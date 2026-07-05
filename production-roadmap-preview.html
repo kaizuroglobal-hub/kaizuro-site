@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KAIZURO Production Roadmap Preview</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #f5f5f2;
+        color: #0b0d10;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      .preview-wrap {
+        display: grid;
+        min-height: 100svh;
+        place-items: center;
+        padding: 42px;
+      }
+
+      .roadmap-section {
+        position: relative;
+        width: min(1360px, 100%);
+        min-height: 760px;
+        overflow: hidden;
+        border-radius: 8px;
+        padding: clamp(54px, 6vw, 92px);
+        background:
+          linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78) 52%, rgba(255, 255, 255, 0.34)),
+          radial-gradient(circle at 84% 18%, rgba(54, 63, 68, 0.2), transparent 34%),
+          #efefeb;
+      }
+
+      .section-label {
+        position: absolute;
+        top: 54px;
+        left: 28px;
+        width: 92px;
+        padding-right: 16px;
+        color: #0b0d10;
+      }
+
+      .section-label::after {
+        content: "";
+        position: absolute;
+        top: -54px;
+        right: 0;
+        width: 1px;
+        height: 900px;
+        background: rgba(11, 13, 16, 0.12);
+      }
+
+      .section-label strong {
+        display: block;
+        font-size: 58px;
+        font-weight: 500;
+        line-height: 0.86;
+      }
+
+      .section-label span {
+        display: block;
+        margin-top: 12px;
+        font-size: 12px;
+        font-weight: 850;
+        line-height: 1.1;
+      }
+
+      .roadmap-inner {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.72fr) minmax(520px, 1fr);
+        gap: clamp(44px, 7vw, 112px);
+        align-items: center;
+        min-height: 620px;
+        padding-left: 118px;
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        color: rgba(11, 13, 16, 0.55);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 600px;
+        margin: 0 0 26px;
+        font-size: clamp(54px, 7vw, 104px);
+        font-weight: 850;
+        letter-spacing: 0;
+        line-height: 0.9;
+      }
+
+      .lead {
+        max-width: 560px;
+        margin: 0;
+        color: rgba(11, 13, 16, 0.64);
+        font-size: clamp(18px, 2vw, 23px);
+        line-height: 1.45;
+      }
+
+      .roadmap {
+        position: relative;
+        display: grid;
+        gap: 12px;
+      }
+
+      .roadmap::before {
+        content: "";
+        position: absolute;
+        top: 26px;
+        bottom: 26px;
+        left: 25px;
+        width: 1px;
+        background: rgba(11, 13, 16, 0.16);
+      }
+
+      .step {
+        position: relative;
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .step-number {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        width: 52px;
+        height: 52px;
+        place-items: center;
+        border: 1px solid rgba(11, 13, 16, 0.18);
+        border-radius: 999px;
+        background: #f5f5f2;
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .step-card {
+        min-height: 86px;
+        border: 1px solid rgba(11, 13, 16, 0.12);
+        border-radius: 8px;
+        padding: 18px 20px;
+        background: rgba(255, 255, 255, 0.68);
+      }
+
+      .step-card h2 {
+        margin: 0 0 6px;
+        font-size: 21px;
+        line-height: 1.1;
+      }
+
+      .step-card p {
+        margin: 0;
+        color: rgba(11, 13, 16, 0.6);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      @media (max-width: 900px) {
+        .preview-wrap {
+          padding: 18px;
+        }
+
+        .roadmap-section {
+          padding: 44px 20px;
+        }
+
+        .section-label {
+          position: static;
+          width: auto;
+          margin-bottom: 34px;
+        }
+
+        .section-label::after {
+          display: none;
+        }
+
+        .roadmap-inner {
+          grid-template-columns: 1fr;
+          padding-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="preview-wrap">
+      <section class="roadmap-section" aria-label="Production roadmap preview">
+        <div class="section-label">
+          <strong>10</strong>
+          <span>Production<br>Roadmap</span>
+        </div>
+        <div class="roadmap-inner">
+          <div>
+            <p class="eyebrow">The road to production</p>
+            <h1>From Founder allocation to first delivery.</h1>
+            <p class="lead">After Founder 100 selections are secured, KAIZURO moves from allocation into production planning, manufacturing, Sydney handover and Founder delivery.</p>
+          </div>
+          <div class="roadmap">
+            <article class="step">
+              <span class="step-number">01</span>
+              <div class="step-card">
+                <h2>Founder allocation secured</h2>
+                <p>Founder position, model choice and accessory preferences are registered.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">02</span>
+              <div class="step-card">
+                <h2>Founder 100 closes</h2>
+                <p>The allocation closes when all 100 Founder positions are secured or on the close date, whichever comes first.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">03</span>
+              <div class="step-card">
+                <h2>Production priorities confirmed</h2>
+                <p>KAIZURO reviews Founder model, colour and accessory selections to guide the first production run.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">04</span>
+              <div class="step-card">
+                <h2>Manufacturing commences</h2>
+                <p>Founder rods move into controlled manufacturing based on fixed engineering specifications.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">05</span>
+              <div class="step-card">
+                <h2>Quality assurance &amp; packing in Sydney</h2>
+                <p>Each Founder rod passes through KAIZURO's Sydney handover process, including pre-dispatch inspection, registration and Founder pack preparation.</p>
+              </div>
+            </article>
+            <article class="step">
+              <span class="step-number">06</span>
+              <div class="step-card">
+                <h2>Founder deliveries begin</h2>
+                <p>Founder rods, accessories and registration details are packed and dispatched from Sydney to each Founder.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
