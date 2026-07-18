@@ -72,3 +72,40 @@ mobileMenu.addEventListener("click", (event) => {
     setMenu(false);
   }
 });
+
+function scrollToHashTarget(hash, behavior = "smooth") {
+  if (!hash || hash === "#") {
+    return;
+  }
+  const target = document.querySelector(hash);
+  if (!target) {
+    return;
+  }
+  const headerHeight = header.offsetHeight || 0;
+  const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+  window.scrollTo({ top: Math.max(0, top), behavior });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const hash = link.getAttribute("href");
+    const target = hash && document.querySelector(hash);
+    if (!target) {
+      return;
+    }
+    event.preventDefault();
+    history.pushState(null, "", hash);
+    setMenu(false);
+    scrollToHashTarget(hash);
+  });
+});
+
+window.addEventListener("load", () => {
+  if (window.location.hash) {
+    window.setTimeout(() => scrollToHashTarget(window.location.hash, "auto"), 80);
+  }
+});
+
+window.addEventListener("hashchange", () => {
+  scrollToHashTarget(window.location.hash);
+});
