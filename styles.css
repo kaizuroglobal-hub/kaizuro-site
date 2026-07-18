@@ -1446,3 +1446,502 @@ h2 {
     font-size: clamp(46px, 13vw, 66px);
   }
 }
+
+/* Final product-story layout correction: tighter sections, explicit image focal points. */
+.hero {
+  min-height: calc(100svh - var(--header));
+}
+
+.hero-copy {
+  align-content: end;
+  padding-bottom: clamp(105px, 13vh, 160px);
+}
+
+.hero h1 {
+  max-width: 830px;
+  font-size: clamp(58px, 7.2vw, 104px);
+  line-height: 0.96;
+}
+
+.focal-hero img {
+  object-position: 58% 50%;
+}
+
+.split-story,
+.split-story.reverse {
+  min-height: auto;
+  padding: clamp(92px, 8vw, 132px) 0;
+  grid-template-columns: minmax(320px, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(48px, 7vw, 110px);
+  align-items: center;
+}
+
+.split-story.reverse {
+  grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+}
+
+.story-copy,
+.chapter-copy {
+  position: relative;
+  top: auto;
+  align-self: center;
+  padding: 0;
+}
+
+.sticky-image {
+  position: relative;
+  top: auto;
+  height: clamp(430px, 54vw, 720px);
+  min-height: 0;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.sticky-image img,
+.chapter-image img,
+.full-width-product img,
+.full-bleed-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.focal-origin img,
+.focal-guide img {
+  object-position: 58% 48%;
+}
+
+.focal-assault img {
+  object-position: 62% 54%;
+}
+
+.focal-grip img {
+  object-position: 64% 49%;
+}
+
+.focal-reel img {
+  object-position: 58% 53%;
+}
+
+.focal-frame img {
+  object-position: 56% 49%;
+}
+
+.focal-wrap img,
+.focal-tip img {
+  object-position: 54% 50%;
+}
+
+.focal-halo img {
+  object-position: 56% 50%;
+}
+
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.78fr) minmax(520px, 1fr);
+  gap: clamp(56px, 7vw, 112px);
+  align-items: center;
+}
+
+.roadmap-copy {
+  max-width: 590px;
+}
+
+.roadmap-copy h2 {
+  font-size: clamp(50px, 5.8vw, 92px);
+  line-height: 0.93;
+}
+
+.roadmap-copy p:not(.eyebrow) {
+  max-width: 520px;
+  color: rgba(244, 244, 242, 0.68);
+  font-size: clamp(18px, 1.55vw, 24px);
+}
+
+.production-roadmap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 0;
+  padding: 0 0 0 38px;
+  overflow: visible;
+  border-top: 0;
+  border-left: 1px solid rgba(244, 244, 242, 0.2);
+}
+
+.production-roadmap li {
+  position: relative;
+  min-width: 0;
+  padding: 18px 20px 18px 34px;
+  border: 1px solid rgba(244, 244, 242, 0.16);
+  background: rgba(244, 244, 242, 0.045);
+}
+
+.production-roadmap li span {
+  position: absolute;
+  left: -65px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  color: var(--white);
+  border: 1px solid rgba(244, 244, 242, 0.22);
+  border-radius: 50%;
+  background: #090909;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transform: translateY(-50%);
+}
+
+.production-roadmap strong {
+  margin: 0 0 7px;
+  color: var(--white);
+  font-size: clamp(18px, 1.45vw, 23px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.production-roadmap p {
+  max-width: 580px;
+  margin: 0;
+  color: rgba(244, 244, 242, 0.58);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.42;
+}
+
+.guide-intro .sticky-image {
+  height: clamp(480px, 56vw, 760px);
+}
+
+.technical-scroll {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+  gap: clamp(46px, 6vw, 90px);
+  min-height: auto;
+  padding: clamp(92px, 8vw, 126px) max(var(--pad), calc((100vw - var(--max)) / 2));
+  align-items: start;
+}
+
+.chapter-copy {
+  max-width: 560px;
+}
+
+.chapter-copy h2 {
+  max-width: 520px;
+  font-size: clamp(42px, 4.6vw, 72px);
+  line-height: 0.98;
+}
+
+.chapter-copy p {
+  max-width: 460px;
+}
+
+.chapter-track {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.chapter-image {
+  height: clamp(240px, 24vw, 380px);
+  min-height: 0;
+  overflow: hidden;
+  background: #090909;
+}
+
+.technical-scroll .chapter-image:nth-child(1) {
+  height: clamp(360px, 34vw, 520px);
+}
+
+.technical-scroll .chapter-image:nth-child(n + 2) {
+  display: none;
+}
+
+.system-section,
+.proof-section,
+.evolution-section,
+.terms-section,
+.capture-section {
+  min-height: auto;
+  padding: clamp(86px, 7vw, 124px) 0;
+}
+
+.proof-grid {
+  grid-template-columns: minmax(320px, 0.78fr) minmax(420px, 1fr);
+  gap: clamp(54px, 8vw, 120px);
+  align-items: center;
+}
+
+.proof-grid h2 {
+  max-width: 560px;
+  font-size: clamp(50px, 5.6vw, 88px);
+}
+
+.proof-panel {
+  align-self: center;
+}
+
+.metric-row {
+  min-height: 0;
+  padding: clamp(18px, 2vw, 28px) 0;
+}
+
+.metric-row strong {
+  font-size: clamp(46px, 5vw, 78px);
+  line-height: 0.95;
+}
+
+.load-curve {
+  height: clamp(150px, 16vw, 230px);
+  margin-top: 22px;
+}
+
+.founder-section {
+  padding: clamp(100px, 8vw, 142px) 0;
+}
+
+.founder-intro {
+  grid-template-columns: minmax(340px, 0.76fr) minmax(420px, 1fr);
+  gap: clamp(36px, 5vw, 74px);
+  align-items: center;
+  padding-bottom: clamp(26px, 3.4vw, 48px);
+}
+
+.founder-intro h2 {
+  max-width: 520px;
+  font-size: clamp(54px, 6vw, 86px);
+}
+
+.founder-intro p:not(.eyebrow) {
+  max-width: 640px;
+}
+
+.founder-options {
+  gap: clamp(18px, 2vw, 28px);
+}
+
+.choice-grid img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: 50% 50%;
+  padding: 0;
+}
+
+.founder-choice:first-child .choice-grid img {
+  object-position: 50% 45%;
+}
+
+.founder-choice:nth-child(2) .choice-grid img {
+  object-fit: contain;
+  padding: 10px;
+  background: #f1f1ef;
+}
+
+.halo-section {
+  min-height: clamp(680px, 86svh, 920px);
+}
+
+.halo-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.52) 46%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.05) 60%);
+  pointer-events: none;
+}
+
+.halo-section .hero-scrim {
+  display: none;
+}
+
+.halo-copy {
+  position: relative;
+  z-index: 2;
+  align-content: center;
+  padding-top: var(--header);
+  padding-bottom: 0;
+}
+
+.halo-copy h2 {
+  max-width: 760px;
+  font-size: clamp(52px, 6.4vw, 92px);
+  line-height: 0.98;
+}
+
+.halo-copy p {
+  max-width: 600px;
+}
+
+.halo-copy a {
+  max-width: 520px;
+}
+
+@media (max-width: 980px) {
+  .split-story,
+  .split-story.reverse,
+  .technical-scroll,
+  .proof-grid,
+  .founder-intro,
+  .roadmap-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .split-story.reverse .sticky-image,
+  .sticky-image {
+    order: 0;
+  }
+
+  .story-copy,
+  .chapter-copy {
+    order: 1;
+  }
+
+  .sticky-image {
+    height: clamp(320px, 58vw, 560px);
+  }
+
+  .technical-scroll {
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  .chapter-track {
+    order: 1;
+  }
+
+  .chapter-copy {
+    order: 0;
+  }
+
+  .chapter-image,
+  .technical-scroll .chapter-image:nth-child(1) {
+    height: clamp(260px, 58vw, 480px);
+  }
+
+  .proof-grid {
+    gap: 38px;
+  }
+
+  .founder-intro h2,
+  .founder-intro p:not(.eyebrow),
+  .founder-intro .text-link {
+    grid-column: auto;
+  }
+
+  .production-roadmap {
+    margin-left: 28px;
+  }
+
+  .halo-section {
+    min-height: 720px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-copy {
+    padding-bottom: 98px;
+  }
+
+  .hero h1 {
+    max-width: 340px;
+    font-size: clamp(40px, 11vw, 52px);
+  }
+
+  .focal-hero img {
+    object-position: 62% 50%;
+  }
+
+  .split-story,
+  .split-story.reverse,
+  .technical-scroll,
+  .system-section,
+  .proof-section,
+  .evolution-section,
+  .founder-section,
+  .terms-section,
+  .capture-section {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .sticky-image,
+  .guide-intro .sticky-image,
+  .chapter-image,
+  .technical-scroll .chapter-image:nth-child(1) {
+    height: 280px;
+  }
+
+  .focal-origin img,
+  .focal-guide img {
+    object-position: 58% 42%;
+  }
+
+  .focal-assault img {
+    object-position: 66% 52%;
+  }
+
+  .focal-grip img {
+    object-position: 68% 50%;
+  }
+
+  .focal-reel img {
+    object-position: 58% 54%;
+  }
+
+  .proof-grid h2,
+  .chapter-copy h2,
+  .halo-copy h2 {
+    font-size: clamp(38px, 10vw, 52px);
+  }
+
+  .metric-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .metric-row strong {
+    text-align: left;
+    font-size: clamp(38px, 12vw, 56px);
+  }
+
+  .founder-options,
+  .choice-grid,
+  .founder-collection,
+  .founder-collection dl {
+    grid-template-columns: 1fr;
+  }
+
+  .production-roadmap {
+    gap: 12px;
+    padding-left: 24px;
+  }
+
+  .production-roadmap li {
+    padding: 16px 16px 16px 22px;
+  }
+
+  .production-roadmap li span {
+    left: -48px;
+    width: 42px;
+    height: 42px;
+    font-size: 12px;
+  }
+
+  .halo-section {
+    min-height: 660px;
+  }
+
+  .halo-copy {
+    align-content: end;
+    padding-bottom: 76px;
+  }
+
+  .focal-halo img {
+    object-position: 54% 50%;
+  }
+}
