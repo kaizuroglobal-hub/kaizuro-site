@@ -6,6 +6,17 @@ const chapterText = document.querySelector("[data-chapter-text]");
 const chapterIndex = document.querySelector("[data-chapter-index]");
 const chapterEyebrow = document.querySelector("[data-chapter-eyebrow]");
 const chapters = [...document.querySelectorAll("[data-chapter]")];
+const reviewSection = new URLSearchParams(window.location.search).get("section");
+
+if (reviewSection) {
+  const selectedSection = document.getElementById(reviewSection);
+  if (selectedSection) {
+    document.body.classList.add("section-review");
+    document.querySelectorAll("main > section").forEach((section) => {
+      section.hidden = section !== selectedSection;
+    });
+  }
+}
 
 const chapterCopy = [
   {

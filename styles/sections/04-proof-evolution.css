@@ -1,0 +1,26 @@
+/* 04 PROOF + EVOLUTION: factual validation and transparent development. */
+#proof .proof-grid,
+#evolution .evolution-grid {
+  width: calc(100% - (var(--pad) * 2));
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+#evolution .prototype-timeline {
+  align-items: stretch;
+}
+
+@media (max-width: 980px) {
+  #proof .proof-grid,
+  #evolution .evolution-grid {
+    width: calc(100% - 48px);
+  }
+}
+
+@media (max-width: 640px) {
+  #proof .proof-grid,
+  #evolution .evolution-grid {
+    width: calc(100% - 40px);
+  }
+}

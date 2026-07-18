@@ -1,0 +1,12 @@
+/* Query with ?section=SECTION_ID to review one homepage section in isolation. */
+.section-review main > section[hidden] {
+  display: none !important;
+}
+
+.section-review .site-footer {
+  display: none;
+}
+
+.section-review main {
+  min-height: 100svh;
+}

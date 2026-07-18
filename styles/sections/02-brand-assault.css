@@ -1,0 +1,88 @@
+/* 02 BRAND + ASSAULT: origin story and first product reveal. */
+#story .sticky-image img {
+  object-fit: contain;
+  object-position: center;
+}
+
+#assault {
+  display: grid;
+  grid-template-columns: minmax(360px, 38%) minmax(0, 62%);
+  min-height: min(860px, 92svh);
+  padding: var(--header) 0 0;
+  background: #050505;
+}
+
+#assault .full-width-product {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  height: 100%;
+  min-height: 720px;
+  margin: 0;
+}
+
+#assault .full-width-product img {
+  object-fit: cover;
+  object-position: 59% 50%;
+}
+
+#assault .assault-copy {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  margin: 0;
+  padding: 72px clamp(36px, 4vw, 72px) 72px var(--pad);
+  background: #050505;
+}
+
+#assault .assault-copy h2 {
+  max-width: 560px;
+  font-size: clamp(52px, 4.5vw, 76px);
+  white-space: normal;
+}
+
+#assault .assault-copy strong {
+  max-width: 520px;
+  font-size: clamp(28px, 2.6vw, 42px);
+}
+
+@media (max-width: 980px) {
+  #assault {
+    grid-template-columns: 1fr;
+    padding-top: var(--header);
+  }
+
+  #assault .full-width-product,
+  #assault .assault-copy {
+    grid-column: 1;
+  }
+
+  #assault .full-width-product {
+    grid-row: 1;
+    min-height: 460px;
+  }
+
+  #assault .assault-copy {
+    grid-row: 2;
+    padding: 64px var(--pad) 76px;
+  }
+}
+
+@media (max-width: 640px) {
+  #assault .full-width-product {
+    min-height: 340px;
+  }
+
+  #assault .full-width-product img {
+    object-position: 64% 50%;
+  }
+
+  #assault .assault-copy {
+    padding: 54px 20px 64px;
+  }
+}
