@@ -1453,13 +1453,19 @@ h2 {
 }
 
 .hero-copy {
-  align-content: end;
-  padding-bottom: clamp(105px, 13vh, 160px);
+  width: auto;
+  max-width: none;
+  margin-inline: 0;
+  padding-right: var(--pad);
+  padding-left: var(--pad);
+  align-content: start;
+  padding-top: clamp(180px, 24vh, 260px);
+  padding-bottom: 96px;
 }
 
 .hero h1 {
-  max-width: 830px;
-  font-size: clamp(58px, 7.2vw, 104px);
+  max-width: 780px;
+  font-size: clamp(58px, 6.4vw, 94px);
   line-height: 0.96;
 }
 
@@ -1844,7 +1850,8 @@ h2 {
 
 @media (max-width: 640px) {
   .hero-copy {
-    padding-bottom: 98px;
+    padding-top: 148px;
+    padding-bottom: 82px;
   }
 
   .hero h1 {
