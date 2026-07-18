@@ -1,240 +1,74 @@
 const header = document.querySelector("[data-site-header]");
-const drawer = document.querySelector("[data-section-drawer]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
-const stickyCompare = document.querySelector(".sticky-compare");
-const specModal = document.querySelector("[data-spec-modal]");
-const enquiryModal = document.querySelector("[data-enquiry-modal]");
-const configTitle = document.querySelector("[data-config-title]");
-const configCopy = document.querySelector("[data-config-copy]");
-const configImage = document.querySelector("[data-config-image]");
-const configStage = document.querySelector(".config-stage");
-const modelCard = document.querySelector("[data-model-card]");
-const toast = document.querySelector("[data-toast]");
-const assetVersion = "?v=20260704-section-rhythm";
-const defaultConfigImage = "assets/kaizuro-site/optimized/reel-seat-transparent.png" + assetVersion;
-const detailImage = document.querySelector("[data-detail-image]");
-const detailCaption = document.querySelector("[data-detail-caption]");
+const mobileMenu = document.querySelector("[data-mobile-menu]");
+const chapterTitle = document.querySelector("[data-chapter-title]");
+const chapterText = document.querySelector("[data-chapter-text]");
+const chapterIndex = document.querySelector("[data-chapter-index]");
+const chapters = [...document.querySelectorAll("[data-chapter]")];
 
-const detailImages = [
+const chapterCopy = [
   {
-    src: "assets/kaizuro-site/detail-gallery/7.png" + assetVersion,
-    alt: "KAIZURO handle detail",
-    caption: "Caption Name"
+    title: "Strength without careless mass.",
+    text: "Heavy offshore guides must withstand impact, repeated loading and lateral force without unnecessary bulk."
   },
   {
-    src: "assets/kaizuro-site/detail-gallery/8.png" + assetVersion,
-    alt: "KAIZURO reel seat detail",
-    caption: "Caption Name"
+    title: "Secure where it matters. Controlled everywhere else.",
+    text: "Wrap construction is treated as structural work, controlling transfer into the blank without turning the rod into dead weight."
   },
   {
-    src: "assets/kaizuro-site/detail-gallery/9.png" + assetVersion,
-    alt: "KAIZURO branded blank detail",
-    caption: "Caption Name"
-  },
-  {
-    src: "assets/kaizuro-site/detail-gallery/10.png" + assetVersion,
-    alt: "KAIZURO guide run detail",
-    caption: "Caption Name"
-  },
-  {
-    src: "assets/kaizuro-site/detail-gallery/11.png" + assetVersion,
-    alt: "KAIZURO tip guide detail",
-    caption: "Caption Name"
+    title: "From line coil to controlled path.",
+    text: "Guide size and progression gradually control braid from a large spinning reel while supporting the upper working section."
   }
 ];
 
-let detailIndex = 0;
-
-const variants = {
-  carbon: {
-    copy: "Stealth carbon finish with reinforced guide spacing and a locked-in seat profile for heavy drag work.",
-    image: defaultConfigImage
-  },
-  storm: {
-    copy: "Storm silver finish with the same locked-in seat profile and offshore-focused build specification.",
-    image: defaultConfigImage
-  }
-};
-
-const models = {
-  assault: {
-    eyebrow: "PE6-8 (ASSAULT)",
-    title: "Fast offshore casting power with a heavier loaded feel.",
-    copy: "Fast enough to cast and work lures cleanly, powerful enough to stay composed when drag climbs.",
-    image: "assets/kaizuro-site/tuna-bluefin.png" + assetVersion
-  },
-  halo: {
-    eyebrow: "PE10+ HALO",
-    title: "Maximum offshore reserve for anglers chasing bigger pressure windows.",
-    copy: "Built for heavier line classes, brutal drag, and clean control when the fish refuses to turn.",
-    image: "assets/kaizuro-site/giant-bluefin-tuna.png" + assetVersion
-  }
-};
-
-function setChromeState() {
-  const y = window.scrollY;
-  header.classList.toggle("scrolled", y > 24);
-  stickyCompare.classList.toggle("visible", y > window.innerHeight * 0.72);
+function setHeaderState() {
+  header.classList.toggle("scrolled", window.scrollY > 18);
 }
 
-function openDialog(dialog) {
-  if (!dialog.open) {
-    dialog.showModal();
-  }
-  document.body.classList.add("modal-open");
+function setMenu(open) {
+  mobileMenu.classList.toggle("open", open);
+  header.classList.toggle("menu-open", open);
+  menuToggle.setAttribute("aria-expanded", String(open));
 }
 
-function closeDialog(dialog) {
-  if (dialog.open) {
-    dialog.close();
-  }
-  document.body.classList.remove("modal-open");
-}
-
-function showToast(message) {
-  toast.textContent = message;
-  toast.classList.add("visible");
-  window.setTimeout(() => toast.classList.remove("visible"), 2600);
-}
-
-function setConfigImage(src, delay = 120, rotateLandscape = false) {
-  configImage.classList.add("swapping");
-  window.setTimeout(() => {
-    configImage.src = src;
-    configImage.classList.toggle("rotate-landscape", rotateLandscape);
-    configStage.classList.toggle("has-alt-image", src !== defaultConfigImage);
-    configImage.classList.remove("swapping");
-  }, delay);
-}
-
-function setDetailImage(nextIndex) {
-  if (!detailImage) {
+function setChapter(index) {
+  const next = chapterCopy[index];
+  if (!next || !chapterTitle || !chapterText || !chapterIndex) {
     return;
   }
-  detailIndex = (nextIndex + detailImages.length) % detailImages.length;
-  const next = detailImages[detailIndex];
-  detailImage.classList.add("swapping");
-  window.setTimeout(() => {
-    detailImage.src = next.src;
-    detailImage.alt = next.alt;
-    detailCaption.textContent = next.caption;
-    detailImage.classList.remove("swapping");
-  }, 120);
+  chapterTitle.textContent = next.title;
+  chapterText.textContent = next.text;
+  chapterIndex.textContent = `${String(index + 1).padStart(2, "0")} / 03`;
 }
 
-window.addEventListener("scroll", setChromeState, { passive: true });
-setChromeState();
+const chapterObserver = new IntersectionObserver(
+  (entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (visible) {
+      setChapter(Number(visible.target.dataset.chapter));
+    }
+  },
+  {
+    threshold: [0.32, 0.54, 0.76],
+    rootMargin: "-12% 0px -18% 0px"
+  }
+);
+
+chapters.forEach((chapter) => chapterObserver.observe(chapter));
+
+window.addEventListener("scroll", setHeaderState, { passive: true });
+setHeaderState();
+setChapter(0);
 
 menuToggle.addEventListener("click", () => {
-  drawer.classList.toggle("open");
+  setMenu(!mobileMenu.classList.contains("open"));
 });
 
-drawer.addEventListener("click", (event) => {
+mobileMenu.addEventListener("click", (event) => {
   if (event.target.closest("a")) {
-    drawer.classList.remove("open");
+    setMenu(false);
   }
-});
-
-document.addEventListener("click", (event) => {
-  if (!drawer.contains(event.target) && !menuToggle.contains(event.target)) {
-    drawer.classList.remove("open");
-  }
-});
-
-document.querySelectorAll("[data-open-specs]").forEach((button) => {
-  button.addEventListener("click", () => openDialog(specModal));
-});
-
-document.querySelectorAll("[data-close-specs]").forEach((button) => {
-  button.addEventListener("click", () => closeDialog(specModal));
-});
-
-document.querySelectorAll("[data-open-enquiry]").forEach((button) => {
-  button.addEventListener("click", () => openDialog(enquiryModal));
-});
-
-[specModal, enquiryModal].forEach((dialog) => {
-  dialog.addEventListener("close", () => {
-    if (!specModal.open && !enquiryModal.open) {
-      document.body.classList.remove("modal-open");
-    }
-  });
-});
-
-document.querySelectorAll(".accordion button").forEach((button) => {
-  button.addEventListener("click", () => {
-    button.classList.toggle("open");
-    button.querySelector("span").textContent = button.classList.contains("open") ? "-" : "+";
-  });
-});
-
-document.querySelectorAll("[data-variant]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const variant = variants[button.dataset.variant];
-    document.querySelectorAll("[data-variant]").forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-    window.setTimeout(() => {
-      configCopy.textContent = variant.copy;
-    }, 120);
-    setConfigImage(variant.image, 150);
-  });
-});
-
-document.querySelectorAll("[data-config-model]").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll("[data-config-model]").forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-    configTitle.textContent = `KAIZURO ${button.dataset.configModel}`;
-  });
-});
-
-document.querySelector("[data-detail-prev]")?.addEventListener("click", () => {
-  setDetailImage(detailIndex - 1);
-});
-
-document.querySelector("[data-detail-next]")?.addEventListener("click", () => {
-  setDetailImage(detailIndex + 1);
-});
-
-document.querySelectorAll("[data-model]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const model = models[button.dataset.model];
-    document.querySelectorAll("[data-model]").forEach((item) => {
-      item.classList.remove("active");
-      item.setAttribute("aria-pressed", "false");
-    });
-    button.classList.add("active");
-    button.setAttribute("aria-pressed", "true");
-    modelCard.innerHTML = `
-      <img src="${model.image}" alt="${model.eyebrow}">
-      <div>
-        <p class="eyebrow">${model.eyebrow}</p>
-        <h3>${model.title}</h3>
-        <p>${model.copy}</p>
-      </div>
-    `;
-  });
-});
-
-document.querySelectorAll(".video-card").forEach((card) => {
-  const video = card.querySelector("video");
-  card.addEventListener("mouseenter", () => video.play().catch(() => {}));
-  card.addEventListener("focusin", () => video.play().catch(() => {}));
-  card.addEventListener("mouseleave", () => {
-    video.pause();
-    video.currentTime = 0;
-  });
-  card.addEventListener("focusout", () => {
-    video.pause();
-    video.currentTime = 0;
-  });
-});
-
-document.querySelector("[data-interest-form]").addEventListener("submit", (event) => {
-  event.preventDefault();
-  showToast("Waitlist interest registered. We’ll connect this to the real form next.");
-});
-
-enquiryModal.querySelector("form").addEventListener("submit", () => {
-  showToast("Waitlist request captured locally for now.");
 });
