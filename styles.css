@@ -908,6 +908,65 @@ p {
   }
 }
 
+/* Editorial alignment pass: all major story copy follows the KAIZURO logo axis. */
+@media (min-width: 981px) {
+  .hero-copy {
+    padding-top: clamp(118px, 13vh, 150px);
+    padding-bottom: 110px;
+  }
+
+  .hero h1 {
+    max-width: 680px;
+    font-size: clamp(56px, 5.2vw, 82px);
+  }
+
+  .hero-copy p:not(.eyebrow) {
+    max-width: 500px;
+  }
+
+  .split-story,
+  .split-story.reverse {
+    width: calc(100% - (var(--pad) * 2));
+    max-width: none;
+    margin-inline: var(--pad);
+  }
+
+  .assault-copy,
+  .system-section > .content-grid,
+  .proof-section > .content-grid,
+  .evolution-section > .content-grid,
+  .founder-section > .content-grid,
+  .terms-section > .content-grid,
+  .capture-section > .content-grid,
+  .halo-copy {
+    width: auto;
+    max-width: none;
+    margin-inline: 0;
+    padding-right: var(--pad);
+    padding-left: var(--pad);
+  }
+
+  .assault-copy {
+    align-content: center;
+    padding-top: var(--header);
+  }
+
+  .assault-copy h2 {
+    max-width: 760px;
+    font-size: clamp(58px, 5vw, 82px);
+    white-space: nowrap;
+  }
+
+  .assault-copy p,
+  .assault-copy strong {
+    max-width: 560px;
+  }
+
+  .assault-copy strong {
+    font-size: clamp(30px, 3vw, 46px);
+  }
+}
+
 /* Layout repair pass: tighter editorial modules, fewer sticky/crop failures. */
 h1 {
   font-size: clamp(58px, 7.4vw, 104px);
@@ -1950,5 +2009,67 @@ h2 {
 
   .focal-halo img {
     object-position: 54% 50%;
+  }
+}
+
+/* Final desktop alignment authority. */
+@media (min-width: 981px) {
+  .hero-copy {
+    width: auto;
+    max-width: none;
+    margin-inline: 0;
+    padding: clamp(118px, 13vh, 150px) var(--pad) 110px;
+    align-content: start;
+  }
+
+  .hero h1 {
+    max-width: 680px;
+    font-size: clamp(56px, 5.2vw, 82px);
+  }
+
+  .hero-copy p:not(.eyebrow) {
+    max-width: 500px;
+  }
+
+  .split-story,
+  .split-story.reverse {
+    width: calc(100% - (var(--pad) * 2));
+    max-width: none;
+    margin-inline: var(--pad);
+  }
+
+  .assault-copy,
+  .system-section > .content-grid,
+  .proof-section > .content-grid,
+  .evolution-section > .content-grid,
+  .founder-section > .content-grid,
+  .terms-section > .content-grid,
+  .capture-section > .content-grid,
+  .halo-copy {
+    width: auto;
+    max-width: none;
+    margin-inline: 0;
+    padding-right: var(--pad);
+    padding-left: var(--pad);
+  }
+
+  .assault-copy {
+    align-content: center;
+    padding-top: var(--header);
+  }
+
+  .assault-copy h2 {
+    max-width: 760px;
+    font-size: clamp(58px, 5vw, 82px);
+    white-space: nowrap;
+  }
+
+  .assault-copy p,
+  .assault-copy strong {
+    max-width: 560px;
+  }
+
+  .assault-copy strong {
+    font-size: clamp(30px, 3vw, 46px);
   }
 }
