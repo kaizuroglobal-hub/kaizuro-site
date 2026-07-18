@@ -4,20 +4,24 @@ const mobileMenu = document.querySelector("[data-mobile-menu]");
 const chapterTitle = document.querySelector("[data-chapter-title]");
 const chapterText = document.querySelector("[data-chapter-text]");
 const chapterIndex = document.querySelector("[data-chapter-index]");
+const chapterEyebrow = document.querySelector("[data-chapter-eyebrow]");
 const chapters = [...document.querySelectorAll("[data-chapter]")];
 
 const chapterCopy = [
   {
+    eyebrow: "01 · Frame",
     title: "Strength without careless mass.",
-    text: "Heavy offshore guides must withstand impact, repeated loading and lateral force without unnecessary bulk."
+    text: "Heavy offshore guides must withstand impact, repeated loading and lateral force. The objective is sufficient frame strength and bracing without unnecessary weight in the working section."
   },
   {
+    eyebrow: "02 · Wrap",
     title: "Secure where it matters. Controlled everywhere else.",
-    text: "Wrap construction is treated as structural work, controlling transfer into the blank without turning the rod into dead weight."
+    text: "Guide security depends on wrap length, thread build, resin control and preparation beneath the foot. Low-build construction manages avoidable weight and stiffness around the guide location."
   },
   {
+    eyebrow: "03 · Progression",
     title: "From line coil to controlled path.",
-    text: "Guide size and progression gradually control braid from a large spinning reel while supporting the upper working section."
+    text: "A large offshore spinning reel releases broad coils of braid. Guide size and progression gradually control that movement while maintaining clearance and supporting the blank under load."
   }
 ];
 
@@ -39,6 +43,9 @@ function setChapter(index) {
   chapterTitle.textContent = next.title;
   chapterText.textContent = next.text;
   chapterIndex.textContent = `${String(index + 1).padStart(2, "0")} / 03`;
+  if (chapterEyebrow) {
+    chapterEyebrow.textContent = next.eyebrow;
+  }
 }
 
 const chapterObserver = new IntersectionObserver(
