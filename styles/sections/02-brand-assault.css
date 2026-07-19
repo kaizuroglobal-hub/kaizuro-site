@@ -4,6 +4,13 @@
   object-position: center;
 }
 
+#story .sticky-image {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 0;
+  background: #050505;
+}
+
 #system-title span {
   display: block;
 }
@@ -29,6 +36,10 @@
 #assault .full-width-product img {
   object-fit: cover;
   object-position: 68% 50%;
+}
+
+#assault.assault-reveal::before {
+  display: none;
 }
 
 #assault .assault-copy {

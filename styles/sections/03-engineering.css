@@ -40,6 +40,34 @@
   background: #050505;
 }
 
+#grip .story-copy h2 {
+  max-width: 560px;
+  font-size: clamp(46px, 3.8vw, 62px);
+  line-height: 0.98;
+}
+
+#grip .geometry-spec {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin: 26px 0 24px;
+  padding: 18px 0;
+  border-block: 1px solid rgba(244, 244, 242, 0.2);
+  color: rgba(244, 244, 242, 0.68);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+#grip .geometry-spec b {
+  color: var(--white);
+}
+
+#grip .story-copy strong {
+  font-size: clamp(30px, 3vw, 44px);
+}
+
 #details #guide-title span {
   display: block;
 }
@@ -64,6 +92,17 @@
 
 #reel .sticky-image {
   background: #050505;
+}
+
+#reel .sticky-image img {
+  transform: scale(1.42);
+  transform-origin: 62% 52%;
+}
+
+#reel .story-copy h2 {
+  max-width: 560px;
+  font-size: clamp(46px, 4vw, 64px);
+  line-height: 0.98;
 }
 
 @media (max-width: 980px) {
@@ -97,5 +136,9 @@
   #technical .chapter-image.focal-power img {
     width: 100%;
     height: auto;
+  }
+
+  #reel .sticky-image img {
+    transform: scale(1.22);
   }
 }
