@@ -29,14 +29,18 @@
   background: #111;
 }
 
-#technical .chapter-image.focal-wrap {
+#technical .chapter-image.focal-wrap,
+#technical .chapter-image.focal-tip,
+#technical .chapter-image.focal-power {
   display: grid;
   place-items: center;
 }
 
-#technical .chapter-image.focal-wrap img {
-  width: 68%;
-  height: 68%;
+#technical .chapter-image.focal-wrap img,
+#technical .chapter-image.focal-tip img,
+#technical .chapter-image.focal-power img {
+  width: 100%;
+  height: 100%;
 }
 
 #reel .sticky-image {
@@ -69,8 +73,10 @@
     object-fit: contain;
   }
 
-  #technical .chapter-image.focal-wrap img {
-    width: 82%;
+  #technical .chapter-image.focal-wrap img,
+  #technical .chapter-image.focal-tip img,
+  #technical .chapter-image.focal-power img {
+    width: 100%;
     height: auto;
   }
 }

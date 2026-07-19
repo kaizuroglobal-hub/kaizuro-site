@@ -33,6 +33,11 @@ const chapterCopy = [
     eyebrow: "03 · Progression",
     title: "From line coil to controlled path.",
     text: "A large offshore spinning reel releases broad coils of braid. Guide size and progression gradually control that movement while maintaining clearance and supporting the blank under load."
+  },
+  {
+    eyebrow: "04 · Power",
+    title: "Power carried through the working section.",
+    text: "The main working section balances blank authority, guide support and controlled load transfer. It is where casting recovery becomes sustained pressure when the fight moves under load."
   }
 ];
 
@@ -53,7 +58,7 @@ function setChapter(index) {
   }
   chapterTitle.textContent = next.title;
   chapterText.textContent = next.text;
-  chapterIndex.textContent = `${String(index + 1).padStart(2, "0")} / 03`;
+  chapterIndex.textContent = `${String(index + 1).padStart(2, "0")} / ${String(chapterCopy.length).padStart(2, "0")}`;
   if (chapterEyebrow) {
     chapterEyebrow.textContent = next.eyebrow;
   }
