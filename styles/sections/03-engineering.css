@@ -17,7 +17,6 @@
   grid-row: 1;
 }
 
-#details .sticky-image img,
 #grip .sticky-image img,
 #reel .sticky-image img,
 #technical .chapter-image img {
@@ -25,12 +24,25 @@
   object-position: center;
 }
 
-#details .sticky-image,
 #reel .sticky-image {
   aspect-ratio: 16 / 9;
   height: auto;
   min-height: 0;
   background: #050505;
+}
+
+#details .sticky-image {
+  width: 100%;
+  height: clamp(560px, 42vw, 650px);
+  min-height: 0;
+  aspect-ratio: auto;
+  align-self: center;
+  background: #050505;
+}
+
+#details .sticky-image img {
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 #grip .sticky-image {
@@ -125,6 +137,10 @@
     grid-column: 1;
     grid-row: 2;
     width: 100%;
+  }
+
+  #details .sticky-image {
+    height: clamp(460px, 82vw, 620px);
   }
 
   #technical .chapter-image img {
