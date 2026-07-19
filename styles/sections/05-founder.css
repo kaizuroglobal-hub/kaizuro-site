@@ -69,6 +69,14 @@
 }
 
 #founder .founder-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#founder .founder-accessories {
+  grid-column: 1 / -1;
+}
+
+#founder .founder-accessories .choice-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -452,6 +460,10 @@
   #founder .founder-accessories,
   #founder .form-wide {
     grid-column: auto;
+  }
+
+  #founder .founder-accessories .choice-grid {
+    grid-template-columns: 1fr;
   }
 
   #founder .product-viewer-trigger > span {
