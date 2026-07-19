@@ -25,6 +25,10 @@
   object-position: center;
 }
 
+#details #guide-title span {
+  display: block;
+}
+
 #technical .chapter-image {
   background: #111;
 }
