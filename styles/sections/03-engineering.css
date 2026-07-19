@@ -29,6 +29,16 @@
   background: #111;
 }
 
+#technical .chapter-image.focal-wrap {
+  display: grid;
+  place-items: center;
+}
+
+#technical .chapter-image.focal-wrap img {
+  width: 68%;
+  height: 68%;
+}
+
 #reel .sticky-image {
   background: #171717;
 }
@@ -57,5 +67,10 @@
 
   #technical .chapter-image img {
     object-fit: contain;
+  }
+
+  #technical .chapter-image.focal-wrap img {
+    width: 82%;
+    height: auto;
   }
 }
