@@ -4,6 +4,10 @@
   object-position: center;
 }
 
+#system-title span {
+  display: block;
+}
+
 #assault {
   display: grid;
   grid-template-columns: minmax(360px, 38%) minmax(0, 62%);
