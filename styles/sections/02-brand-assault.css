@@ -23,11 +23,12 @@
   height: 100%;
   min-height: 720px;
   margin: 0;
+  background: #050505;
 }
 
 #assault .full-width-product img {
   object-fit: cover;
-  object-position: 59% 50%;
+  object-position: 68% 50%;
 }
 
 #assault .assault-copy {

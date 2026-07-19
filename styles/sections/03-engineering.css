@@ -25,12 +25,27 @@
   object-position: center;
 }
 
+#details .sticky-image,
+#reel .sticky-image {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 0;
+  background: #050505;
+}
+
+#grip .sticky-image {
+  aspect-ratio: 1 / 1;
+  height: auto;
+  min-height: 0;
+  background: #050505;
+}
+
 #details #guide-title span {
   display: block;
 }
 
 #technical .chapter-image {
-  background: #111;
+  background: #050505;
 }
 
 #technical .chapter-image.focal-wrap,
@@ -48,7 +63,7 @@
 }
 
 #reel .sticky-image {
-  background: #171717;
+  background: #050505;
 }
 
 @media (max-width: 980px) {
