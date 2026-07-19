@@ -1,0 +1,32 @@
+/* iPad Pro 13 landscape: retain the editorial split layouts with tablet navigation and spacing. */
+@media (min-width: 1101px) and (max-width: 1400px) and (any-pointer: coarse) {
+  :root {
+    --pad: 48px;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr auto;
+  }
+
+  .desktop-nav,
+  .nav-action {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  #purpose .hero-copy {
+    padding-top: clamp(128px, 15vh, 158px);
+  }
+
+  #purpose .hero-copy h1 {
+    max-width: 650px;
+    font-size: 62px;
+  }
+
+  #purpose .hero-copy p:not(.eyebrow) {
+    max-width: 450px;
+  }
+}
