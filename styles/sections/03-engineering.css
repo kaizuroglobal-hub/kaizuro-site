@@ -123,8 +123,10 @@
 }
 
 #reel .sticky-image img {
-  transform: scale(1.42);
-  transform-origin: 62% 52%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  transform: translateX(-15%) scale(0.96);
+  transform-origin: 50% 50%;
 }
 
 #reel .story-copy h2 {
@@ -174,6 +176,6 @@
   }
 
   #reel .sticky-image img {
-    transform: scale(1.22);
+    transform: translateX(-10%) scale(0.96);
   }
 }
