@@ -53,8 +53,8 @@
 }
 
 #assault .full-width-product img {
-  object-fit: cover;
-  object-position: 68% 50%;
+  object-fit: contain;
+  object-position: 50% 50%;
 }
 
 #assault.assault-reveal::before {
