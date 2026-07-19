@@ -132,3 +132,43 @@ window.addEventListener("load", () => {
 window.addEventListener("hashchange", () => {
   scrollToHashTarget(window.location.hash);
 });
+
+const productLightbox = document.querySelector("[data-product-lightbox]");
+const lightboxImage = productLightbox?.querySelector("[data-lightbox-image]");
+const lightboxCaption = productLightbox?.querySelector("[data-lightbox-caption]");
+const lightboxClose = productLightbox?.querySelector("[data-lightbox-close]");
+let lightboxTrigger = null;
+
+function closeProductLightbox() {
+  if (!productLightbox?.open) {
+    return;
+  }
+  productLightbox.close();
+}
+
+document.querySelectorAll("[data-lightbox-src]").forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    if (!productLightbox || !lightboxImage || !lightboxCaption) {
+      return;
+    }
+    lightboxTrigger = trigger;
+    lightboxImage.src = trigger.dataset.lightboxSrc;
+    lightboxImage.alt = trigger.dataset.lightboxAlt || "KAIZURO Founder product";
+    lightboxCaption.textContent = trigger.dataset.lightboxCaption || "KAIZURO Founder product";
+    productLightbox.showModal();
+  });
+});
+
+lightboxClose?.addEventListener("click", closeProductLightbox);
+
+productLightbox?.addEventListener("click", (event) => {
+  if (event.target === productLightbox) {
+    closeProductLightbox();
+  }
+});
+
+productLightbox?.addEventListener("close", () => {
+  lightboxImage?.removeAttribute("src");
+  lightboxTrigger?.focus();
+  lightboxTrigger = null;
+});
