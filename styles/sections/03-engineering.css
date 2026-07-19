@@ -85,9 +85,12 @@
 }
 
 #technical .chapter-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
   background: #050505;
 }
 
+#technical .chapter-image.focal-frame,
 #technical .chapter-image.focal-wrap,
 #technical .chapter-image.focal-tip,
 #technical .chapter-image.focal-power {
@@ -95,11 +98,24 @@
   place-items: center;
 }
 
+#technical .chapter-image.focal-frame img,
 #technical .chapter-image.focal-wrap img,
 #technical .chapter-image.focal-tip img,
 #technical .chapter-image.focal-power img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+@media (min-width: 981px) {
+  #technical .chapter-image,
+  #technical .chapter-image:nth-child(1),
+  #technical .chapter-image:nth-child(n + 2) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 #reel .sticky-image {
@@ -144,7 +160,10 @@
   }
 
   #technical .chapter-image img {
-    object-fit: contain;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 
   #technical .chapter-image.focal-wrap img,
