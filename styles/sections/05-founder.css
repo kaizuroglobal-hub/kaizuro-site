@@ -98,6 +98,41 @@
   cursor: zoom-in;
 }
 
+#founder .product-viewer-trigger[data-founder-field] {
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+#founder .product-viewer-trigger[data-founder-field]::after {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  content: "Select";
+  padding: 7px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: var(--white);
+  background: rgba(0, 0, 0, 0.78);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#founder .product-viewer-trigger[data-founder-field].is-selected {
+  border-color: #b77443;
+  box-shadow: inset 0 0 0 1px #b77443;
+}
+
+#founder .product-viewer-trigger[data-founder-field].is-selected::after {
+  content: "Selected";
+  border-color: #f4f4f2;
+  color: #050505;
+  background: #f4f4f2;
+}
+
+#founder .choice-grid figure.is-selected figcaption {
+  border-color: #b77443;
+}
+
 #founder .product-viewer-trigger img {
   display: block;
   transition: transform 240ms ease, filter 240ms ease;
@@ -241,6 +276,35 @@
   grid-column: 1 / -1;
 }
 
+#founder .founder-selection-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line);
+}
+
+#founder .founder-selection-summary > span {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  padding: 16px;
+}
+
+#founder .founder-selection-summary > span + span {
+  border-left: 1px solid var(--line);
+}
+
+#founder .founder-selection-summary small {
+  color: rgba(244, 244, 242, 0.58);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#founder .founder-selection-summary strong {
+  color: var(--white);
+  font-size: 15px;
+}
+
 #founder .form-consent {
   grid-template-columns: 20px 1fr;
   align-items: start;
@@ -366,6 +430,14 @@
 }
 
 @media (max-width: 640px) {
+  #founder .founder-selection-summary {
+    grid-template-columns: 1fr;
+  }
+
+  #founder .founder-selection-summary > span + span {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
   #founder .founder-shell,
   #terms .terms-grid {
     width: calc(100% - 40px);

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="styles/sections/06-halo-footer.css?v=20260719-ipad">
     <link rel="stylesheet" href="styles/sections/07-ipad.css?v=20260719-ipad">
     <link rel="stylesheet" href="styles/section-review.css?v=20260718-1">
+    <link rel="stylesheet" href="styles/sections/08-alignment.css?v=20260719-alignment-1">
   </head>
   <body>
     <header class="site-header" data-site-header>
@@ -291,14 +292,14 @@
               </div>
               <div class="choice-grid">
                 <figure>
-                  <button class="product-viewer-trigger" type="button" data-lightbox-src="assets/kaizuro-site/concepts/founder-cap-black-copper.png" data-lightbox-alt="KAIZURO Founder 100 black copper cap" data-lightbox-caption="Founder Cap · Carbon Copper">
+                  <button class="product-viewer-trigger" type="button" data-founder-field="Preferred cap" data-founder-value="Carbon Copper" aria-pressed="false" data-lightbox-src="assets/kaizuro-site/concepts/founder-cap-black-copper.png" data-lightbox-alt="KAIZURO Founder 100 black copper cap" data-lightbox-caption="Founder Cap · Carbon Copper">
                     <img src="assets/kaizuro-site/concepts/founder-cap-black-copper.png" alt="KAIZURO Founder 100 black copper cap">
                     <span>View full size</span>
                   </button>
                   <figcaption><span>Founder cap</span><b>Carbon Copper</b></figcaption>
                 </figure>
                 <figure>
-                  <button class="product-viewer-trigger" type="button" data-lightbox-src="assets/kaizuro-site/concepts/founder-cap-navy.png" data-lightbox-alt="KAIZURO Founder 100 navy cap" data-lightbox-caption="Founder Cap · Offshore Navy">
+                  <button class="product-viewer-trigger" type="button" data-founder-field="Preferred cap" data-founder-value="Offshore Navy" aria-pressed="false" data-lightbox-src="assets/kaizuro-site/concepts/founder-cap-navy.png" data-lightbox-alt="KAIZURO Founder 100 navy cap" data-lightbox-caption="Founder Cap · Offshore Navy">
                     <img src="assets/kaizuro-site/concepts/founder-cap-navy.png" alt="KAIZURO Founder 100 navy cap">
                     <span>View full size</span>
                   </button>
@@ -317,14 +318,14 @@
               </div>
               <div class="choice-grid">
                 <figure>
-                  <button class="product-viewer-trigger" type="button" data-lightbox-src="assets/kaizuro-site/concepts/founder-pack-black-copper.png" data-lightbox-alt="KAIZURO black copper offshore pack" data-lightbox-caption="Founder Offshore Pack · Carbon Pack">
+                  <button class="product-viewer-trigger" type="button" data-founder-field="Preferred offshore pack" data-founder-value="Carbon Pack" aria-pressed="false" data-lightbox-src="assets/kaizuro-site/concepts/founder-pack-black-copper.png" data-lightbox-alt="KAIZURO black copper offshore pack" data-lightbox-caption="Founder Offshore Pack · Carbon Pack">
                     <img src="assets/kaizuro-site/concepts/founder-pack-black-copper.png" alt="KAIZURO black copper offshore pack">
                     <span>View full size</span>
                   </button>
                   <figcaption><span>Founder offshore pack</span><b>Carbon Pack</b></figcaption>
                 </figure>
                 <figure>
-                  <button class="product-viewer-trigger" type="button" data-lightbox-src="assets/kaizuro-site/concepts/founder-pack-navy.png" data-lightbox-alt="KAIZURO navy offshore pack" data-lightbox-caption="Founder Offshore Pack · Surge Pack">
+                  <button class="product-viewer-trigger" type="button" data-founder-field="Preferred offshore pack" data-founder-value="Surge Pack" aria-pressed="false" data-lightbox-src="assets/kaizuro-site/concepts/founder-pack-navy.png" data-lightbox-alt="KAIZURO navy offshore pack" data-lightbox-caption="Founder Offshore Pack · Surge Pack">
                     <img src="assets/kaizuro-site/concepts/founder-pack-navy.png" alt="KAIZURO navy offshore pack">
                     <span>View full size</span>
                   </button>
@@ -410,6 +411,10 @@
                   <option>Surge Pack</option>
                 </select>
               </label>
+              <div class="founder-selection-summary form-wide" aria-live="polite">
+                <span><small>Selected cap</small><strong data-selection-summary="Preferred cap">Not selected</strong></span>
+                <span><small>Selected offshore pack</small><strong data-selection-summary="Preferred offshore pack">Not selected</strong></span>
+              </div>
               <label class="form-wide">Notes<textarea name="Notes" rows="4" placeholder="Rod number preference, delivery questions or other details"></textarea></label>
               <label class="form-consent form-wide"><input type="checkbox" name="Founder terms acknowledged" required><span>I understand this is an expression of interest and no allocation is secured until the 25% deposit is paid through the future secure payment link.</span></label>
               <button class="founder-submit form-wide" type="submit">Submit Founder 100 interest</button>

@@ -1,0 +1,71 @@
+/* Canonical page rails. Keep this file last in the stylesheet order. */
+:root {
+  --page-gutter: 60px;
+  --pad: var(--page-gutter);
+}
+
+.site-header,
+.site-footer {
+  padding-right: var(--page-gutter);
+  padding-left: var(--page-gutter);
+}
+
+.content-grid,
+.hero-copy,
+.hero-status,
+.assault-copy,
+.halo-copy,
+.split-story,
+.split-story.reverse,
+.technical-scroll,
+#proof .proof-grid,
+#specifications .specifications-grid,
+#evolution .evolution-grid,
+#founder .founder-shell,
+#terms .terms-grid {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: var(--page-gutter);
+  padding-left: var(--page-gutter);
+}
+
+/* Hero layers use the same rails while retaining their vertical composition. */
+.hero-copy {
+  padding-right: var(--page-gutter);
+  padding-left: var(--page-gutter);
+}
+
+.hero-status {
+  right: 0;
+  left: 0;
+}
+
+/* These sections previously reintroduced centered max-width containers. */
+#principles > .content-grid,
+#proof > .content-grid,
+#specifications > .content-grid,
+#evolution > .content-grid,
+#founder > .content-grid,
+#terms > .content-grid,
+#updates > .content-grid {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-right: var(--page-gutter);
+  padding-left: var(--page-gutter);
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --page-gutter: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --page-gutter: 20px;
+  }
+}

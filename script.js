@@ -138,6 +138,42 @@ const lightboxImage = productLightbox?.querySelector("[data-lightbox-image]");
 const lightboxCaption = productLightbox?.querySelector("[data-lightbox-caption]");
 const lightboxClose = productLightbox?.querySelector("[data-lightbox-close]");
 let lightboxTrigger = null;
+const founderForm = document.querySelector(".founder-form");
+const founderChoiceTriggers = document.querySelectorAll("[data-founder-field][data-founder-value]");
+
+function setFounderSelection(fieldName, value) {
+  const field = founderForm?.elements.namedItem(fieldName);
+  if (field && "value" in field) {
+    field.value = value;
+  }
+
+  founderChoiceTriggers.forEach((trigger) => {
+    if (trigger.dataset.founderField !== fieldName) return;
+    const selected = trigger.dataset.founderValue === value;
+    trigger.classList.toggle("is-selected", selected);
+    trigger.setAttribute("aria-pressed", String(selected));
+    trigger.closest("figure")?.classList.toggle("is-selected", selected);
+  });
+
+  document.querySelectorAll("[data-selection-summary]").forEach((summary) => {
+    if (summary.dataset.selectionSummary === fieldName) {
+      summary.textContent = value || "Not selected";
+    }
+  });
+}
+
+founderChoiceTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    setFounderSelection(trigger.dataset.founderField, trigger.dataset.founderValue);
+  });
+});
+
+["Preferred cap", "Preferred offshore pack"].forEach((fieldName) => {
+  const field = founderForm?.elements.namedItem(fieldName);
+  if (!field || !("value" in field)) return;
+  field.addEventListener("change", () => setFounderSelection(fieldName, field.value));
+  setFounderSelection(fieldName, field.value);
+});
 
 function closeProductLightbox() {
   if (!productLightbox?.open) {
