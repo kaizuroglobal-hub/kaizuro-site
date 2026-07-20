@@ -200,23 +200,36 @@
             <p>KAIZURO is being developed through physical prototypes, controlled loading and documented revision. The purpose is not to promote one maximum number. It is to understand how the blank, components and finished rod behave as one system.</p>
           </div>
           <div class="proof-panel" aria-label="Prototype proof metrics">
-            <div class="metric-row">
-              <span><b>Blank-only destructive result</b>Not the recommended fishing drag.</span>
-              <strong>27.5 kg</strong>
-            </div>
-            <div class="metric-row">
-              <span><b>Controlled static-load reference</b>Used to observe working shape and load distribution.</span>
-              <strong>24 kg</strong>
+          <div class="metric-row">
+            <span><b>Controlled static-load reference</b>Used to observe working shape and load distribution.</span>
+            <strong>24 kg</strong>
             </div>
             <div class="metric-row">
               <span><b>Target offshore platform</b>Developed for topwater use with large spinning reels.</span>
               <strong>PE6-8</strong>
             </div>
-            <div class="load-curve" aria-hidden="true">
-              <span></span>
-            </div>
-            <p class="curve-heading">How the rod carries load matters as much as how much load it carries.</p>
-            <small class="proof-disclosure">Destructive strength, static-load testing and recommended fishing drag are different measurements. Final working-load guidance will follow completed prototype validation.</small>
+          <div class="load-curve">
+            <svg viewBox="0 0 900 430" role="img" aria-labelledby="load-curve-title load-curve-desc" preserveAspectRatio="xMidYMid meet">
+              <title id="load-curve-title">ASSAULT PE6-8 static-load curve comparison</title>
+              <desc id="load-curve-desc">Four reference curves showing the rod shape under loads of 8, 14, 20 and 24 kilograms.</desc>
+              <g class="load-grid" aria-hidden="true">
+                <path d="M160 30V390 M340 30V390 M520 30V390 M700 30V390 M870 30V390" />
+                <path d="M160 80H870 M160 160H870 M160 240H870 M160 320H870 M160 390H870" />
+              </g>
+              <text class="load-label load-label-red" x="18" y="92">24kg @ 60°</text>
+              <text class="load-label load-label-orange" x="18" y="182">20kg @ 45°</text>
+              <text class="load-label load-label-blue" x="18" y="272">14kg @ 45°</text>
+              <text class="load-label load-label-gray" x="18" y="352">8kg @ 25°</text>
+              <path class="load-path load-path-red" d="M160 122 C300 5 575 18 720 135 C810 208 848 300 870 390" />
+              <path class="load-path load-path-orange" d="M160 208 C315 95 570 105 725 205 C810 260 850 332 870 390" />
+              <path class="load-path load-path-blue" d="M160 300 C325 180 580 185 735 275 C815 320 850 360 870 390" />
+              <path class="load-path load-path-gray" d="M160 368 C330 265 590 270 745 330 C820 356 850 376 870 390" />
+              <circle class="load-endpoint" cx="870" cy="390" r="7" />
+              <text class="load-end-label" x="720" y="420">BUTT END (0-0-0)</text>
+            </svg>
+          </div>
+          <p class="curve-heading">How the rod carries load matters as much as how much load it carries.</p>
+          <small class="proof-disclosure">Static-load testing and recommended fishing drag are different measurements. Final working-load guidance will follow completed prototype validation.</small>
           </div>
         </div>
       </section>
