@@ -96,13 +96,15 @@
 
 #founder .product-viewer-trigger {
   position: relative;
-  display: block;
+  display: grid;
+  place-items: center;
   width: 100%;
-  padding: 0;
+  aspect-ratio: 16 / 10;
+  padding: clamp(8px, 0.8vw, 12px);
   overflow: hidden;
   border: 0;
   color: var(--white);
-  background: #070808;
+  background: #050505;
   cursor: zoom-in;
 }
 
@@ -143,6 +145,13 @@
 
 #founder .product-viewer-trigger img {
   display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+  padding: 0;
+  background: transparent;
   transition: transform 240ms ease, filter 240ms ease;
 }
 
@@ -179,12 +188,6 @@
 .founder-form :focus-visible {
   outline: 2px solid #f4f4f2;
   outline-offset: 3px;
-}
-
-#founder .founder-choice:nth-child(3) .choice-grid img {
-  object-fit: contain;
-  padding: 8px;
-  background: #000;
 }
 
 #founder .founder-collection dl div:last-child {
