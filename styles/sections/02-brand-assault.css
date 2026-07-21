@@ -122,3 +122,21 @@
     padding: 54px 20px 64px;
   }
 }
+
+/* Desktop ASSAULT guardrail: keep the one-line title clear of the media. */
+@media (min-width: 1101px) {
+  #assault {
+    grid-template-columns: minmax(520px, 0.42fr) minmax(0, 0.58fr);
+    column-gap: clamp(56px, 5vw, 96px);
+  }
+
+  #assault .assault-copy {
+    min-width: 0;
+    padding-right: clamp(28px, 3vw, 56px);
+  }
+
+  #assault .assault-copy h2 {
+    max-width: min(100%, 640px);
+    font-size: clamp(52px, 4.2vw, 76px);
+  }
+}
