@@ -2787,3 +2787,19 @@ h2 {
     line-height: 1.05;
   }
 }
+
+/* Final section spacing authority: short sections sit in a consistent band. */
+@media (min-width: 1101px) {
+  .system-section,
+  .terms-section,
+  .capture-section {
+    display: grid;
+    align-items: center;
+  }
+
+  .system-section > .content-grid,
+  .terms-section > .content-grid,
+  .capture-section > .content-grid {
+    align-self: center;
+  }
+}

@@ -264,3 +264,10 @@
     line-height: 1.05;
   }
 }
+
+/* Let the technical section end with its actual image track. */
+@media (min-width: 1101px) {
+  #technical {
+    min-height: auto;
+  }
+}

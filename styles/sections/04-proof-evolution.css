@@ -225,3 +225,17 @@
     font-size: 38px;
   }
 }
+
+/* Final proof spacing authority. */
+@media (min-width: 1101px) {
+  #proof {
+    display: grid;
+    min-height: calc(100svh - var(--header));
+    padding-block: var(--section-pad-y);
+    align-items: center;
+  }
+
+  #proof .proof-grid {
+    align-self: center;
+  }
+}
