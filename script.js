@@ -41,6 +41,9 @@ const chapterCopy = [
   }
 ];
 
+let activeChapterIndex = -1;
+let chapterScrollTicking = false;
+
 function setHeaderState() {
   header.classList.toggle("scrolled", window.scrollY > 18);
 }
@@ -56,6 +59,10 @@ function setChapter(index) {
   if (!next || !chapterTitle || !chapterText || !chapterIndex) {
     return;
   }
+  if (index === activeChapterIndex) {
+    return;
+  }
+  activeChapterIndex = index;
   chapterTitle.textContent = next.title;
   chapterText.textContent = next.text;
   chapterIndex.textContent = `${String(index + 1).padStart(2, "0")} / ${String(chapterCopy.length).padStart(2, "0")}`;
@@ -64,27 +71,52 @@ function setChapter(index) {
   }
 }
 
-const chapterObserver = new IntersectionObserver(
-  (entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-    if (visible) {
-      setChapter(Number(visible.target.dataset.chapter));
-    }
-  },
-  {
-    threshold: [0.32, 0.54, 0.76],
-    rootMargin: "-12% 0px -18% 0px"
+function updateChapterFromScroll() {
+  if (!chapters.length) {
+    return;
   }
-);
 
-chapters.forEach((chapter) => chapterObserver.observe(chapter));
+  const headerHeight = header?.offsetHeight || 0;
+  const activationY = headerHeight + ((window.innerHeight - headerHeight) * 0.52);
+  const resetY = activationY + Math.min(96, window.innerHeight * 0.09);
+  let nextIndex = activeChapterIndex;
+
+  if (nextIndex < 0) {
+    nextIndex = 0;
+    chapters.forEach((chapter) => {
+      if (chapter.getBoundingClientRect().top <= activationY) {
+        nextIndex = Number(chapter.dataset.chapter);
+      }
+    });
+  } else {
+    while (nextIndex < chapters.length - 1 && chapters[nextIndex + 1].getBoundingClientRect().top <= activationY) {
+      nextIndex += 1;
+    }
+
+    while (nextIndex > 0 && chapters[nextIndex].getBoundingClientRect().top > resetY) {
+      nextIndex -= 1;
+    }
+  }
+
+  setChapter(nextIndex);
+}
+
+function requestChapterUpdate() {
+  if (chapterScrollTicking) {
+    return;
+  }
+  chapterScrollTicking = true;
+  window.requestAnimationFrame(() => {
+    chapterScrollTicking = false;
+    updateChapterFromScroll();
+  });
+}
 
 window.addEventListener("scroll", setHeaderState, { passive: true });
+window.addEventListener("scroll", requestChapterUpdate, { passive: true });
+window.addEventListener("resize", requestChapterUpdate);
 setHeaderState();
-setChapter(0);
+updateChapterFromScroll();
 
 menuToggle.addEventListener("click", () => {
   setMenu(!mobileMenu.classList.contains("open"));

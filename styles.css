@@ -2490,3 +2490,32 @@ h2 {
 .evolution-section.section-light .roadmap-copy p:not(.eyebrow) {
   color: rgba(5, 5, 5, 0.66);
 }
+
+/* Targeted copy corrections for final section review. */
+.proof-section .curve-heading {
+  max-width: 700px;
+  font-size: clamp(24px, 2.2vw, 36px);
+  line-height: 1.22;
+}
+
+.evolution-section .roadmap-copy {
+  max-width: 1100px;
+}
+
+.evolution-section .roadmap-copy h2 {
+  max-width: none;
+  white-space: nowrap;
+}
+
+.evolution-section .roadmap-copy p:not(.eyebrow) {
+  max-width: min(1040px, 100%);
+  font-size: clamp(19px, 1.6vw, 25px);
+  line-height: 1.38;
+}
+
+@media (max-width: 720px) {
+  .assault-copy h2,
+  .evolution-section .roadmap-copy h2 {
+    white-space: normal;
+  }
+}
