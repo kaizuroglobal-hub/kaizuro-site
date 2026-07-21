@@ -202,3 +202,65 @@
     transform: translateX(-10%) scale(0.96);
   }
 }
+
+/* Final mobile chapter containment. */
+@media (max-width: 1100px) {
+  #technical {
+    overflow: hidden;
+  }
+
+  #technical .chapter-track {
+    display: grid;
+    gap: clamp(52px, 9vw, 84px);
+    width: 100%;
+  }
+
+  #technical .chapter-image,
+  #technical .chapter-image:nth-child(1),
+  #technical .chapter-image:nth-child(n + 2),
+  #technical .chapter-image.focal-frame,
+  #technical .chapter-image.focal-wrap,
+  #technical .chapter-image.focal-tip,
+  #technical .chapter-image.focal-power {
+    display: grid !important;
+    grid-template-rows: auto auto;
+    place-items: stretch;
+    width: 100%;
+    height: auto !important;
+    min-height: 0;
+    aspect-ratio: auto !important;
+    overflow: visible;
+  }
+
+  #technical .chapter-image img,
+  #technical .chapter-image.focal-frame img,
+  #technical .chapter-image.focal-wrap img,
+  #technical .chapter-image.focal-tip img,
+  #technical .chapter-image.focal-power img {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  #technical .mobile-chapter-copy {
+    position: static;
+    display: grid !important;
+    height: auto;
+    margin: 0;
+    padding: 26px 0 0;
+  }
+}
+
+@media (max-width: 640px) {
+  #technical .mobile-chapter-copy {
+    gap: 10px;
+  }
+
+  #technical .mobile-chapter-copy b {
+    font-size: clamp(31px, 9vw, 42px);
+    line-height: 1.05;
+  }
+}

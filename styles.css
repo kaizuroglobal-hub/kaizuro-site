@@ -2519,3 +2519,271 @@ h2 {
     white-space: normal;
   }
 }
+
+/* KAIZURO section system: one premium rhythm across the site. */
+:root {
+  --section-min: calc(100svh - var(--header));
+  --section-pad-y: clamp(96px, 8vw, 132px);
+  --section-gap: clamp(56px, 7vw, 104px);
+  --section-media-height: clamp(520px, 43vw, 700px);
+  --section-media-bg: #111212;
+  --copy-measure: 610px;
+  --statement-measure: 560px;
+}
+
+@media (min-width: 1101px) {
+  .split-story,
+  .split-story.reverse,
+  #details,
+  #grip,
+  #reel {
+    display: grid;
+    grid-template-columns: minmax(360px, 0.78fr) minmax(0, 1.22fr);
+    gap: var(--section-gap);
+    width: calc(100% - (var(--pad) * 2));
+    max-width: none;
+    min-height: var(--section-min);
+    margin-inline: var(--pad);
+    padding-block: var(--section-pad-y);
+    align-items: center;
+  }
+
+  .split-story.reverse,
+  #details,
+  #reel {
+    grid-template-columns: minmax(0, 1.22fr) minmax(360px, 0.78fr);
+  }
+
+  .split-story > .story-copy,
+  .split-story > .sticky-image,
+  #details > .story-copy,
+  #details > .sticky-image,
+  #grip > .story-copy,
+  #grip > .sticky-image,
+  #reel > .story-copy,
+  #reel > .sticky-image {
+    align-self: center;
+  }
+
+  #details .story-copy,
+  #grip .story-copy,
+  #reel .story-copy {
+    grid-row: 1;
+  }
+
+  #details .sticky-image,
+  #grip .sticky-image,
+  #reel .sticky-image {
+    grid-row: 1;
+  }
+
+  #grip .story-copy {
+    grid-column: 1;
+  }
+
+  #grip .sticky-image {
+    grid-column: 2;
+  }
+
+  .story-copy p,
+  .assault-copy p,
+  .halo-copy p,
+  .proof-grid p {
+    max-width: var(--copy-measure);
+  }
+
+  .story-copy strong,
+  .assault-copy strong {
+    max-width: var(--statement-measure);
+  }
+
+  .sticky-image,
+  #details .sticky-image,
+  #grip .sticky-image,
+  #reel .sticky-image {
+    position: relative;
+    top: auto;
+    width: 100%;
+    height: var(--section-media-height);
+    min-height: 0;
+    aspect-ratio: auto;
+    overflow: hidden;
+    background: var(--section-media-bg);
+    transform: none;
+  }
+
+  .sticky-image img,
+  #details .sticky-image img,
+  #grip .sticky-image img,
+  #reel .sticky-image img {
+    width: 100%;
+    height: 100%;
+  }
+
+  #details .sticky-image img,
+  #grip .sticky-image img,
+  #reel .sticky-image img {
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+
+  #story .sticky-image {
+    height: clamp(680px, 58vw, 860px);
+    aspect-ratio: 4 / 5;
+    justify-self: center;
+  }
+
+  #assault {
+    min-height: var(--section-min);
+    grid-template-columns: minmax(360px, 0.78fr) minmax(0, 1.22fr);
+    align-items: center;
+  }
+
+  #assault .full-width-product {
+    min-height: var(--section-media-height);
+    height: var(--section-media-height);
+    align-self: center;
+    background: var(--section-media-bg);
+  }
+
+  #assault .assault-copy {
+    justify-content: center;
+    align-self: center;
+    padding-block: var(--section-pad-y);
+  }
+
+  .system-section,
+  .proof-section,
+  .evolution-section,
+  .terms-section,
+  .capture-section,
+  .founder-section {
+    min-height: var(--section-min);
+    padding-block: var(--section-pad-y);
+  }
+
+  .system-section > .content-grid,
+  .proof-section > .content-grid,
+  .evolution-section > .content-grid,
+  .terms-section > .content-grid,
+  .capture-section > .content-grid,
+  .founder-section > .content-grid {
+    width: calc(100% - (var(--pad) * 2));
+    max-width: none;
+    margin-inline: var(--pad);
+    padding-inline: 0;
+  }
+
+  .proof-grid {
+    grid-template-columns: minmax(360px, 0.78fr) minmax(0, 1.22fr);
+    gap: var(--section-gap);
+    align-items: center;
+  }
+
+  .proof-panel {
+    align-self: center;
+  }
+
+  .evolution-grid {
+    align-content: center;
+  }
+}
+
+@media (max-width: 1100px) {
+  .split-story,
+  .split-story.reverse,
+  #details,
+  #grip,
+  #reel,
+  .technical-scroll,
+  .system-section,
+  .proof-section,
+  .evolution-section,
+  .terms-section,
+  .capture-section,
+  .founder-section {
+    padding-block: clamp(76px, 10vw, 112px);
+  }
+
+  .split-story,
+  .split-story.reverse,
+  #details,
+  #grip,
+  #reel {
+    min-height: auto;
+    align-items: start;
+  }
+
+  .sticky-image,
+  #details .sticky-image,
+  #grip .sticky-image,
+  #reel .sticky-image {
+    height: clamp(300px, 58vw, 560px);
+    background: var(--section-media-bg);
+    transform: none;
+  }
+
+  #assault .assault-copy,
+  #assault .full-width-product {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  #assault .assault-copy,
+  #assault .full-width-product {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Final mobile chapter authority: captions stay inside their own figures. */
+@media (max-width: 1100px) {
+  .technical-scroll {
+    overflow: hidden;
+  }
+
+  .technical-scroll .chapter-track {
+    display: grid;
+    gap: clamp(52px, 9vw, 84px);
+    width: 100%;
+  }
+
+  .technical-scroll .chapter-image,
+  .technical-scroll .chapter-image:nth-child(1),
+  .technical-scroll .chapter-image:nth-child(n + 2) {
+    display: grid !important;
+    grid-template-rows: auto auto;
+    height: auto !important;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .technical-scroll .chapter-image img {
+    display: block;
+    width: 100%;
+    height: auto !important;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .technical-scroll .mobile-chapter-copy {
+    position: static;
+    display: grid !important;
+    height: auto;
+    margin: 0;
+    padding: 26px 0 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .technical-scroll .mobile-chapter-copy {
+    gap: 10px;
+  }
+
+  .technical-scroll .mobile-chapter-copy b {
+    font-size: clamp(31px, 9vw, 42px);
+    line-height: 1.05;
+  }
+}
