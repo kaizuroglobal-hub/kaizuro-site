@@ -37,7 +37,7 @@
   align-items: start !important;
   min-height: 0 !important;
   height: auto !important;
-  padding-block: clamp(18px, 1.5vw, 24px) !important;
+  padding-block: clamp(58px, 4vw, 64px) !important;
 }
 
 #updates .capture-box h2 {
@@ -64,7 +64,7 @@
   }
 
   #updates.capture-section {
-    padding-block: 20px !important;
+    padding-block: 60px !important;
   }
 }
 
@@ -87,6 +87,6 @@
   }
 
   #updates.capture-section {
-    padding-block: 16px !important;
+    padding-block: 56px !important;
   }
 }
