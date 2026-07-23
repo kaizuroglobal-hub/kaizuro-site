@@ -13,6 +13,18 @@
 
 #founder {
   padding-top: clamp(84px, 7vw, 112px);
+  padding-bottom: clamp(56px, 6vw, 88px);
+  min-height: auto;
+}
+
+#terms {
+  display: block;
+  min-height: auto;
+  padding-top: clamp(56px, 5vw, 84px);
+}
+
+#terms > .terms-grid {
+  align-self: auto;
 }
 
 #founder .founder-intro {
