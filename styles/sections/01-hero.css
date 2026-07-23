@@ -5,22 +5,15 @@
 
 #purpose .focal-hero img {
   object-fit: cover;
-  object-position: 42% 50%;
+  object-position: 50% 50%;
 }
 
 #purpose .hero-scrim {
-  background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.24) 34%, rgba(0, 0, 0, 0.04) 70%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 38%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 34%);
 }
 
 #purpose .hero-copy {
-  position: relative;
-  z-index: 3;
-  display: block;
-  width: min(820px, calc(100% - (var(--pad) * 2)));
-  margin: 0;
-  padding: clamp(138px, 17vh, 190px) 0 0 var(--pad);
+  display: none;
 }
 
 #purpose .hero-copy h1 {
@@ -42,8 +35,7 @@
 }
 
 #purpose .hero-status {
-  padding-inline: 0;
-  width: calc(100% - (var(--pad) * 2));
+  display: none;
 }
 
 @media (max-width: 1100px) {
