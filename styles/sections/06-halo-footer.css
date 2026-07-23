@@ -22,6 +22,21 @@
   max-width: var(--max);
   margin-inline: auto;
   padding-inline: 0;
+  align-self: start;
+}
+
+#updates.capture-section {
+  display: block;
+  min-height: auto;
+  padding-block: clamp(42px, 3.5vw, 62px);
+}
+
+#updates .capture-box h2 {
+  font-size: clamp(46px, 5vw, 78px);
+}
+
+#updates .capture-box form {
+  margin-top: clamp(24px, 2.5vw, 32px);
 }
 
 @media (max-width: 1100px) {
@@ -32,6 +47,10 @@
 
   #updates .capture-box {
     width: calc(100% - 48px);
+  }
+
+  #updates.capture-section {
+    padding-block: clamp(40px, 7vw, 64px);
   }
 }
 
@@ -47,5 +66,9 @@
 
   #updates .capture-box {
     width: calc(100% - 40px);
+  }
+
+  #updates.capture-section {
+    padding-block: 38px;
   }
 }
