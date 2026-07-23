@@ -52,12 +52,6 @@
   background: #050505;
 }
 
-@media (min-width: 1101px) {
-  #grip .sticky-image {
-    transform: translateY(clamp(72px, 6vw, 120px));
-  }
-}
-
 #grip .sticky-image::after {
   content: "";
   position: absolute;
