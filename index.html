@@ -58,7 +58,7 @@
 
     <link
       rel="stylesheet"
-      href="styles/sections/05-founder.css?v=20260723-founder-line-control"
+      href="styles/sections/05-founder.css?v=20260723-founder-selection-sync"
     >
 
     <link
@@ -1672,7 +1672,12 @@
                 class="founder-payment-grid"
                 aria-label="Founder deposit options"
               >
-                <article class="founder-payment-card">
+                <article
+                  class="founder-payment-card"
+                  data-founder-field="Preferred rod"
+                  data-founder-value="ASSAULT PE6-8"
+                  aria-pressed="false"
+                >
                   <div
                     class="founder-payment-card__visual"
                     aria-hidden="true"
@@ -1724,6 +1729,8 @@
                       href="https://square.link/u/alquFkmg"
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-founder-field="Preferred rod"
+                      data-founder-value="ASSAULT PE6-8"
                     >
                       <span>
                         Secure ASSAULT allocation
@@ -1736,7 +1743,12 @@
                   </div>
                 </article>
 
-                <article class="founder-payment-card">
+                <article
+                  class="founder-payment-card"
+                  data-founder-field="Preferred rod"
+                  data-founder-value="HALO PE10-12"
+                  aria-pressed="false"
+                >
                   <div
                     class="founder-payment-card__visual"
                     aria-hidden="true"
@@ -1788,6 +1800,8 @@
                       href="https://square.link/u/ohOr1RV2"
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-founder-field="Preferred rod"
+                      data-founder-value="HALO PE10-12"
                     >
                       <span>
                         Secure HALO allocation
@@ -1852,6 +1866,27 @@
               </label>
 
               <label>
+                Preferred rod
+
+                <select
+                  name="Preferred rod"
+                  required
+                >
+                  <option value="">
+                    Select rod
+                  </option>
+
+                  <option>
+                    ASSAULT PE6-8
+                  </option>
+
+                  <option>
+                    HALO PE10-12
+                  </option>
+                </select>
+              </label>
+
+              <label>
                 Preferred cap
 
                 <select
@@ -1897,6 +1932,16 @@
                 class="founder-selection-summary form-wide"
                 aria-live="polite"
               >
+                <span>
+                  <small>
+                    Selected rod
+                  </small>
+
+                  <strong data-selection-summary="Preferred rod">
+                    Not selected
+                  </strong>
+                </span>
+
                 <span>
                   <small>
                     Selected cap
@@ -2258,7 +2303,7 @@
     </footer>
 
     <script
-      src="script.js?v=20260721-chapter-scroll"
+      src="script.js?v=20260723-founder-selection-sync"
       defer
     ></script>
   </body>

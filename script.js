@@ -184,6 +184,7 @@ function setFounderSelection(fieldName, value) {
     const selected = trigger.dataset.founderValue === value;
     trigger.classList.toggle("is-selected", selected);
     trigger.setAttribute("aria-pressed", String(selected));
+    trigger.closest(".founder-payment-card")?.classList.toggle("is-selected", selected);
     trigger.closest("figure")?.classList.toggle("is-selected", selected);
   });
 
@@ -200,7 +201,7 @@ founderChoiceTriggers.forEach((trigger) => {
   });
 });
 
-["Preferred cap", "Preferred offshore pack"].forEach((fieldName) => {
+["Preferred rod", "Preferred cap", "Preferred offshore pack"].forEach((fieldName) => {
   const field = founderForm?.elements.namedItem(fieldName);
   if (!field || !("value" in field)) return;
   field.addEventListener("change", () => setFounderSelection(fieldName, field.value));
