@@ -119,14 +119,22 @@
   #details .story-copy h2,
   #grip .story-copy h2,
   #reel .story-copy h2,
+  .system-section h2,
   .proof-grid h2,
   .evolution-section .roadmap-copy h2,
   #founder .founder-intro > h2,
   #founder .deposit-intro h3 {
     max-width: 100%;
-    font-size: clamp(38px, 10.8vw, 48px);
-    line-height: 1.03;
+    font-size: clamp(31px, 8vw, 38px);
+    line-height: 1.08;
     letter-spacing: 0;
+  }
+
+  .system-section h2 span,
+  #details .story-copy h2 span,
+  #founder .founder-intro > h2 span,
+  #founder .deposit-intro h3 span {
+    display: block;
   }
 
   .story-copy p,
@@ -138,8 +146,19 @@
   .halo-copy p,
   .assault-copy p,
   .capture-box p {
-    font-size: clamp(17px, 4.6vw, 20px);
+    font-size: clamp(16px, 4.1vw, 18px);
     line-height: 1.5;
+  }
+
+  .eyebrow,
+  p.eyebrow,
+  .mobile-chapter-copy span,
+  .founder-payment-kicker,
+  .choice-kicker,
+  .production-roadmap span {
+    font-size: 10px;
+    line-height: 1.3;
+    letter-spacing: 0.22em;
   }
 
   .story-copy strong {
@@ -189,13 +208,13 @@
   }
 
   #technical .mobile-chapter-copy b {
-    font-size: clamp(32px, 8.8vw, 38px);
-    line-height: 1.04;
+    font-size: clamp(29px, 7.6vw, 34px);
+    line-height: 1.08;
     letter-spacing: 0;
   }
 
   #technical .mobile-chapter-copy p {
-    font-size: clamp(17px, 4.6vw, 19px);
+    font-size: clamp(16px, 4.1vw, 18px);
     line-height: 1.48;
   }
 
@@ -264,8 +283,8 @@
   #halo .halo-copy h2,
   #assault .assault-copy h2 {
     max-width: 100%;
-    font-size: clamp(38px, 10.8vw, 48px);
-    line-height: 1.06;
+    font-size: clamp(32px, 8.5vw, 40px);
+    line-height: 1.08;
     letter-spacing: 0;
     white-space: normal;
   }
@@ -280,8 +299,8 @@
   }
 
   #updates .capture-box h2 {
-    font-size: clamp(38px, 10.8vw, 48px);
-    line-height: 1.05;
+    font-size: clamp(32px, 8.5vw, 40px);
+    line-height: 1.08;
   }
 
   #updates .capture-box form {
