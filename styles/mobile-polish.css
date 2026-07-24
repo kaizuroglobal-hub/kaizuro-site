@@ -483,13 +483,14 @@ main > section::before,
 main > section::after {
   content: "";
   position: absolute;
-  right: 0;
-  left: 0;
+  left: 50%;
   z-index: 20;
   display: block;
+  width: 100vw;
   height: 0.5px;
   pointer-events: none;
   background: rgba(255, 255, 255, 0.92);
+  transform: translateX(-50%);
 }
 
 main > section::before {
