@@ -3008,4 +3008,67 @@ h2 {
     width: 100%;
     margin: 0;
   }
+
+  #assault,
+  #halo {
+    display: grid;
+    min-height: auto;
+    padding-block: 72px;
+    overflow: hidden;
+  }
+
+  #assault .assault-copy,
+  #halo .halo-copy {
+    grid-row: 1;
+    order: 1;
+    min-height: auto;
+    width: calc(100% - 40px);
+    margin-inline: auto;
+    padding: 0;
+    align-content: start;
+  }
+
+  #assault .full-width-product,
+  #halo .full-bleed-image {
+    position: relative;
+    inset: auto;
+    grid-row: 2;
+    order: 2;
+    width: calc(100% - 40px);
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 34px auto 0;
+    background: #050505;
+  }
+
+  #assault .full-width-product img,
+  #halo .full-bleed-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  #assault::before,
+  #halo::after,
+  #halo .hero-scrim {
+    display: none;
+  }
+
+  .technical-scroll .chapter-image {
+    grid-template-rows: auto auto;
+  }
+
+  .technical-scroll .chapter-image img {
+    grid-row: 2;
+    order: 2;
+  }
+
+  .technical-scroll .mobile-chapter-copy {
+    grid-row: 1;
+    order: 1;
+    padding: 0 0 22px;
+  }
 }

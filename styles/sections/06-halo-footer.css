@@ -69,13 +69,40 @@
 }
 
 @media (max-width: 640px) {
+  #halo {
+    display: grid;
+    min-height: auto;
+    padding: 72px 0;
+  }
+
   #halo .halo-copy {
+    grid-row: 1;
+    order: 1;
     width: calc(100% - 40px);
-    padding: 108px 0 0 20px;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  #halo .full-bleed-image {
+    position: relative;
+    inset: auto;
+    grid-row: 2;
+    order: 2;
+    width: calc(100% - 40px);
+    height: auto;
+    margin: 34px auto 0;
   }
 
   #halo .focal-halo img {
-    object-position: 60% 50%;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-position: 50% 50%;
+  }
+
+  #halo::after,
+  #halo .hero-scrim {
+    display: none;
   }
 
   #halo .halo-copy h2 {

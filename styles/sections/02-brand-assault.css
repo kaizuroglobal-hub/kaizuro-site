@@ -110,16 +110,33 @@
 }
 
 @media (max-width: 640px) {
-  #assault .full-width-product {
-    min-height: 340px;
-  }
-
-  #assault .full-width-product img {
-    object-position: 64% 50%;
+  #assault {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 72px 0;
   }
 
   #assault .assault-copy {
-    padding: 54px 20px 64px;
+    grid-row: 1;
+    order: 1;
+    width: calc(100% - 40px);
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  #assault .full-width-product {
+    grid-row: 2;
+    order: 2;
+    width: calc(100% - 40px);
+    height: auto;
+    min-height: 0;
+    margin: 34px auto 0;
+  }
+
+  #assault .full-width-product img {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 }
 
