@@ -352,6 +352,16 @@
     align-self: center;
   }
 
+  #story > .sticky-image,
+  #details > .sticky-image,
+  #grip > .sticky-image,
+  #reel > .sticky-image,
+  #assault .full-width-product,
+  #halo .full-bleed-image {
+    justify-self: center;
+    margin-inline: auto;
+  }
+
   #story > .sticky-image {
     align-self: start;
     height: 699px;
@@ -360,6 +370,7 @@
   }
 
   #details > .sticky-image {
+    width: min(100%, 760px);
     height: 600px;
     align-self: center;
     aspect-ratio: auto;
