@@ -321,6 +321,19 @@
 
 /* Desktop-only section height and center-alignment preview pass. */
 @media (min-width: 1101px) {
+  #founder .founder-intro {
+    grid-template-columns: minmax(620px, 0.95fr) minmax(0, 1fr);
+  }
+
+  #founder .founder-intro > h2 {
+    max-width: 620px;
+  }
+
+  #founder .deposit-intro h3 {
+    max-width: 100%;
+    font-size: clamp(42px, 3.6vw, 60px);
+  }
+
   #purpose {
     height: 1000px;
     min-height: 1000px;
@@ -455,8 +468,8 @@
   #specifications {
     display: grid;
     align-items: center;
-    height: 900px;
-    min-height: 900px;
+    height: 980px;
+    min-height: 980px;
     padding-block: 76px;
   }
 
@@ -467,8 +480,8 @@
   #evolution {
     display: grid;
     align-items: center;
-    height: 1200px;
-    min-height: 1200px;
+    height: 1450px;
+    min-height: 1450px;
     padding-block: 86px;
   }
 
@@ -477,8 +490,8 @@
   }
 
   #founder {
-    height: 4600px;
-    min-height: 4600px;
+    height: 4900px;
+    min-height: 4900px;
     padding-block: 96px;
   }
 
@@ -513,6 +526,21 @@
 
   #updates .capture-box {
     align-self: center !important;
+  }
+}
+
+#updates .capture-box > p:not(.eyebrow),
+#updates .capture-box > small {
+  color: rgba(244, 244, 242, 0.64);
+}
+
+@media (min-width: 641px) and (max-width: 1100px) {
+  #founder .founder-intro > h2 {
+    font-size: clamp(48px, 7.8vw, 80px);
+  }
+
+  #founder .deposit-intro h3 {
+    font-size: clamp(34px, 5.3vw, 54px);
   }
 }
 
@@ -556,6 +584,14 @@ main > section::after {
 }
 
 @media (max-width: 640px) {
+  #assault .assault-copy h2 {
+    font-size: min(8.2vw, 35px);
+  }
+
+  #terms {
+    padding-bottom: 152px;
+  }
+
   #purpose .focal-hero img {
     display: block;
     width: 100%;
