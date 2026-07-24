@@ -1,5 +1,5 @@
-/* Final mobile authority: loaded last so section files cannot reintroduce overflow. */
-@media (max-width: 640px) {
+/* Mobile overrides disabled so the live mobile site matches the earlier base layout. */
+@media (min-width: 641px) and (max-width: 640px) {
   html,
   body,
   main {
