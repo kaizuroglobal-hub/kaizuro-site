@@ -7,6 +7,7 @@ const chapterIndex = document.querySelector("[data-chapter-index]");
 const chapterEyebrow = document.querySelector("[data-chapter-eyebrow]");
 const chapters = [...document.querySelectorAll("[data-chapter]")];
 const reviewSection = new URLSearchParams(window.location.search).get("section");
+const brandLink = document.querySelector(".brand-word");
 
 if (reviewSection) {
   const selectedSection = document.getElementById(reviewSection);
@@ -149,6 +150,14 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
       return;
     }
     event.preventDefault();
+
+    if (link === brandLink) {
+      history.pushState(null, "", `${window.location.pathname}${window.location.search}`);
+      setMenu(false);
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      return;
+    }
+
     history.pushState(null, "", hash);
     setMenu(false);
     scrollToHashTarget(hash);
@@ -156,9 +165,7 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 });
 
 window.addEventListener("load", () => {
-  if (window.location.hash) {
-    window.setTimeout(() => scrollToHashTarget(window.location.hash, "auto"), 80);
-  }
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 });
 
 window.addEventListener("hashchange", () => {

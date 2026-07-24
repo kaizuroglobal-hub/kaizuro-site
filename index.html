@@ -3,6 +3,14 @@
   <head>
     <meta charset="utf-8">
 
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      window.scrollTo(0, 0);
+      window.addEventListener("pageshow", () => window.scrollTo(0, 0));
+    </script>
+
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1"
@@ -2310,7 +2318,7 @@
     </footer>
 
     <script
-      src="script.js?v=20260723-founder-selection-sync"
+      src="script.js?v=20260724-always-start-at-top"
       defer
     ></script>
   </body>
