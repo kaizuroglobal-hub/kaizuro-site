@@ -531,7 +531,7 @@ main > section::after {
   z-index: 20;
   display: block;
   width: 100vw;
-  height: 0.5px;
+  height: 0.25px;
   pointer-events: none;
   background: rgba(255, 255, 255, 0.92);
   transform: translateX(-50%);
