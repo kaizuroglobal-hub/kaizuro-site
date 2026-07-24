@@ -156,7 +156,7 @@
   #details,
   #grip,
   #reel {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   #details .story-copy,
@@ -164,6 +164,7 @@
   #reel .story-copy {
     grid-column: 1;
     grid-row: 1;
+    order: 1;
   }
 
   #details .sticky-image,
@@ -171,6 +172,7 @@
   #reel .sticky-image {
     grid-column: 1;
     grid-row: 2;
+    order: 2;
     width: 100%;
   }
 

@@ -2975,4 +2975,37 @@ h2 {
   .capture-box form {
     width: 100%;
   }
+
+  .split-story,
+  .split-story.reverse,
+  #details,
+  #grip,
+  #reel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+    align-items: start;
+  }
+
+  .split-story > .story-copy,
+  .split-story.reverse > .story-copy,
+  #details > .story-copy,
+  #grip > .story-copy,
+  #reel > .story-copy {
+    grid-column: 1;
+    grid-row: 1;
+    order: 1;
+  }
+
+  .split-story > .sticky-image,
+  .split-story.reverse > .sticky-image,
+  #details > .sticky-image,
+  #grip > .sticky-image,
+  #reel > .sticky-image {
+    grid-column: 1;
+    grid-row: 2;
+    order: 2;
+    width: 100%;
+    margin: 0;
+  }
 }
