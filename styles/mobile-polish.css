@@ -474,6 +474,28 @@
 
 /* Temporary spacing review guides. */
 main > section {
-  border-top: 1px solid rgba(255, 255, 255, 0.92) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.92) !important;
+  position: relative;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+main > section::before,
+main > section::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  display: block;
+  height: 0.5px;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+main > section::before {
+  top: 0;
+}
+
+main > section::after {
+  bottom: 0;
 }
