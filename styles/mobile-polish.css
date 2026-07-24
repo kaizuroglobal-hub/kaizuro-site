@@ -415,8 +415,8 @@
   }
 
   #technical {
-    height: 2000px;
-    min-height: 2000px;
+    height: 2216px;
+    min-height: 2216px;
     padding-block: 92px;
     align-items: start;
   }
@@ -433,6 +433,11 @@
   #technical .chapter-image:nth-child(1),
   #technical .chapter-image:nth-child(n + 2) {
     height: 415px;
+  }
+
+  #technical .chapter-image.focal-power {
+    justify-self: center;
+    margin-inline: auto;
   }
 
   #proof {
