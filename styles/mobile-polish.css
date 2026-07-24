@@ -549,7 +549,7 @@ main > section::after {
   main > section::before,
   main > section::after {
     height: 1px;
-    background: rgba(255, 255, 255, 0.42);
+    background: #fff;
     transform: translateX(-50%) scaleY(0.25);
     transform-origin: center;
   }
