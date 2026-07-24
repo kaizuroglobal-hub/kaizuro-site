@@ -49,18 +49,11 @@
   aspect-ratio: 16 / 10;
   height: auto;
   min-height: 0;
-  background: #050505;
+  background: #000;
 }
 
 #grip .sticky-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 52% 46%, rgba(70, 72, 72, 0.28), rgba(70, 72, 72, 0.08) 34%, rgba(0, 0, 0, 0) 66%),
-    linear-gradient(90deg, rgba(26, 27, 27, 0.16), rgba(38, 39, 39, 0.22) 46%, rgba(20, 21, 21, 0.1));
-  mix-blend-mode: screen;
+  content: none;
 }
 
 #grip .story-copy h2 {
