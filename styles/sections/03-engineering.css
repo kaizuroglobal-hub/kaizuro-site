@@ -25,7 +25,7 @@
 }
 
 #reel .sticky-image {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   height: auto;
   min-height: 0;
   background: #050505;
@@ -33,9 +33,9 @@
 
 #details .sticky-image {
   width: 100%;
-  height: clamp(560px, 42vw, 650px);
+  height: auto;
   min-height: 0;
-  aspect-ratio: auto;
+  aspect-ratio: 16 / 10;
   align-self: center;
   background: #050505;
 }
@@ -46,7 +46,7 @@
 }
 
 #grip .sticky-image {
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   height: auto;
   min-height: 0;
   background: #050505;
@@ -103,7 +103,7 @@
 
 #technical .chapter-image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   background: #050505;
 }
 
@@ -131,7 +131,7 @@
   #technical .chapter-image:nth-child(n + 2) {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
   }
 }
 
@@ -177,12 +177,13 @@
   }
 
   #details .sticky-image {
-    height: clamp(460px, 82vw, 620px);
+    height: auto;
+    aspect-ratio: 16 / 10;
   }
 
   #technical .chapter-image img {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
     object-fit: cover;
     object-position: 50% 50%;
   }

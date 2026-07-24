@@ -115,6 +115,11 @@
     object-fit: contain;
   }
 
+  #story .sticky-image {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
   .story-copy h2,
   #details .story-copy h2,
   #grip .story-copy h2,
@@ -311,5 +316,158 @@
 
   #updates .capture-box button {
     width: 100%;
+  }
+}
+
+/* Desktop-only section height and center-alignment preview pass. */
+@media (min-width: 1101px) {
+  #purpose {
+    height: 1000px;
+    min-height: 1000px;
+  }
+
+  #purpose .hero-copy {
+    min-height: 1000px;
+  }
+
+  #story,
+  #details,
+  #grip,
+  #reel {
+    display: grid;
+    align-items: center;
+    height: 900px;
+    min-height: 900px;
+    padding-block: 78px;
+  }
+
+  #story > .story-copy,
+  #story > .sticky-image,
+  #details > .story-copy,
+  #details > .sticky-image,
+  #grip > .story-copy,
+  #grip > .sticky-image,
+  #reel > .story-copy,
+  #reel > .sticky-image {
+    align-self: center;
+  }
+
+  #assault {
+    height: 800px;
+    min-height: 800px;
+    align-items: center;
+  }
+
+  #assault .assault-copy,
+  #assault .full-width-product {
+    align-self: center;
+  }
+
+  #principles {
+    display: grid;
+    align-items: center;
+    height: 900px;
+    min-height: 900px;
+    padding-block: 82px;
+  }
+
+  #principles > .content-grid {
+    align-self: center;
+  }
+
+  #technical {
+    height: 2000px;
+    min-height: 2000px;
+    padding-block: 92px;
+    align-items: start;
+  }
+
+  #technical .chapter-copy {
+    top: 132px;
+  }
+
+  #technical .chapter-track {
+    gap: 124px;
+  }
+
+  #technical .chapter-image,
+  #technical .chapter-image:nth-child(1),
+  #technical .chapter-image:nth-child(n + 2) {
+    height: 415px;
+  }
+
+  #proof {
+    display: grid;
+    align-items: center;
+    height: 900px;
+    min-height: 900px;
+    padding-block: 76px;
+  }
+
+  #proof .proof-grid {
+    align-self: center;
+  }
+
+  #specifications {
+    display: grid;
+    align-items: center;
+    height: 900px;
+    min-height: 900px;
+    padding-block: 76px;
+  }
+
+  #specifications .specifications-grid {
+    align-self: center;
+  }
+
+  #evolution {
+    display: grid;
+    align-items: center;
+    height: 1200px;
+    min-height: 1200px;
+    padding-block: 86px;
+  }
+
+  #evolution .evolution-grid {
+    align-self: center;
+  }
+
+  #founder {
+    height: 4600px;
+    min-height: 4600px;
+    padding-block: 96px;
+  }
+
+  #terms {
+    display: grid;
+    align-items: center;
+    height: 800px;
+    min-height: 800px;
+    padding-block: 76px;
+  }
+
+  #terms .terms-grid {
+    align-self: center;
+  }
+
+  #halo {
+    height: 900px;
+    min-height: 900px;
+  }
+
+  #halo .halo-copy {
+    min-height: 900px;
+  }
+
+  #updates.capture-section {
+    display: grid !important;
+    align-items: center !important;
+    height: 460px !important;
+    min-height: 460px !important;
+    padding-block: 44px !important;
+  }
+
+  #updates .capture-box {
+    align-self: center !important;
   }
 }
