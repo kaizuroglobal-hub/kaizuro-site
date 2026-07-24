@@ -50,6 +50,25 @@
 }
 
 @media (max-width: 640px) {
+  #purpose {
+    min-height: auto;
+    padding-top: var(--header);
+  }
+
+  #purpose .full-bleed-image {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    background: #050505;
+  }
+
+  #purpose .focal-hero img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+
   #purpose .hero-copy {
     width: calc(100% - 40px);
     padding: 118px 0 0 20px;

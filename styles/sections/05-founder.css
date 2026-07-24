@@ -525,6 +525,13 @@
     font-size: clamp(28px, 7.6vw, 42px);
   }
 
+  #founder .founder-intro > h2 span,
+  #founder .deposit-intro h3 span,
+  #founder .founder-intro > .founder-subhead span {
+    display: inline;
+    white-space: normal;
+  }
+
   .product-lightbox {
     width: 100vw;
     height: 100dvh;

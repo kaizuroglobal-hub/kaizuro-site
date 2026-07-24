@@ -2803,3 +2803,176 @@ h2 {
     align-self: center;
   }
 }
+
+/* Mobile authority: prevent sideways canvas and keep every module inside the phone viewport. */
+@media (max-width: 640px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    position: relative;
+  }
+
+  main,
+  section,
+  .content-grid,
+  .split-story,
+  .split-story.reverse,
+  .technical-scroll,
+  .proof-grid,
+  .terms-grid,
+  .founder-shell,
+  .founder-deposit,
+  .founder-options,
+  .founder-payment-grid,
+  .founder-payment-card,
+  .choice-grid,
+  .choice-grid figure,
+  .founder-collection,
+  .capture-box,
+  .halo-copy,
+  .assault-copy,
+  .site-footer {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .site-header {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100vw;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    padding-inline: 24px;
+  }
+
+  .brand-word {
+    width: auto;
+    min-width: 0;
+  }
+
+  .menu-toggle {
+    width: 42px;
+    min-width: 42px;
+  }
+
+  .content-grid,
+  .split-story,
+  .split-story.reverse,
+  .technical-scroll,
+  .proof-section > .content-grid,
+  .evolution-section > .content-grid,
+  .terms-section > .content-grid,
+  .capture-section > .content-grid,
+  .founder-section > .content-grid,
+  .founder-shell,
+  #founder .founder-shell,
+  #terms .terms-grid {
+    width: calc(100% - 40px);
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  .hero {
+    min-height: auto;
+    overflow: hidden;
+  }
+
+  #purpose {
+    padding-top: var(--header);
+    min-height: auto;
+  }
+
+  #purpose .full-bleed-image {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    background: #050505;
+  }
+
+  #purpose .focal-hero img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+
+  .full-bleed-image,
+  .full-width-product {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  p,
+  strong,
+  b,
+  .eyebrow,
+  .text-link,
+  .halo-copy a,
+  .capture-box button,
+  .founder-submit {
+    overflow-wrap: anywhere;
+  }
+
+  .assault-copy h2,
+  .evolution-section .roadmap-copy h2,
+  #purpose .hero-copy h1 span:first-child,
+  #founder .founder-intro > h2 span,
+  #founder .deposit-intro h3 span,
+  #founder .founder-intro > .founder-subhead span {
+    white-space: normal;
+  }
+
+  #founder .founder-intro > h2 span,
+  #founder .deposit-intro h3 span {
+    display: inline;
+  }
+
+  #founder .founder-intro > h2,
+  #founder .deposit-intro h3,
+  .founder-payment-title,
+  .choice-head h3 {
+    max-width: 100%;
+  }
+
+  #founder .deposit-intro h3 {
+    font-size: clamp(38px, 9vw, 42px);
+    line-height: 1.05;
+  }
+
+  .founder-payment-title,
+  .founder-payment-title small {
+    white-space: normal;
+  }
+
+  .founder-payment-grid,
+  .founder-options,
+  .choice-grid,
+  .founder-collection,
+  .founder-collection dl,
+  .footer-links {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .choice-head {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  #founder .product-viewer-trigger[data-founder-field]::after,
+  #founder .product-viewer-trigger > span {
+    right: 10px;
+    max-width: calc(100% - 20px);
+  }
+
+  .capture-box form {
+    width: 100%;
+  }
+}
