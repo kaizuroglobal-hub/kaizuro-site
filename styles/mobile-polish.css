@@ -359,6 +359,12 @@
     aspect-ratio: auto;
   }
 
+  #details > .sticky-image {
+    height: 500px;
+    align-self: center;
+    aspect-ratio: auto;
+  }
+
   #assault {
     height: 800px;
     min-height: 800px;
