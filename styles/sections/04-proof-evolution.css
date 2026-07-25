@@ -104,6 +104,29 @@
   letter-spacing: 0;
 }
 
+@media (min-width: 641px) {
+  #proof {
+    display: grid;
+    min-height: 900px;
+    align-items: center;
+  }
+
+  #proof .proof-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.18fr);
+    gap: clamp(44px, 7vw, 116px);
+    align-items: center;
+  }
+
+  #proof .proof-panel {
+    width: 88%;
+    max-width: 920px;
+    justify-self: end;
+    align-self: center;
+    border-top: 0;
+  }
+}
+
 #specifications {
   padding-block: clamp(76px, 8vw, 128px);
   border-top: 1px solid rgba(255, 255, 255, 0.14);
@@ -236,6 +259,14 @@
   }
 
   #proof .proof-grid {
+    width: calc(100% - 15vw);
+    max-width: none;
+    grid-template-columns: minmax(360px, 0.72fr) minmax(0, 1.18fr);
+    gap: clamp(150px, 12vw, 250px);
     align-self: center;
+  }
+
+  #proof .proof-panel {
+    width: 100%;
   }
 }
