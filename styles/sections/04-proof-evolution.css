@@ -115,15 +115,42 @@
     display: grid;
     grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.18fr);
     gap: clamp(44px, 7vw, 116px);
-    align-items: center;
+    align-items: stretch;
   }
 
   #proof .proof-panel {
     width: 88%;
+    height: 100%;
     max-width: 920px;
+    display: flex;
+    flex-direction: column;
     justify-self: end;
-    align-self: center;
+    align-self: stretch;
     border-top: 0;
+  }
+
+  #proof .metric-row {
+    padding-block: 8px;
+  }
+
+  #proof .metric-row strong {
+    font-size: clamp(32px, 3vw, 44px);
+  }
+
+  #proof .load-curve {
+    aspect-ratio: 4.5 / 1;
+    margin-top: 8px;
+  }
+
+  #proof .curve-heading {
+    margin: 10px 0 4px;
+    font-size: clamp(20px, 1.55vw, 28px);
+    line-height: 1.15;
+  }
+
+  #proof .proof-disclosure {
+    font-size: 11px;
+    line-height: 1.35;
   }
 }
 
