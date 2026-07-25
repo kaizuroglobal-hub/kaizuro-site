@@ -297,3 +297,40 @@
     width: 100%;
   }
 }
+
+/* Final desktop/tablet specifications alignment authority. */
+@media (min-width: 641px) {
+  #specifications {
+    display: grid;
+    min-height: 900px;
+    padding-block: 0;
+    align-items: center;
+  }
+
+  #specifications .specifications-grid {
+    grid-template-columns: minmax(280px, 0.68fr) minmax(0, 1.32fr);
+    grid-template-rows: auto auto;
+    column-gap: clamp(52px, 8vw, 132px);
+    row-gap: 14px;
+    align-items: start;
+    width: calc(100% - 15vw);
+    max-width: none;
+  }
+
+  #specifications .specifications-intro {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+
+  #specifications .specifications-list {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  #specifications .specifications-note {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+  }
+}
