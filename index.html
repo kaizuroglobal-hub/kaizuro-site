@@ -46,7 +46,7 @@
 
     <link
       rel="stylesheet"
-      href="styles/sections/01-hero.css?v=20260725-responsive-video"
+      href="styles/sections/01-hero.css?v=20260725-static-original"
     >
 
     <link
@@ -528,29 +528,14 @@
         id="purpose"
         aria-labelledby="hero-title"
       >
-        <div class="full-bleed-image focal-hero">
-          <video
-            data-hero-video
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="assets/kaizuro-site/hero/kaizuro-website-hero-final.png"
-            aria-label="KAIZURO modern offshore fishing hero with an animated sea dragon, storm ocean and angler"
+        <picture class="full-bleed-image focal-hero">
+          <img
+            src="assets/kaizuro-site/hero/kaizuro-website-hero-original.png?v=20260725"
+            alt="KAIZURO modern offshore fishing hero with storm sea, water dragon and angler"
+            decoding="async"
+            fetchpriority="high"
           >
-            <source
-              media="(max-width: 900px)"
-              src="assets/kaizuro-site/hero/kaizuro-hero-mobile-720p.mp4?v=20260725-hq"
-              type="video/mp4"
-            >
-            <source
-              media="(min-width: 901px)"
-              src="assets/kaizuro-site/hero/kaizuro-hero-desktop-1080p.mp4?v=20260725-hq"
-              type="video/mp4"
-            >
-          </video>
-        </div>
+        </picture>
 
         <div class="hero-scrim"></div>
 
@@ -2329,7 +2314,7 @@
     </footer>
 
     <script
-      src="script.js?v=20260725-responsive-hero-video"
+      src="script.js?v=20260725-static-original"
       defer
     ></script>
   </body>

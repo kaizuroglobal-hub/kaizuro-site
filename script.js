@@ -8,33 +8,6 @@ const chapterEyebrow = document.querySelector("[data-chapter-eyebrow]");
 const chapters = [...document.querySelectorAll("[data-chapter]")];
 const reviewSection = new URLSearchParams(window.location.search).get("section");
 const brandLink = document.querySelector(".brand-word");
-const heroVideo = document.querySelector("[data-hero-video]");
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-function syncHeroMotion() {
-  if (!heroVideo) {
-    return;
-  }
-
-  if (reducedMotion.matches) {
-    heroVideo.pause();
-    heroVideo.currentTime = 0;
-    return;
-  }
-
-  heroVideo.play().catch(() => {
-    // The poster remains visible if autoplay is unavailable.
-  });
-}
-
-reducedMotion.addEventListener?.("change", syncHeroMotion);
-heroVideo?.addEventListener("loadeddata", syncHeroMotion, { once: true });
-
-if (reducedMotion.matches) {
-  heroVideo?.removeAttribute("autoplay");
-  syncHeroMotion();
-}
-
 if (reviewSection) {
   const selectedSection = document.getElementById(reviewSection);
   if (selectedSection) {
