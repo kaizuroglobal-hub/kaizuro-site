@@ -578,7 +578,6 @@
       }
 
       .preview-logout {
-        justify-self: end;
         border: 0;
         background: transparent;
         color: rgba(255, 255, 255, 0.62);
@@ -594,6 +593,20 @@
       .preview-logout:hover,
       .preview-logout:focus-visible {
         color: #ffffff;
+      }
+
+      .header-left {
+        justify-self: start;
+        display: flex;
+        align-items: center;
+        gap: clamp(18px, 2vw, 30px);
+        min-width: 0;
+      }
+
+      @media (max-width: 1100px) {
+        .preview-logout {
+          display: none;
+        }
       }
     </style>
   </head>
@@ -651,13 +664,23 @@
       class="site-header"
       data-site-header
     >
-      <a
-        class="brand-word"
-        href="#purpose"
-        aria-label="KAIZURO home"
-      >
-        KAIZURO
-      </a>
+      <div class="header-left">
+        <a
+          class="brand-word"
+          href="#purpose"
+          aria-label="KAIZURO home"
+        >
+          KAIZURO
+        </a>
+
+        <button
+          class="preview-logout"
+          type="button"
+          data-private-gate-logout
+        >
+          Log out
+        </button>
+      </div>
 
       <nav
         class="desktop-nav"
@@ -670,14 +693,6 @@
         <a href="#halo">HALO</a>
         <a href="#story">Story</a>
       </nav>
-
-      <button
-        class="preview-logout"
-        type="button"
-        data-private-gate-logout
-      >
-        Log out
-      </button>
 
       <a
         class="nav-action"
@@ -2518,6 +2533,11 @@
         const error = document.querySelector("[data-private-gate-error]");
         const logout = document.querySelector("[data-private-gate-logout]");
 
+        logout?.addEventListener("click", () => {
+          localStorage.removeItem(storageKey);
+          window.location.reload();
+        });
+
         const unlock = () => {
           body.classList.remove("private-gate-locked");
           localStorage.setItem(storageKey, "true");
@@ -2540,11 +2560,6 @@
 
           error.textContent = "Incorrect password.";
           input.select();
-        });
-
-        logout?.addEventListener("click", () => {
-          localStorage.removeItem(storageKey);
-          window.location.reload();
         });
       })();
     </script>
