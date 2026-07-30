@@ -240,6 +240,56 @@ video {
     aspect-ratio: 16 / 10;
   }
 
+  #technical .chapter-track {
+    gap: 0;
+  }
+
+  #technical .chapter-image,
+  #technical .chapter-image:nth-child(1),
+  #technical .chapter-image:nth-child(n + 2),
+  #technical .chapter-image.focal-frame,
+  #technical .chapter-image.focal-wrap,
+  #technical .chapter-image.focal-tip,
+  #technical .chapter-image.focal-power {
+    display: grid !important;
+    grid-template-rows: auto auto;
+    gap: clamp(24px, 5vw, 34px);
+    height: auto !important;
+    min-height: 0;
+    padding-block: clamp(42px, 7vw, 58px);
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: var(--black);
+  }
+
+  #technical .chapter-image:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  #technical .mobile-chapter-copy {
+    grid-row: 1;
+    order: 1;
+    display: grid !important;
+    gap: 12px;
+    margin: 0;
+    padding: 0 !important;
+  }
+
+  #technical .chapter-image img,
+  #technical .chapter-image.focal-frame img,
+  #technical .chapter-image.focal-wrap img,
+  #technical .chapter-image.focal-tip img,
+  #technical .chapter-image.focal-power img {
+    grid-row: 2;
+    order: 2;
+    width: 100%;
+    height: auto !important;
+    margin: 0;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
   #specifications {
     min-height: auto;
     padding-block: var(--section-y);
