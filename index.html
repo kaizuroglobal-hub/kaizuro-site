@@ -576,6 +576,25 @@
           grid-template-columns: 1fr;
         }
       }
+
+      .preview-logout {
+        justify-self: end;
+        border: 0;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.62);
+        font: inherit;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+
+      .preview-logout:hover,
+      .preview-logout:focus-visible {
+        color: #ffffff;
+      }
     </style>
   </head>
 
@@ -651,6 +670,14 @@
         <a href="#halo">HALO</a>
         <a href="#story">Story</a>
       </nav>
+
+      <button
+        class="preview-logout"
+        type="button"
+        data-private-gate-logout
+      >
+        Log out
+      </button>
 
       <a
         class="nav-action"
@@ -2489,6 +2516,7 @@
         const form = document.querySelector("[data-private-gate-form]");
         const input = document.getElementById("private-gate-password");
         const error = document.querySelector("[data-private-gate-error]");
+        const logout = document.querySelector("[data-private-gate-logout]");
 
         const unlock = () => {
           body.classList.remove("private-gate-locked");
@@ -2512,6 +2540,11 @@
 
           error.textContent = "Incorrect password.";
           input.select();
+        });
+
+        logout?.addEventListener("click", () => {
+          localStorage.removeItem(storageKey);
+          window.location.reload();
         });
       })();
     </script>
