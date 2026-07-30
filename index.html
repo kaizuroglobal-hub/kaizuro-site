@@ -595,16 +595,17 @@
         color: #ffffff;
       }
 
-      .header-left {
-        justify-self: start;
+      .header-actions {
+        justify-self: end;
         display: flex;
         align-items: center;
-        gap: clamp(18px, 2vw, 30px);
+        gap: clamp(16px, 1.8vw, 28px);
         min-width: 0;
       }
 
       @media (max-width: 1100px) {
-        .preview-logout {
+        .preview-logout,
+        .header-actions {
           display: none;
         }
       }
@@ -664,23 +665,13 @@
       class="site-header"
       data-site-header
     >
-      <div class="header-left">
-        <a
-          class="brand-word"
-          href="#purpose"
-          aria-label="KAIZURO home"
-        >
-          KAIZURO
-        </a>
-
-        <button
-          class="preview-logout"
-          type="button"
-          data-private-gate-logout
-        >
-          Log out
-        </button>
-      </div>
+      <a
+        class="brand-word"
+        href="#purpose"
+        aria-label="KAIZURO home"
+      >
+        KAIZURO
+      </a>
 
       <nav
         class="desktop-nav"
@@ -694,12 +685,22 @@
         <a href="#story">Story</a>
       </nav>
 
-      <a
-        class="nav-action"
-        href="#founder"
-      >
-        Join Founder 100
-      </a>
+      <div class="header-actions">
+        <button
+          class="preview-logout"
+          type="button"
+          data-private-gate-logout
+        >
+          Log out
+        </button>
+
+        <a
+          class="nav-action"
+          href="#founder"
+        >
+          Join Founder 100
+        </a>
+      </div>
 
       <button
         class="menu-toggle"
