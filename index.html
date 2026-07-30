@@ -461,10 +461,173 @@
           gap: 18px;
         }
       }
+
+      body.private-gate-locked {
+        overflow: hidden;
+      }
+
+      body.private-gate-locked > *:not(.private-gate) {
+        filter: blur(12px);
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .private-gate {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 50% 24%, rgba(255, 255, 255, 0.08), transparent 28%),
+          rgba(0, 0, 0, 0.92);
+        color: #f5f5f5;
+      }
+
+      body.private-gate-locked .private-gate {
+        display: flex;
+      }
+
+      .private-gate__panel {
+        width: min(100%, 460px);
+        padding: 38px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(0, 0, 0, 0.86);
+      }
+
+      .private-gate__brand {
+        margin: 0 0 44px;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+
+      .private-gate__panel h1 {
+        margin: 0 0 18px;
+        font-size: clamp(38px, 7vw, 62px);
+        font-weight: 500;
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .private-gate__panel p {
+        margin: 0 0 28px;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .private-gate__panel label {
+        display: block;
+        margin-bottom: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .private-gate__field {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+      }
+
+      .private-gate__field input {
+        min-width: 0;
+        height: 48px;
+        padding: 0 14px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 0;
+        background: #050505;
+        color: #f5f5f5;
+        font: inherit;
+      }
+
+      .private-gate__field button {
+        height: 48px;
+        padding: 0 18px;
+        border: 1px solid #f5f5f5;
+        border-radius: 0;
+        background: #f5f5f5;
+        color: #050505;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .private-gate__error {
+        min-height: 20px;
+        margin-top: 14px;
+        color: #ffb4b4;
+        font-size: 13px;
+      }
+
+      @media (max-width: 540px) {
+        .private-gate__panel {
+          padding: 28px;
+        }
+
+        .private-gate__field {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
 
-  <body>
+  <body class="private-gate-locked">
+    <div
+      class="private-gate"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="private-gate-title"
+    >
+      <form
+        class="private-gate__panel"
+        data-private-gate-form
+      >
+        <p class="private-gate__brand">
+          KAIZURO
+        </p>
+
+        <h1 id="private-gate-title">
+          Private preview.
+        </h1>
+
+        <p>
+          Enter the preview password to view the KAIZURO site.
+        </p>
+
+        <label for="private-gate-password">
+          Password
+        </label>
+
+        <div class="private-gate__field">
+          <input
+            id="private-gate-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button type="submit">
+            Enter
+          </button>
+        </div>
+
+        <div
+          class="private-gate__error"
+          data-private-gate-error
+          aria-live="polite"
+        ></div>
+      </form>
+    </div>
+
     <header
       class="site-header"
       data-site-header
@@ -2317,5 +2480,40 @@
       src="script.js?v=20260725-static-original"
       defer
     ></script>
+
+    <script>
+      (() => {
+        const previewPassword = "KAIZURO100";
+        const storageKey = "kaizuroPrivatePreviewUnlocked";
+        const body = document.body;
+        const form = document.querySelector("[data-private-gate-form]");
+        const input = document.getElementById("private-gate-password");
+        const error = document.querySelector("[data-private-gate-error]");
+
+        const unlock = () => {
+          body.classList.remove("private-gate-locked");
+          localStorage.setItem(storageKey, "true");
+        };
+
+        if (localStorage.getItem(storageKey) === "true") {
+          unlock();
+          return;
+        }
+
+        input?.focus();
+
+        form?.addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          if (input.value.trim() === previewPassword) {
+            unlock();
+            return;
+          }
+
+          error.textContent = "Incorrect password.";
+          input.select();
+        });
+      })();
+    </script>
   </body>
 </html>
