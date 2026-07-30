@@ -247,3 +247,8 @@ productLightbox?.addEventListener("close", () => {
   lightboxTrigger?.focus();
   lightboxTrigger = null;
 });
+
+const warrantyLink = document.querySelector('a[href="mailto:info@kaizuro.com?subject=Warranty"]');
+if (warrantyLink) {
+  warrantyLink.href = "warranty.html";
+}
