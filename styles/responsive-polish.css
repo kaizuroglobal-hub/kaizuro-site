@@ -51,13 +51,26 @@ video {
     width: var(--page-width);
     max-width: var(--max);
     margin-inline: auto;
-    min-height: auto;
-    padding-block: var(--section-y);
-    overflow: hidden;
+    grid-template-columns: minmax(320px, 36vw) 1fr;
+    gap: clamp(42px, 6vw, 100px);
+    min-height: 260svh;
+    padding: 120px 0;
+    overflow: visible;
   }
 
   .chapter-track {
-    gap: clamp(70px, 8vw, 124px);
+    gap: 34vh;
+  }
+
+  .technical-scroll .chapter-copy {
+    position: sticky;
+    top: 17svh;
+    height: fit-content;
+  }
+
+  .technical-scroll .chapter-image {
+    height: 78svh;
+    overflow: hidden;
   }
 
   .system-section,
