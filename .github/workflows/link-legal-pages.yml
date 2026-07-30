@@ -1,0 +1,47 @@
+name: Link legal and support pages
+
+on:
+  push:
+    paths:
+      - .github/workflows/link-legal-pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-footer-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Replace footer email links with site pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          content = path.read_text(encoding='utf-8')
+          replacements = {
+              '<a href="#terms-title">Founder Terms</a>': '<a href="founder-terms.html">Founder Terms</a>',
+              '<a href="mailto:info@kaizuro.com?subject=Shipping">Shipping</a>': '<a href="shipping.html">Shipping</a>',
+              '<a href="mailto:info@kaizuro.com?subject=Warranty">Warranty</a>': '<a href="warranty.html">Warranty</a>',
+              '<a href="mailto:info@kaizuro.com?subject=Privacy">Privacy</a>': '<a href="privacy.html">Privacy</a>',
+          }
+          for old, new in replacements.items():
+              if old not in content:
+                  raise SystemExit(f'Expected footer link not found: {old}')
+              content = content.replace(old, new, 1)
+          path.write_text(content, encoding='utf-8')
+          PY
+
+      - name: Remove one-time workflow
+        run: rm .github/workflows/link-legal-pages.yml
+
+      - name: Commit footer links
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/link-legal-pages.yml
+          git commit -m "Connect footer legal and support pages"
+          git push
