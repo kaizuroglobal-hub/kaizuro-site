@@ -252,3 +252,49 @@ const warrantyLink = document.querySelector('a[href="mailto:info@kaizuro.com?sub
 if (warrantyLink) {
   warrantyLink.href = "warranty.html";
 }
+
+const squareCheckoutLinks = [...document.querySelectorAll('.founder-payment-button[href*="square.link"]')];
+if (squareCheckoutLinks.length) {
+  const checkoutDialog = document.createElement("dialog");
+  checkoutDialog.className = "square-checkout-dialog";
+  checkoutDialog.setAttribute("aria-labelledby", "square-checkout-title");
+  checkoutDialog.innerHTML = `
+    <div class="square-checkout-dialog__panel">
+      <p class="square-checkout-dialog__eyebrow">Secure checkout</p>
+      <h2 id="square-checkout-title">Continue to Square?</h2>
+      <p class="square-checkout-dialog__copy">
+        You are leaving KAIZURO to complete your Founder deposit through our secure Square payment page. Square will open in a new tab, and this KAIZURO page will remain open so you can return and submit your Founder details.
+      </p>
+      <div class="square-checkout-dialog__actions">
+        <a class="square-checkout-dialog__continue" href="#" target="_blank" rel="noopener noreferrer">Continue to Square</a>
+        <button class="square-checkout-dialog__cancel" type="button">Cancel</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(checkoutDialog);
+
+  const continueLink = checkoutDialog.querySelector(".square-checkout-dialog__continue");
+  const cancelButton = checkoutDialog.querySelector(".square-checkout-dialog__cancel");
+  let activeCheckoutTrigger = null;
+
+  squareCheckoutLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      activeCheckoutTrigger = link;
+      continueLink.href = link.href;
+      checkoutDialog.showModal();
+    });
+  });
+
+  cancelButton.addEventListener("click", () => checkoutDialog.close());
+  continueLink.addEventListener("click", () => checkoutDialog.close());
+  checkoutDialog.addEventListener("click", (event) => {
+    if (event.target === checkoutDialog) {
+      checkoutDialog.close();
+    }
+  });
+  checkoutDialog.addEventListener("close", () => {
+    activeCheckoutTrigger?.focus();
+    activeCheckoutTrigger = null;
+  });
+}
