@@ -38,6 +38,35 @@
   min-height: 0 !important;
   height: auto !important;
   padding-block: clamp(58px, 4vw, 64px) !important;
+  background: #050505 !important;
+  color: #ffffff !important;
+}
+
+#updates .capture-box .eyebrow,
+#updates .capture-box h2,
+#updates .capture-box p,
+#updates .capture-box label {
+  color: #ffffff !important;
+}
+
+#updates .capture-box small {
+  color: rgba(255, 255, 255, 0.62) !important;
+}
+
+#updates .capture-box input {
+  border-color: rgba(255, 255, 255, 0.34) !important;
+  background: #050505 !important;
+  color: #ffffff !important;
+}
+
+#updates .capture-box input::placeholder {
+  color: rgba(255, 255, 255, 0.44) !important;
+}
+
+#updates .capture-box button {
+  border-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #050505 !important;
 }
 
 #updates .capture-box h2 {
