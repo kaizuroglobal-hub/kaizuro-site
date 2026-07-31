@@ -145,6 +145,20 @@
   line-height: 0.98;
 }
 
+/* Reel-interface feature dividers span the full width of each grid column. */
+#reel .detail-list.two-column {
+  width: 100%;
+  max-width: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#reel .detail-list.two-column > span {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(244, 244, 242, 0.22);
+}
+
 @media (max-width: 1100px) {
   #details,
   #grip,
