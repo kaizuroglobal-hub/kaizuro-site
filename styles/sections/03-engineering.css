@@ -5,26 +5,49 @@
   grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
 }
 
-/* Guide Architecture uses one clean full-viewport bottom divider. */
-#details {
+/*
+ * Section divider ownership:
+ * - the technical section's top line also serves as the Guide Architecture bottom line;
+ * - technical and reel each draw one top and one bottom line only.
+ */
+#details,
+#technical,
+#reel {
   position: relative;
+  border-top: 0 !important;
   border-bottom: 0 !important;
 }
 
+#details::before,
 #details::after {
+  content: none !important;
+  display: none !important;
+}
+
+#technical::before,
+#technical::after,
+#reel::before,
+#reel::after {
   position: absolute;
-  bottom: 0;
   left: 50%;
+  z-index: 3;
+  display: block;
   width: 100vw;
   height: 1px;
   content: "";
-  background: var(--line);
+  background: rgba(244, 244, 242, 0.22);
   transform: translateX(-50%);
   pointer-events: none;
 }
 
-#technical {
-  border-top: 0 !important;
+#technical::before,
+#reel::before {
+  top: 0;
+}
+
+#technical::after,
+#reel::after {
+  bottom: 0;
 }
 
 #details .story-copy,
