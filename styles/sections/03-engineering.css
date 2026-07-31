@@ -5,6 +5,28 @@
   grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
 }
 
+/* Guide Architecture uses one clean full-viewport bottom divider. */
+#details {
+  position: relative;
+  border-bottom: 0 !important;
+}
+
+#details::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  height: 1px;
+  content: "";
+  background: var(--line);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+#technical {
+  border-top: 0 !important;
+}
+
 #details .story-copy,
 #reel .story-copy {
   grid-column: 1;
