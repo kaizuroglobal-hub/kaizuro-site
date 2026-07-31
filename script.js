@@ -298,3 +298,36 @@ if (squareCheckoutLinks.length) {
     activeCheckoutTrigger = null;
   });
 }
+
+function updateSiteNavigation() {
+  const desktopNav = document.querySelector(".desktop-nav");
+  if (desktopNav) {
+    desktopNav.innerHTML = `
+      <a href="#assault">Rods</a>
+      <a href="#details">Engineering</a>
+      <a href="#proof">Proof</a>
+      <a href="#founder">Founder 100</a>
+      <a href="#story">Story</a>
+    `;
+  }
+
+  const reserveAction = document.querySelector(".header-actions .nav-action");
+  if (reserveAction) {
+    reserveAction.href = "#founder";
+    reserveAction.textContent = "Reserve";
+    reserveAction.setAttribute("aria-label", "Reserve a Founder allocation");
+  }
+
+  if (mobileMenu) {
+    mobileMenu.innerHTML = `
+      <a href="#assault">Rods</a>
+      <a href="#details">Engineering</a>
+      <a href="#proof">Proof</a>
+      <a href="#founder">Founder 100</a>
+      <a href="#story">Story</a>
+      <a href="#founder">Reserve</a>
+    `;
+  }
+}
+
+updateSiteNavigation();
