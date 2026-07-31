@@ -3,14 +3,21 @@
   position: relative;
 }
 
+/* Remove the shorter divider attached to the constrained story content. */
+#story .story-copy {
+  border-bottom: 0 !important;
+}
+
+/* Match the full-width top divider across the complete viewport. */
 #story::after {
   position: absolute;
-  right: 0;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  width: 100vw;
   height: 1px;
   content: "";
   background: var(--line);
+  transform: translateX(-50%);
   pointer-events: none;
 }
 
