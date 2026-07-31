@@ -1,4 +1,19 @@
 /* 02 BRAND + ASSAULT: origin story and first product reveal. */
+#story {
+  position: relative;
+}
+
+#story::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: var(--line);
+  pointer-events: none;
+}
+
 #story .sticky-image img {
   object-fit: cover;
   object-position: 50% 50%;
