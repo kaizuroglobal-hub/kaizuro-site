@@ -1,18 +1,24 @@
 /* 02 BRAND + ASSAULT: origin story and first product reveal. */
 #story {
   position: relative;
+  overflow: visible !important;
 }
 
-/* Remove the shorter divider attached to the constrained story content. */
-#story .story-copy {
+/* Remove every constrained divider attached to the story content. */
+#story .story-copy,
+#story .sticky-image,
+#story .story-copy::after,
+#story .sticky-image::after {
   border-bottom: 0 !important;
 }
 
-/* Match the full-width top divider across the complete viewport. */
+/* One clean divider spanning the complete viewport. */
 #story::after {
   position: absolute;
+  z-index: 3;
   bottom: 0;
   left: 50%;
+  display: block !important;
   width: 100vw;
   height: 1px;
   content: "";
