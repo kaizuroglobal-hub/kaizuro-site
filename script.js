@@ -22,17 +22,17 @@ const chapterCopy = [
   {
     eyebrow: "01 · Frame",
     title: "Strength without careless mass.",
-    text: "Heavy offshore guides must withstand impact, repeated loading and lateral force. The objective is sufficient frame strength and bracing without unnecessary weight in the working section."
+    text: "Heavy offshore guides must withstand impact, repeated loading and lateral force. The objective is sufficient frame strength and bracing without unnecessary weight in the working section.",
   },
   {
     eyebrow: "02 · Wrap",
     title: "Secure where it matters. Controlled everywhere else.",
-    text: "Guide security depends on wrap length, thread build, resin control and preparation beneath the foot. Low-build construction manages avoidable weight and stiffness around the guide location."
+    text: "Guide security depends on wrap length, thread build, resin control and preparation beneath the foot. Low-build construction manages avoidable weight and stiffness around the guide location.",
   },
   {
     eyebrow: "03 · Progression",
     title: "From line coil to controlled path.",
-    text: "A large offshore spinning reel releases broad coils of braid. Guide size and progression gradually control that movement while maintaining clearance and supporting the blank under load."
+    text: "A large offshore spinning reel releases broad coils of braid. Guide size and progression gradually control that movement while maintaining clearance and supporting the blank under load.",
   },
   {
     eyebrow: "04 · Power",
@@ -201,7 +201,7 @@ if (squareCheckoutLinks.length) {
     <div class="square-checkout-dialog__panel">
       <p class="square-checkout-dialog__eyebrow">Secure checkout</p>
       <h2 id="square-checkout-title">Continue to Square?</h2>
-      <p class="square-checkout-dialog__copy">You are leaving KAIZURO to complete your Founder deposit through our secure Square payment page. Square will open in a new tab, and this KAIZURO page will remain open so you can return and submit your Founder details.</p>
+      <p class="square-checkout-dialog__copy">You are leaving KAIZURO to complete your Founder deposit through our secure Square payment page. Square will open in a new tab, and this KAIZURO page will remain available behind it.</p>
       <div class="square-checkout-dialog__actions">
         <a class="square-checkout-dialog__continue" href="#" target="_blank" rel="noopener noreferrer">Continue to Square</a>
         <button class="square-checkout-dialog__cancel" type="button">Cancel</button>
