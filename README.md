@@ -1,14 +1,7 @@
 # KAIZURO Site
 
-Static KAIZURO draft website for GitHub Pages.
+Static KAIZURO website deployed through Cloudflare.
 
-## Preview Privacy
+## Recovery deployment
 
-This site currently uses a lightweight client-side password gate for short-term
-preview access while KAIZURO hosting is being prepared.
-
-Do not treat GitHub Pages as confidential hosting while this repository and site
-are public. Do not add supplier-only documents, unreleased IP, detailed
-forecasts, or signed agreement material to this repository.
-
-Cloudflare deployment connected.
+This commit intentionally preserves the last known working website files and only retriggers the Cloudflare deployment pipeline.
