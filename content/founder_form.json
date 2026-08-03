@@ -1,0 +1,21 @@
+{
+  "heading": "Founder details",
+  "action_email": "info@kaizuro.com",
+  "subject": "Founder 100 allocation",
+  "fields": [
+    {"label": "Full name", "name": "Full name", "type": "text", "required": true, "placeholder": ""},
+    {"label": "Email address", "name": "Email", "type": "email", "required": true, "placeholder": ""},
+    {"label": "Phone / WhatsApp", "name": "Phone", "type": "tel", "required": false, "placeholder": ""},
+    {"label": "Country", "name": "Country", "type": "text", "required": true, "placeholder": ""}
+  ],
+  "rod_label": "Preferred rod",
+  "rod_options": ["ASSAULT PE6-8", "HALO PE10-12"],
+  "cap_label": "Preferred cap",
+  "cap_options": ["Carbon Copper", "Offshore Navy"],
+  "pack_label": "Preferred offshore pack",
+  "pack_options": ["Carbon Pack", "Surge Pack"],
+  "notes_label": "Notes",
+  "notes_placeholder": "Rod number preference, delivery questions or other details",
+  "consent": "I understand that my Founder allocation is only secured after the correct 25% deposit has been successfully paid through Square.",
+  "submit_label": "Submit Founder details"
+}
