@@ -1,426 +1,223 @@
-# Pages CMS 2.x configuration for kaizuroglobal-hub/kaizuro-site
-# App: https://app.pagescms.org
-# See CMS-SETUP.md for setup and editing guidance.
+# Pages CMS configuration for KAIZURO
+# Long-form visible copy uses rich-text HTML. Structural values such as titles,
+# labels, links, email addresses, numbers and image metadata remain simple fields.
 
 media:
-  # Uploaded images are stored in a dedicated subdirectory so they never
-  # accidentally overwrite the curated assets already in assets/kaizuro-site/.
   input: assets/kaizuro-site/uploads
   output: /assets/kaizuro-site/uploads
 
 content:
-
-  # ── Site / SEO settings ────────────────────────────────────────────────────
   - name: site
     label: "Site Settings"
     type: file
     path: content/site.json
     format: json
     fields:
-      - name: title
-        label: "Browser tab title"
-        type: string
-        required: true
-      - name: description
-        label: "Meta description (SEO)"
-        type: text
-        required: true
-      - name: og_image
-        label: "Social / OG share image"
-        type: image
+      - { name: title, label: "Browser tab title", type: string, required: true }
+      - { name: description, label: "Meta description (SEO)", type: text, required: true }
+      - { name: og_image, label: "Social / OG share image", type: image }
 
-  # ── Hero section ───────────────────────────────────────────────────────────
   - name: hero
     label: "Hero Section"
     type: file
     path: content/hero.json
     format: json
     fields:
-      - name: eyebrow
-        label: "Eyebrow (small label above title)"
-        type: string
-        required: true
-      - name: title_line1
-        label: "Hero title — line 1"
-        type: string
-        required: true
-      - name: title_line2
-        label: "Hero title — line 2"
-        type: string
-        required: true
+      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: title_line1, label: "Hero title — line 1", type: string, required: true }
+      - { name: title_line2, label: "Hero title — line 2", type: string, required: true }
       - name: description
-        label: "Hero description paragraph"
-        type: text
+        label: "Hero description"
+        type: rich-text
         required: true
-      - name: cta_discover_label
-        label: "Primary CTA button label"
-        type: string
-        required: true
-      - name: cta_discover_href
-        label: "Primary CTA button link (e.g. #story)"
-        type: string
-        required: true
-      - name: cta_join_label
-        label: "Secondary CTA button label"
-        type: string
-        required: true
-      - name: cta_join_href
-        label: "Secondary CTA button link (e.g. #founder)"
-        type: string
-        required: true
-      - name: status_1
-        label: "Status badge — left"
-        type: string
-        required: true
-      - name: status_2
-        label: "Status badge — right"
-        type: string
-        required: true
-      - name: image_desktop_src
-        label: "Hero image — desktop"
-        type: image
-        required: true
-      - name: image_mobile_src
-        label: "Hero image — mobile"
-        type: image
-        required: true
-      - name: image_alt
-        label: "Hero image alt text"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: cta_discover_label, label: "Primary CTA label", type: string, required: true }
+      - { name: cta_discover_href, label: "Primary CTA link", type: string, required: true }
+      - { name: cta_join_label, label: "Secondary CTA label", type: string, required: true }
+      - { name: cta_join_href, label: "Secondary CTA link", type: string, required: true }
+      - { name: status_1, label: "Status badge — left", type: string, required: true }
+      - { name: status_2, label: "Status badge — right", type: string, required: true }
+      - { name: image_desktop_src, label: "Hero image — desktop", type: image, required: true }
+      - { name: image_mobile_src, label: "Hero image — mobile", type: image, required: true }
+      - { name: image_alt, label: "Hero image alt text", type: string, required: true }
 
-  # ── Brand / story section ──────────────────────────────────────────────────
   - name: story
     label: "Brand Story Section"
     type: file
     path: content/story.json
     format: json
     fields:
-      - name: eyebrow
-        label: "Eyebrow"
-        type: string
-        required: true
-      - name: title
-        label: "Section heading"
-        type: string
-        required: true
+      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: title, label: "Section heading", type: string, required: true }
       - name: body_1
-        label: "Body paragraph"
-        type: text
+        label: "Body copy"
+        type: rich-text
         required: true
+        options: { format: html, media: false, switcher: false }
       - name: principles_text
-        label: "Brand principles (numbered list text)"
-        type: text
-      - name: image_src
-        label: "Story image"
-        type: image
+        label: "Brand principles"
+        type: rich-text
         required: true
-      - name: image_alt
-        label: "Story image alt text"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: image_src, label: "Story image", type: image, required: true }
+      - { name: image_alt, label: "Story image alt text", type: string, required: true }
 
-  # ── ASSAULT product section ────────────────────────────────────────────────
   - name: assault
     label: "ASSAULT Product Section"
     type: file
     path: content/assault.json
     format: json
     fields:
-      - name: eyebrow
-        label: "Eyebrow"
-        type: string
-        required: true
-      - name: title
-        label: "Product title"
-        type: string
-        required: true
-      - name: lead
-        label: "Lead sentence"
-        type: string
-        required: true
+      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: title, label: "Product title", type: string, required: true }
+      - { name: lead, label: "Lead sentence", type: string, required: true }
       - name: body
-        label: "Body paragraph"
-        type: text
+        label: "Body copy"
+        type: rich-text
         required: true
-      - name: tagline
-        label: "Tagline (bold)"
-        type: string
-        required: true
-      - name: image_src
-        label: "Product image"
-        type: image
-        required: true
-      - name: image_alt
-        label: "Product image alt text"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: tagline, label: "Tagline", type: string, required: true }
+      - { name: image_src, label: "Product image", type: image, required: true }
+      - { name: image_alt, label: "Product image alt text", type: string, required: true }
 
-  # ── Design principles section ──────────────────────────────────────────────
   - name: principles
     label: "Design Principles Section"
     type: file
     path: content/principles.json
     format: json
     fields:
-      - name: eyebrow
-        label: "Eyebrow"
-        type: string
-        required: true
-      - name: title_line1
-        label: "Heading — line 1"
-        type: string
-        required: true
-      - name: title_line2
-        label: "Heading — line 2"
-        type: string
-        required: true
+      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: title_line1, label: "Heading — line 1", type: string, required: true }
+      - { name: title_line2, label: "Heading — line 2", type: string, required: true }
       - name: intro
-        label: "Intro paragraph"
-        type: text
+        label: "Intro copy"
+        type: rich-text
         required: true
+        options: { format: html, media: false, switcher: false }
       - name: principles
         label: "Principles list"
         type: list
         fields:
-          - name: number
-            label: "Number (e.g. 01)"
-            type: string
-            required: true
-          - name: title
-            label: "Principle title"
-            type: string
-            required: true
+          - { name: number, label: "Number", type: string, required: true }
+          - { name: title, label: "Principle title", type: string, required: true }
           - name: body
             label: "Principle description"
-            type: text
+            type: rich-text
             required: true
+            options: { format: html, media: false, switcher: false }
 
-  # ── Engineering / detail chapters ─────────────────────────────────────────
   - name: engineering
     label: "Engineering Section & Chapters"
     type: file
     path: content/engineering.json
     format: json
     fields:
-      - name: section_eyebrow
-        label: "Guide architecture eyebrow"
-        type: string
-        required: true
-      - name: section_title_line1
-        label: "Guide architecture heading — line 1"
-        type: string
-        required: true
-      - name: section_title_line2
-        label: "Guide architecture heading — line 2"
-        type: string
-        required: true
+      - { name: section_eyebrow, label: "Guide architecture eyebrow", type: string, required: true }
+      - { name: section_title_line1, label: "Heading — line 1", type: string, required: true }
+      - { name: section_title_line2, label: "Heading — line 2", type: string, required: true }
       - name: section_body
-        label: "Guide architecture body paragraph"
-        type: text
+        label: "Guide architecture body copy"
+        type: rich-text
         required: true
-      - name: section_tagline
-        label: "Guide architecture tagline"
-        type: string
-        required: true
-      - name: section_image_src
-        label: "Guide architecture image"
-        type: image
-        required: true
-      - name: section_image_alt
-        label: "Guide architecture image alt text"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: section_tagline, label: "Guide architecture tagline", type: string, required: true }
+      - { name: section_image_src, label: "Guide architecture image", type: image, required: true }
+      - { name: section_image_alt, label: "Guide architecture image alt text", type: string, required: true }
       - name: chapters
-        label: "Design detail chapters (scroll animation)"
+        label: "Design detail chapters"
         type: list
         fields:
-          - name: eyebrow
-            label: "Chapter eyebrow (e.g. 01 · Frame)"
-            type: string
-            required: true
-          - name: title
-            label: "Chapter title"
-            type: string
-            required: true
+          - { name: eyebrow, label: "Chapter eyebrow", type: string, required: true }
+          - { name: title, label: "Chapter title", type: string, required: true }
           - name: text
-            label: "Chapter body text (desktop panel)"
-            type: text
+            label: "Desktop chapter copy"
+            type: rich-text
             required: true
+            options: { format: html, media: false, switcher: false }
           - name: mobile_text
-            label: "Chapter body text (mobile caption)"
-            type: text
+            label: "Mobile chapter copy"
+            type: rich-text
             required: true
-          - name: image_src
-            label: "Chapter image"
-            type: image
-            required: true
-          - name: image_alt
-            label: "Chapter image alt text"
-            type: string
-            required: true
+            options: { format: html, media: false, switcher: false }
+          - { name: image_src, label: "Chapter image", type: image, required: true }
+          - { name: image_alt, label: "Chapter image alt text", type: string, required: true }
 
-  # ── Founder 100 section ────────────────────────────────────────────────────
-  # NOTE: Square payment URLs are developer-controlled and not editable here.
   - name: founder
     label: "Founder 100 Section"
     type: file
     path: content/founder.json
     format: json
     fields:
-      - name: eyebrow
-        label: "Section eyebrow"
-        type: string
-        required: true
-      - name: allocation_label
-        label: "Allocation counter label"
-        type: string
-        required: true
-      - name: allocation_count
-        label: "Allocation counter value"
-        type: string
-        required: true
-      - name: title
-        label: "Main heading"
-        type: string
-        required: true
-      - name: subhead_line1
-        label: "Subheading — line 1"
-        type: string
-        required: true
-      - name: subhead_line2
-        label: "Subheading — line 2"
-        type: string
-        required: true
+      - { name: eyebrow, label: "Section eyebrow", type: string, required: true }
+      - { name: allocation_label, label: "Allocation counter label", type: string, required: true }
+      - { name: allocation_count, label: "Allocation counter value", type: string, required: true }
+      - { name: title, label: "Main heading", type: string, required: true }
+      - { name: subhead_line1, label: "Subheading — line 1", type: string, required: true }
+      - { name: subhead_line2, label: "Subheading — line 2", type: string, required: true }
       - name: body_1
-        label: "Body paragraph 1"
-        type: text
+        label: "Body copy 1"
+        type: rich-text
         required: true
+        options: { format: html, media: false, switcher: false }
       - name: body_2
-        label: "Body paragraph 2"
-        type: text
+        label: "Body copy 2"
+        type: rich-text
         required: true
-      - name: cta_label
-        label: "In-page CTA link label"
-        type: string
-        required: true
-      - name: deposit_eyebrow
-        label: "Deposit sub-section eyebrow"
-        type: string
-        required: true
-      - name: deposit_title
-        label: "Deposit sub-section heading"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: cta_label, label: "In-page CTA label", type: string, required: true }
+      - { name: deposit_eyebrow, label: "Deposit eyebrow", type: string, required: true }
+      - { name: deposit_title, label: "Deposit heading", type: string, required: true }
       - name: deposit_body
-        label: "Deposit instructions paragraph"
-        type: text
+        label: "Deposit instructions"
+        type: rich-text
         required: true
-      - name: deposit_step_1
-        label: "Step 1 label"
-        type: string
-        required: true
-      - name: deposit_step_2
-        label: "Step 2 label"
-        type: string
-        required: true
-      - name: deposit_step_3
-        label: "Step 3 label"
-        type: string
-        required: true
-      - name: payment_secure_label
-        label: "Secure checkout label"
-        type: string
-        required: true
-      - name: form_contact_email
-        label: "Founder form contact email"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: deposit_step_1, label: "Step 1 label", type: string, required: true }
+      - { name: deposit_step_2, label: "Step 2 label", type: string, required: true }
+      - { name: deposit_step_3, label: "Step 3 label", type: string, required: true }
+      - { name: payment_secure_label, label: "Secure checkout label", type: string, required: true }
+      - { name: form_contact_email, label: "Founder form contact email", type: string, required: true }
       - name: closing_line
         label: "Closing statement"
-        type: text
+        type: rich-text
         required: true
+        options: { format: html, media: false, switcher: false }
 
-  # ── HALO section & updates ─────────────────────────────────────────────────
   - name: halo
     label: "HALO Section & Updates"
     type: file
     path: content/halo.json
     format: json
     fields:
-      - name: eyebrow
-        label: "HALO eyebrow"
-        type: string
-        required: true
-      - name: title_line1
-        label: "HALO heading — line 1"
-        type: string
-        required: true
-      - name: title_line2
-        label: "HALO heading — line 2"
-        type: string
-        required: true
+      - { name: eyebrow, label: "HALO eyebrow", type: string, required: true }
+      - { name: title_line1, label: "HALO heading — line 1", type: string, required: true }
+      - { name: title_line2, label: "HALO heading — line 2", type: string, required: true }
       - name: body
-        label: "HALO body paragraph"
-        type: text
+        label: "HALO body copy"
+        type: rich-text
         required: true
-      - name: cta_label
-        label: "HALO CTA label"
-        type: string
-        required: true
-      - name: cta_href
-        label: "HALO CTA link (mailto or URL)"
-        type: string
-        required: true
-      - name: image_src
-        label: "HALO background image"
-        type: image
-        required: true
-      - name: image_alt
-        label: "HALO background image alt text"
-        type: string
-        required: true
-      - name: updates_eyebrow
-        label: "Updates section eyebrow"
-        type: string
-        required: true
-      - name: updates_title
-        label: "Updates section heading"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: cta_label, label: "HALO CTA label", type: string, required: true }
+      - { name: cta_href, label: "HALO CTA link", type: string, required: true }
+      - { name: image_src, label: "HALO background image", type: image, required: true }
+      - { name: image_alt, label: "HALO image alt text", type: string, required: true }
+      - { name: updates_eyebrow, label: "Updates eyebrow", type: string, required: true }
+      - { name: updates_title, label: "Updates heading", type: string, required: true }
       - name: updates_body
-        label: "Updates section body"
-        type: text
+        label: "Updates body copy"
+        type: rich-text
         required: true
-      - name: updates_cta_label
-        label: "Email list submit button label"
-        type: string
-        required: true
-      - name: updates_privacy_note
-        label: "Privacy notice text"
-        type: string
-        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: updates_cta_label, label: "Email-list button label", type: string, required: true }
+      - { name: updates_privacy_note, label: "Privacy notice", type: string, required: true }
 
-  # ── Footer ─────────────────────────────────────────────────────────────────
   - name: footer
     label: "Footer"
     type: file
     path: content/footer.json
     format: json
     fields:
-      - name: brand_name
-        label: "Brand name"
-        type: string
-        required: true
-      - name: brand_tagline
-        label: "Brand tagline"
-        type: string
-        required: true
-      - name: copyright
-        label: "Copyright / footer bottom text"
-        type: string
-        required: true
-      - name: contact_email
-        label: "Contact email address"
-        type: string
-        required: true
+      - { name: brand_name, label: "Brand name", type: string, required: true }
+      - { name: brand_tagline, label: "Brand tagline", type: string, required: true }
+      - { name: copyright, label: "Copyright / footer text", type: string, required: true }
+      - { name: contact_email, label: "Contact email", type: string, required: true }
