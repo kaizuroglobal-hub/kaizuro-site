@@ -259,3 +259,15 @@ productLightbox?.addEventListener("close", () => {
   lightboxTrigger?.focus();
   lightboxTrigger = null;
 });
+
+(function bootstrapCmsLoader() {
+  if (document.querySelector('script[data-kaizuro-cms-loader]')) return;
+  const loader = document.createElement("script");
+  loader.src = "content-loader.js";
+  loader.defer = true;
+  loader.dataset.kaizuroCmsLoader = "true";
+  loader.addEventListener("error", () => {
+    console.warn("[KAIZURO] CMS content loader was unavailable; using HTML fallback content.");
+  });
+  document.head.appendChild(loader);
+})();
