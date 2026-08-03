@@ -13,35 +13,20 @@
   background: #050505;
 }
 
-/* Brand-story numbered principles rendered by Pages CMS. */
+/* Brand-story principles rendered by Pages CMS. Numbers are part of each editable title. */
 #story .story-copy > .cms-rich-text {
-  margin-top: 32px;
-  counter-reset: story-principle;
+  margin-top: 34px;
 }
 
 #story .story-copy > .cms-rich-text > p {
-  counter-increment: story-principle;
-  position: relative;
   margin: 0;
-  padding: 28px 0 30px 48px;
+  padding: 26px 0 28px;
   border-top: 1px solid rgba(255, 255, 255, 0.13);
   line-height: 1.65;
 }
 
 #story .story-copy > .cms-rich-text > p:last-child {
   border-bottom: 1px solid rgba(255, 255, 255, 0.13);
-}
-
-#story .story-copy > .cms-rich-text > p::before {
-  content: counter(story-principle, decimal-leading-zero);
-  position: absolute;
-  top: 29px;
-  left: 0;
-  color: rgba(255, 255, 255, 0.46);
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: 0.12em;
 }
 
 #story .story-copy > .cms-rich-text strong {
@@ -59,15 +44,11 @@
 
 @media (max-width: 640px) {
   #story .story-copy > .cms-rich-text {
-    margin-top: 26px;
+    margin-top: 28px;
   }
 
   #story .story-copy > .cms-rich-text > p {
-    padding: 24px 0 26px 42px;
-  }
-
-  #story .story-copy > .cms-rich-text > p::before {
-    top: 25px;
+    padding: 22px 0 24px;
   }
 
   #story .story-copy > .cms-rich-text strong {
