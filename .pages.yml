@@ -1,323 +1,231 @@
-# Pages CMS configuration for KAIZURO
-# Long-form visible copy uses rich-text HTML. Structural values such as titles,
-# labels, links, email addresses, numbers and image metadata remain simple fields.
-
 media:
   input: assets/kaizuro-site/uploads
   output: /assets/kaizuro-site/uploads
 
 content:
   - name: site
-    label: "Site Settings"
+    label: Site Settings
     type: file
     path: content/site.json
     format: json
     fields:
-      - { name: title, label: "Browser tab title", type: string, required: true }
-      - { name: description, label: "Meta description (SEO)", type: text, required: true }
-      - { name: og_image, label: "Social / OG share image", type: image }
+      - { name: title, label: Browser tab title, type: string, required: true }
+      - { name: description, label: Meta description, type: text, required: true }
+      - { name: og_image, label: Social share image, type: image }
 
   - name: hero
-    label: "Hero Section"
+    label: Hero Section
     type: file
     path: content/hero.json
     format: json
     fields:
-      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: title_line1, label: "Hero title — line 1", type: string, required: true }
-      - { name: title_line2, label: "Hero title — line 2", type: string, required: true }
-      - name: description
-        label: "Hero description"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: cta_discover_label, label: "Primary CTA label", type: string, required: true }
-      - { name: cta_discover_href, label: "Primary CTA link", type: string, required: true }
-      - { name: cta_join_label, label: "Secondary CTA label", type: string, required: true }
-      - { name: cta_join_href, label: "Secondary CTA link", type: string, required: true }
-      - { name: status_1, label: "Status badge — left", type: string, required: true }
-      - { name: status_2, label: "Status badge — right", type: string, required: true }
-      - { name: image_desktop_src, label: "Hero image — desktop", type: image, required: true }
-      - { name: image_mobile_src, label: "Hero image — mobile", type: image, required: true }
-      - { name: image_alt, label: "Hero image alt text", type: string, required: true }
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title_line1, label: Title line 1, type: string, required: true }
+      - { name: title_line2, label: Title line 2, type: string, required: true }
+      - &rich { name: description, label: Description, type: rich-text, required: true, options: { format: html, media: false, switcher: false } }
+      - { name: cta_discover_label, label: Primary CTA label, type: string, required: true }
+      - { name: cta_discover_href, label: Primary CTA link, type: string, required: true }
+      - { name: cta_join_label, label: Secondary CTA label, type: string, required: true }
+      - { name: cta_join_href, label: Secondary CTA link, type: string, required: true }
+      - { name: status_1, label: Status left, type: string, required: true }
+      - { name: status_2, label: Status right, type: string, required: true }
+      - { name: image_desktop_src, label: Desktop image, type: image, required: true }
+      - { name: image_mobile_src, label: Mobile image, type: image, required: true }
+      - { name: image_alt, label: Image alt text, type: string, required: true }
 
   - name: story
-    label: "Brand Story Section"
+    label: Brand Story Section
     type: file
     path: content/story.json
     format: json
     fields:
-      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: title, label: "Section heading", type: string, required: true }
-      - name: body_1
-        label: "Body copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - name: principles_text
-        label: "Brand principles"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: image_src, label: "Story image", type: image, required: true }
-      - { name: image_alt, label: "Story image alt text", type: string, required: true }
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title, label: Heading, type: string, required: true }
+      - { <<: *rich, name: body_1, label: Body copy }
+      - { <<: *rich, name: principles_text, label: Brand principles }
+      - { name: image_src, label: Story image, type: image, required: true }
+      - { name: image_alt, label: Image alt text, type: string, required: true }
 
   - name: assault
-    label: "ASSAULT Product Section"
+    label: ASSAULT Product Section
     type: file
     path: content/assault.json
     format: json
     fields:
-      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: title, label: "Product title", type: string, required: true }
-      - { name: lead, label: "Lead sentence", type: string, required: true }
-      - name: body
-        label: "Body copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: tagline, label: "Tagline", type: string, required: true }
-      - { name: image_src, label: "Product image", type: image, required: true }
-      - { name: image_alt, label: "Product image alt text", type: string, required: true }
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title, label: Product title, type: string, required: true }
+      - { name: lead, label: Lead sentence, type: string, required: true }
+      - { <<: *rich, name: body, label: Body copy }
+      - { name: tagline, label: Tagline, type: string, required: true }
+      - { name: image_src, label: Product image, type: image, required: true }
+      - { name: image_alt, label: Image alt text, type: string, required: true }
 
   - name: principles
-    label: "Design Principles 01–03"
+    label: Design Principles 01–03
     type: file
     path: content/principles.json
     format: json
     fields:
-      - { name: eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: title_line1, label: "Heading — line 1", type: string, required: true }
-      - { name: title_line2, label: "Heading — line 2", type: string, required: true }
-      - name: intro
-        label: "Intro copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title_line1, label: Heading line 1, type: string, required: true }
+      - { name: title_line2, label: Heading line 2, type: string, required: true }
+      - { <<: *rich, name: intro, label: Intro copy }
       - name: principles
-        label: "01–03 Design principles"
+        label: Principle cards 01–03
         type: list
         fields:
-          - { name: number, label: "Number", type: string, required: true }
-          - { name: title, label: "Principle title", type: string, required: true }
-          - name: body
-            label: "Principle description"
-            type: rich-text
-            required: true
-            options: { format: html, media: false, switcher: false }
+          - { name: number, label: Number, type: string, required: true }
+          - { name: title, label: Title, type: string, required: true }
+          - { <<: *rich, name: body, label: Description }
 
   - name: engineering
-    label: "Guide Architecture + Cards 01–04"
+    label: Guide Architecture + Cards 01–04
     type: file
     path: content/engineering.json
     format: json
     fields:
-      - { name: section_eyebrow, label: "Guide architecture eyebrow", type: string, required: true }
-      - { name: section_title_line1, label: "Heading — line 1", type: string, required: true }
-      - { name: section_title_line2, label: "Heading — line 2", type: string, required: true }
-      - name: section_body
-        label: "Guide architecture body copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: section_tagline, label: "Guide architecture tagline", type: string, required: true }
-      - { name: section_image_src, label: "Guide architecture image", type: image, required: true }
-      - { name: section_image_alt, label: "Guide architecture image alt text", type: string, required: true }
+      - { name: section_eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: section_title_line1, label: Heading line 1, type: string, required: true }
+      - { name: section_title_line2, label: Heading line 2, type: string, required: true }
+      - { <<: *rich, name: section_body, label: Body copy }
+      - { name: section_tagline, label: Tagline, type: string, required: true }
+      - { name: section_image_src, label: Section image, type: image, required: true }
+      - { name: section_image_alt, label: Image alt text, type: string, required: true }
       - name: chapters
-        label: "Scrolling cards: 01 Frame to 04 Power"
+        label: Scrolling cards 01 Frame to 04 Power
         type: list
         fields:
-          - { name: eyebrow, label: "Card number / eyebrow", type: string, required: true }
-          - { name: title, label: "Card title", type: string, required: true }
-          - name: text
-            label: "Desktop card copy"
-            type: rich-text
-            required: true
-            options: { format: html, media: false, switcher: false }
-          - name: mobile_text
-            label: "Mobile card copy"
-            type: rich-text
-            required: true
-            options: { format: html, media: false, switcher: false }
-          - { name: image_src, label: "Card image", type: image, required: true }
-          - { name: image_alt, label: "Card image alt text", type: string, required: true }
+          - { name: eyebrow, label: Number / eyebrow, type: string, required: true }
+          - { name: title, label: Card title, type: string, required: true }
+          - { <<: *rich, name: text, label: Desktop copy }
+          - { <<: *rich, name: mobile_text, label: Mobile copy }
+          - { name: image_src, label: Card image, type: image, required: true }
+          - { name: image_alt, label: Image alt text, type: string, required: true }
 
   - name: grip
-    label: "Grip Geometry Section"
+    label: Grip Geometry Section
     type: file
-    path: content/engineering-details.json
+    path: content/grip.json
     format: json
     fields:
-      - { name: grip.eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: grip.title, label: "Heading", type: string, required: true }
-      - name: grip.body
-        label: "Body copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - name: grip.features
-        label: "Grip features"
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title, label: Heading, type: string, required: true }
+      - { <<: *rich, name: body, label: Body copy }
+      - name: features
+        label: Grip features
         type: list
         fields:
-          - { name: title, label: "Feature title", type: string, required: true }
-          - name: body
-            label: "Feature copy"
-            type: rich-text
-            required: true
-            options: { format: html, media: false, switcher: false }
-      - { name: grip.image_src, label: "Grip image", type: image, required: true }
-      - { name: grip.image_alt, label: "Grip image alt text", type: string, required: true }
+          - { name: title, label: Feature title, type: string, required: true }
+          - { <<: *rich, name: body, label: Feature copy }
+      - { name: image_src, label: Grip image, type: image, required: true }
+      - { name: image_alt, label: Image alt text, type: string, required: true }
 
   - name: reel
-    label: "Reel Interface Section"
+    label: Reel Interface Section
     type: file
-    path: content/engineering-details.json
+    path: content/reel.json
     format: json
     fields:
-      - { name: reel.eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: reel.title, label: "Heading", type: string, required: true }
-      - name: reel.body_1
-        label: "Body copy 1"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - name: reel.body_2
-        label: "Body copy 2"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: reel.note, label: "Image note", type: string, required: true }
-      - name: reel.features
-        label: "Reel interface features"
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title, label: Heading, type: string, required: true }
+      - { <<: *rich, name: body_1, label: Body copy 1 }
+      - { <<: *rich, name: body_2, label: Body copy 2 }
+      - { name: note, label: Image note, type: string, required: true }
+      - name: features
+        label: Reel features
         type: list
-        field: { name: feature, label: "Feature", type: string }
-      - { name: reel.image_src, label: "Reel interface image", type: image, required: true }
-      - { name: reel.image_alt, label: "Reel interface image alt text", type: string, required: true }
+        field: { name: feature, label: Feature, type: string }
+      - { name: image_src, label: Reel image, type: image, required: true }
+      - { name: image_alt, label: Image alt text, type: string, required: true }
 
   - name: proof
-    label: "Physical Validation Section"
+    label: Physical Validation Section
     type: file
-    path: content/engineering-details.json
+    path: content/proof.json
     format: json
     fields:
-      - { name: proof.eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: proof.title, label: "Heading", type: string, required: true }
-      - name: proof.body
-        label: "Body copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: proof.metric_1_title, label: "Metric 1 title", type: string, required: true }
-      - { name: proof.metric_1_body, label: "Metric 1 description", type: string, required: true }
-      - { name: proof.metric_1_value, label: "Metric 1 value", type: string, required: true }
-      - { name: proof.metric_2_title, label: "Metric 2 title", type: string, required: true }
-      - { name: proof.metric_2_body, label: "Metric 2 description", type: string, required: true }
-      - { name: proof.metric_2_value, label: "Metric 2 value", type: string, required: true }
-      - { name: proof.curve_heading, label: "Curve heading", type: string, required: true }
-      - { name: proof.disclosure, label: "Validation disclosure", type: text, required: true }
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title, label: Heading, type: string, required: true }
+      - { <<: *rich, name: body, label: Body copy }
+      - { name: metric_1_title, label: Metric 1 title, type: string, required: true }
+      - { name: metric_1_body, label: Metric 1 description, type: text, required: true }
+      - { name: metric_1_value, label: Metric 1 value, type: string, required: true }
+      - { name: metric_2_title, label: Metric 2 title, type: string, required: true }
+      - { name: metric_2_body, label: Metric 2 description, type: text, required: true }
+      - { name: metric_2_value, label: Metric 2 value, type: string, required: true }
+      - { name: curve_heading, label: Curve heading, type: string, required: true }
+      - { name: disclosure, label: Disclosure, type: text, required: true }
 
   - name: specifications
-    label: "Rod Specifications Section"
+    label: Rod Specifications Section
     type: file
-    path: content/engineering-details.json
+    path: content/specifications.json
     format: json
     fields:
-      - { name: specifications.eyebrow, label: "Eyebrow", type: string, required: true }
-      - { name: specifications.title_line1, label: "Heading — line 1", type: string, required: true }
-      - { name: specifications.title_line2, label: "Heading — line 2", type: string, required: true }
-      - name: specifications.summary
-        label: "Summary"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - name: specifications.items
-        label: "Specification rows"
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title_line1, label: Heading line 1, type: string, required: true }
+      - { name: title_line2, label: Heading line 2, type: string, required: true }
+      - { <<: *rich, name: summary, label: Summary }
+      - name: items
+        label: Specification rows
         type: list
         fields:
-          - { name: label, label: "Specification", type: string, required: true }
-          - { name: value, label: "Value", type: string, required: true }
-      - name: specifications.note
-        label: "Pre-production note"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
+          - { name: label, label: Specification, type: string, required: true }
+          - { name: value, label: Value, type: string, required: true }
+      - { <<: *rich, name: note, label: Pre-production note }
 
   - name: founder
-    label: "Founder 100 Section"
+    label: Founder 100 Section
     type: file
     path: content/founder.json
     format: json
     fields:
-      - { name: eyebrow, label: "Section eyebrow", type: string, required: true }
-      - { name: allocation_label, label: "Allocation counter label", type: string, required: true }
-      - { name: allocation_count, label: "Allocation counter value", type: string, required: true }
-      - { name: title, label: "Main heading", type: string, required: true }
-      - { name: subhead_line1, label: "Subheading — line 1", type: string, required: true }
-      - { name: subhead_line2, label: "Subheading — line 2", type: string, required: true }
-      - name: body_1
-        label: "Body copy 1"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - name: body_2
-        label: "Body copy 2"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: cta_label, label: "In-page CTA label", type: string, required: true }
-      - { name: deposit_eyebrow, label: "Deposit eyebrow", type: string, required: true }
-      - { name: deposit_title, label: "Deposit heading", type: string, required: true }
-      - name: deposit_body
-        label: "Deposit instructions"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: deposit_step_1, label: "Step 1 label", type: string, required: true }
-      - { name: deposit_step_2, label: "Step 2 label", type: string, required: true }
-      - { name: deposit_step_3, label: "Step 3 label", type: string, required: true }
-      - { name: payment_secure_label, label: "Secure checkout label", type: string, required: true }
-      - { name: form_contact_email, label: "Founder form contact email", type: string, required: true }
-      - name: closing_line
-        label: "Closing statement"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: allocation_label, label: Allocation label, type: string, required: true }
+      - { name: allocation_count, label: Allocation count, type: string, required: true }
+      - { name: title, label: Main heading, type: string, required: true }
+      - { name: subhead_line1, label: Subheading line 1, type: string, required: true }
+      - { name: subhead_line2, label: Subheading line 2, type: string, required: true }
+      - { <<: *rich, name: body_1, label: Body copy 1 }
+      - { <<: *rich, name: body_2, label: Body copy 2 }
+      - { name: cta_label, label: CTA label, type: string, required: true }
+      - { name: deposit_eyebrow, label: Deposit eyebrow, type: string, required: true }
+      - { name: deposit_title, label: Deposit heading, type: string, required: true }
+      - { <<: *rich, name: deposit_body, label: Deposit instructions }
+      - { name: deposit_step_1, label: Step 1, type: string, required: true }
+      - { name: deposit_step_2, label: Step 2, type: string, required: true }
+      - { name: deposit_step_3, label: Step 3, type: string, required: true }
+      - { name: payment_secure_label, label: Secure checkout label, type: string, required: true }
+      - { name: form_contact_email, label: Contact email, type: string, required: true }
+      - { <<: *rich, name: closing_line, label: Closing statement }
 
   - name: halo
-    label: "HALO Section & Updates"
+    label: HALO Section & Updates
     type: file
     path: content/halo.json
     format: json
     fields:
-      - { name: eyebrow, label: "HALO eyebrow", type: string, required: true }
-      - { name: title_line1, label: "HALO heading — line 1", type: string, required: true }
-      - { name: title_line2, label: "HALO heading — line 2", type: string, required: true }
-      - name: body
-        label: "HALO body copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: cta_label, label: "HALO CTA label", type: string, required: true }
-      - { name: cta_href, label: "HALO CTA link", type: string, required: true }
-      - { name: image_src, label: "HALO background image", type: image, required: true }
-      - { name: image_alt, label: "HALO image alt text", type: string, required: true }
-      - { name: updates_eyebrow, label: "Updates eyebrow", type: string, required: true }
-      - { name: updates_title, label: "Updates heading", type: string, required: true }
-      - name: updates_body
-        label: "Updates body copy"
-        type: rich-text
-        required: true
-        options: { format: html, media: false, switcher: false }
-      - { name: updates_cta_label, label: "Email-list button label", type: string, required: true }
-      - { name: updates_privacy_note, label: "Privacy notice", type: string, required: true }
+      - { name: eyebrow, label: Eyebrow, type: string, required: true }
+      - { name: title_line1, label: Heading line 1, type: string, required: true }
+      - { name: title_line2, label: Heading line 2, type: string, required: true }
+      - { <<: *rich, name: body, label: Body copy }
+      - { name: cta_label, label: CTA label, type: string, required: true }
+      - { name: cta_href, label: CTA link, type: string, required: true }
+      - { name: image_src, label: Background image, type: image, required: true }
+      - { name: image_alt, label: Image alt text, type: string, required: true }
+      - { name: updates_eyebrow, label: Updates eyebrow, type: string, required: true }
+      - { name: updates_title, label: Updates heading, type: string, required: true }
+      - { <<: *rich, name: updates_body, label: Updates body copy }
+      - { name: updates_cta_label, label: Submit button label, type: string, required: true }
+      - { name: updates_privacy_note, label: Privacy note, type: string, required: true }
 
   - name: footer
-    label: "Footer"
+    label: Footer
     type: file
     path: content/footer.json
     format: json
     fields:
-      - { name: brand_name, label: "Brand name", type: string, required: true }
-      - { name: brand_tagline, label: "Brand tagline", type: string, required: true }
-      - { name: copyright, label: "Copyright / footer text", type: string, required: true }
-      - { name: contact_email, label: "Contact email", type: string, required: true }
+      - { name: brand_name, label: Brand name, type: string, required: true }
+      - { name: brand_tagline, label: Brand tagline, type: string, required: true }
+      - { name: copyright, label: Copyright text, type: string, required: true }
+      - { name: contact_email, label: Contact email, type: string, required: true }
