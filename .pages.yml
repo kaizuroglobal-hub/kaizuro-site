@@ -79,7 +79,7 @@ content:
           - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
 
   - name: engineering
-    label: "06 · Guide Architecture & Cards 01–04"
+    label: "06 · Guide Architecture"
     type: file
     path: content/engineering.json
     format: json
@@ -91,8 +91,15 @@ content:
       - { name: section_tagline, label: "Tagline", type: string }
       - { name: section_image_src, label: "Section image", type: image }
       - { name: section_image_alt, label: "Section image alt text", type: string }
-      - name: chapters
-        label: "Scrolling cards"
+
+  - name: scrolling_cards
+    label: "07 · Scrolling Cards 01–04"
+    type: file
+    path: content/scrolling_cards.json
+    format: json
+    fields:
+      - name: cards
+        label: "All four scrolling cards"
         type: list
         fields:
           - { name: eyebrow, label: "Card number and label", type: string }
@@ -103,7 +110,7 @@ content:
           - { name: image_alt, label: "Image alt text", type: string }
 
   - name: grip
-    label: "07 · Grip Geometry"
+    label: "08 · Grip Geometry"
     type: file
     path: content/grip.json
     format: json
@@ -121,7 +128,7 @@ content:
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: reel
-    label: "08 · Reel Interface"
+    label: "09 · Reel Interface"
     type: file
     path: content/reel.json
     format: json
@@ -136,7 +143,7 @@ content:
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: proof
-    label: "09 · Physical Validation"
+    label: "10 · Physical Validation"
     type: file
     path: content/proof.json
     format: json
@@ -154,7 +161,7 @@ content:
       - { name: disclosure, label: "Disclosure", type: text }
 
   - name: specifications
-    label: "10 · Rod Specifications"
+    label: "11 · Rod Specifications"
     type: file
     path: content/specifications.json
     format: json
@@ -171,8 +178,26 @@ content:
           - { name: value, label: "Value", type: string }
       - { name: note, label: "Specification note", type: rich-text, options: { format: html, media: false, switcher: false } }
 
+  - name: evolution
+    label: "12 · Prototype Process 01–07"
+    type: file
+    path: content/evolution.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - name: steps
+        label: "Prototype stages"
+        type: list
+        fields:
+          - { name: number, label: "Number", type: string }
+          - { name: title, label: "Stage title", type: string }
+          - { name: body, label: "Stage description", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: closing_line, label: "Closing statement", type: string }
+
   - name: founder
-    label: "11 · Founder 100"
+    label: "13 · Founder 100"
     type: file
     path: content/founder.json
     format: json
@@ -196,8 +221,41 @@ content:
       - { name: form_contact_email, label: "Form destination email", type: string }
       - { name: closing_line, label: "Closing statement", type: rich-text, options: { format: html, media: false, switcher: false } }
 
+  - name: founder_delivery
+    label: "14 · Founder Delivery 01–05"
+    type: file
+    path: content/founder_delivery.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - name: milestones
+        label: "Delivery milestones"
+        type: list
+        fields:
+          - { name: number, label: "Number", type: string }
+          - { name: title, label: "Milestone title", type: string }
+          - { name: body, label: "Milestone description", type: rich-text, options: { format: html, media: false, switcher: false } }
+
+  - name: terms
+    label: "15 · Commercial Terms"
+    type: file
+    path: content/terms.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - name: items
+        label: "Questions and answers"
+        type: list
+        fields:
+          - { name: open, label: "Open by default", type: boolean }
+          - { name: question, label: "Question", type: string }
+          - { name: answer, label: "Answer", type: rich-text, options: { format: html, media: false, switcher: false } }
+
   - name: halo
-    label: "12 · HALO & Updates"
+    label: "16 · HALO & Updates"
     type: file
     path: content/halo.json
     format: json
@@ -217,7 +275,7 @@ content:
       - { name: updates_privacy_note, label: "Privacy note", type: string }
 
   - name: footer
-    label: "13 · Footer"
+    label: "17 · Footer"
     type: file
     path: content/footer.json
     format: json
