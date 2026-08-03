@@ -1,0 +1,31 @@
+name: Validate Pages CMS content
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".pages.yml"
+      - "content/**"
+      - "content-loader.js"
+      - "script.js"
+      - "index.html"
+      - "CMS-SETUP.md"
+      - "validate-content.sh"
+      - ".github/workflows/validate-cms.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout CMS branch
+        uses: actions/checkout@v4
+
+      - name: Validate CMS content and JavaScript
+        run: |
+          chmod +x validate-content.sh
+          ./validate-content.sh
