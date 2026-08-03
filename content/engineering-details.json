@@ -1,0 +1,57 @@
+{
+  "grip": {
+    "eyebrow": "Grip Geometry",
+    "title": "World-first grip geometry.",
+    "body": "<p>The elongated upper grip combines a 90% rounded profile with a deliberate 10% pentagonal index. It preserves offshore comfort while providing tactile orientation, leverage and resistance to unwanted rotation under heavy load.</p>",
+    "features": [
+      {"title": "Longer usable leverage", "body": "<p>Supports changing hand positions through the fight.</p>"},
+      {"title": "Indexed orientation", "body": "<p>Provides a tactile reference without looking at the grip.</p>"},
+      {"title": "Controlled transitions", "body": "<p>Rounded corners retain comfort while preserving the faceted form.</p>"}
+    ],
+    "image_src": "assets/kaizuro-site/editorial/04b-wrap-grip-geometry.png?v=20260719-2",
+    "image_alt": "Close-up of the KAIZURO black EVA grip showing its rounded-pentagonal geometry"
+  },
+  "reel": {
+    "eyebrow": "Reel Interface",
+    "title": "The mechanical connection point.",
+    "body_1": "<p>The reel seat is where rod, reel and angler become one load-bearing system. ASSAULT uses a heavy-duty Fuji DPS configuration selected for secure reel retention, offshore reliability and compatibility with large PE6-8 spinning reels.</p>",
+    "body_2": "<p>Once installed, the reel foot occupies the seat opening and the principal Fuji branding is positioned on the underside.</p>",
+    "note": "Fuji DPS component shown before installation.",
+    "features": ["Heavy-duty graphite body", "Double locking hardware", "Large offshore reel compatibility", "Proven serviceability"],
+    "image_src": "assets/kaizuro-site/editorial/07-reel-interface.png",
+    "image_alt": "Fuji DPS reel seat component before installation"
+  },
+  "proof": {
+    "eyebrow": "Physical Validation",
+    "title": "Proof before production.",
+    "body": "<p>KAIZURO is being developed through physical prototypes, controlled loading and documented revision. The purpose is not to promote one maximum number. It is to understand how the blank, components and finished rod behave as one system.</p>",
+    "metric_1_title": "Controlled static-load reference",
+    "metric_1_body": "Used to observe working shape and load distribution.",
+    "metric_1_value": "24 kg",
+    "metric_2_title": "Target offshore platform",
+    "metric_2_body": "Developed for topwater use with large spinning reels.",
+    "metric_2_value": "PE6-8",
+    "curve_heading": "How the rod carries load matters as much as how much load it carries.",
+    "disclosure": "Static-load testing and recommended fishing drag are different measurements. Final working-load guidance will follow completed prototype validation."
+  },
+  "specifications": {
+    "eyebrow": "Rod Specifications",
+    "title_line1": "ASSAULT",
+    "title_line2": "PE6-8.",
+    "summary": "<p>The essential measurements, tackle compatibility and performance characteristics of KAIZURO's first offshore casting platform.</p>",
+    "items": [
+      {"label": "Model", "value": "ASSAULT"},
+      {"label": "Line class", "value": "PE6-8"},
+      {"label": "Rod type", "value": "Offshore Casting"},
+      {"label": "Length", "value": "7'10\""},
+      {"label": "Lure weight", "value": "80-180 g"},
+      {"label": "Drag rating", "value": "24 kg"},
+      {"label": "Performance characteristics", "value": "Fast Recovery / Progressive Power"},
+      {"label": "Grip", "value": "KAIZURO Rounded Pentagonal EVA Grip"},
+      {"label": "Reel seat", "value": "Marine-Grade Aluminium"},
+      {"label": "Target species", "value": "GT, Tuna, Kingfish, Dogtooth Tuna & Large Pelagics"},
+      {"label": "Rod bag", "value": "Premium Protective Rod Sleeve Included"}
+    ],
+    "note": "<p>Pre-production specifications remain subject to final prototype and validation outcomes.</p>"
+  }
+}
