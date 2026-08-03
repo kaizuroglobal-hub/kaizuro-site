@@ -22,6 +22,56 @@
   font-weight: 700;
 }
 
+/* Give the numbered principles clear spacing and softer dividers. */
+#story .cms-rich-text ol {
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: story-principle;
+}
+
+#story .cms-rich-text ol > li {
+  counter-increment: story-principle;
+  position: relative;
+  margin: 0;
+  padding: 26px 0 28px 46px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+#story .cms-rich-text ol > li:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+#story .cms-rich-text ol > li::before {
+  content: counter(story-principle, decimal-leading-zero);
+  position: absolute;
+  top: 27px;
+  left: 0;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+}
+
+#story .cms-rich-text ol > li > p {
+  margin: 9px 0 0;
+}
+
+@media (max-width: 640px) {
+  #story .cms-rich-text ol {
+    margin-top: 26px;
+  }
+
+  #story .cms-rich-text ol > li {
+    padding: 22px 0 24px 40px;
+  }
+
+  #story .cms-rich-text ol > li::before {
+    top: 23px;
+  }
+}
+
 @media (max-width: 1100px) {
   #story .sticky-image {
     width: min(100%, 680px);
