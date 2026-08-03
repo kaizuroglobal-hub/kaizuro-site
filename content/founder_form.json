@@ -16,6 +16,6 @@
   "pack_options": ["Carbon Pack", "Surge Pack"],
   "notes_label": "Notes",
   "notes_placeholder": "Rod number preference, delivery questions or other details",
-  "consent": "I understand that my Founder allocation is only secured after the correct 25% deposit has been successfully paid through Square.",
+  "consent": "I understand that my Founder allocation is only secured after the correct 30% deposit has been successfully paid through Square.",
   "submit_label": "Submit Founder details"
 }
