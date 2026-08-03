@@ -13,25 +13,35 @@
   background: #050505;
 }
 
-/* Brand-story principles rendered by Pages CMS. Numbers are part of each editable title. */
+/* Brand-story principles rendered by Pages CMS.
+   Numbers are part of each editable title; no generated numbers or dividers. */
 #story .story-copy > .cms-rich-text {
   margin-top: 34px;
+  counter-reset: none !important;
 }
 
 #story .story-copy > .cms-rich-text > p {
-  margin: 0;
-  padding: 26px 0 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.13);
+  margin: 0 0 28px;
+  padding: 0;
+  border: 0 !important;
   line-height: 1.65;
+  counter-increment: none !important;
 }
 
 #story .story-copy > .cms-rich-text > p:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+  margin-bottom: 0;
+  border: 0 !important;
+}
+
+#story .story-copy > .cms-rich-text > p::before,
+#story .story-copy > .cms-rich-text > p::after {
+  content: none !important;
+  display: none !important;
 }
 
 #story .story-copy > .cms-rich-text strong {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-size: inherit;
   line-height: 1.35;
   letter-spacing: inherit;
@@ -48,11 +58,13 @@
   }
 
   #story .story-copy > .cms-rich-text > p {
-    padding: 22px 0 24px;
+    margin-bottom: 24px;
+    padding: 0;
+    border: 0 !important;
   }
 
   #story .story-copy > .cms-rich-text strong {
-    margin-bottom: 8px;
+    margin-bottom: 7px;
   }
 }
 
