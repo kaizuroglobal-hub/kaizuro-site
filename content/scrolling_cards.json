@@ -1,0 +1,36 @@
+{
+  "cards": [
+    {
+      "eyebrow": "01 · Frame",
+      "title": "Strength without careless mass.",
+      "text": "Heavy offshore guides must withstand impact, repeated loading and lateral force. The objective is sufficient frame strength and bracing without unnecessary weight in the working section.",
+      "mobile_text": "Heavy offshore guides must withstand impact, repeated loading and lateral force without unnecessary weight in the working section.",
+      "image_src": "assets/kaizuro-site/editorial/04-guide-frame.png",
+      "image_alt": "Close-up of KAIZURO guide frame and wrap detail"
+    },
+    {
+      "eyebrow": "02 · Wrap",
+      "title": "Secure where it matters. Controlled everywhere else.",
+      "text": "Guide security depends on wrap length, thread build, resin control and preparation beneath the foot. Low-build construction manages avoidable weight and stiffness around the guide location.",
+      "mobile_text": "Wrap length, thread build, resin control and preparation beneath the foot manage security, stiffness and avoidable mass.",
+      "image_src": "assets/kaizuro-site/editorial/04b-wrap-branded-blank.png",
+      "image_alt": "KAIZURO branded carbon blank and lower guide on a black studio background"
+    },
+    {
+      "eyebrow": "03 · Progression",
+      "title": "From line coil to controlled path.",
+      "text": "A large offshore spinning reel releases broad coils of braid. Guide size and progression gradually control that movement while maintaining clearance and supporting the blank under load.",
+      "mobile_text": "Guide size and progression gradually control broad coils of braid while supporting the blank under load.",
+      "image_src": "assets/kaizuro-site/editorial/05b-power-working-section.png",
+      "image_alt": "KAIZURO rod working section with two heavy-duty guides"
+    },
+    {
+      "eyebrow": "04 · Power",
+      "title": "Power carried through the working section.",
+      "text": "The main working section balances blank authority, guide support and controlled load transfer. It is where casting recovery becomes sustained pressure when the fight moves under load.",
+      "mobile_text": "The main working section balances blank authority, guide support and controlled load transfer when the rod is under sustained pressure.",
+      "image_src": "assets/kaizuro-site/editorial/05-tip-progression-approved.png",
+      "image_alt": "KAIZURO guide progression toward the rod tip"
+    }
+  ]
+}
