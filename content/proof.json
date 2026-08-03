@@ -1,0 +1,13 @@
+{
+  "eyebrow": "Physical Validation",
+  "title": "Proof before production.",
+  "body": "<p>KAIZURO is being developed through physical prototypes, controlled loading and documented revision. The purpose is not to promote one maximum number. It is to understand how the blank, components and finished rod behave as one system.</p>",
+  "metric_1_title": "Controlled static-load reference",
+  "metric_1_body": "Used to observe working shape and load distribution.",
+  "metric_1_value": "24 kg",
+  "metric_2_title": "Target offshore platform",
+  "metric_2_body": "Developed for topwater use with large spinning reels.",
+  "metric_2_value": "PE6-8",
+  "curve_heading": "How the rod carries load matters as much as how much load it carries.",
+  "disclosure": "Static-load testing and recommended fishing drag are different measurements. Final working-load guidance will follow completed prototype validation."
+}
