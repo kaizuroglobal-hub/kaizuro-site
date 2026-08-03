@@ -1,8 +1,8 @@
 {
   "eyebrow": "Rod Selection & Payment",
   "title": "Secure the platform built for you.",
-  "body": "<p>Select ASSAULT or HALO, review the Founder price and pay the correct 25% deposit through the approved Square checkout.</p>",
-  "steps": ["Choose your rod", "Pay the correct 25% deposit", "Submit Founder details"],
+  "body": "<p>Select ASSAULT or HALO, review the Founder price and pay the correct 30% deposit through the approved Square checkout.</p>",
+  "steps": ["Choose your rod", "Pay the correct 30% deposit", "Submit Founder details"],
   "products": [
     {
       "model": "ASSAULT",
@@ -10,10 +10,10 @@
       "kicker": "Founder Allocation",
       "price": "$799",
       "currency": "AUD",
-      "deposit_label": "Deposit today (25%)",
-      "deposit": "$199.75",
-      "balance_label": "Balance later (75%)",
-      "balance": "$599.25",
+      "deposit_label": "Deposit today (30%)",
+      "deposit": "$240",
+      "balance_label": "Balance later (70%)",
+      "balance": "$559",
       "secure_label": "Secure checkout powered by Square",
       "button_label": "Secure ASSAULT allocation",
       "checkout_url": "https://square.link/u/alquFkmg"
@@ -24,10 +24,10 @@
       "kicker": "Founder Allocation",
       "price": "$999",
       "currency": "AUD",
-      "deposit_label": "Deposit today (25%)",
-      "deposit": "$249.75",
-      "balance_label": "Balance later (75%)",
-      "balance": "$749.25",
+      "deposit_label": "Deposit today (30%)",
+      "deposit": "$300",
+      "balance_label": "Balance later (70%)",
+      "balance": "$699",
       "secure_label": "Secure checkout powered by Square",
       "button_label": "Secure HALO allocation",
       "checkout_url": "https://square.link/u/ohOr1RV2"
