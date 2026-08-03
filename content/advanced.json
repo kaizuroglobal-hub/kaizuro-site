@@ -12,7 +12,7 @@
   ],
   "css_variables": [],
   "custom_css": "",
-  "custom_javascript": "var old=document.querySelector('script[data-kaizuro-structure]');if(old)old.remove();var s=document.createElement('script');s.src='site-structure.js?v=20260803-hero-order-fix-2';s.defer=true;s.dataset.kaizuroStructure='true';document.body.appendChild(s);",
+  "custom_javascript": "",
   "javascript_settings": {
     "smooth_scroll": true,
     "chapter_scroll": true,
