@@ -81,7 +81,7 @@ content:
       - { name: image_alt, label: "Product image alt text", type: string, required: true }
 
   - name: principles
-    label: "Design Principles Section"
+    label: "Design Principles 01–03"
     type: file
     path: content/principles.json
     format: json
@@ -95,7 +95,7 @@ content:
         required: true
         options: { format: html, media: false, switcher: false }
       - name: principles
-        label: "Principles list"
+        label: "01–03 Design principles"
         type: list
         fields:
           - { name: number, label: "Number", type: string, required: true }
@@ -107,7 +107,7 @@ content:
             options: { format: html, media: false, switcher: false }
 
   - name: engineering
-    label: "Engineering Section & Chapters"
+    label: "Guide Architecture + Cards 01–04"
     type: file
     path: content/engineering.json
     format: json
@@ -124,23 +124,123 @@ content:
       - { name: section_image_src, label: "Guide architecture image", type: image, required: true }
       - { name: section_image_alt, label: "Guide architecture image alt text", type: string, required: true }
       - name: chapters
-        label: "Design detail chapters"
+        label: "Scrolling cards: 01 Frame to 04 Power"
         type: list
         fields:
-          - { name: eyebrow, label: "Chapter eyebrow", type: string, required: true }
-          - { name: title, label: "Chapter title", type: string, required: true }
+          - { name: eyebrow, label: "Card number / eyebrow", type: string, required: true }
+          - { name: title, label: "Card title", type: string, required: true }
           - name: text
-            label: "Desktop chapter copy"
+            label: "Desktop card copy"
             type: rich-text
             required: true
             options: { format: html, media: false, switcher: false }
           - name: mobile_text
-            label: "Mobile chapter copy"
+            label: "Mobile card copy"
             type: rich-text
             required: true
             options: { format: html, media: false, switcher: false }
-          - { name: image_src, label: "Chapter image", type: image, required: true }
-          - { name: image_alt, label: "Chapter image alt text", type: string, required: true }
+          - { name: image_src, label: "Card image", type: image, required: true }
+          - { name: image_alt, label: "Card image alt text", type: string, required: true }
+
+  - name: grip
+    label: "Grip Geometry Section"
+    type: file
+    path: content/engineering-details.json
+    format: json
+    fields:
+      - { name: grip.eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: grip.title, label: "Heading", type: string, required: true }
+      - name: grip.body
+        label: "Body copy"
+        type: rich-text
+        required: true
+        options: { format: html, media: false, switcher: false }
+      - name: grip.features
+        label: "Grip features"
+        type: list
+        fields:
+          - { name: title, label: "Feature title", type: string, required: true }
+          - name: body
+            label: "Feature copy"
+            type: rich-text
+            required: true
+            options: { format: html, media: false, switcher: false }
+      - { name: grip.image_src, label: "Grip image", type: image, required: true }
+      - { name: grip.image_alt, label: "Grip image alt text", type: string, required: true }
+
+  - name: reel
+    label: "Reel Interface Section"
+    type: file
+    path: content/engineering-details.json
+    format: json
+    fields:
+      - { name: reel.eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: reel.title, label: "Heading", type: string, required: true }
+      - name: reel.body_1
+        label: "Body copy 1"
+        type: rich-text
+        required: true
+        options: { format: html, media: false, switcher: false }
+      - name: reel.body_2
+        label: "Body copy 2"
+        type: rich-text
+        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: reel.note, label: "Image note", type: string, required: true }
+      - name: reel.features
+        label: "Reel interface features"
+        type: list
+        field: { name: feature, label: "Feature", type: string }
+      - { name: reel.image_src, label: "Reel interface image", type: image, required: true }
+      - { name: reel.image_alt, label: "Reel interface image alt text", type: string, required: true }
+
+  - name: proof
+    label: "Physical Validation Section"
+    type: file
+    path: content/engineering-details.json
+    format: json
+    fields:
+      - { name: proof.eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: proof.title, label: "Heading", type: string, required: true }
+      - name: proof.body
+        label: "Body copy"
+        type: rich-text
+        required: true
+        options: { format: html, media: false, switcher: false }
+      - { name: proof.metric_1_title, label: "Metric 1 title", type: string, required: true }
+      - { name: proof.metric_1_body, label: "Metric 1 description", type: string, required: true }
+      - { name: proof.metric_1_value, label: "Metric 1 value", type: string, required: true }
+      - { name: proof.metric_2_title, label: "Metric 2 title", type: string, required: true }
+      - { name: proof.metric_2_body, label: "Metric 2 description", type: string, required: true }
+      - { name: proof.metric_2_value, label: "Metric 2 value", type: string, required: true }
+      - { name: proof.curve_heading, label: "Curve heading", type: string, required: true }
+      - { name: proof.disclosure, label: "Validation disclosure", type: text, required: true }
+
+  - name: specifications
+    label: "Rod Specifications Section"
+    type: file
+    path: content/engineering-details.json
+    format: json
+    fields:
+      - { name: specifications.eyebrow, label: "Eyebrow", type: string, required: true }
+      - { name: specifications.title_line1, label: "Heading — line 1", type: string, required: true }
+      - { name: specifications.title_line2, label: "Heading — line 2", type: string, required: true }
+      - name: specifications.summary
+        label: "Summary"
+        type: rich-text
+        required: true
+        options: { format: html, media: false, switcher: false }
+      - name: specifications.items
+        label: "Specification rows"
+        type: list
+        fields:
+          - { name: label, label: "Specification", type: string, required: true }
+          - { name: value, label: "Value", type: string, required: true }
+      - name: specifications.note
+        label: "Pre-production note"
+        type: rich-text
+        required: true
+        options: { format: html, media: false, switcher: false }
 
   - name: founder
     label: "Founder 100 Section"
