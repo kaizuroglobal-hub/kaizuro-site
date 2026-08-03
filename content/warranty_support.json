@@ -1,0 +1,13 @@
+{
+  "eyebrow": "Warranty & Support",
+  "title": "Support that continues after delivery.",
+  "body": "<p>Final warranty and service terms will be published before Founder payments are accepted. KAIZURO intends to provide clear registration, assessment and support pathways for every numbered production rod.</p>",
+  "items": [
+    {"title": "Registered ownership", "body": "<p>Each Founder rod is linked to its numbered certificate and digital rod passport.</p>"},
+    {"title": "Clear warranty terms", "body": "<p>Coverage, exclusions, assessment requirements and claim steps will be stated before payment.</p>"},
+    {"title": "Component support", "body": "<p>Serviceable components and replacement pathways will be documented as production specifications are locked.</p>"},
+    {"title": "Direct KAIZURO contact", "body": "<p>Owners can contact KAIZURO directly for product registration, support and delivery questions.</p>"}
+  ],
+  "contact_label": "Contact KAIZURO support",
+  "contact_href": "mailto:info@kaizuro.com?subject=KAIZURO%20support"
+}
