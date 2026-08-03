@@ -12,7 +12,7 @@
   ],
   "css_variables": [],
   "custom_css": "",
-  "custom_javascript": "",
+  "custom_javascript": "(function(){if(window.location.hash)return;try{history.scrollRestoration='manual';}catch(e){}var cancelled=false;var cancel=function(){cancelled=true;window.removeEventListener('wheel',cancel);window.removeEventListener('touchstart',cancel);window.removeEventListener('keydown',cancel);};window.addEventListener('wheel',cancel,{passive:true,once:true});window.addEventListener('touchstart',cancel,{passive:true,once:true});window.addEventListener('keydown',cancel,{once:true});var reset=function(){if(!cancelled)window.scrollTo({top:0,left:0,behavior:'auto'});};reset();requestAnimationFrame(reset);setTimeout(reset,60);setTimeout(reset,250);setTimeout(reset,800);window.addEventListener('pageshow',function(){reset();setTimeout(reset,120);});})();",
   "javascript_settings": {
     "smooth_scroll": true,
     "chapter_scroll": true,
