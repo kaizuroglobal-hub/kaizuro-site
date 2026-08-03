@@ -42,6 +42,12 @@ const chapterCopy = [
   }
 ];
 
+function getChapterData() {
+  return Array.isArray(window.kzChapterData) && window.kzChapterData.length
+    ? window.kzChapterData
+    : chapterCopy;
+}
+
 let activeChapterIndex = -1;
 let chapterScrollTicking = false;
 
@@ -56,7 +62,8 @@ function setMenu(open) {
 }
 
 function setChapter(index) {
-  const next = chapterCopy[index];
+  const activeChapterData = getChapterData();
+  const next = activeChapterData[index];
   if (!next || !chapterTitle || !chapterText || !chapterIndex) {
     return;
   }
@@ -66,7 +73,7 @@ function setChapter(index) {
   activeChapterIndex = index;
   chapterTitle.textContent = next.title;
   chapterText.textContent = next.text;
-  chapterIndex.textContent = `${String(index + 1).padStart(2, "0")} / ${String(chapterCopy.length).padStart(2, "0")}`;
+  chapterIndex.textContent = `${String(index + 1).padStart(2, "0")} / ${String(activeChapterData.length).padStart(2, "0")}`;
   if (chapterEyebrow) {
     chapterEyebrow.textContent = next.eyebrow;
   }
@@ -116,6 +123,10 @@ function requestChapterUpdate() {
 window.addEventListener("scroll", setHeaderState, { passive: true });
 window.addEventListener("scroll", requestChapterUpdate, { passive: true });
 window.addEventListener("resize", requestChapterUpdate);
+window.addEventListener("kaizuro:content-loaded", () => {
+  activeChapterIndex = -1;
+  updateChapterFromScroll();
+});
 setHeaderState();
 updateChapterFromScroll();
 
