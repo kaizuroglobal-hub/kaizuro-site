@@ -1,0 +1,20 @@
+{
+  "eyebrow": "Rod Specifications",
+  "title_line1": "ASSAULT",
+  "title_line2": "PE6-8.",
+  "summary": "<p>The essential measurements, tackle compatibility and performance characteristics of KAIZURO's first offshore casting platform.</p>",
+  "items": [
+    {"label": "Model", "value": "ASSAULT"},
+    {"label": "Line class", "value": "PE6-8"},
+    {"label": "Rod type", "value": "Offshore Casting"},
+    {"label": "Length", "value": "7'10\""},
+    {"label": "Lure weight", "value": "80-180 g"},
+    {"label": "Drag rating", "value": "24 kg"},
+    {"label": "Performance characteristics", "value": "Fast Recovery / Progressive Power"},
+    {"label": "Grip", "value": "KAIZURO Rounded Pentagonal EVA Grip"},
+    {"label": "Reel seat", "value": "Marine-Grade Aluminium"},
+    {"label": "Target species", "value": "GT, Tuna, Kingfish, Dogtooth Tuna & Large Pelagics"},
+    {"label": "Rod bag", "value": "Premium Protective Rod Sleeve Included"}
+  ],
+  "note": "<p>Pre-production specifications remain subject to final prototype and validation outcomes.</p>"
+}
