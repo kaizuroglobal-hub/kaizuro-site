@@ -1,216 +1,219 @@
 /**
- * content-loader.js
+ * Runtime content layer for Pages CMS.
  *
- * Fetches JSON content files from the `content/` directory and updates
- * matching DOM elements using `data-cms-*` attributes.
- *
- * Attributes understood:
- *   data-cms-text="source:key.path"   — sets element.textContent
- *   data-cms-html="source:key.path"   — sets element.innerHTML (use sparingly)
- *   data-cms-src="source:key.path"    — sets element.src
- *   data-cms-srcset="source:key.path" — sets element.srcset
- *   data-cms-href="source:key.path"   — sets element.href
- *   data-cms-alt="source:key.path"    — sets element.alt
- *
- * Source names map to files under `content/`:
- *   hero, story, assault, principles, engineering, founder, halo, footer, site
- *
- * If a fetch fails (network error, file not found, invalid JSON), the
- * original HTML content is preserved — the page degrades gracefully.
- *
- * Engineering chapter data is exposed on `window.kzChapterData` for use
- * by script.js chapter scroll logic.
+ * JSON files in content/ override the hard-coded HTML. If loading fails, the
+ * original page remains unchanged. Existing data-cms-* attributes are honoured,
+ * while the remaining engineering, Founder, HALO and footer fields are bound
+ * through stable section selectors.
  */
-
 (function () {
   "use strict";
 
-  // Resolve the base URL for content/ relative to the current page.
-  // Works on GitHub Pages and local dev servers. Does not work on file://.
-  var base = (function () {
-    var loc = window.location;
-    if (loc.protocol === "file:") {
-      return null; // Fetch not supported over file://
-    }
-    var path = loc.pathname.replace(/\/[^/]*$/, "/");
-    return loc.origin + path;
-  })();
+  var loc = window.location;
+  if (loc.protocol === "file:") return;
+  var base = loc.origin + loc.pathname.replace(/\/[^/]*$/, "/");
 
-  if (!base) {
-    return; // Skip silently when opened as a local file
-  }
-
-  /**
-   * Resolve a dot-notation key path within an object.
-   * E.g. get(obj, "chapters.0.title") → obj.chapters[0].title
-   */
   function get(obj, path) {
     return path.split(".").reduce(function (acc, key) {
       return acc != null ? acc[key] : undefined;
     }, obj);
   }
 
-  /**
-   * Fetch a single JSON content file.
-   */
   function loadJson(name) {
     return fetch(base + "content/" + name + ".json", { cache: "no-cache" })
       .then(function (res) {
-        if (!res.ok) {
-          throw new Error("HTTP " + res.status + " loading content/" + name + ".json");
-        }
+        if (!res.ok) throw new Error("HTTP " + res.status);
         return res.json();
       })
       .catch(function (err) {
-        console.warn("[content-loader] Could not load content/" + name + ".json —", err.message);
+        console.warn("[content-loader] " + name + ".json not applied:", err.message);
         return null;
       });
   }
 
-  /**
-   * Apply a single data value to a DOM element using a specific attribute type.
-   */
-  function applyValue(el, attrType, value) {
-    if (value == null || value === "") return;
+  function applyValue(el, type, value) {
+    if (!el || value == null || value === "") return;
     var str = String(value);
-    switch (attrType) {
-      case "text":
-        el.textContent = str;
-        break;
-      case "html":
-        el.innerHTML = str;
-        break;
-      case "src":
-        el.src = str;
-        break;
-      case "srcset":
-        el.srcset = str;
-        break;
-      case "href":
-        el.href = str;
-        break;
-      case "alt":
-        el.alt = str;
-        break;
-    }
+    if (type === "text") el.textContent = str;
+    if (type === "html") el.innerHTML = str;
+    if (type === "src") el.src = str;
+    if (type === "srcset") el.srcset = str;
+    if (type === "href") el.href = str;
+    if (type === "alt") el.alt = str;
   }
 
-  /**
-   * Walk all data-cms-* attributes and update matching elements
-   * for a given source name and its loaded JSON data.
-   */
+  function text(selector, value, root) {
+    applyValue((root || document).querySelector(selector), "text", value);
+  }
+
+  function attr(selector, name, value, root) {
+    var el = (root || document).querySelector(selector);
+    if (el && value != null && value !== "") el.setAttribute(name, String(value));
+  }
+
   function applySource(name, data) {
     if (!data) return;
-    var attrTypes = ["text", "html", "src", "srcset", "href", "alt"];
-    attrTypes.forEach(function (attrType) {
-      var attr = "data-cms-" + attrType;
-      document.querySelectorAll("[" + attr + "]").forEach(function (el) {
-        var spec = el.getAttribute(attr);
+    ["text", "html", "src", "srcset", "href", "alt"].forEach(function (type) {
+      var attribute = "data-cms-" + type;
+      document.querySelectorAll("[" + attribute + "]").forEach(function (el) {
+        var spec = el.getAttribute(attribute);
         if (!spec) return;
-        var parts = spec.split(":", 2);
-        var sourceName = parts[0];
-        var keyPath = parts[1];
-        if (sourceName !== name) return;
-        var value = get(data, keyPath);
-        applyValue(el, attrType, value);
+        var splitAt = spec.indexOf(":");
+        if (splitAt < 1 || spec.slice(0, splitAt) !== name) return;
+        applyValue(el, type, get(data, spec.slice(splitAt + 1)));
       });
     });
   }
 
-  /**
-   * Apply engineering chapter data to the mobile chapter captions in the DOM
-   * and expose on window.kzChapterData for the scroll-based desktop panel.
-   */
+  function applySite(data) {
+    if (!data) return;
+    if (data.title) document.title = data.title;
+    attr('meta[name="description"]', "content", data.description);
+    attr('meta[property="og:image"]', "content", data.og_image);
+  }
+
+  function applyPrinciples(data) {
+    if (!data || !Array.isArray(data.principles)) return;
+    document.querySelectorAll(".principle-row article").forEach(function (article, i) {
+      var item = data.principles[i];
+      if (!item) return;
+      text("span", item.number, article);
+      text("h3", item.title, article);
+      text("p", item.body, article);
+    });
+  }
+
   function applyEngineering(data) {
-    if (!data || !Array.isArray(data.chapters)) return;
+    if (!data) return;
+    var section = document.getElementById("details");
+    if (section) {
+      attr(".sticky-image img", "src", data.section_image_src, section);
+      attr(".sticky-image img", "alt", data.section_image_alt, section);
+      text(".story-copy .eyebrow", data.section_eyebrow, section);
+      var headingLines = section.querySelectorAll("#guide-title span");
+      if (headingLines[0]) headingLines[0].textContent = data.section_title_line1 || headingLines[0].textContent;
+      if (headingLines[1]) headingLines[1].textContent = data.section_title_line2 || headingLines[1].textContent;
+      text(".story-copy > p:not(.eyebrow)", data.section_body, section);
+      text(".story-copy > strong", data.section_tagline, section);
+    }
 
-    // Expose for script.js to pick up on subsequent scroll events
+    if (!Array.isArray(data.chapters)) return;
     window.kzChapterData = data.chapters;
-
-    // Update mobile chapter captions already in the DOM
-    var chapterFigures = document.querySelectorAll("[data-chapter]");
-    chapterFigures.forEach(function (figure) {
-      var idx = Number(figure.dataset.chapter);
-      var ch = data.chapters[idx];
-      if (!ch) return;
-
-      var mobileCaption = figure.querySelector(".mobile-chapter-copy");
-      if (mobileCaption) {
-        var eyebrowEl = mobileCaption.querySelector("span");
-        var titleEl = mobileCaption.querySelector("b");
-        var bodyEl = mobileCaption.querySelector("p");
-        if (eyebrowEl && ch.eyebrow) eyebrowEl.textContent = ch.eyebrow;
-        if (titleEl && ch.title) titleEl.textContent = ch.title;
-        if (bodyEl && ch.mobile_text) bodyEl.textContent = ch.mobile_text;
-      }
-
-      var img = figure.querySelector("img");
-      if (img) {
-        if (ch.image_src) img.src = ch.image_src;
-        if (ch.image_alt) img.alt = ch.image_alt;
-      }
+    document.querySelectorAll("[data-chapter]").forEach(function (figure) {
+      var chapter = data.chapters[Number(figure.dataset.chapter)];
+      if (!chapter) return;
+      text(".mobile-chapter-copy span", chapter.eyebrow, figure);
+      text(".mobile-chapter-copy b", chapter.title, figure);
+      text(".mobile-chapter-copy p", chapter.mobile_text, figure);
+      attr("img", "src", chapter.image_src, figure);
+      attr("img", "alt", chapter.image_alt, figure);
     });
 
-    // Also update the sticky desktop chapter panel if it is showing chapter 0
-    // (already rendered; subsequent chapters update via scroll events in script.js)
-    var titleEl = document.querySelector("[data-chapter-title]");
-    var textEl = document.querySelector("[data-chapter-text]");
-    var eyebrowEl = document.querySelector("[data-chapter-eyebrow]");
-    var indexEl = document.querySelector("[data-chapter-index]");
-    if (titleEl || textEl) {
-      var first = data.chapters[0];
-      if (first) {
-        if (titleEl && first.title) titleEl.textContent = first.title;
-        if (textEl && first.text) textEl.textContent = first.text;
-        if (eyebrowEl && first.eyebrow) eyebrowEl.textContent = first.eyebrow;
-        if (indexEl) {
-          indexEl.textContent =
-            "01 / " + String(data.chapters.length).padStart(2, "0");
-        }
-      }
+    var first = data.chapters[0];
+    if (first) {
+      text("[data-chapter-eyebrow]", first.eyebrow);
+      text("[data-chapter-title]", first.title);
+      text("[data-chapter-text]", first.text);
+      text("[data-chapter-index]", "01 / " + String(data.chapters.length).padStart(2, "0"));
     }
   }
 
-  /**
-   * Apply principles list — re-render the principle articles if data differs.
-   */
-  function applyPrinciples(data) {
-    if (!data || !Array.isArray(data.principles)) return;
-    var row = document.querySelector(".principle-row");
-    if (!row) return;
-    var articles = row.querySelectorAll("article");
-    data.principles.forEach(function (p, i) {
-      var article = articles[i];
-      if (!article) return;
-      var numEl = article.querySelector("span");
-      var titleEl = article.querySelector("h3");
-      var bodyEl = article.querySelector("p");
-      if (numEl && p.number) numEl.textContent = p.number;
-      if (titleEl && p.title) titleEl.textContent = p.title;
-      if (bodyEl && p.body) bodyEl.textContent = p.body;
-    });
+  function applyFounder(data) {
+    if (!data) return;
+    var section = document.getElementById("founder");
+    if (!section) return;
+    var intro = section.querySelector(".founder-intro");
+    if (intro) {
+      text(".eyebrow", data.eyebrow, intro);
+      text(".allocation-counter span", data.allocation_label, intro);
+      text(".allocation-counter b", data.allocation_count, intro);
+      text("#founder-title span", data.title, intro);
+      var subheads = intro.querySelectorAll(".founder-subhead span");
+      if (subheads[0]) subheads[0].textContent = data.subhead_line1 || subheads[0].textContent;
+      if (subheads[1]) subheads[1].textContent = data.subhead_line2 || subheads[1].textContent;
+      var body = intro.querySelectorAll(":scope > p:not(.eyebrow)");
+      if (body[0] && data.body_1) body[0].textContent = data.body_1;
+      if (body[1] && data.body_2) body[1].textContent = data.body_2;
+      text(".text-link", data.cta_label, intro);
+    }
+
+    var deposit = section.querySelector("#founder-deposit");
+    if (deposit) {
+      text(".deposit-intro .eyebrow", data.deposit_eyebrow, deposit);
+      text("#deposit-title span", data.deposit_title, deposit);
+      text(".deposit-intro > p:not(.eyebrow)", data.deposit_body, deposit);
+      var steps = deposit.querySelectorAll(".founder-payment-steps li");
+      [data.deposit_step_1, data.deposit_step_2, data.deposit_step_3].forEach(function (label, i) {
+        if (!steps[i] || !label) return;
+        var number = steps[i].querySelector("span");
+        steps[i].textContent = label;
+        if (number) steps[i].prepend(number);
+      });
+      deposit.querySelectorAll(".founder-payment-secure").forEach(function (el) {
+        if (data.payment_secure_label) el.textContent = data.payment_secure_label;
+      });
+      var form = deposit.querySelector(".founder-form");
+      if (form && data.form_contact_email) {
+        form.action = "mailto:" + data.form_contact_email + "?subject=Founder%20100%20allocation";
+      }
+    }
+    text(".founder-collection > strong", data.closing_line, section);
   }
 
-  // Sources to load (name → optional post-processing function)
-  var sources = {
-    site: null,
+  function applyHalo(data) {
+    if (!data) return;
+    var halo = document.getElementById("halo");
+    if (halo) {
+      attr(".full-bleed-image img", "src", data.image_src, halo);
+      attr(".full-bleed-image img", "alt", data.image_alt, halo);
+      text(".halo-copy .eyebrow", data.eyebrow, halo);
+      var lines = halo.querySelectorAll("#halo-title span");
+      if (lines[0]) lines[0].textContent = data.title_line1 || lines[0].textContent;
+      if (lines[1]) lines[1].textContent = data.title_line2 || lines[1].textContent;
+      text(".halo-copy > p:not(.eyebrow)", data.body, halo);
+      text(".halo-copy > a", data.cta_label, halo);
+      attr(".halo-copy > a", "href", data.cta_href, halo);
+    }
+
+    var updates = document.getElementById("updates");
+    if (updates) {
+      text(".capture-box .eyebrow", data.updates_eyebrow, updates);
+      text("#capture-title", data.updates_title, updates);
+      text(".capture-box > p:not(.eyebrow)", data.updates_body, updates);
+      text("button[type='submit']", data.updates_cta_label, updates);
+      text(".capture-box > small", data.updates_privacy_note, updates);
+    }
+  }
+
+  function applyFooter(data) {
+    if (!data) return;
+    var footer = document.querySelector(".site-footer");
+    if (!footer) return;
+    text(".footer-brand strong", data.brand_name, footer);
+    text(".footer-brand p", data.brand_tagline, footer);
+    text(".footer-bottom", data.copyright, footer);
+    attr('.footer-links a[href^="mailto:"]', "href", "mailto:" + data.contact_email, footer);
+  }
+
+  var handlers = {
+    site: applySite,
     hero: null,
     story: null,
     assault: null,
     principles: applyPrinciples,
     engineering: applyEngineering,
-    founder: null,
-    halo: null,
-    footer: null
+    founder: applyFounder,
+    halo: applyHalo,
+    footer: applyFooter
   };
 
-  // Load all sources in parallel
-  Object.keys(sources).forEach(function (name) {
-    loadJson(name).then(function (data) {
+  Promise.all(Object.keys(handlers).map(function (name) {
+    return loadJson(name).then(function (data) {
       applySource(name, data);
-      if (typeof sources[name] === "function" && data) {
-        sources[name](data);
-      }
+      if (typeof handlers[name] === "function") handlers[name](data);
+      return data;
     });
+  })).then(function () {
+    window.dispatchEvent(new CustomEvent("kaizuro:content-loaded"));
   });
 })();
