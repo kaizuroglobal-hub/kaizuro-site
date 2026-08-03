@@ -18,10 +18,11 @@
 
     <meta
       name="description"
+      id="meta-description"
       content="KAIZURO ASSAULT PE6-8: a premium offshore casting rod story, engineered around load, recovery, control and Founder 100 production."
     >
 
-    <title>KAIZURO | ASSAULT PE6-8</title>
+    <title id="page-title">KAIZURO | ASSAULT PE6-8</title>
 
     <link
       rel="preconnect"
@@ -531,10 +532,13 @@
         <picture class="full-bleed-image focal-hero">
           <source
             media="(max-width: 900px)"
+            data-cms-srcset="hero:image_mobile_src"
             srcset="assets/kaizuro-site/hero/kaizuro-website-hero-mobile.webp"
           >
           <img
             src="assets/kaizuro-site/hero/kaizuro-website-hero-final.png"
+            data-cms-src="hero:image_desktop_src"
+            data-cms-alt="hero:image_alt"
             alt="KAIZURO modern offshore fishing hero with storm sea, water dragon and angler"
             decoding="async"
             fetchpriority="high"
@@ -544,23 +548,23 @@
         <div class="hero-scrim"></div>
 
         <div class="hero-copy content-grid">
-          <p class="eyebrow">
+          <p class="eyebrow" data-cms-text="hero:eyebrow">
             KAIZURO ASSAULT · PE6-8
           </p>
 
           <h1 id="hero-title">
-            <span>Over-engineered</span>
-            <span>on purpose.</span>
+            <span data-cms-text="hero:title_line1">Over-engineered</span>
+            <span data-cms-text="hero:title_line2">on purpose.</span>
           </h1>
 
-          <p>
+          <p data-cms-text="hero:description">
             A new offshore casting rod created for anglers who refuse to
             accept the usual compromises.
           </p>
 
           <div class="hero-actions">
-            <a href="#story">Discover ASSAULT</a>
-            <a href="#founder">Join Founder 100</a>
+            <a href="#story" data-cms-href="hero:cta_discover_href" data-cms-text="hero:cta_discover_label">Discover ASSAULT</a>
+            <a href="#founder" data-cms-href="hero:cta_join_href" data-cms-text="hero:cta_join_label">Join Founder 100</a>
           </div>
         </div>
 
@@ -568,8 +572,8 @@
           class="hero-status content-grid"
           aria-label="Prototype status"
         >
-          <span>Prototype development underway</span>
-          <span>Founder production planned</span>
+          <span data-cms-text="hero:status_1">Prototype development underway</span>
+          <span data-cms-text="hero:status_2">Founder production planned</span>
         </div>
       </section>
 
@@ -579,15 +583,15 @@
         aria-labelledby="origin-title"
       >
         <div class="story-copy">
-          <p class="eyebrow">
+          <p class="eyebrow" data-cms-text="story:eyebrow">
             Why KAIZURO
           </p>
 
-          <h2 id="origin-title">
+          <h2 id="origin-title" data-cms-text="story:title">
             Over-engineered on purpose.
           </h2>
 
-          <p>
+          <p data-cms-text="story:body_1">
             Offshore casting rods are commonly built around accepted compromises.
             KAIZURO is being developed by questioning each of them—from grip geometry
             and guide architecture to blank recovery, load control and component weight.
@@ -607,6 +611,8 @@
         <figure class="sticky-image focal-origin">
           <img
             src="assets/kaizuro-site/editorial/01-brand-origin.png"
+            data-cms-src="story:image_src"
+            data-cms-alt="story:image_alt"
             alt="Head-on KAIZURO rod blank and guide train in a dark studio"
           >
         </figure>
@@ -620,29 +626,31 @@
         <figure class="full-width-product focal-assault">
           <img
             src="assets/kaizuro-site/editorial/02-project-elite-branding.png?v=20260719-2"
+            data-cms-src="assault:image_src"
+            data-cms-alt="assault:image_alt"
             alt="KAIZURO PROJECT ELITE branding and carbon construction on the ASSAULT PE6-8 blank"
           >
         </figure>
 
         <div class="assault-copy content-grid">
-          <p class="eyebrow">
+          <p class="eyebrow" data-cms-text="assault:eyebrow">
             Project Elite 01
           </p>
 
-          <h2 id="assault-title">
+          <h2 id="assault-title" data-cms-text="assault:title">
             ASSAULT PE6-8
           </h2>
 
-          <p class="section-lead">
+          <p class="section-lead" data-cms-text="assault:lead">
             The first physical expression of the KAIZURO philosophy.
           </p>
 
-          <p>
+          <p data-cms-text="assault:body">
             Designed for high-output topwater casting, serious offshore load
             and the violent opening phase of a fight.
           </p>
 
-          <strong>
+          <strong data-cms-text="assault:tagline">
             Designed to cast. Built to load. Engineered to recover.
           </strong>
         </div>
@@ -654,16 +662,16 @@
         aria-labelledby="system-title"
       >
         <div class="content-grid">
-          <p class="eyebrow">
+          <p class="eyebrow" data-cms-text="principles:eyebrow">
             Design Principles
           </p>
 
           <h2 id="system-title">
-            <span>A complete system.</span>
-            <span>Not a collection of parts.</span>
+            <span data-cms-text="principles:title_line1">A complete system.</span>
+            <span data-cms-text="principles:title_line2">Not a collection of parts.</span>
           </h2>
 
-          <p class="system-intro">
+          <p class="system-intro" data-cms-text="principles:intro">
             Blank architecture, guide placement, grip geometry and reel
             retention influence one another. ASSAULT is being developed as
             one connected mechanical system.
