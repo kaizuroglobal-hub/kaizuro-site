@@ -1,0 +1,25 @@
+{
+  "eyebrow": "KAIZURO Rod Range",
+  "title": "Choose the platform built for your water.",
+  "body": "<p>ASSAULT and HALO share the same KAIZURO development philosophy, but they are engineered for different line classes, lure ranges and offshore pressure.</p>",
+  "columns": [
+    {
+      "model": "ASSAULT",
+      "rating": "PE6-8",
+      "status": "First production platform",
+      "body": "<p>Built for heavy topwater casting, large GT, tuna, kingfish, dogtooth tuna and other large pelagics.</p>",
+      "items": ["7'10\" offshore casting platform", "80-180 g published lure range", "Fast recovery with progressive power", "Founder price $799 AUD"],
+      "cta_label": "Explore ASSAULT",
+      "cta_href": "#assault"
+    },
+    {
+      "model": "HALO",
+      "rating": "PE10-12",
+      "status": "In development",
+      "body": "<p>A heavier expedition platform for giant GT, very large tuna and extreme offshore pressure.</p>",
+      "items": ["PE10-12 heavy offshore platform", "Higher working-load target", "Designed for giant pelagics", "Founder price $999 AUD"],
+      "cta_label": "Preview HALO",
+      "cta_href": "#halo"
+    }
+  ]
+}
