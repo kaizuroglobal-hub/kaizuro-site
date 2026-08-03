@@ -4,7 +4,7 @@
   "element_rules": [
     {
       "enabled": false,
-      "selector": "#hero",
+      "selector": "#purpose",
       "action": "visibility",
       "attribute": "",
       "value": "hidden"
@@ -12,7 +12,7 @@
   ],
   "css_variables": [],
   "custom_css": "",
-  "custom_javascript": "",
+  "custom_javascript": "var s=document.createElement('script');s.src='site-structure.js?v=20260803-final-structure';s.defer=true;document.body.appendChild(s);",
   "javascript_settings": {
     "smooth_scroll": true,
     "chapter_scroll": true,
