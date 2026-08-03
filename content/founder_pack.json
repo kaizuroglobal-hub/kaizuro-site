@@ -1,0 +1,19 @@
+{
+  "eyebrow": "Founder Pack",
+  "title": "Choose your Founder identity.",
+  "body": "<p>Each Founder selects a cap colourway and offshore accessory pack to accompany the numbered rod and ownership documentation.</p>",
+  "cap_heading": "Choose your cap",
+  "cap_subheading": "Founder 100 colourway",
+  "caps": [
+    {"name": "Carbon Copper", "image_src": "assets/kaizuro-site/concepts/founder-cap-black-copper.png", "image_alt": "KAIZURO Founder 100 Carbon Copper cap"},
+    {"name": "Offshore Navy", "image_src": "assets/kaizuro-site/concepts/founder-cap-navy.png", "image_alt": "KAIZURO Founder 100 Offshore Navy cap"}
+  ],
+  "pack_heading": "Choose your offshore pack",
+  "pack_subheading": "Founder 100 accessory colourway",
+  "packs": [
+    {"name": "Carbon Pack", "image_src": "assets/kaizuro-site/concepts/founder-pack-carbon.png", "image_alt": "KAIZURO Founder 100 Carbon offshore pack"},
+    {"name": "Surge Pack", "image_src": "assets/kaizuro-site/concepts/founder-pack-surge.png", "image_alt": "KAIZURO Founder 100 Surge offshore pack"}
+  ],
+  "included_heading": "Founder ownership package",
+  "included_items": ["Numbered Founder rod", "Selected Founder cap", "Selected offshore pack", "Founder certificate", "Registered digital rod passport"]
+}
