@@ -1,0 +1,15 @@
+{
+  "eyebrow": "The Road to Production",
+  "title": "Prototype is a process.",
+  "body": "<p>The first prototype proved the foundation of ASSAULT. It also exposed what needed to improve. That is the purpose of a prototype.</p>",
+  "steps": [
+    {"number":"01","title":"Define","body":"<p>Set the target: PE6-8 offshore casting performance focused on strength, recovery and control.</p>"},
+    {"number":"02","title":"Build","body":"<p>Produce the first physical blank and finished prototype.</p>"},
+    {"number":"03","title":"Load","body":"<p>Perform static testing, destructive blank testing and structural review.</p>"},
+    {"number":"04","title":"Learn","body":"<p>Identify opportunities in weight, recovery, guide construction and grip geometry.</p>"},
+    {"number":"05","title":"Refine","body":"<p>Create the next prototype around evidence rather than protecting the first design.</p>"},
+    {"number":"06","title":"Validate","body":"<p>Complete component, load, recovery and real-world testing.</p>"},
+    {"number":"07","title":"Produce","body":"<p>Release the first Founder allocation only after the design is ready.</p>"}
+  ],
+  "closing_line": "No hidden development. No artificial perfection. Progress shown honestly."
+}
