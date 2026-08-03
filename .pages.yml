@@ -4,7 +4,7 @@ media:
 
 content:
   - name: site
-    label: "01 · Site Settings & SEO"
+    label: "01 · Site Settings, Header & SEO"
     type: file
     path: content/site.json
     format: json
@@ -24,17 +24,17 @@ content:
       - { name: title_line2, label: "Title line 2", type: string }
       - { name: description, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: cta_discover_label, label: "Primary button label", type: string }
-      - { name: cta_discover_href, label: "Primary button destination", type: string }
+      - { name: cta_discover_href, label: "Primary destination", type: string }
       - { name: cta_join_label, label: "Secondary button label", type: string }
-      - { name: cta_join_href, label: "Secondary button destination", type: string }
-      - { name: status_1, label: "Status label 1", type: string }
-      - { name: status_2, label: "Status label 2", type: string }
+      - { name: cta_join_href, label: "Secondary destination", type: string }
+      - { name: status_1, label: "Status 1", type: string }
+      - { name: status_2, label: "Status 2", type: string }
       - { name: image_desktop_src, label: "Desktop image", type: image }
       - { name: image_mobile_src, label: "Mobile image", type: image }
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: story
-    label: "03 · Brand Story"
+    label: "03 · Why KAIZURO"
     type: file
     path: content/story.json
     format: json
@@ -42,75 +42,33 @@ content:
       - { name: eyebrow, label: "Eyebrow", type: string }
       - { name: title, label: "Heading", type: string }
       - { name: body_1, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: principles_text, label: "Numbered principles", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: principles_text, label: "Three principle blocks", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: image_src, label: "Image", type: image }
       - { name: image_alt, label: "Image alt text", type: string }
 
-  - name: assault
-    label: "04 · ASSAULT Product"
+  - name: rod_comparison
+    label: "04 · Rod Comparison"
     type: file
-    path: content/assault.json
+    path: content/rod_comparison.json
     format: json
     fields:
       - { name: eyebrow, label: "Eyebrow", type: string }
       - { name: title, label: "Heading", type: string }
-      - { name: lead, label: "Lead sentence", type: string }
-      - { name: body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: tagline, label: "Tagline", type: string }
-      - { name: image_src, label: "Image", type: image }
-      - { name: image_alt, label: "Image alt text", type: string }
-
-  - name: principles
-    label: "05 · Design Principles 01–03"
-    type: file
-    path: content/principles.json
-    format: json
-    fields:
-      - { name: eyebrow, label: "Eyebrow", type: string }
-      - { name: title_line1, label: "Heading line 1", type: string }
-      - { name: title_line2, label: "Heading line 2", type: string }
-      - { name: intro, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - name: principles
-        label: "Principle cards"
+      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - name: columns
+        label: "Rod columns"
         type: list
         fields:
-          - { name: number, label: "Number", type: string }
-          - { name: title, label: "Title", type: string }
+          - { name: model, label: "Model", type: string }
+          - { name: rating, label: "PE rating", type: string }
+          - { name: status, label: "Status", type: string }
           - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
-
-  - name: engineering
-    label: "06 · Guide Architecture"
-    type: file
-    path: content/engineering.json
-    format: json
-    fields:
-      - { name: section_eyebrow, label: "Section eyebrow", type: string }
-      - { name: section_title_line1, label: "Heading line 1", type: string }
-      - { name: section_title_line2, label: "Heading line 2", type: string }
-      - { name: section_body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: section_tagline, label: "Tagline", type: string }
-      - { name: section_image_src, label: "Section image", type: image }
-      - { name: section_image_alt, label: "Section image alt text", type: string }
-
-  - name: scrolling_cards
-    label: "07 · Scrolling Cards 01–04"
-    type: file
-    path: content/scrolling_cards.json
-    format: json
-    fields:
-      - name: cards
-        label: "All four scrolling cards"
-        type: list
-        fields:
-          - { name: eyebrow, label: "Card number and label", type: string }
-          - { name: title, label: "Card heading", type: string }
-          - { name: text, label: "Desktop copy", type: rich-text, options: { format: html, media: false, switcher: false } }
-          - { name: mobile_text, label: "Mobile copy", type: rich-text, options: { format: html, media: false, switcher: false } }
-          - { name: image_src, label: "Image", type: image }
-          - { name: image_alt, label: "Image alt text", type: string }
+          - { name: items, label: "Key points", type: list, field: { name: value, label: "Point", type: string } }
+          - { name: cta_label, label: "Button label", type: string }
+          - { name: cta_href, label: "Button destination", type: string }
 
   - name: grip
-    label: "08 · Grip Geometry"
+    label: "05 · Grip Geometry"
     type: file
     path: content/grip.json
     format: json
@@ -127,8 +85,39 @@ content:
       - { name: image_src, label: "Image", type: image }
       - { name: image_alt, label: "Image alt text", type: string }
 
+  - name: engineering
+    label: "06 · Component Architecture"
+    type: file
+    path: content/engineering.json
+    format: json
+    fields:
+      - { name: section_eyebrow, label: "Eyebrow", type: string }
+      - { name: section_title_line1, label: "Heading line 1", type: string }
+      - { name: section_title_line2, label: "Heading line 2", type: string }
+      - { name: section_body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: section_tagline, label: "Tagline", type: string }
+      - { name: section_image_src, label: "Image", type: image }
+      - { name: section_image_alt, label: "Image alt text", type: string }
+
+  - name: scrolling_cards
+    label: "07 · Scrolling Cards 01–04"
+    type: file
+    path: content/scrolling_cards.json
+    format: json
+    fields:
+      - name: cards
+        label: "All four cards"
+        type: list
+        fields:
+          - { name: eyebrow, label: "Number and label", type: string }
+          - { name: title, label: "Heading", type: string }
+          - { name: text, label: "Desktop copy", type: rich-text, options: { format: html, media: false, switcher: false } }
+          - { name: mobile_text, label: "Mobile copy", type: rich-text, options: { format: html, media: false, switcher: false } }
+          - { name: image_src, label: "Image", type: image }
+          - { name: image_alt, label: "Image alt text", type: string }
+
   - name: reel
-    label: "09 · Reel Interface"
+    label: "08 · Reel Interface"
     type: file
     path: content/reel.json
     format: json
@@ -142,8 +131,25 @@ content:
       - { name: image_src, label: "Image", type: image }
       - { name: image_alt, label: "Image alt text", type: string }
 
+  - name: blank_action
+    label: "09 · Blank & Action"
+    type: file
+    path: content/blank_action.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - { name: body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - name: features
+        label: "Performance points"
+        type: list
+        fields:
+          - { name: title, label: "Heading", type: string }
+          - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: closing_line, label: "Closing statement", type: string }
+
   - name: proof
-    label: "10 · Physical Validation"
+    label: "10 · Proof & Testing"
     type: file
     path: content/proof.json
     format: json
@@ -161,7 +167,7 @@ content:
       - { name: disclosure, label: "Disclosure", type: text }
 
   - name: specifications
-    label: "11 · Rod Specifications"
+    label: "11 · Specifications"
     type: file
     path: content/specifications.json
     format: json
@@ -178,31 +184,13 @@ content:
           - { name: value, label: "Value", type: string }
       - { name: note, label: "Specification note", type: rich-text, options: { format: html, media: false, switcher: false } }
 
-  - name: evolution
-    label: "12 · Prototype Process 01–07"
-    type: file
-    path: content/evolution.json
-    format: json
-    fields:
-      - { name: eyebrow, label: "Eyebrow", type: string }
-      - { name: title, label: "Heading", type: string }
-      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - name: steps
-        label: "Prototype stages"
-        type: list
-        fields:
-          - { name: number, label: "Number", type: string }
-          - { name: title, label: "Stage title", type: string }
-          - { name: body, label: "Stage description", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: closing_line, label: "Closing statement", type: string }
-
   - name: founder
-    label: "13 · Founder 100"
+    label: "12 · Founder 100 Introduction"
     type: file
     path: content/founder.json
     format: json
     fields:
-      - { name: eyebrow, label: "Section eyebrow", type: string }
+      - { name: eyebrow, label: "Eyebrow", type: string }
       - { name: allocation_label, label: "Allocation label", type: string }
       - { name: allocation_count, label: "Allocation count", type: string }
       - { name: title, label: "Heading", type: string }
@@ -211,18 +199,95 @@ content:
       - { name: body_1, label: "Body copy 1", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: body_2, label: "Body copy 2", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: cta_label, label: "CTA label", type: string }
-      - { name: deposit_eyebrow, label: "Deposit eyebrow", type: string }
-      - { name: deposit_title, label: "Deposit heading", type: string }
-      - { name: deposit_body, label: "Deposit instructions", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: deposit_step_1, label: "Deposit step 1", type: string }
-      - { name: deposit_step_2, label: "Deposit step 2", type: string }
-      - { name: deposit_step_3, label: "Deposit step 3", type: string }
-      - { name: payment_secure_label, label: "Checkout security label", type: string }
-      - { name: form_contact_email, label: "Form destination email", type: string }
-      - { name: closing_line, label: "Closing statement", type: rich-text, options: { format: html, media: false, switcher: false } }
+
+  - name: founder_payment
+    label: "13 · Rod Selection & Payment"
+    type: file
+    path: content/founder_payment.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - { name: body, label: "Instructions", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: steps, label: "Payment steps", type: list, field: { name: value, label: "Step", type: string } }
+      - name: products
+        label: "Rod payment cards"
+        type: list
+        fields:
+          - { name: model, label: "Model", type: string }
+          - { name: rating, label: "PE rating", type: string }
+          - { name: kicker, label: "Card label", type: string }
+          - { name: price, label: "Founder price", type: string }
+          - { name: currency, label: "Currency", type: string }
+          - { name: deposit_label, label: "Deposit label", type: string }
+          - { name: deposit, label: "Deposit amount", type: string }
+          - { name: balance_label, label: "Balance label", type: string }
+          - { name: balance, label: "Balance amount", type: string }
+          - { name: secure_label, label: "Security label", type: string }
+          - { name: button_label, label: "Button label", type: string }
+          - { name: checkout_url, label: "Square checkout URL", type: string }
+
+  - name: founder_pack
+    label: "14 · Founder Pack"
+    type: file
+    path: content/founder_pack.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: cap_heading, label: "Cap heading", type: string }
+      - { name: cap_subheading, label: "Cap subheading", type: string }
+      - name: caps
+        label: "Cap choices"
+        type: list
+        fields:
+          - { name: name, label: "Name", type: string }
+          - { name: image_src, label: "Image", type: image }
+          - { name: image_alt, label: "Image alt text", type: string }
+      - { name: pack_heading, label: "Pack heading", type: string }
+      - { name: pack_subheading, label: "Pack subheading", type: string }
+      - name: packs
+        label: "Pack choices"
+        type: list
+        fields:
+          - { name: name, label: "Name", type: string }
+          - { name: image_src, label: "Image", type: image }
+          - { name: image_alt, label: "Image alt text", type: string }
+      - { name: included_heading, label: "Included heading", type: string }
+      - { name: included_items, label: "Included items", type: list, field: { name: value, label: "Item", type: string } }
+
+  - name: founder_form
+    label: "15 · Founder Form"
+    type: file
+    path: content/founder_form.json
+    format: json
+    fields:
+      - { name: heading, label: "Form heading", type: string }
+      - { name: action_email, label: "Destination email", type: string }
+      - { name: subject, label: "Email subject", type: string }
+      - name: fields
+        label: "Contact fields"
+        type: list
+        fields:
+          - { name: label, label: "Label", type: string }
+          - { name: name, label: "Submitted field name", type: string }
+          - { name: type, label: "Input type", type: string }
+          - { name: required, label: "Required", type: boolean }
+          - { name: placeholder, label: "Placeholder", type: string }
+      - { name: rod_label, label: "Rod field label", type: string }
+      - { name: rod_options, label: "Rod choices", type: list, field: { name: value, label: "Choice", type: string } }
+      - { name: cap_label, label: "Cap field label", type: string }
+      - { name: cap_options, label: "Cap choices", type: list, field: { name: value, label: "Choice", type: string } }
+      - { name: pack_label, label: "Pack field label", type: string }
+      - { name: pack_options, label: "Pack choices", type: list, field: { name: value, label: "Choice", type: string } }
+      - { name: notes_label, label: "Notes label", type: string }
+      - { name: notes_placeholder, label: "Notes placeholder", type: string }
+      - { name: consent, label: "Consent statement", type: text }
+      - { name: submit_label, label: "Submit button label", type: string }
 
   - name: founder_delivery
-    label: "14 · Founder Delivery 01–05"
+    label: "16 · Founder Roadmap"
     type: file
     path: content/founder_delivery.json
     format: json
@@ -236,10 +301,28 @@ content:
         fields:
           - { name: number, label: "Number", type: string }
           - { name: title, label: "Milestone title", type: string }
-          - { name: body, label: "Milestone description", type: rich-text, options: { format: html, media: false, switcher: false } }
+          - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
+
+  - name: warranty_support
+    label: "17 · Warranty & Support"
+    type: file
+    path: content/warranty_support.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - name: items
+        label: "Support points"
+        type: list
+        fields:
+          - { name: title, label: "Heading", type: string }
+          - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: contact_label, label: "Contact button label", type: string }
+      - { name: contact_href, label: "Contact destination", type: string }
 
   - name: terms
-    label: "15 · Commercial Terms"
+    label: "18 · FAQ & Commercial Terms"
     type: file
     path: content/terms.json
     format: json
@@ -255,27 +338,45 @@ content:
           - { name: answer, label: "Answer", type: rich-text, options: { format: html, media: false, switcher: false } }
 
   - name: halo
-    label: "16 · HALO & Updates"
+    label: "19 · HALO Preview"
     type: file
     path: content/halo.json
     format: json
     fields:
       - { name: eyebrow, label: "HALO eyebrow", type: string }
-      - { name: title_line1, label: "HALO heading line 1", type: string }
-      - { name: title_line2, label: "HALO heading line 2", type: string }
-      - { name: body, label: "HALO body", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: cta_label, label: "HALO CTA label", type: string }
-      - { name: cta_href, label: "HALO CTA destination", type: string }
-      - { name: image_src, label: "HALO image", type: image }
-      - { name: image_alt, label: "HALO image alt text", type: string }
+      - { name: title_line1, label: "Heading line 1", type: string }
+      - { name: title_line2, label: "Heading line 2", type: string }
+      - { name: body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: cta_label, label: "CTA label", type: string }
+      - { name: cta_href, label: "CTA destination", type: string }
+      - { name: image_src, label: "Image", type: image }
+      - { name: image_alt, label: "Image alt text", type: string }
       - { name: updates_eyebrow, label: "Updates eyebrow", type: string }
       - { name: updates_title, label: "Updates heading", type: string }
       - { name: updates_body, label: "Updates body", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: updates_cta_label, label: "Submit button label", type: string }
+      - { name: updates_cta_label, label: "Updates button label", type: string }
       - { name: updates_privacy_note, label: "Privacy note", type: string }
 
+  - name: evolution
+    label: "20 · Story & Development"
+    type: file
+    path: content/evolution.json
+    format: json
+    fields:
+      - { name: eyebrow, label: "Eyebrow", type: string }
+      - { name: title, label: "Heading", type: string }
+      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - name: steps
+        label: "Development stages"
+        type: list
+        fields:
+          - { name: number, label: "Number", type: string }
+          - { name: title, label: "Stage title", type: string }
+          - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
+      - { name: closing_line, label: "Closing statement", type: string }
+
   - name: footer
-    label: "17 · Footer"
+    label: "21 · Footer"
     type: file
     path: content/footer.json
     format: json
@@ -299,37 +400,14 @@ content:
         fields:
           - { name: enabled, label: "Rule enabled", type: boolean }
           - { name: selector, label: "CSS selector", type: string }
-          - name: action
-            label: "Action"
-            type: select
-            options:
-              values:
-                - { value: text, label: "Replace plain text" }
-                - { value: html, label: "Replace HTML" }
-                - { value: attribute, label: "Set attribute" }
-                - { value: remove_attribute, label: "Remove attribute" }
-                - { value: class, label: "Replace CSS class" }
-                - { value: add_class, label: "Add CSS class" }
-                - { value: remove_class, label: "Remove CSS class" }
-                - { value: style, label: "Set inline style property" }
-                - { value: visibility, label: "Show or hide" }
-                - { value: remove, label: "Remove element from page" }
+          - { name: action, label: "Action", type: string }
           - { name: attribute, label: "Attribute / class / CSS property", type: string }
           - { name: value, label: "New value", type: text }
       - name: css_variables
         label: "Global CSS variables"
         type: list
         fields:
-          - { name: name, label: "Variable name, including --", type: string }
+          - { name: name, label: "Variable name", type: string }
           - { name: value, label: "Value", type: string }
       - { name: custom_css, label: "Custom CSS", type: code, options: { language: css } }
       - { name: custom_javascript, label: "Custom JavaScript", type: code, options: { language: javascript } }
-      - name: javascript_settings
-        label: "JavaScript feature switches"
-        type: object
-        fields:
-          - { name: smooth_scroll, label: "Smooth scrolling", type: boolean }
-          - { name: chapter_scroll, label: "Scrolling engineering cards", type: boolean }
-          - { name: product_lightbox, label: "Product lightbox", type: boolean }
-          - { name: founder_selection, label: "Founder selection controls", type: boolean }
-          - { name: always_start_at_top, label: "Always start at top", type: boolean }
