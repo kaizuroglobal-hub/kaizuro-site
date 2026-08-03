@@ -13,62 +13,65 @@
   background: #050505;
 }
 
-/* Keep rich-text principle labels bold without inheriting display-heading styling. */
-#story .cms-rich-text strong {
-  display: inline;
-  font-size: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
-  font-weight: 700;
-}
-
-/* Give the numbered principles clear spacing and softer dividers. */
-#story .cms-rich-text ol {
-  margin: 32px 0 0;
-  padding: 0;
-  list-style: none;
+/* Brand-story numbered principles rendered by Pages CMS. */
+#story .story-copy > .cms-rich-text {
+  margin-top: 32px;
   counter-reset: story-principle;
 }
 
-#story .cms-rich-text ol > li {
+#story .story-copy > .cms-rich-text > p {
   counter-increment: story-principle;
   position: relative;
   margin: 0;
-  padding: 26px 0 28px 46px;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 28px 0 30px 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+  line-height: 1.65;
 }
 
-#story .cms-rich-text ol > li:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+#story .story-copy > .cms-rich-text > p:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.13);
 }
 
-#story .cms-rich-text ol > li::before {
+#story .story-copy > .cms-rich-text > p::before {
   content: counter(story-principle, decimal-leading-zero);
   position: absolute;
-  top: 27px;
+  top: 29px;
   left: 0;
-  color: rgba(255, 255, 255, 0.48);
+  color: rgba(255, 255, 255, 0.46);
   font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
   letter-spacing: 0.12em;
 }
 
-#story .cms-rich-text ol > li > p {
-  margin: 9px 0 0;
+#story .story-copy > .cms-rich-text strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: inherit;
+  line-height: 1.35;
+  letter-spacing: inherit;
+  font-weight: 700;
+}
+
+#story .story-copy > .cms-rich-text br {
+  display: none;
 }
 
 @media (max-width: 640px) {
-  #story .cms-rich-text ol {
+  #story .story-copy > .cms-rich-text {
     margin-top: 26px;
   }
 
-  #story .cms-rich-text ol > li {
-    padding: 22px 0 24px 40px;
+  #story .story-copy > .cms-rich-text > p {
+    padding: 24px 0 26px 42px;
   }
 
-  #story .cms-rich-text ol > li::before {
-    top: 23px;
+  #story .story-copy > .cms-rich-text > p::before {
+    top: 25px;
+  }
+
+  #story .story-copy > .cms-rich-text strong {
+    margin-bottom: 8px;
   }
 }
 
