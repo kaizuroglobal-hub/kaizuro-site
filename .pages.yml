@@ -46,29 +46,8 @@ content:
       - { name: image_src, label: "Image", type: image }
       - { name: image_alt, label: "Image alt text", type: string }
 
-  - name: rod_comparison
-    label: "04 · Rod Comparison"
-    type: file
-    path: content/rod_comparison.json
-    format: json
-    fields:
-      - { name: eyebrow, label: "Eyebrow", type: string }
-      - { name: title, label: "Heading", type: string }
-      - { name: body, label: "Introduction", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - name: columns
-        label: "Rod columns"
-        type: list
-        fields:
-          - { name: model, label: "Model", type: string }
-          - { name: rating, label: "PE rating", type: string }
-          - { name: status, label: "Status", type: string }
-          - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
-          - { name: items, label: "Key points", type: list, field: { name: value, label: "Point", type: string } }
-          - { name: cta_label, label: "Button label", type: string }
-          - { name: cta_href, label: "Button destination", type: string }
-
   - name: grip
-    label: "05 · Grip Geometry"
+    label: "04 · Grip Geometry"
     type: file
     path: content/grip.json
     format: json
@@ -86,7 +65,7 @@ content:
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: engineering
-    label: "06 · Component Architecture"
+    label: "05 · Component Architecture"
     type: file
     path: content/engineering.json
     format: json
@@ -100,7 +79,7 @@ content:
       - { name: section_image_alt, label: "Image alt text", type: string }
 
   - name: scrolling_cards
-    label: "07 · Scrolling Cards 01–04"
+    label: "06 · Scrolling Cards 01–04"
     type: file
     path: content/scrolling_cards.json
     format: json
@@ -117,7 +96,7 @@ content:
           - { name: image_alt, label: "Image alt text", type: string }
 
   - name: reel
-    label: "08 · Reel Interface"
+    label: "07 · Reel Interface"
     type: file
     path: content/reel.json
     format: json
@@ -132,7 +111,7 @@ content:
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: blank_action
-    label: "09 · Blank & Action"
+    label: "08 · Blank & Action"
     type: file
     path: content/blank_action.json
     format: json
@@ -149,7 +128,7 @@ content:
       - { name: closing_line, label: "Closing statement", type: string }
 
   - name: proof
-    label: "10 · Proof & Testing"
+    label: "09 · Proof & Testing"
     type: file
     path: content/proof.json
     format: json
@@ -167,7 +146,7 @@ content:
       - { name: disclosure, label: "Disclosure", type: text }
 
   - name: specifications
-    label: "11 · Specifications"
+    label: "10 · Specifications"
     type: file
     path: content/specifications.json
     format: json
@@ -185,7 +164,7 @@ content:
       - { name: note, label: "Specification note", type: rich-text, options: { format: html, media: false, switcher: false } }
 
   - name: founder
-    label: "12 · Founder 100 Introduction"
+    label: "11 · Founder 100 Introduction"
     type: file
     path: content/founder.json
     format: json
@@ -201,7 +180,7 @@ content:
       - { name: cta_label, label: "CTA label", type: string }
 
   - name: founder_payment
-    label: "13 · Rod Selection & Payment"
+    label: "12 · Rod Selection & Payment"
     type: file
     path: content/founder_payment.json
     format: json
@@ -228,7 +207,7 @@ content:
           - { name: checkout_url, label: "Square checkout URL", type: string }
 
   - name: founder_pack
-    label: "14 · Founder Pack"
+    label: "13 · Founder Pack"
     type: file
     path: content/founder_pack.json
     format: json
@@ -258,7 +237,7 @@ content:
       - { name: included_items, label: "Included items", type: list, field: { name: value, label: "Item", type: string } }
 
   - name: founder_form
-    label: "15 · Founder Form"
+    label: "14 · Founder Form"
     type: file
     path: content/founder_form.json
     format: json
@@ -287,7 +266,7 @@ content:
       - { name: submit_label, label: "Submit button label", type: string }
 
   - name: founder_delivery
-    label: "16 · Founder Roadmap"
+    label: "15 · Founder Roadmap"
     type: file
     path: content/founder_delivery.json
     format: json
@@ -304,7 +283,7 @@ content:
           - { name: body, label: "Description", type: rich-text, options: { format: html, media: false, switcher: false } }
 
   - name: warranty_support
-    label: "17 · Warranty & Support"
+    label: "16 · Warranty & Support"
     type: file
     path: content/warranty_support.json
     format: json
@@ -322,7 +301,7 @@ content:
       - { name: contact_href, label: "Contact destination", type: string }
 
   - name: terms
-    label: "18 · FAQ & Commercial Terms"
+    label: "17 · FAQ & Commercial Terms"
     type: file
     path: content/terms.json
     format: json
@@ -338,7 +317,7 @@ content:
           - { name: answer, label: "Answer", type: rich-text, options: { format: html, media: false, switcher: false } }
 
   - name: halo
-    label: "19 · HALO Preview"
+    label: "18 · HALO Preview"
     type: file
     path: content/halo.json
     format: json
@@ -358,7 +337,7 @@ content:
       - { name: updates_privacy_note, label: "Privacy note", type: string }
 
   - name: evolution
-    label: "20 · Story & Development"
+    label: "19 · Story & Development"
     type: file
     path: content/evolution.json
     format: json
@@ -376,7 +355,7 @@ content:
       - { name: closing_line, label: "Closing statement", type: string }
 
   - name: footer
-    label: "21 · Footer"
+    label: "20 · Footer"
     type: file
     path: content/footer.json
     format: json
