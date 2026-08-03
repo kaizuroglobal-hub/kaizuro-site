@@ -1,0 +1,23 @@
+{
+  "enabled": true,
+  "notes": "Advanced controls are applied after all structured CMS content. Use one CSS selector per rule. Disable a rule instead of deleting it when testing.",
+  "element_rules": [
+    {
+      "enabled": false,
+      "selector": "#hero",
+      "action": "visibility",
+      "attribute": "",
+      "value": "hidden"
+    }
+  ],
+  "css_variables": [],
+  "custom_css": "",
+  "custom_javascript": "",
+  "javascript_settings": {
+    "smooth_scroll": true,
+    "chapter_scroll": true,
+    "product_lightbox": true,
+    "founder_selection": true,
+    "always_start_at_top": true
+  }
+}
