@@ -379,3 +379,14 @@
     row-gap: 20px;
   }
 }
+
+/* iPad Pro portrait only: reduce the Physical Validation chart by 30%. */
+@media (min-width: 820px) and (max-width: 1100px) and (orientation: portrait) {
+  html body main #proof .load-curve {
+    width: 70% !important;
+    max-width: 70% !important;
+    height: auto !important;
+    margin: 24px auto 0 !important;
+    aspect-ratio: 2.05 / 1 !important;
+  }
+}
