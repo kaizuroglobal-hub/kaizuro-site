@@ -1,11 +1,21 @@
-/* iPad Pro 13 landscape: retain the editorial split layouts with tablet navigation and spacing. */
+/* KAIZURO iPad landscape corrections.
+   Touch tablets in the 1101–1400px range must not inherit the fixed desktop
+   section heights and narrow image treatments. */
 @media (min-width: 1101px) and (max-width: 1400px) and (any-pointer: coarse) {
   :root {
     --pad: 48px;
   }
 
+  html,
+  body,
+  main {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
   .site-header {
     grid-template-columns: 1fr auto;
+    padding-inline: var(--pad);
   }
 
   .desktop-nav,
@@ -17,16 +27,594 @@
     display: block;
   }
 
-  #purpose .hero-copy {
-    padding-top: clamp(128px, 15vh, 158px);
+  html body main > section::after {
+    display: none !important;
+    content: none !important;
   }
 
-  #purpose .hero-copy h1 {
-    max-width: 650px;
-    font-size: 62px;
+  html body main > section:last-of-type::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 50% !important;
+    bottom: 0 !important;
+    display: block !important;
+    width: 100vw !important;
+    height: 1px !important;
+    pointer-events: none !important;
+    background: #fff !important;
+    transform: translateX(-50%) scaleY(0.25) !important;
+    transform-origin: center !important;
   }
 
-  #purpose .hero-copy p:not(.eyebrow) {
-    max-width: 450px;
+  #assault,
+  #evolution,
+  #founder,
+  #halo,
+  #terms,
+  #updates {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  #assault {
+    display: grid !important;
+    grid-template-columns: minmax(0, 0.52fr) minmax(460px, 0.48fr) !important;
+    column-gap: clamp(44px, 5vw, 76px) !important;
+    align-items: center !important;
+    min-height: 780px !important;
+    padding: 84px var(--pad) !important;
+  }
+
+  #assault .assault-copy {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+
+  #assault .full-width-product {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 620px !important;
+    height: clamp(360px, 35vw, 500px) !important;
+    min-height: 360px !important;
+    margin: 0 !important;
+    justify-self: end !important;
+    overflow: hidden !important;
+  }
+
+  #assault .full-width-product img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  #evolution {
+    display: block !important;
+    padding: 92px var(--pad) 104px !important;
+  }
+
+  #evolution .evolution-grid,
+  #evolution > .content-grid {
+    width: 100% !important;
+    max-width: 1280px !important;
+    margin-inline: auto !important;
+    padding: 0 !important;
+  }
+
+  #evolution .roadmap-copy {
+    margin-bottom: 48px !important;
+  }
+
+  #evolution .roadmap-copy p {
+    max-width: 1120px !important;
+    line-height: 1.48 !important;
+  }
+
+  #evolution .timeline,
+  #evolution .evolution-list,
+  #evolution ol,
+  #evolution ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    column-gap: clamp(42px, 4.5vw, 72px) !important;
+    row-gap: 54px !important;
+    align-items: start !important;
+  }
+
+  #evolution .timeline > *,
+  #evolution .evolution-list > *,
+  #evolution ol > *,
+  #evolution ul > * {
+    min-width: 0 !important;
+  }
+
+  #founder {
+    padding-bottom: 88px !important;
+  }
+
+  #founder .founder-delivery::before,
+  #founder .founder-delivery::after,
+  #founder .founder-roadmap::before,
+  #founder .founder-roadmap::after,
+  #founder .delivery-roadmap::before,
+  #founder .delivery-roadmap::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  #founder .founder-delivery,
+  #founder .founder-roadmap,
+  #founder .delivery-roadmap,
+  #founder .production-roadmap {
+    min-height: 0 !important;
+    height: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 78px !important;
+    padding-bottom: 78px !important;
+  }
+
+  #halo {
+    position: relative !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    min-height: 780px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  #halo .halo-copy {
+    position: relative !important;
+    z-index: 2 !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    min-height: 780px !important;
+    padding: 104px 44px 90px var(--pad) !important;
+    background: #050505 !important;
+  }
+
+  #halo .full-bleed-image {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 1 !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 780px !important;
+    min-height: 780px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  #halo .full-bleed-image img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  #halo .halo-copy h2,
+  #halo .halo-copy p,
+  #halo .halo-copy .button,
+  #halo .halo-copy .btn {
+    position: relative !important;
+    z-index: 3 !important;
+  }
+}
+
+/* iPad portrait: final editorial section rhythm. */
+@media (min-width: 641px) and (max-width: 1100px) and (orientation: portrait) {
+  html body main #story {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: clamp(38px, 5vw, 58px) !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 940px !important;
+    margin: 0 !important;
+    padding: 74px var(--tablet-gutter) !important;
+    overflow: visible !important;
+  }
+
+  html body main #story::before,
+  html body main #assault::before,
+  html body main #details::before,
+  html body main #grip::before,
+  html body main #reel::before {
+    left: 50% !important;
+    display: block !important;
+    width: 100vw !important;
+    max-width: none !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    transform: translateX(-50%) !important;
+  }
+
+  html body main #story > .story-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 790px !important;
+    min-height: 790px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  html body main #story > .story-copy > *:first-child {
+    margin-top: 0 !important;
+  }
+
+  html body main #story > .story-copy > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  html body main #story > .sticky-image {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    height: 790px !important;
+    min-height: 790px !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+  }
+
+  html body main #story > .sticky-image img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    width: 320% !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    transform: translateX(-50%) !important;
+  }
+
+  html body main #assault {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    row-gap: 38px !important;
+    align-items: start !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 68px var(--tablet-gutter) 74px !important;
+    overflow: hidden !important;
+  }
+
+  html body main #assault .assault-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: start !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html body main #assault .assault-copy h2 {
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  html body main #assault .full-width-product {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    align-self: start !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  html body main #assault .full-width-product img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  html body main #details {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
+    column-gap: clamp(38px, 5vw, 58px) !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 970px !important;
+    margin: 0 !important;
+    padding: 72px var(--tablet-gutter) !important;
+    overflow: visible !important;
+  }
+
+  html body main #details > .story-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html body main #details .story-copy strong {
+    display: block !important;
+    white-space: pre-line !important;
+  }
+
+  html body main #details > .sticky-image {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  html body main #details > .sticky-image img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
+    transform: none !important;
+  }
+
+  html body main #grip {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: auto !important;
+    column-gap: clamp(42px, 5vw, 60px) !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 72px var(--tablet-gutter) 78px !important;
+    overflow: visible !important;
+  }
+
+  html body main #grip > .story-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html body main #grip > .sticky-image {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    background: #000 !important;
+  }
+
+  html body main #grip > .sticky-image img {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transform: scale(1.12) !important;
+    transform-origin: center !important;
+  }
+}
+
+/* iPad Pro portrait only: four-card engineering section cleanup.
+   11-inch and 13-inch iPad Pro portrait CSS widths are included. */
+@media (min-width: 820px) and (max-width: 1100px) and (orientation: portrait) {
+  html body main #technical::before {
+    left: 50% !important;
+    display: block !important;
+    width: 100vw !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    transform: translateX(-50%) !important;
+  }
+
+  html body main #technical .chapter-track {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 57px !important;
+  }
+
+  html body main #technical .chapter-track > .chapter-image,
+  html body main #technical .chapter-track > .chapter-image:nth-child(1),
+  html body main #technical .chapter-track > .chapter-image:nth-child(n + 2),
+  html body main #technical .chapter-track > .chapter-image:last-child {
+    margin: 0 !important;
+    padding: 46px 0 !important;
+    border: 0 !important;
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html body main #technical .chapter-image::before,
+  html body main #technical .chapter-image::after,
+  html body main #technical .mobile-chapter-copy::before,
+  html body main #technical .mobile-chapter-copy::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  html body main #grip > .story-copy > :nth-child(n + 4) {
+    display: none !important;
+  }
+
+  html body main #grip > .story-copy,
+  html body main #grip > .story-copy > * {
+    border: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html body main #grip {
+    min-height: 760px !important;
+    padding-top: 84px !important;
+    padding-bottom: 84px !important;
+    align-items: stretch !important;
+  }
+
+  html body main #grip > .story-copy {
+    align-self: stretch !important;
+    justify-content: center !important;
+  }
+
+  html body main #grip > .sticky-image {
+    align-self: stretch !important;
+  }
+
+  html body main #reel {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: minmax(640px, auto) !important;
+    column-gap: clamp(42px, 5vw, 60px) !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 84px var(--tablet-gutter) !important;
+    overflow: visible !important;
+  }
+
+  html body main #reel::before {
+    left: 50% !important;
+    width: 100vw !important;
+    max-width: none !important;
+    transform: translateX(-50%) !important;
+  }
+
+  html body main #reel > .story-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html body main #reel > .sticky-image {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  html body main #reel > .sticky-image img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transform: scale(1.18) !important;
+    transform-origin: center !important;
+  }
+
+  html body main #reel > .story-copy > :last-child {
+    display: none !important;
   }
 }
