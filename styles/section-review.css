@@ -10,3 +10,123 @@
 .section-review main {
   min-height: 100svh;
 }
+
+/* iPad Pro portrait: one full-width line per section boundary and equal chapter spacing. */
+@media (min-width: 820px) and (max-width: 1100px) and (orientation: portrait) {
+  html body main > section[id][id]::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  html body main > section[id][id]:not(#purpose)::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    right: auto !important;
+    display: block !important;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: none !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+    transform: translateX(-50%) scaleY(0.25) !important;
+    transform-origin: center !important;
+  }
+
+  html body main #purpose#purpose::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  html body main #technical#technical .chapter-track {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 57px !important;
+    column-gap: 0 !important;
+  }
+
+  html body main #technical#technical .chapter-track > .chapter-image {
+    margin: 0 !important;
+    padding-top: 46px !important;
+    padding-bottom: 46px !important;
+    border: 0 !important;
+    border-top: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    border-left: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html body main #technical#technical .chapter-image::before,
+  html body main #technical#technical .chapter-image::after,
+  html body main #technical#technical .mobile-chapter-copy::before,
+  html body main #technical#technical .mobile-chapter-copy::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* #technical also carries .technical-scroll, which otherwise constrains the whole section. */
+  html body main #technical#technical {
+    position: relative !important;
+    left: 50% !important;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: none !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    transform: translateX(-50%) !important;
+    overflow: visible !important;
+  }
+
+  /* Keep the editorial content inside the normal tablet gutters. */
+  html body main #technical#technical > .chapter-copy,
+  html body main #technical#technical > .chapter-track {
+    width: calc(100% - (var(--tablet-gutter) * 2)) !important;
+    max-width: none !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  html body main #technical#technical::after,
+  html body main #technical#technical .chapter-copy::before,
+  html body main #technical#technical .chapter-copy::after,
+  html body main #technical#technical .chapter-track::before,
+  html body main #technical#technical .chapter-track::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Exactly one line, anchored to the full-width section immediately above 01 FRAME. */
+  html body main #technical#technical::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 30 !important;
+    display: block !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: none !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+    transform: scaleY(0.25) !important;
+    transform-origin: center !important;
+    pointer-events: none !important;
+  }
+
+  /* Reel Interface: enlarge the component 50% beyond the current portrait scale. */
+  html body main #reel#reel > figure.sticky-image.sticky-image img {
+    max-width: none !important;
+    transform: scale(1.77) !important;
+    transform-origin: center !important;
+  }
+}
