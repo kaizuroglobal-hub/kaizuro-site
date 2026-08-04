@@ -234,3 +234,82 @@
     font-size: clamp(52px, 4.2vw, 76px);
   }
 }
+
+/* iPad portrait: consistent editorial spacing for WHY KAIZURO and PROJECT ELITE 01. */
+@media (min-width: 641px) and (max-width: 1100px) and (orientation: portrait) {
+  html body main #story,
+  html body main #assault {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    grid-template-rows: 900px !important;
+    column-gap: 0 !important;
+    width: 100% !important;
+    height: 900px !important;
+    min-height: 900px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  html body main #story::after,
+  html body main #assault::before {
+    content: "" !important;
+    display: block !important;
+  }
+
+  html body main #story > .story-copy,
+  html body main #assault > .assault-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    justify-content: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 900px !important;
+    margin: 0 !important;
+    padding: 88px var(--tablet-gutter) !important;
+    overflow: visible !important;
+  }
+
+  html body main #story > .sticky-image,
+  html body main #assault > .full-width-product {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 900px !important;
+    min-height: 900px !important;
+    margin: 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  html body main #story > .sticky-image img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 50% !important;
+    width: 320% !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: 50% 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  html body main #assault > .full-width-product img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+
+  html body main #assault .assault-copy h2 {
+    white-space: normal !important;
+    font-size: clamp(44px, 5.6vw, 62px) !important;
+    line-height: 1.02 !important;
+  }
+}
