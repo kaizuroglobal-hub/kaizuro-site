@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kaizuro-site-live",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-02",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+}
