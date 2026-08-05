@@ -3,6 +3,12 @@
   "name": "kaizuro-site-live",
   "main": "src/index.js",
   "compatibility_date": "2026-08-02",
+  "routes": [
+    {
+      "pattern": "kaizuro.com",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
