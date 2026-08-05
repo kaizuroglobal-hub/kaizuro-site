@@ -70,7 +70,6 @@
     content: none !important;
   }
 
-  /* #technical also carries .technical-scroll, which otherwise constrains the whole section. */
   html body main #technical#technical {
     position: relative !important;
     left: 50% !important;
@@ -83,7 +82,6 @@
     overflow: visible !important;
   }
 
-  /* Keep the editorial content inside the normal tablet gutters. */
   html body main #technical#technical > .chapter-copy,
   html body main #technical#technical > .chapter-track {
     width: calc(100% - (var(--tablet-gutter) * 2)) !important;
@@ -101,7 +99,6 @@
     content: none !important;
   }
 
-  /* Exactly one line, anchored to the full-width section immediately above 01 FRAME. */
   html body main #technical#technical::before {
     content: "" !important;
     position: absolute !important;
@@ -123,10 +120,241 @@
     pointer-events: none !important;
   }
 
-  /* Reel Interface: enlarge the component 50% beyond the current portrait scale. */
   html body main #reel#reel > figure.sticky-image.sticky-image img {
     max-width: none !important;
     transform: scale(1.77) !important;
     transform-origin: center !important;
+  }
+}
+
+@media (max-width: 640px) and (orientation: portrait) {
+  html body main #story#story > figure.sticky-image.sticky-image {
+    width: 100% !important;
+    height: clamp(440px, 118vw, 560px) !important;
+    min-height: 440px !important;
+    max-height: 560px !important;
+    margin: 12px auto 20px !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+  }
+
+  html body main #story#story > figure.sticky-image.sticky-image img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transform: scale(2.35) !important;
+    transform-origin: center !important;
+  }
+
+  /* Guide Architecture: full mobile width at natural image height. */
+  html body main #details#details > figure.sticky-image.sticky-image {
+    position: relative !important;
+    top: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 18px auto 0 !important;
+    aspect-ratio: auto !important;
+    overflow: visible !important;
+    background: #050505 !important;
+  }
+
+  html body main #details#details > figure.sticky-image.sticky-image img {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    transform: none !important;
+  }
+
+  /* Reel Interface: preserve image framing while reducing vertical whitespace. */
+  html body main #reel#reel > figure.sticky-image.sticky-image {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: clamp(340px, 90vw, 450px) !important;
+    min-height: 340px !important;
+    max-height: 450px !important;
+    margin: 8px auto 0 !important;
+    aspect-ratio: auto !important;
+    overflow: hidden !important;
+    background: #050505 !important;
+  }
+
+  html body main #reel#reel > figure.sticky-image.sticky-image img {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    transform: translate(-75%, -50%) scale(1.35) !important;
+    transform-origin: center center !important;
+  }
+
+  /* Grip Geometry: reduce only the space above the section copy. */
+  html body main #grip#grip {
+    padding-top: 42px !important;
+  }
+
+  html body main #founder .founder-delivery,
+  html body main #founder .founder-roadmap,
+  html body main #founder .delivery-roadmap,
+  html body main #founder .production-roadmap {
+    position: relative !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html body main #founder .founder-delivery::before,
+  html body main #founder .founder-delivery::after,
+  html body main #founder .founder-roadmap::before,
+  html body main #founder .founder-roadmap::after,
+  html body main #founder .delivery-roadmap::before,
+  html body main #founder .delivery-roadmap::after,
+  html body main #founder .production-roadmap::before,
+  html body main #founder .production-roadmap::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  html body main #technical#technical {
+    position: relative !important;
+    left: 50% !important;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: translateX(-50%) !important;
+    overflow: visible !important;
+    border: 0 !important;
+  }
+
+  html body main #technical#technical::after,
+  html body main #technical#technical .chapter-copy::before,
+  html body main #technical#technical .chapter-copy::after,
+  html body main #technical#technical .chapter-track::before,
+  html body main #technical#technical .chapter-track::after,
+  html body main #technical#technical .chapter-image::before,
+  html body main #technical#technical .chapter-image::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  html body main #technical#technical .chapter-track > .chapter-image,
+  html body main #technical#technical .chapter-track > .chapter-image:first-child {
+    border: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  html body main #technical#technical > .chapter-copy,
+  html body main #technical#technical > .chapter-track {
+    width: calc(100% - (var(--mobile-gutter) * 2)) !important;
+    max-width: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  html body main #technical#technical::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 30 !important;
+    display: block !important;
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: none !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+    transform: scaleY(0.25) !important;
+    transform-origin: center !important;
+    pointer-events: none !important;
+  }
+
+  html body main #technical#technical .chapter-track > .chapter-image:first-child {
+    width: 100% !important;
+    margin-inline: auto !important;
+  }
+
+  html body main #technical#technical .chapter-track > .chapter-image:first-child img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    object-position: 70% 50% !important;
+    transform: none !important;
+  }
+
+  /* Commercial Terms: clear mobile accordion affordance. */
+  html body main #terms#terms .terms-list summary {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    min-height: 52px !important;
+    padding-right: 38px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    list-style: none !important;
+  }
+
+  html body main #terms#terms .terms-list summary::-webkit-details-marker {
+    display: none !important;
+  }
+
+  html body main #terms#terms .terms-list summary::marker {
+    content: "" !important;
+  }
+
+  html body main #terms#terms .terms-list summary::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: 5px !important;
+    display: block !important;
+    width: 9px !important;
+    height: 9px !important;
+    border-right: 1.5px solid rgba(255, 255, 255, 0.76) !important;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.76) !important;
+    transform: translateY(-65%) rotate(45deg) !important;
+    transform-origin: center !important;
+    transition: transform 180ms ease !important;
+    pointer-events: none !important;
+  }
+
+  html body main #terms#terms .terms-list details[open] > summary::after {
+    transform: translateY(-35%) rotate(225deg) !important;
+  }
+}
+
+@media (max-width: 1100px) and (orientation: portrait) {
+  html body main #founder#founder .founder-roadmap {
+    border-top: 0 !important;
   }
 }
