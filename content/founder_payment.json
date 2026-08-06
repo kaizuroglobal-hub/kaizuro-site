@@ -1,8 +1,8 @@
 {
-  "eyebrow": "Rod Selection & Payment",
-  "title": "Secure the platform built for you.",
-  "body": "<p>Select ASSAULT or HALO, review the Founder price and pay the correct 30% deposit through the approved Square checkout.</p>",
-  "steps": ["Choose your rod", "Pay the correct 30% deposit", "Submit Founder details"],
+  "eyebrow": "Founder 100 Allocation",
+  "title": "Secure your ASSAULT Founder allocation.",
+  "body": "<p>Review the ASSAULT PE6-8 Founder price and secure your allocation with the approved 30% deposit through Square. HALO PE10-12 remains in development and is not currently available to purchase.</p>",
+  "steps": ["Choose ASSAULT PE6-8", "Pay the 30% deposit", "Submit Founder details"],
   "products": [
     {
       "model": "ASSAULT",
@@ -17,20 +17,6 @@
       "secure_label": "Secure checkout powered by Square",
       "button_label": "Secure ASSAULT allocation",
       "checkout_url": "https://square.link/u/alquFkmg"
-    },
-    {
-      "model": "HALO",
-      "rating": "PE10-12",
-      "kicker": "Founder Allocation",
-      "price": "$999",
-      "currency": "AUD",
-      "deposit_label": "Deposit today (30%)",
-      "deposit": "$300",
-      "balance_label": "Balance later (70%)",
-      "balance": "$699",
-      "secure_label": "Secure checkout powered by Square",
-      "button_label": "Secure HALO allocation",
-      "checkout_url": "https://square.link/u/ohOr1RV2"
     }
   ]
 }
