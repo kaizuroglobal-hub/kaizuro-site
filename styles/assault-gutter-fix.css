@@ -265,3 +265,47 @@ html body main #updates#updates > .capture-box {
     line-height: 1.2;
   }
 }
+
+/* Desktop Follow the Build: centre the complete content group in both axes. */
+@media (min-width: 1101px) {
+  html body main #updates#updates.capture-section {
+    display: grid !important;
+    place-items: center !important;
+    min-height: clamp(560px, 42vw, 700px) !important;
+    height: auto !important;
+    padding-block: 72px !important;
+  }
+
+  html body main #updates#updates > .capture-box.content-grid {
+    display: grid !important;
+    justify-items: center !important;
+    align-content: center !important;
+    width: min(920px, calc(100% - (var(--pad) * 2))) !important;
+    max-width: 920px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  html body main #updates#updates .capture-box > p:not(.eyebrow) {
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  html body main #updates#updates .capture-box form {
+    display: grid !important;
+    grid-template-columns: minmax(360px, 1fr) auto !important;
+    align-items: end !important;
+    width: min(680px, 100%) !important;
+    margin: 26px auto 0 !important;
+    text-align: left !important;
+  }
+
+  html body main #updates#updates .capture-box > small {
+    display: block !important;
+    width: 100% !important;
+    margin-top: 18px !important;
+    text-align: center !important;
+  }
+}
