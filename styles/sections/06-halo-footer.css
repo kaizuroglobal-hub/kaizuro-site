@@ -1,3 +1,5 @@
+@import url("../assault-gutter-fix.css");
+
 /* 06 HALO + FOLLOW: future product, email capture and footer. */
 #halo .focal-halo img {
   object-fit: cover;
@@ -49,6 +51,115 @@
   margin-top: clamp(16px, 1.6vw, 22px);
 }
 
+/* Shared horizontal rhythm for all standard content sections. */
+#story .story-grid,
+#principles .system-grid,
+#details .story-grid,
+#grip .story-grid,
+#reel .story-grid,
+#proof .proof-grid,
+#evolution .evolution-grid,
+#specifications .specifications-grid,
+#founder .founder-shell,
+#updates .capture-box,
+#terms .terms-grid {
+  box-sizing: border-box;
+  width: calc(100% - (var(--pad) * 2)) !important;
+  max-width: var(--max) !important;
+  margin-inline: auto !important;
+  padding-inline: 0 !important;
+}
+
+/* Founder Delivery: one separator, lower height and twice the centre spacing. */
+#founder .founder-deposit {
+  border-bottom: 1px solid var(--line) !important;
+}
+
+#founder .founder-roadmap {
+  display: grid !important;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(560px, 1.28fr) !important;
+  column-gap: clamp(120px, 12vw, 190px) !important;
+  align-items: start !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding-top: clamp(72px, 6vw, 96px) !important;
+  padding-bottom: clamp(72px, 6vw, 96px) !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+}
+
+#founder .founder-roadmap::before,
+#founder .founder-roadmap::after {
+  display: none !important;
+  content: none !important;
+}
+
+#founder .founder-roadmap > div {
+  align-self: start !important;
+}
+
+#founder .production-roadmap {
+  gap: 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#founder .production-roadmap li {
+  min-height: 0 !important;
+  padding: 20px 28px !important;
+}
+
+/* Desktop and tablet landscape: HALO copy left, image right, never overlapping. */
+@media (min-width: 901px) {
+  #halo {
+    display: grid !important;
+    grid-template-columns: minmax(340px, 42%) minmax(0, 58%) !important;
+    gap: clamp(64px, 7vw, 112px) !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: clamp(96px, 8vw, 140px) var(--pad) !important;
+    overflow: hidden !important;
+  }
+
+  #halo .halo-copy {
+    position: relative !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: auto !important;
+    max-width: 620px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: center !important;
+  }
+
+  #halo .full-bleed-image {
+    position: relative !important;
+    inset: auto !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    align-self: center !important;
+  }
+
+  #halo .focal-halo img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  #halo::after,
+  #halo .hero-scrim {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1100px) {
   #halo .halo-copy {
     width: calc(100% - 48px);
@@ -65,6 +176,34 @@
 
   #updates.capture-section {
     padding-block: 60px !important;
+  }
+
+  #story .story-grid,
+  #principles .system-grid,
+  #details .story-grid,
+  #grip .story-grid,
+  #reel .story-grid,
+  #proof .proof-grid,
+  #evolution .evolution-grid,
+  #specifications .specifications-grid,
+  #founder .founder-shell,
+  #updates .capture-box,
+  #terms .terms-grid {
+    width: calc(100% - 48px) !important;
+  }
+
+  #founder .founder-roadmap {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(460px, 1.2fr) !important;
+    column-gap: 72px !important;
+    padding-block: 72px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  #founder .founder-roadmap {
+    grid-template-columns: 1fr !important;
+    row-gap: 48px !important;
+    padding-block: 64px !important;
   }
 }
 
@@ -115,5 +254,148 @@
 
   #updates.capture-section {
     padding-block: 56px !important;
+  }
+
+  #story .story-grid,
+  #principles .system-grid,
+  #details .story-grid,
+  #grip .story-grid,
+  #reel .story-grid,
+  #proof .proof-grid,
+  #evolution .evolution-grid,
+  #specifications .specifications-grid,
+  #founder .founder-shell,
+  #updates .capture-box,
+  #terms .terms-grid {
+    width: calc(100% - 40px) !important;
+  }
+
+  #founder .founder-roadmap {
+    row-gap: 40px !important;
+    padding-block: 56px !important;
+  }
+
+  #founder .production-roadmap li {
+    padding: 18px 20px !important;
+  }
+}
+
+/* Final Founder Delivery height authority. */
+#founder .founder-roadmap,
+#founder .founder-delivery,
+#founder .delivery-roadmap {
+  min-block-size: 0 !important;
+  block-size: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  align-self: start !important;
+  align-content: start !important;
+  padding-block: clamp(44px, 4vw, 60px) !important;
+  margin-block: 0 !important;
+}
+
+#founder .founder-roadmap .production-roadmap,
+#founder .founder-delivery .production-roadmap,
+#founder .delivery-roadmap .production-roadmap {
+  min-height: 0 !important;
+  height: auto !important;
+  align-self: start !important;
+  align-content: start !important;
+}
+
+#founder .founder-roadmap .production-roadmap li,
+#founder .founder-delivery .production-roadmap li,
+#founder .delivery-roadmap .production-roadmap li {
+  min-height: 0 !important;
+}
+
+@media (max-width: 900px) {
+  #founder .founder-roadmap,
+  #founder .founder-delivery,
+  #founder .delivery-roadmap {
+    padding-block: 44px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #founder .founder-roadmap,
+  #founder .founder-delivery,
+  #founder .delivery-roadmap {
+    padding-block: 36px !important;
+  }
+}
+
+/* Final compact spacing authority for the three content-driven sections. */
+@media (min-width: 901px) {
+  html body main #founder#founder .founder-roadmap,
+  html body main #founder#founder .founder-delivery,
+  html body main #founder#founder .delivery-roadmap {
+    box-sizing: border-box !important;
+    min-block-size: 0 !important;
+    block-size: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    padding-top: 44px !important;
+    padding-bottom: 44px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    align-self: start !important;
+    align-content: start !important;
+  }
+
+  html body main #terms#terms.terms-section {
+    box-sizing: border-box !important;
+    min-block-size: 0 !important;
+    block-size: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    align-content: start !important;
+  }
+
+  html body main #terms#terms .terms-grid {
+    min-height: 0 !important;
+    height: auto !important;
+    align-items: center !important;
+  }
+
+  html body main #halo#halo.halo-section {
+    box-sizing: border-box !important;
+    min-block-size: 0 !important;
+    block-size: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    align-content: center !important;
+  }
+}
+
+@media (max-width: 900px) {
+  html body main #founder#founder .founder-roadmap,
+  html body main #founder#founder .founder-delivery,
+  html body main #founder#founder .delivery-roadmap,
+  html body main #terms#terms.terms-section,
+  html body main #halo#halo.halo-section {
+    min-height: 0 !important;
+    height: auto !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html body main #founder#founder .founder-roadmap,
+  html body main #founder#founder .founder-delivery,
+  html body main #founder#founder .delivery-roadmap,
+  html body main #terms#terms.terms-section,
+  html body main #halo#halo.halo-section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
   }
 }
