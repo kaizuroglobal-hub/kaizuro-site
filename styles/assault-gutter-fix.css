@@ -51,8 +51,6 @@
   }
 }
 
-/* One vertical rhythm for every content section.
-   Values are taken directly from the WHY KAIZURO section. */
 :root {
   --kaizuro-section-space-y: clamp(120px, 15vw, 210px);
 }
@@ -83,7 +81,6 @@ html body main > section#updates#updates {
   align-content: start !important;
 }
 
-/* Founder is a parent shell containing several visible sections. */
 html body main > section#founder#founder {
   min-block-size: 0 !important;
   block-size: auto !important;
@@ -113,86 +110,35 @@ html body main #founder#founder .delivery-roadmap {
   align-content: start !important;
 }
 
-/* The First Production Allocation to First 100 options transition.
-   No divider and half the normal combined internal-section spacing. */
 html body main #founder#founder .founder-intro {
-  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.25) !important;
+  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.30) !important;
   border-bottom: 0 !important;
-  box-shadow: none !important;
 }
 
 html body main #founder#founder .founder-options {
-  padding-top: calc(var(--kaizuro-section-space-y) * 0.25) !important;
+  padding-top: calc(var(--kaizuro-section-space-y) * 0.30) !important;
+  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.60) !important;
   border-top: 0 !important;
-  box-shadow: none !important;
+  border-bottom: 0 !important;
 }
 
-html body main #founder#founder .founder-intro::after,
-html body main #founder#founder .founder-options::before {
-  display: none !important;
-  content: none !important;
-  border: 0 !important;
-  background: transparent !important;
-}
-
-/* Remove old inner chapter padding so spacing is not doubled. */
-html body main #technical#technical > .technical-scroll,
-html body main #evolution#evolution > .evolution-grid,
-html body main #terms#terms > .terms-grid,
-html body main #updates#updates > .capture-box {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
-
-@media (min-width: 641px) and (max-width: 1100px) {
-  :root {
-    --kaizuro-section-space-y: clamp(68px, 9vw, 96px);
-  }
-}
-
-@media (max-width: 640px) {
-  :root {
-    --kaizuro-section-space-y: 58px;
-  }
-}
-
-/* Founder internal rhythm: reduce every inter-section gap by a further 40%. */
-html body main #founder#founder .founder-intro,
-html body main #founder#founder .founder-options,
 html body main #founder#founder .founder-collection,
 html body main #founder#founder .founder-deposit,
 html body main #founder#founder .founder-roadmap,
 html body main #founder#founder .founder-delivery,
 html body main #founder#founder .delivery-roadmap {
-  padding-top: calc(var(--kaizuro-section-space-y) * 0.6) !important;
-  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.6) !important;
-}
-
-html body main #founder#founder .founder-intro {
-  padding-top: var(--kaizuro-section-space-y) !important;
-  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.15) !important;
-}
-
-html body main #founder#founder .founder-options {
-  padding-top: calc(var(--kaizuro-section-space-y) * 0.15) !important;
-}
-
-html body main #founder#founder .founder-options,
-html body main #founder#founder .founder-collection,
-html body main #founder#founder .founder-deposit,
-html body main #founder#founder .founder-roadmap,
-html body main #founder#founder .founder-delivery,
-html body main #founder#founder .delivery-roadmap {
+  margin-block: 0 !important;
+  padding-top: calc(var(--kaizuro-section-space-y) * 0.60) !important;
+  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.60) !important;
   border-top: 0 !important;
   border-bottom: 0 !important;
   box-shadow: none !important;
 }
 
-/* Founder Allocation uses the same full Founder content edge, not a narrower centred wrapper. */
-html body main #founder#founder .founder-deposit > .deposit-intro,
-html body main #founder#founder .founder-deposit > .founder-payment-steps,
-html body main #founder#founder .founder-deposit > .founder-payment-grid,
-html body main #founder#founder .founder-deposit > .halo-allocation-note {
+html body main #founder#founder .deposit-intro,
+html body main #founder#founder .founder-payment-steps,
+html body main #founder#founder .founder-payment-grid,
+html body main #founder#founder .halo-allocation-note {
   box-sizing: border-box !important;
   width: 100% !important;
   max-width: none !important;
@@ -202,8 +148,78 @@ html body main #founder#founder .founder-deposit > .halo-allocation-note {
   padding-right: 0 !important;
 }
 
+html body main #founder#founder .founder-intro::after,
+html body main #founder#founder .founder-options::before,
+html body main #founder#founder .founder-options::after,
+html body main #founder#founder .founder-collection::before,
+html body main #founder#founder .founder-collection::after,
+html body main #founder#founder .founder-deposit::before,
+html body main #founder#founder .founder-deposit::after,
+html body main #founder#founder .founder-roadmap::before,
+html body main #founder#founder .founder-roadmap::after,
+html body main #founder#founder .founder-delivery::before,
+html body main #founder#founder .delivery-roadmap::before,
+html body main #founder#founder .halo-allocation-note::before,
+html body main #founder#founder .halo-allocation-note::after {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+html body main #founder#founder .halo-allocation-note,
+html body main #founder#founder .founder-deposit,
+html body main #founder#founder .founder-roadmap,
+html body main #founder#founder .founder-delivery,
+html body main #founder#founder .delivery-roadmap {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Compact Founder Allocation to Founder Delivery transition. */
 html body main #founder#founder .founder-deposit {
-  width: 100% !important;
-  max-width: none !important;
-  margin-inline: 0 !important;
+  padding-bottom: 12px !important;
+}
+
+html body main #founder#founder .founder-roadmap,
+html body main #founder#founder .founder-delivery,
+html body main #founder#founder .delivery-roadmap {
+  padding-top: 12px !important;
+}
+
+@media (min-width: 641px) and (max-width: 1100px) {
+  :root { --kaizuro-section-space-y: clamp(68px, 9vw, 96px); }
+
+  html body main #founder#founder .founder-deposit {
+    padding-bottom: 10px !important;
+  }
+
+  html body main #founder#founder .founder-roadmap,
+  html body main #founder#founder .founder-delivery,
+  html body main #founder#founder .delivery-roadmap {
+    padding-top: 10px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :root { --kaizuro-section-space-y: 58px; }
+
+  html body main #founder#founder .founder-deposit {
+    padding-bottom: 8px !important;
+  }
+
+  html body main #founder#founder .founder-roadmap,
+  html body main #founder#founder .founder-delivery,
+  html body main #founder#founder .delivery-roadmap {
+    padding-top: 8px !important;
+  }
+}
+
+html body main #technical#technical > .technical-scroll,
+html body main #evolution#evolution > .evolution-grid,
+html body main #terms#terms > .terms-grid,
+html body main #updates#updates > .capture-box {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
