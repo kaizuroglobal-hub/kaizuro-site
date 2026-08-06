@@ -1,4 +1,10 @@
 /* 02 BRAND + ASSAULT: origin story and first product reveal. */
+
+/* One immutable desktop content edge used from first paint. */
+:root {
+  --kaizuro-content-edge: max(var(--pad), calc((100vw - var(--max)) / 2));
+}
+
 #story .sticky-image img {
   object-fit: cover;
   object-position: 50% 50%;
@@ -7,26 +13,36 @@
 #story .sticky-image {
   width: min(100%, 760px);
   height: auto;
+  min-height: 0;
   aspect-ratio: 16 / 10;
   justify-self: center;
-  min-height: 0;
   background: #050505;
 }
 
-/* Ensure all editable Brand Story copy remains visible instead of being clipped. */
 #story {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
   height: auto !important;
   min-height: 100svh;
+  margin-inline: 0;
+  padding-right: var(--kaizuro-content-edge);
+  padding-left: var(--kaizuro-content-edge);
   overflow: visible !important;
 }
 
 #story .story-copy {
   align-self: center;
+  margin: 0;
+  padding: 0;
   overflow: visible;
+  opacity: 1 !important;
+  translate: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
 }
 
-/* Brand-story principles rendered by Pages CMS.
-   Numbers are part of each editable title; no generated numbers or dividers. */
 #story .story-copy > .cms-rich-text {
   margin-top: 24px;
   counter-reset: none !important;
@@ -43,13 +59,12 @@
 
 #story .story-copy > .cms-rich-text > p:last-child {
   margin-bottom: 0;
-  border: 0 !important;
 }
 
 #story .story-copy > .cms-rich-text > p::before,
 #story .story-copy > .cms-rich-text > p::after {
-  content: none !important;
   display: none !important;
+  content: none !important;
 }
 
 #story .story-copy > .cms-rich-text strong {
@@ -57,7 +72,6 @@
   margin-bottom: 5px;
   font-size: clamp(14px, 1vw, 16px);
   line-height: 1.3;
-  letter-spacing: inherit;
   font-weight: 700;
 }
 
@@ -65,54 +79,71 @@
   display: none;
 }
 
-@media (max-width: 1100px) {
-  #story {
-    min-height: 0;
-  }
-
-  #story .sticky-image {
-    width: min(100%, 680px);
-    height: auto;
-    min-height: 0;
-  }
-}
-
-@media (max-width: 640px) {
-  #story .story-copy > .cms-rich-text {
-    margin-top: 22px;
-  }
-
-  #story .story-copy > .cms-rich-text > p {
-    margin-bottom: 16px;
-    padding: 0;
-    border: 0 !important;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  #story .story-copy > .cms-rich-text strong {
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-
-  #story .sticky-image {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 16 / 10;
-  }
-}
-
 #system-title span {
   display: block;
 }
 
+/* PROJECT ELITE 01 uses the identical page edge as every standard section. */
 #assault {
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: minmax(360px, 38%) minmax(0, 62%);
-  min-height: min(760px, 84svh);
-  padding: var(--header) 0 0;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(48px, 5vw, 84px);
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 40px var(--kaizuro-content-edge);
   background: #050505;
+  overflow: visible;
+}
+
+#assault .assault-copy {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  background: #050505;
+  opacity: 1 !important;
+  translate: none !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+#assault .assault-copy h2 {
+  max-width: 100%;
+  margin-bottom: 26px;
+  font-size: clamp(48px, 3.9vw, 66px);
+  line-height: 0.98;
+  white-space: normal;
+}
+
+#assault .assault-copy .section-lead {
+  max-width: 500px;
+  font-size: clamp(21px, 1.55vw, 26px);
+  line-height: 1.28;
+}
+
+#assault .assault-copy > p:not(.eyebrow):not(.section-lead) {
+  max-width: 500px;
+}
+
+#assault .assault-copy strong {
+  max-width: 500px;
+  margin-top: 26px;
+  font-size: clamp(20px, 1.4vw, 24px);
+  line-height: 1.28;
 }
 
 #assault .full-width-product {
@@ -120,12 +151,17 @@
   grid-column: 2;
   grid-row: 1;
   align-self: center;
+  justify-self: stretch;
+  width: 100%;
+  max-width: none;
   height: auto;
   min-height: 0;
   aspect-ratio: 16 / 9;
   margin: 0;
-  background: #050505;
   overflow: hidden;
+  background: #050505;
+  translate: none !important;
+  transform: none !important;
 }
 
 #assault .full-width-product img {
@@ -139,194 +175,137 @@
   display: none;
 }
 
-#assault .assault-copy {
-  position: relative;
-  z-index: 2;
-  grid-column: 1;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: auto;
-  margin: 0;
-  padding: 64px clamp(36px, 4vw, 64px) 64px var(--pad);
-  background: #050505;
-}
+@media (min-width: 1101px) {
+  html body main #story#story {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0 !important;
+    padding-right: var(--kaizuro-content-edge) !important;
+    padding-left: var(--kaizuro-content-edge) !important;
+  }
 
-#assault .assault-copy h2 {
-  max-width: 560px;
-  font-size: clamp(50px, 4.25vw, 70px);
-  white-space: nowrap;
-}
+  html body main #story#story > .story-copy {
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    translate: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
 
-#assault .assault-copy strong {
-  max-width: 500px;
-  font-size: clamp(20px, 1.55vw, 26px);
-  line-height: 1.24;
+  html body main #assault#assault {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) !important;
+    column-gap: clamp(48px, 5vw, 84px) !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 40px var(--kaizuro-content-edge) !important;
+    overflow: visible !important;
+  }
+
+  html body main #assault#assault > .assault-copy.content-grid {
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-self: center !important;
+    opacity: 1 !important;
+    translate: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  html body main #assault#assault > .full-width-product {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    align-self: center !important;
+    translate: none !important;
+    transform: none !important;
+  }
 }
 
 @media (max-width: 1100px) {
-  #assault {
-    grid-template-columns: 1fr;
-    padding-top: var(--header);
+  :root {
+    --kaizuro-content-edge: 24px;
   }
 
-  #assault .full-width-product,
-  #assault .assault-copy {
-    grid-column: 1;
+  #story {
+    width: 100%;
+    min-height: 0;
+    padding-right: var(--kaizuro-content-edge);
+    padding-left: var(--kaizuro-content-edge);
   }
 
-  #assault .full-width-product {
-    grid-row: 1;
+  #story .sticky-image {
+    width: min(100%, 680px);
+    height: auto;
     min-height: 0;
   }
 
-  #assault .assault-copy {
-    grid-row: 2;
-    padding: 64px var(--pad) 76px;
-  }
-}
-
-@media (max-width: 640px) {
   #assault {
-    grid-template-columns: minmax(0, 1fr);
-    padding: 72px 0;
+    grid-template-columns: 1fr;
+    width: 100%;
+    min-height: 0;
+    padding: 72px var(--kaizuro-content-edge);
   }
 
   #assault .assault-copy {
+    grid-column: 1;
     grid-row: 1;
-    order: 1;
-    width: calc(100% - 40px);
-    margin-inline: auto;
     padding: 0;
   }
 
   #assault .full-width-product {
+    grid-column: 1;
     grid-row: 2;
-    order: 2;
-    width: calc(100% - 40px);
-    height: auto;
-    min-height: 0;
-    margin: 34px auto 0;
+    width: 100%;
+    max-width: none;
+    margin: 34px 0 0;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --kaizuro-content-edge: 20px;
+  }
+
+  #story .story-copy > .cms-rich-text {
+    margin-top: 22px;
+  }
+
+  #story .story-copy > .cms-rich-text > p {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  #story .story-copy > .cms-rich-text strong {
+    font-size: 14px;
+  }
+
+  #story .sticky-image {
+    width: 100%;
+  }
+
+  #assault {
+    width: 100%;
+    padding: 72px var(--kaizuro-content-edge);
   }
 
   #assault .full-width-product img {
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    object-position: 50% 50%;
-  }
-}
-
-/* Desktop ASSAULT guardrail: balanced copy, media and site gutters. */
-@media (min-width: 1101px) {
-  html body main #assault {
-    grid-template-columns: minmax(500px, 42%) minmax(0, 58%);
-    column-gap: clamp(28px, 3vw, 52px);
-    min-height: min(760px, 84svh);
-    padding-top: var(--header);
-  }
-
-  html body main #assault > .assault-copy {
-    min-width: 0;
-    padding: 56px clamp(24px, 2.5vw, 44px) 56px var(--pad) !important;
-  }
-
-  html body main #assault > .full-width-product {
-    width: calc(100% - var(--pad));
-    max-width: 860px;
-    justify-self: end;
-    margin-right: var(--pad);
-    aspect-ratio: 16 / 9;
-  }
-
-  html body main #assault .assault-copy h2 {
-    max-width: 100%;
-    margin-bottom: 28px;
-    font-size: clamp(50px, 4vw, 68px);
-    line-height: 0.98;
-  }
-
-  html body main #assault .assault-copy > p:not(.eyebrow) {
-    max-width: 500px;
-  }
-}
-
-/* iPad portrait: consistent editorial spacing for WHY KAIZURO and PROJECT ELITE 01. */
-@media (min-width: 641px) and (max-width: 1100px) and (orientation: portrait) {
-  html body main #story,
-  html body main #assault {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-    grid-template-rows: 900px !important;
-    column-gap: 0 !important;
-    width: 100% !important;
-    height: 900px !important;
-    min-height: 900px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-  }
-
-  html body main #story::after,
-  html body main #assault::before {
-    content: "" !important;
-    display: block !important;
-  }
-
-  html body main #story > .story-copy,
-  html body main #assault > .assault-copy {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    align-self: stretch !important;
-    justify-content: center !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    height: 900px !important;
-    margin: 0 !important;
-    padding: 88px var(--tablet-gutter) !important;
-    overflow: visible !important;
-  }
-
-  html body main #story > .sticky-image,
-  html body main #assault > .full-width-product {
-    position: relative !important;
-    inset: auto !important;
-    grid-column: 2 !important;
-    grid-row: 1 !important;
-    align-self: stretch !important;
-    width: 100% !important;
-    max-width: none !important;
-    height: 900px !important;
-    min-height: 900px !important;
-    margin: 0 !important;
-    aspect-ratio: auto !important;
-    overflow: hidden !important;
-    background: #050505 !important;
-  }
-
-  html body main #story > .sticky-image img {
-    position: absolute !important;
-    top: 0 !important;
-    left: 50% !important;
-    width: 320% !important;
-    max-width: none !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: 50% 50% !important;
-    transform: translateX(-50%) !important;
-  }
-
-  html body main #assault > .full-width-product img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
-    object-position: center !important;
-  }
-
-  html body main #assault .assault-copy h2 {
-    white-space: normal !important;
-    font-size: clamp(44px, 5.6vw, 62px) !important;
-    line-height: 1.02 !important;
   }
 }
