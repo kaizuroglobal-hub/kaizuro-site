@@ -157,3 +157,70 @@
     })
     .catch(function(e){console.error('[KAIZURO structure]',e);});
 })();
+
+/* PROJECT ELITE uses the exact live width and left edge of Design Principles. */
+(function(){
+  function set(el,name,value){if(el)el.style.setProperty(name,value,'important');}
+  function apply(){
+    var section=document.querySelector('#assault');
+    if(!section)return;
+    var copy=section.querySelector('.assault-copy');
+    var media=section.querySelector('.full-width-product');
+    var reference=document.querySelector('#principles .system-grid');
+    var desktop=window.matchMedia('(min-width:1101px)').matches;
+    if(desktop){
+      var referenceWidth=reference&&reference.getBoundingClientRect().width;
+      set(section,'display','grid');
+      set(section,'grid-template-columns','minmax(0,5fr) minmax(0,7fr)');
+      set(section,'column-gap','clamp(48px,5vw,84px)');
+      set(section,'box-sizing','border-box');
+      set(section,'width',referenceWidth?referenceWidth+'px':'min(1440px,calc(100% - (var(--site-gutter, var(--pad)) * 2)))');
+      set(section,'max-width','none');
+      set(section,'height','auto');
+      set(section,'min-height','0');
+      set(section,'margin-left','auto');
+      set(section,'margin-right','auto');
+      set(section,'padding-top','40px');
+      set(section,'padding-bottom','40px');
+      set(section,'align-items','center');
+      set(section,'align-content','start');
+      set(section,'overflow','hidden');
+      set(copy,'grid-column','1');
+      set(copy,'grid-row','1');
+      set(copy,'box-sizing','border-box');
+      set(copy,'width','100%');
+      set(copy,'height','auto');
+      set(copy,'min-height','0');
+      set(copy,'margin','0');
+      set(copy,'padding','0');
+      set(copy,'justify-content','center');
+      set(copy,'align-self','center');
+      set(copy,'transform','none');
+      set(media,'grid-column','2');
+      set(media,'grid-row','1');
+      set(media,'position','relative');
+      set(media,'inset','auto');
+      set(media,'box-sizing','border-box');
+      set(media,'width','100%');
+      set(media,'max-width','none');
+      set(media,'height','auto');
+      set(media,'min-height','0');
+      set(media,'margin','0');
+      set(media,'align-self','center');
+      set(media,'aspect-ratio','16 / 9');
+      set(media,'transform','none');
+    }else{
+      ['height','min-height','margin-left','margin-right','padding-top','padding-bottom','align-content','max-width','width'].forEach(function(n){section.style.removeProperty(n);});
+      ['height','min-height','margin','padding','justify-content','align-self','transform'].forEach(function(n){if(copy)copy.style.removeProperty(n);});
+      ['position','inset','width','max-width','height','min-height','margin','align-self','aspect-ratio','transform'].forEach(function(n){if(media)media.style.removeProperty(n);});
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
+  window.addEventListener('load',apply);
+  window.addEventListener('resize',apply);
+  window.addEventListener('kaizuro:content-loaded',apply);
+  window.addEventListener('kaizuro:structure-ready',apply);
+  setTimeout(apply,100);
+  setTimeout(apply,500);
+  setTimeout(apply,1500);
+})();
