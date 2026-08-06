@@ -70,9 +70,9 @@
   padding-inline: 0 !important;
 }
 
-/* Founder Delivery: one separator, lower height and twice the centre spacing. */
+/* Founder Delivery: no separator, lower height and twice the centre spacing. */
 #founder .founder-deposit {
-  border-bottom: 1px solid var(--line) !important;
+  border-bottom: 0 !important;
 }
 
 #founder .founder-roadmap {
@@ -398,4 +398,28 @@
     padding-top: 40px !important;
     padding-bottom: 40px !important;
   }
+}
+
+/* Absolute final Founder Delivery divider removal. */
+html body main #founder#founder .founder-deposit,
+html body main #founder#founder .halo-allocation-note,
+html body main #founder#founder .founder-roadmap,
+html body main #founder#founder .founder-delivery,
+html body main #founder#founder .delivery-roadmap {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+html body main #founder#founder .founder-deposit::after,
+html body main #founder#founder .halo-allocation-note::before,
+html body main #founder#founder .halo-allocation-note::after,
+html body main #founder#founder .founder-roadmap::before,
+html body main #founder#founder .founder-roadmap::after,
+html body main #founder#founder .founder-delivery::before,
+html body main #founder#founder .delivery-roadmap::before {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+  background: transparent !important;
 }
