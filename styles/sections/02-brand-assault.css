@@ -110,7 +110,7 @@
 #assault {
   display: grid;
   grid-template-columns: minmax(360px, 38%) minmax(0, 62%);
-  min-height: min(860px, 92svh);
+  min-height: min(760px, 84svh);
   padding: var(--header) 0 0;
   background: #050505;
 }
@@ -122,9 +122,10 @@
   align-self: center;
   height: auto;
   min-height: 0;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   margin: 0;
   background: #050505;
+  overflow: hidden;
 }
 
 #assault .full-width-product img {
@@ -148,19 +149,19 @@
   justify-content: center;
   width: auto;
   margin: 0;
-  padding: 72px clamp(36px, 4vw, 72px) 72px var(--pad);
+  padding: 64px clamp(36px, 4vw, 64px) 64px var(--pad);
   background: #050505;
 }
 
 #assault .assault-copy h2 {
   max-width: 560px;
-  font-size: clamp(52px, 4.5vw, 76px);
+  font-size: clamp(50px, 4.25vw, 70px);
   white-space: nowrap;
 }
 
 #assault .assault-copy strong {
-  max-width: 520px;
-  font-size: clamp(20px, 1.7vw, 28px);
+  max-width: 500px;
+  font-size: clamp(20px, 1.55vw, 26px);
   line-height: 1.24;
 }
 
@@ -217,21 +218,37 @@
   }
 }
 
-/* Desktop ASSAULT guardrail: keep the one-line title clear of the media. */
+/* Desktop ASSAULT guardrail: balanced copy, media and site gutters. */
 @media (min-width: 1101px) {
-  #assault {
-    grid-template-columns: minmax(520px, 0.42fr) minmax(0, 0.58fr);
-    column-gap: clamp(56px, 5vw, 96px);
+  html body main #assault {
+    grid-template-columns: minmax(500px, 42%) minmax(0, 58%);
+    column-gap: clamp(28px, 3vw, 52px);
+    min-height: min(760px, 84svh);
+    padding-top: var(--header);
   }
 
-  #assault .assault-copy {
+  html body main #assault > .assault-copy {
     min-width: 0;
-    padding-right: clamp(28px, 3vw, 56px);
+    padding: 56px clamp(24px, 2.5vw, 44px) 56px var(--pad) !important;
   }
 
-  #assault .assault-copy h2 {
-    max-width: min(100%, 640px);
-    font-size: clamp(52px, 4.2vw, 76px);
+  html body main #assault > .full-width-product {
+    width: calc(100% - var(--pad));
+    max-width: 860px;
+    justify-self: end;
+    margin-right: var(--pad);
+    aspect-ratio: 16 / 9;
+  }
+
+  html body main #assault .assault-copy h2 {
+    max-width: 100%;
+    margin-bottom: 28px;
+    font-size: clamp(50px, 4vw, 68px);
+    line-height: 0.98;
+  }
+
+  html body main #assault .assault-copy > p:not(.eyebrow) {
+    max-width: 500px;
   }
 }
 
