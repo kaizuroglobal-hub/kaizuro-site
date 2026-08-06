@@ -223,3 +223,45 @@ html body main #updates#updates > .capture-box {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* Desktop footer contact: use the existing Contact link as a centred email block. */
+@media (min-width: 1101px) {
+  html body .site-footer {
+    position: relative !important;
+  }
+
+  html body .site-footer .footer-links nav[aria-label="KAIZURO"] > a[href="mailto:info@kaizuro.com"] {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    display: grid !important;
+    place-items: center !important;
+    gap: 10px !important;
+    width: max-content !important;
+    margin: 0 !important;
+    color: var(--white) !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    opacity: 1 !important;
+    text-align: center !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  html body .site-footer .footer-links nav[aria-label="KAIZURO"] > a[href="mailto:info@kaizuro.com"]::before {
+    content: "CONTACT US";
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.2;
+  }
+
+  html body .site-footer .footer-links nav[aria-label="KAIZURO"] > a[href="mailto:info@kaizuro.com"]::after {
+    content: "info@kaizuro.com";
+    color: var(--white);
+    font-size: clamp(18px, 1.5vw, 24px);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+}
