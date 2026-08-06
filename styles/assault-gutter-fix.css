@@ -1,0 +1,209 @@
+/* Final ASSAULT container authority.
+   Match the standard .content-grid left/right edge exactly and keep the gap inside the container. */
+@media (min-width: 1101px) {
+  html body main #assault#assault {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr) !important;
+    column-gap: clamp(48px, 5vw, 84px) !important;
+    align-items: center !important;
+    width: min(calc(100vw - (var(--pad) * 2)), var(--max)) !important;
+    max-width: var(--max) !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin-inline: auto !important;
+    padding: 40px 0 !important;
+    overflow: visible !important;
+  }
+
+  html body main #assault#assault > .assault-copy.content-grid {
+    box-sizing: border-box !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    translate: none !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  html body main #assault#assault > .full-width-product {
+    box-sizing: border-box !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    align-self: center !important;
+    justify-self: stretch !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    translate: none !important;
+    transform: none !important;
+  }
+}
+
+/* One vertical rhythm for every content section.
+   Values are taken directly from the WHY KAIZURO section. */
+:root {
+  --kaizuro-section-space-y: clamp(120px, 15vw, 210px);
+}
+
+html body main > section#story#story,
+html body main > section#assault#assault,
+html body main > section#principles#principles,
+html body main > section#details#details,
+html body main > section#technical#technical,
+html body main > section#grip#grip,
+html body main > section#reel#reel,
+html body main > section#blank-action#blank-action,
+html body main > section#proof#proof,
+html body main > section#specifications#specifications,
+html body main > section#warranty-support#warranty-support,
+html body main > section#terms#terms,
+html body main > section#halo#halo,
+html body main > section#evolution#evolution,
+html body main > section#updates#updates {
+  box-sizing: border-box !important;
+  min-block-size: 0 !important;
+  block-size: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  padding-top: var(--kaizuro-section-space-y) !important;
+  padding-bottom: var(--kaizuro-section-space-y) !important;
+  align-content: start !important;
+}
+
+/* Founder is a parent shell containing several visible sections. */
+html body main > section#founder#founder {
+  min-block-size: 0 !important;
+  block-size: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+html body main #founder#founder .founder-intro,
+html body main #founder#founder .founder-deposit,
+html body main #founder#founder .founder-options,
+html body main #founder#founder .founder-roadmap,
+html body main #founder#founder .founder-delivery,
+html body main #founder#founder .delivery-roadmap {
+  box-sizing: border-box !important;
+  min-block-size: 0 !important;
+  block-size: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: var(--kaizuro-section-space-y) !important;
+  padding-bottom: var(--kaizuro-section-space-y) !important;
+  align-content: start !important;
+}
+
+/* The First Production Allocation to First 100 options transition.
+   No divider and half the normal combined internal-section spacing. */
+html body main #founder#founder .founder-intro {
+  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.25) !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+html body main #founder#founder .founder-options {
+  padding-top: calc(var(--kaizuro-section-space-y) * 0.25) !important;
+  border-top: 0 !important;
+  box-shadow: none !important;
+}
+
+html body main #founder#founder .founder-intro::after,
+html body main #founder#founder .founder-options::before {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* Remove old inner chapter padding so spacing is not doubled. */
+html body main #technical#technical > .technical-scroll,
+html body main #evolution#evolution > .evolution-grid,
+html body main #terms#terms > .terms-grid,
+html body main #updates#updates > .capture-box {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+@media (min-width: 641px) and (max-width: 1100px) {
+  :root {
+    --kaizuro-section-space-y: clamp(68px, 9vw, 96px);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --kaizuro-section-space-y: 58px;
+  }
+}
+
+/* Founder internal rhythm: reduce every inter-section gap by a further 40%. */
+html body main #founder#founder .founder-intro,
+html body main #founder#founder .founder-options,
+html body main #founder#founder .founder-collection,
+html body main #founder#founder .founder-deposit,
+html body main #founder#founder .founder-roadmap,
+html body main #founder#founder .founder-delivery,
+html body main #founder#founder .delivery-roadmap {
+  padding-top: calc(var(--kaizuro-section-space-y) * 0.6) !important;
+  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.6) !important;
+}
+
+html body main #founder#founder .founder-intro {
+  padding-top: var(--kaizuro-section-space-y) !important;
+  padding-bottom: calc(var(--kaizuro-section-space-y) * 0.15) !important;
+}
+
+html body main #founder#founder .founder-options {
+  padding-top: calc(var(--kaizuro-section-space-y) * 0.15) !important;
+}
+
+html body main #founder#founder .founder-options,
+html body main #founder#founder .founder-collection,
+html body main #founder#founder .founder-deposit,
+html body main #founder#founder .founder-roadmap,
+html body main #founder#founder .founder-delivery,
+html body main #founder#founder .delivery-roadmap {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Founder Allocation uses the same full Founder content edge, not a narrower centred wrapper. */
+html body main #founder#founder .founder-deposit > .deposit-intro,
+html body main #founder#founder .founder-deposit > .founder-payment-steps,
+html body main #founder#founder .founder-deposit > .founder-payment-grid,
+html body main #founder#founder .founder-deposit > .halo-allocation-note {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+html body main #founder#founder .founder-deposit {
+  width: 100% !important;
+  max-width: none !important;
+  margin-inline: 0 !important;
+}
