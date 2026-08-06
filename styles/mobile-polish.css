@@ -838,3 +838,43 @@ main > section::after { bottom: 0; }
     box-shadow: none !important;
   }
 }
+
+/* Founder intro to options: remove divider and halve the internal gap. */
+html body main #founder#founder .founder-intro {
+  border-bottom: 0 !important;
+  padding-bottom: calc(var(--section-space, clamp(120px, 15vw, 210px)) / 2) !important;
+  margin-bottom: 0 !important;
+}
+
+html body main #founder#founder .founder-options {
+  border-top: 0 !important;
+  margin-top: 0 !important;
+  padding-top: calc(var(--section-space, clamp(120px, 15vw, 210px)) / 2) !important;
+}
+
+html body main #founder#founder .founder-intro::after,
+html body main #founder#founder .founder-options::before {
+  display: none !important;
+  content: none !important;
+  border: 0 !important;
+}
+
+@media (max-width: 1100px) {
+  html body main #founder#founder .founder-intro {
+    padding-bottom: calc(clamp(68px, 9vw, 96px) / 2) !important;
+  }
+
+  html body main #founder#founder .founder-options {
+    padding-top: calc(clamp(68px, 9vw, 96px) / 2) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html body main #founder#founder .founder-intro {
+    padding-bottom: 29px !important;
+  }
+
+  html body main #founder#founder .founder-options {
+    padding-top: 29px !important;
+  }
+}
