@@ -283,13 +283,19 @@ productLightbox?.addEventListener("close", () => {
     if (!links) return;
 
     const productNav = links.querySelector('nav[aria-label="Products"]');
-    if (productNav) productNav.innerHTML = '<b>Products</b><a href="#assault">ASSAULT PE6-8</a><a href="#founder">Founder 100</a><a href="#halo">HALO PE10-12</a>';
+    if (productNav) {
+      productNav.innerHTML = '<b>Products</b><a href="#assault">ASSAULT PE6-8</a><a href="#founder">Founder 100</a><a href="#halo">HALO PE10-12</a>';
+    }
 
     const brandNav = links.querySelector('nav[aria-label="KAIZURO"]');
-    if (brandNav) brandNav.innerHTML = '<b>KAIZURO</b><a href="#story">Our Story</a><a href="#details">Engineering</a><a href="#proof">Physical Proof</a><a href="#evolution">Development</a>';
+    if (brandNav) {
+      brandNav.innerHTML = '<b>KAIZURO</b><a href="#story">Our Story</a><a href="#details">Engineering</a><a href="#proof">Physical Proof</a><a href="#evolution">Development</a>';
+    }
 
     const supportNav = links.querySelector('nav[aria-label="Support"]');
-    if (supportNav) supportNav.innerHTML = '<b>Support</b><a href="#terms">Founder Terms</a><a href="mailto:info@kaizuro.com">Contact</a><a href="mailto:info@kaizuro.com?subject=Warranty">Warranty</a><a href="mailto:info@kaizuro.com?subject=Shipping">Shipping</a><a href="mailto:info@kaizuro.com?subject=Privacy">Privacy</a>';
+    if (supportNav) {
+      supportNav.innerHTML = '<b>Support</b><a href="#terms">Founder Terms</a><a href="mailto:info@kaizuro.com">Contact</a><a href="mailto:info@kaizuro.com?subject=Warranty">Warranty</a><a href="mailto:info@kaizuro.com?subject=Shipping">Shipping</a><a href="mailto:info@kaizuro.com?subject=Privacy">Privacy</a>';
+    }
 
     let socials = links.querySelector(".footer-socials");
     if (!socials) {
@@ -298,7 +304,7 @@ productLightbox?.addEventListener("close", () => {
       socials.setAttribute("aria-label", "Follow KAIZURO");
       const title = document.createElement("b");
       title.textContent = "Follow KAIZURO";
-      socials.append(title, makeLink("Instagram", instagram), makeLink("LinkedIn · Greg Griffiths", linkedin));
+      socials.append(title, makeLink("Instagram", instagram), makeLink("Founder Profile", linkedin));
       links.appendChild(socials);
     }
 
@@ -310,7 +316,7 @@ productLightbox?.addEventListener("close", () => {
       mobileSocials.className = "mobile-socials";
       const label = document.createElement("span");
       label.textContent = "Follow KAIZURO";
-      mobileSocials.append(label, makeLink("Instagram", instagram), makeLink("LinkedIn · Greg Griffiths", linkedin));
+      mobileSocials.append(label, makeLink("Instagram", instagram), makeLink("Founder Profile", linkedin));
       mobileMenu.appendChild(mobileSocials);
     }
   }
