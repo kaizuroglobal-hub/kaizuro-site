@@ -271,3 +271,144 @@ productLightbox?.addEventListener("close", () => {
   });
   document.head.appendChild(loader);
 })();
+
+(function installSiteCtas() {
+  const styleId = "kaizuro-site-cta-styles";
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = `
+      .kaizuro-section-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        min-height: 52px;
+        margin-top: 30px;
+        padding: 0 22px;
+        border: 1px solid rgba(255,255,255,.34);
+        background: transparent;
+        color: #f5f5f3;
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: .03em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+      }
+      .section-light .kaizuro-section-cta {
+        border-color: rgba(15,15,15,.28);
+        color: #111;
+      }
+      .kaizuro-section-cta:hover,
+      .kaizuro-section-cta:focus-visible {
+        transform: translateY(-2px);
+        border-color: currentColor;
+      }
+      .kaizuro-section-cta[data-cta-tone="primary"] {
+        border-color: #f2f2ef;
+        background: #f2f2ef;
+        color: #090909;
+      }
+      .section-light .kaizuro-section-cta[data-cta-tone="primary"] {
+        border-color: #111;
+        background: #111;
+        color: #f5f5f3;
+      }
+      #founder .founder-roadmap .kaizuro-section-cta,
+      #evolution .roadmap-copy .kaizuro-section-cta,
+      #specifications .specifications-intro .kaizuro-section-cta,
+      #proof .proof-grid > div:first-child .kaizuro-section-cta,
+      #assault .assault-copy .kaizuro-section-cta {
+        margin-top: 30px;
+      }
+      @media (max-width: 1100px) {
+        .kaizuro-section-cta { min-height: 50px; margin-top: 26px; }
+      }
+      @media (max-width: 640px) {
+        .kaizuro-section-cta {
+          width: 100%;
+          min-height: 52px;
+          margin-top: 24px;
+          padding: 0 18px;
+          box-sizing: border-box;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function bindHashLink(link) {
+    if (!link || link.dataset.kaizuroHashBound === "true") return;
+    link.dataset.kaizuroHashBound = "true";
+    link.addEventListener("click", (event) => {
+      const hash = link.getAttribute("href");
+      const target = hash && document.querySelector(hash);
+      if (!target) return;
+      event.preventDefault();
+      history.pushState(null, "", hash);
+      setMenu(false);
+      scrollToHashTarget(hash);
+    });
+  }
+
+  function addCta(selector, label, href, tone = "secondary") {
+    const host = document.querySelector(selector);
+    if (!host) return;
+    const key = `${selector}|${label}`;
+    if (document.querySelector(`[data-kaizuro-cta="${CSS.escape(key)}"]`)) return;
+    const link = document.createElement("a");
+    link.className = "kaizuro-section-cta";
+    link.href = href;
+    link.textContent = label;
+    link.dataset.ctaTone = tone;
+    link.dataset.kaizuroCta = key;
+    host.appendChild(link);
+    bindHashLink(link);
+  }
+
+  function applyCtas() {
+    const headerJoin = document.querySelector(".nav-action");
+    if (headerJoin && /Join Founder 100/i.test(headerJoin.textContent)) {
+      headerJoin.href = "#founder-deposit";
+      bindHashLink(headerJoin);
+    }
+
+    document.querySelectorAll('.hero-actions a').forEach((link) => {
+      if (/Join Founder 100/i.test(link.textContent)) {
+        link.href = "#founder-deposit";
+        bindHashLink(link);
+      }
+    });
+
+    addCta("#assault .assault-copy", "Explore ASSAULT Engineering", "#details");
+    addCta("#proof .proof-grid > div:first-child", "View ASSAULT Specifications", "#specifications");
+    addCta("#specifications .specifications-intro", "Secure Founder Allocation", "#founder-deposit", "primary");
+    addCta("#evolution .roadmap-copy", "Join Founder 100", "#founder-deposit", "primary");
+    addCta("#founder .founder-roadmap > div:first-child", "Secure Founder Allocation", "#founder-deposit", "primary");
+
+    const founderIntroCta = document.querySelector('#founder .founder-intro a[href="#founder-deposit"]');
+    if (founderIntroCta) {
+      founderIntroCta.textContent = "Secure Founder Allocation";
+    }
+
+    const haloCta = document.querySelector("#halo .halo-copy a");
+    if (haloCta) {
+      haloCta.href = "#updates";
+      haloCta.textContent = "Follow HALO Development";
+      haloCta.classList.add("kaizuro-section-cta");
+      haloCta.dataset.ctaTone = "secondary";
+      bindHashLink(haloCta);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyCtas, { once: true });
+  } else {
+    applyCtas();
+  }
+  window.addEventListener("kaizuro:content-loaded", applyCtas);
+  window.setTimeout(applyCtas, 150);
+  window.setTimeout(applyCtas, 600);
+})();
