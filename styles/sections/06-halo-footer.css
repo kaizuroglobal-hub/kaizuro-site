@@ -109,7 +109,6 @@
   padding: 20px 28px !important;
 }
 
-/* Desktop and tablet landscape: HALO copy left, image right, never overlapping. */
 @media (min-width: 901px) {
   #halo {
     display: grid !important;
@@ -280,7 +279,6 @@
   }
 }
 
-/* Final Founder Delivery height authority. */
 #founder .founder-roadmap,
 #founder .founder-delivery,
 #founder .delivery-roadmap {
@@ -326,7 +324,6 @@
   }
 }
 
-/* Final compact spacing authority for the three content-driven sections. */
 @media (min-width: 901px) {
   html body main #founder#founder .founder-roadmap,
   html body main #founder#founder .founder-delivery,
@@ -400,7 +397,6 @@
   }
 }
 
-/* Absolute final Founder Delivery divider removal. */
 html body main #founder#founder .founder-deposit,
 html body main #founder#founder .halo-allocation-note,
 html body main #founder#founder .founder-roadmap,
@@ -422,4 +418,46 @@ html body main #founder#founder .delivery-roadmap::before {
   content: none !important;
   border: 0 !important;
   background: transparent !important;
+}
+
+/* Final Follow the Build authority: centre the inner block, not only the section wrapper. */
+@media (min-width: 1101px) {
+  html body main section#updates#updates.capture-section {
+    display: grid !important;
+    place-items: center !important;
+    min-height: 680px !important;
+    height: auto !important;
+    padding: 72px var(--pad) !important;
+  }
+
+  html body main section#updates#updates > .capture-box.content-grid {
+    display: grid !important;
+    justify-items: center !important;
+    align-content: center !important;
+    width: min(760px, 100%) !important;
+    max-width: 760px !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  html body main section#updates#updates .capture-box > p:not(.eyebrow) {
+    max-width: 760px !important;
+    margin-inline: auto !important;
+  }
+
+  html body main section#updates#updates .capture-box form {
+    display: grid !important;
+    grid-template-columns: minmax(360px, 1fr) auto !important;
+    align-items: end !important;
+    width: min(680px, 100%) !important;
+    margin: 26px auto 0 !important;
+    text-align: left !important;
+  }
+
+  html body main section#updates#updates .capture-box > small {
+    width: 100% !important;
+    margin-top: 18px !important;
+    text-align: center !important;
+  }
 }
