@@ -358,3 +358,100 @@
     border-top: 0 !important;
   }
 }
+
+/* iPad landscape only: compact HALO / Follow the Build and remove Founder centre divider. */
+@media (min-width: 1101px) and (max-width: 1400px) and (orientation: landscape) and (any-pointer: coarse) {
+  html body main section#updates#updates.capture-section {
+    display: grid !important;
+    place-items: center !important;
+    min-height: 520px !important;
+    height: auto !important;
+    padding-top: 52px !important;
+    padding-bottom: 52px !important;
+  }
+
+  html body main section#updates#updates > .capture-box.content-grid {
+    align-self: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  html body main section#halo#halo.halo-section {
+    min-height: 0 !important;
+    height: auto !important;
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+    align-items: center !important;
+    align-content: center !important;
+  }
+
+  html body main section#halo#halo .halo-copy {
+    min-height: 0 !important;
+    height: auto !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    align-self: center !important;
+  }
+
+  html body main section#halo#halo .full-bleed-image {
+    height: auto !important;
+    min-height: 0 !important;
+    align-self: center !important;
+  }
+
+  html body main section#halo#halo .full-bleed-image img {
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    object-fit: cover !important;
+  }
+
+  html body main #founder#founder .founder-roadmap,
+  html body main #founder#founder .production-roadmap {
+    border-left: 0 !important;
+    border-right: 0 !important;
+    box-shadow: none !important;
+    background-image: none !important;
+  }
+
+  html body main #founder#founder .founder-roadmap::before,
+  html body main #founder#founder .founder-roadmap::after,
+  html body main #founder#founder .production-roadmap::before,
+  html body main #founder#founder .production-roadmap::after {
+    display: none !important;
+    content: none !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+}
+
+/* iPad portrait HALO: shared page gutter and true 50/50 content split. */
+@media (min-width: 641px) and (max-width: 1100px) and (orientation: portrait) {
+  html body main section#halo#halo {
+    box-sizing: border-box !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    column-gap: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding-left: var(--tablet-gutter) !important;
+    padding-right: var(--tablet-gutter) !important;
+  }
+
+  html body main section#halo#halo > .halo-copy {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: clamp(24px, 4vw, 40px) !important;
+  }
+
+  html body main section#halo#halo > .full-bleed-image {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+}
