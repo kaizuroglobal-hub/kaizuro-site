@@ -55,24 +55,18 @@ function resolveAssetRequest(request) {
 
 export default {
   async fetch(request, env) {
-    if (!env.BASIC_AUTH_USERNAME || !env.BASIC_AUTH_PASSWORD) {
-      return new Response("Private access is not configured.", {
-        status: 503,
-        headers: {
-          "Cache-Control": "no-store",
-          "X-Robots-Tag": "noindex, nofollow, noarchive",
-        },
-      });
-    }
+    const authConfigured = Boolean(env.BASIC_AUTH_USERNAME && env.BASIC_AUTH_PASSWORD);
 
-    const credentials = decodeBasicAuth(request.headers.get("Authorization"));
+    if (authConfigured) {
+      const credentials = decodeBasicAuth(request.headers.get("Authorization"));
 
-    if (
-      !credentials ||
-      !timingSafeEqual(credentials.username, env.BASIC_AUTH_USERNAME) ||
-      !timingSafeEqual(credentials.password, env.BASIC_AUTH_PASSWORD)
-    ) {
-      return unauthorized();
+      if (
+        !credentials ||
+        !timingSafeEqual(credentials.username, env.BASIC_AUTH_USERNAME) ||
+        !timingSafeEqual(credentials.password, env.BASIC_AUTH_PASSWORD)
+      ) {
+        return unauthorized();
+      }
     }
 
     const assetRequest = resolveAssetRequest(request);
