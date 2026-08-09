@@ -6,8 +6,8 @@
   "workers_dev": true,
   "routes": [
     {
-      "pattern": "staging.kaizuro.com/*",
-      "zone_name": "kaizuro.com"
+      "pattern": "staging.kaizuro.com",
+      "custom_domain": true
     }
   ],
   "assets": {
