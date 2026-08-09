@@ -42,6 +42,17 @@ function timingSafeEqual(left, right) {
   return mismatch === 0;
 }
 
+function resolveAssetRequest(request) {
+  const url = new URL(request.url);
+
+  if (url.pathname === "/partners" || url.pathname === "/partners/") {
+    url.pathname = "/partners/index.html";
+    return new Request(url.toString(), request);
+  }
+
+  return request;
+}
+
 export default {
   async fetch(request, env) {
     if (!env.BASIC_AUTH_USERNAME || !env.BASIC_AUTH_PASSWORD) {
@@ -64,7 +75,8 @@ export default {
       return unauthorized();
     }
 
-    const response = await env.ASSETS.fetch(request);
+    const assetRequest = resolveAssetRequest(request);
+    const response = await env.ASSETS.fetch(assetRequest);
     const headers = new Headers(response.headers);
     headers.set("Cache-Control", "private, no-store");
     headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
