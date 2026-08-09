@@ -3,6 +3,13 @@
   "name": "staging-kaizuro-com",
   "main": "src/index.js",
   "compatibility_date": "2026-08-02",
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "staging.kaizuro.com",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
