@@ -1,8 +1,10 @@
 media:
-  input: assets/kaizuro-site
-  output: /assets/kaizuro-site
-  rename: safe
-  categories: [image]
+  - name: images
+    label: "KAIZURO Images"
+    input: assets/kaizuro-site
+    output: /assets/kaizuro-site
+    rename: safe
+    categories: [image]
 
 content:
   - name: site
@@ -13,7 +15,7 @@ content:
     fields:
       - { name: title, label: "Browser title", type: string }
       - { name: description, label: "Meta description", type: text }
-      - { name: og_image, label: "Social sharing image", type: image }
+      - { name: og_image, label: "Social sharing image", type: image, options: { media: images } }
 
   - name: hero
     label: "02 · Hero"
@@ -31,8 +33,8 @@ content:
       - { name: cta_join_href, label: "Secondary destination", type: string }
       - { name: status_1, label: "Status 1", type: string }
       - { name: status_2, label: "Status 2", type: string }
-      - { name: image_desktop_src, label: "Desktop image", type: image }
-      - { name: image_mobile_src, label: "Mobile image", type: image }
+      - { name: image_desktop_src, label: "Desktop image", type: image, options: { media: images } }
+      - { name: image_mobile_src, label: "Mobile image", type: image, options: { media: images } }
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: story
@@ -45,7 +47,7 @@ content:
       - { name: title, label: "Heading", type: string }
       - { name: body_1, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: principles_text, label: "Three principle blocks", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: image_src, label: "Image", type: image }
+      - { name: image_src, label: "Image", type: image, options: { media: images } }
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: assault
@@ -59,7 +61,7 @@ content:
       - { name: lead, label: "Lead sentence", type: string }
       - { name: body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: tagline, label: "Tagline", type: string }
-      - { name: image_src, label: "Image", type: image }
+      - { name: image_src, label: "Image", type: image, options: { media: images } }
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: principles
@@ -91,7 +93,7 @@ content:
       - { name: section_title_line2, label: "Heading line 2", type: string }
       - { name: section_body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: section_tagline, label: "Tagline", type: string }
-      - { name: section_image_src, label: "Image", type: image }
+      - { name: section_image_src, label: "Image", type: image, options: { media: images } }
       - { name: section_image_alt, label: "Image alt text", type: string }
 
   - name: scrolling_cards
@@ -108,7 +110,7 @@ content:
           - { name: title, label: "Heading", type: string }
           - { name: text, label: "Desktop copy", type: rich-text, options: { format: html, media: false, switcher: false } }
           - { name: mobile_text, label: "Mobile copy", type: rich-text, options: { format: html, media: false, switcher: false } }
-          - { name: image_src, label: "Image", type: image }
+          - { name: image_src, label: "Image", type: image, options: { media: images } }
           - { name: image_alt, label: "Image alt text", type: string }
 
   - name: grip
@@ -126,7 +128,7 @@ content:
         fields:
           - { name: title, label: "Feature heading", type: string }
           - { name: body, label: "Feature copy", type: rich-text, options: { format: html, media: false, switcher: false } }
-      - { name: image_src, label: "Image", type: image }
+      - { name: image_src, label: "Image", type: image, options: { media: images } }
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: reel
@@ -141,7 +143,7 @@ content:
       - { name: body_2, label: "Body copy 2", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: note, label: "Disclosure note", type: string }
       - { name: features, label: "Feature points", type: list, field: { name: value, label: "Feature", type: string } }
-      - { name: image_src, label: "Image", type: image }
+      - { name: image_src, label: "Image", type: image, options: { media: images } }
       - { name: image_alt, label: "Image alt text", type: string }
 
   - name: proof
@@ -230,7 +232,7 @@ content:
         type: list
         fields:
           - { name: name, label: "Name", type: string }
-          - { name: image_src, label: "Image", type: image }
+          - { name: image_src, label: "Image", type: image, options: { media: images } }
           - { name: image_alt, label: "Image alt text", type: string }
       - { name: pack_heading, label: "Pack heading", type: string }
       - { name: pack_subheading, label: "Pack subheading", type: string }
@@ -239,7 +241,7 @@ content:
         type: list
         fields:
           - { name: name, label: "Name", type: string }
-          - { name: image_src, label: "Image", type: image }
+          - { name: image_src, label: "Image", type: image, options: { media: images } }
           - { name: image_alt, label: "Image alt text", type: string }
       - { name: included_heading, label: "Included heading", type: string }
       - { name: included_items, label: "Included items", type: list, field: { name: value, label: "Item", type: string } }
@@ -345,7 +347,7 @@ content:
       - { name: body, label: "Body copy", type: rich-text, options: { format: html, media: false, switcher: false } }
       - { name: cta_label, label: "CTA label", type: string }
       - { name: cta_href, label: "CTA destination", type: string }
-      - { name: image_src, label: "Image", type: image }
+      - { name: image_src, label: "Image", type: image, options: { media: images } }
       - { name: image_alt, label: "Image alt text", type: string }
       - { name: updates_eyebrow, label: "Updates eyebrow", type: string }
       - { name: updates_title, label: "Updates heading", type: string }
