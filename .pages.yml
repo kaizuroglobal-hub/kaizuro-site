@@ -1,6 +1,8 @@
 media:
-  input: assets/kaizuro-site/uploads
-  output: /assets/kaizuro-site/uploads
+  input: assets/kaizuro-site
+  output: /assets/kaizuro-site
+  rename: safe
+  categories: [image]
 
 content:
   - name: site
