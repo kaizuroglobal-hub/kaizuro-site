@@ -1,0 +1,1 @@
+Fixing Project Elite 01 performance image source after incorrect raster asset rendered on staging.
