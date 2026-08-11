@@ -23,22 +23,6 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Remove accidental kaizuro-site Worker
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          status=$(curl -sS -o /tmp/cf-delete.json -w "%{http_code}" \
-            -X DELETE \
-            "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts/kaizuro-site?force=true" \
-            -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}")
-          if [ "$status" = "200" ] || [ "$status" = "404" ]; then
-            echo "Accidental kaizuro-site Worker is absent."
-          else
-            cat /tmp/cf-delete.json
-            exit 1
-          fi
-
       - name: Deploy to Cloudflare Workers
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
