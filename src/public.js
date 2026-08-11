@@ -18,6 +18,28 @@ const backToTopMarkup = `<style>
 })();
 </script>`;
 
+const mergedStoryMarkup = `<style>
+  #story.kz-story-merged{padding-bottom:0;row-gap:clamp(56px,7vw,96px)}
+  #story>#principles.kz-principles-merged{grid-column:1/-1;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:clamp(96px,11vw,154px) 0}
+  @media(max-width:900px){#story.kz-story-merged{padding-bottom:0;row-gap:52px}#story>#principles.kz-principles-merged{grid-column:1/-1;padding:78px 0}}
+  @media(max-width:640px){#story.kz-story-merged{row-gap:40px}#story>#principles.kz-principles-merged{padding:64px 0}}
+</style>
+<script>
+(function(){
+  const story=document.querySelector('#story');
+  const principles=document.querySelector('#principles');
+  if(!story||!principles||principles.parentElement===story)return;
+  const duplicate=[...story.querySelectorAll('.story-copy>p:not(.eyebrow)')].find((p)=>{
+    const text=p.textContent.replace(/\\s+/g,' ').trim().toLowerCase();
+    return text.includes('remove compromise')&&text.includes('prove the structure')&&text.includes('refine relentlessly');
+  });
+  if(duplicate)duplicate.remove();
+  story.classList.add('kz-story-merged');
+  principles.classList.add('kz-principles-merged');
+  story.appendChild(principles);
+})();
+</script>`;
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -47,6 +69,11 @@ export default {
 
         if (isHomepage) {
           rewriter
+            .on("body", {
+              element(element) {
+                element.append(mergedStoryMarkup, { html: true });
+              },
+            })
             .on('#updates form', {
               element(element) {
                 element.setAttribute("action", "/join");
