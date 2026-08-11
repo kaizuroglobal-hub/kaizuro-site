@@ -8,6 +8,13 @@
       "action": "visibility",
       "attribute": "",
       "value": "hidden"
+    },
+    {
+      "enabled": true,
+      "selector": ".footer-links nav[aria-label=\"KAIZURO\"]",
+      "action": "html",
+      "attribute": "",
+      "value": "<b>KAIZURO</b><a href=\"#story\">Our Story</a><a href=\"#details\">Engineering</a><a href=\"/how-kaizuro-is-built/\">How KAIZURO Is Built</a><a href=\"#evolution\">Development</a><a href=\"mailto:info@kaizuro.com\">Contact</a>"
     }
   ],
   "css_variables": [],
