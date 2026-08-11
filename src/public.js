@@ -40,6 +40,30 @@ const mergedStoryMarkup = `<style>
 })();
 </script>`;
 
+const mergedEngineeringMarkup = `<script>
+(function(){
+  const main=document.querySelector('main');
+  const details=document.querySelector('#details');
+  const technical=document.querySelector('#technical');
+  const grip=document.querySelector('#grip');
+  const reel=document.querySelector('#reel');
+  if(!main||!details||!technical||!grip||!reel)return;
+  if(details.closest('#engineering'))return;
+  const sections=[details,technical,grip,reel];
+  if(!sections.every((section)=>section.parentElement===main))return;
+  const engineering=document.createElement('section');
+  engineering.id='engineering';
+  engineering.className='kz-engineering-chapter';
+  engineering.setAttribute('aria-label','ASSAULT Engineering');
+  main.insertBefore(engineering,details);
+  sections.forEach((section,index)=>{
+    section.dataset.engineeringSubsection=String(index+1).padStart(2,'0');
+    engineering.appendChild(section);
+  });
+  window.dispatchEvent(new Event('resize'));
+})();
+</script>`;
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -71,7 +95,7 @@ export default {
           rewriter
             .on("body", {
               element(element) {
-                element.append(mergedStoryMarkup, { html: true });
+                element.append(mergedStoryMarkup + mergedEngineeringMarkup, { html: true });
               },
             })
             .on('#updates form', {
