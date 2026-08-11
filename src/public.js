@@ -31,6 +31,12 @@ export default {
               element.setInnerContent("FUJI DPSSD GM Deluxe Seat");
             },
           })
+          .on('script[src^="script.js"]', {
+            element(element) {
+              // Force production browsers onto the current CTA-enabled script.
+              element.setAttribute("src", "script.js?v=20260811-cta-restore");
+            },
+          })
           .on('footer nav[aria-label="KAIZURO"] a[href="#evolution"]', {
             element(element) {
               element.before('<a href="/how-kaizuro-is-built/">How KAIZURO Is Built</a><a href="/partners/portal">Partners</a>', { html: true });
@@ -44,7 +50,7 @@ export default {
         const before = 'brandNav.innerHTML = \'<b>KAIZURO</b><a href="#story">Our Story</a><a href="#details">Engineering</a><a href="#proof">Physical Proof</a><a href="#evolution">Development</a>\';';
         const after = 'brandNav.innerHTML = \'<b>KAIZURO</b><a href="#story">Our Story</a><a href="#details">Engineering</a><a href="#proof">Physical Proof</a><a href="/how-kaizuro-is-built/">How KAIZURO Is Built</a><a href="/partners/portal">Partners</a><a href="#evolution">Development</a>\';';
         const headers = new Headers(response.headers);
-        headers.set("Cache-Control", "no-cache");
+        headers.set("Cache-Control", "no-cache, no-store, must-revalidate");
         return new Response(source.replace(before, after), {
           status: response.status,
           statusText: response.statusText,
