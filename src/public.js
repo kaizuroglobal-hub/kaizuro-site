@@ -37,16 +37,24 @@ export default {
       return response;
     }
 
-    // Keep the separate KAIZURO partner portal authentication working.
-    if (env.BASIC_AUTH_USERNAME && env.BASIC_AUTH_PASSWORD) {
-      const headers = new Headers(request.headers);
-      headers.set(
-        "Authorization",
-        `Basic ${btoa(`${env.BASIC_AUTH_USERNAME}:${env.BASIC_AUTH_PASSWORD}`)}`,
-      );
-      request = new Request(request, { headers });
-    }
+    // Production partner routes use the partner login form. The app still contains
+    // the old staging preview gate, so satisfy that gate internally without exposing
+    // or requiring a browser-level Basic Auth prompt for production users.
+    const internalUsername = env.BASIC_AUTH_USERNAME || "kaizuro-production-partner-wrapper";
+    const internalPassword = env.BASIC_AUTH_PASSWORD || "kaizuro-production-partner-wrapper";
+    const headers = new Headers(request.headers);
+    headers.set(
+      "Authorization",
+      `Basic ${btoa(`${internalUsername}:${internalPassword}`)}`,
+    );
+    request = new Request(request, { headers });
 
-    return app.fetch(request, env);
+    const appEnv = {
+      ...env,
+      BASIC_AUTH_USERNAME: internalUsername,
+      BASIC_AUTH_PASSWORD: internalPassword,
+    };
+
+    return app.fetch(request, appEnv);
   },
 };
