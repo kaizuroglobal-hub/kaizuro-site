@@ -49,6 +49,24 @@
   margin-top: clamp(16px, 1.6vw, 22px);
 }
 
+/* How KAIZURO Is Built hero */
+.built-hero {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(5, 6, 6, .90) 0%, rgba(5, 6, 6, .76) 34%, rgba(5, 6, 6, .48) 62%, rgba(5, 6, 6, .24) 100%),
+    url('/assets/kaizuro-site/editorial/how-kaizuro-is-built-hero.jpg') center center / cover no-repeat !important;
+}
+
+.built-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, .16), rgba(0, 0, 0, .40));
+  pointer-events: none;
+}
+
 @media (max-width: 1100px) {
   #halo .halo-copy {
     width: calc(100% - 48px);
@@ -115,5 +133,9 @@
 
   #updates.capture-section {
     padding-block: 56px !important;
+  }
+
+  .built-hero {
+    background-position: 56% center !important;
   }
 }
