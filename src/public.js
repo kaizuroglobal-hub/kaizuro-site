@@ -40,27 +40,61 @@ const mergedStoryMarkup = `<style>
 })();
 </script>`;
 
-const mergedEngineeringMarkup = `<script>
+const engineeringPreviewMarkup = `<script>
 (function(){
-  const main=document.querySelector('main');
   const details=document.querySelector('#details');
   const technical=document.querySelector('#technical');
-  const grip=document.querySelector('#grip');
-  const reel=document.querySelector('#reel');
-  if(!main||!details||!technical||!grip||!reel)return;
-  if(details.closest('#engineering'))return;
-  const sections=[details,technical,grip,reel];
-  if(!sections.every((section)=>section.parentElement===main))return;
-  const engineering=document.createElement('section');
-  engineering.id='engineering';
-  engineering.className='kz-engineering-chapter';
-  engineering.setAttribute('aria-label','ASSAULT Engineering');
-  main.insertBefore(engineering,details);
-  sections.forEach((section,index)=>{
-    section.dataset.engineeringSubsection=String(index+1).padStart(2,'0');
-    engineering.appendChild(section);
-  });
-  window.dispatchEvent(new Event('resize'));
+  if(!details||!technical)return;
+
+  const firstCard=technical.querySelector('[data-chapter="0"]');
+  const firstImage=firstCard?.querySelector('img');
+  const firstCaption=firstCard?.querySelector('.mobile-chapter-copy');
+  if(!firstCard||!firstImage)return;
+
+  firstImage.src='assets/kaizuro-site/editorial/03-guide-architecture-enhanced.png';
+  firstImage.alt='Enlarged KAIZURO guide train and ring progression aligned along the blank';
+  firstCard.classList.remove('focal-frame');
+  firstCard.classList.add('focal-guide');
+
+  if(firstCaption){
+    const label=firstCaption.querySelector('span');
+    const title=firstCaption.querySelector('b');
+    const copy=firstCaption.querySelector('p');
+    if(label)label.textContent='01 · Guide Architecture';
+    if(title)title.textContent='Control starts with alignment.';
+    if(copy)copy.textContent='Frame geometry, ring size, spacing and wrap construction work together to control braid, transfer load and avoid unnecessary mass.';
+  }
+
+  window.kzChapterData=[
+    {
+      eyebrow:'01 · Guide Architecture',
+      title:'Control starts with alignment.',
+      text:'Guide selection is not a finishing decision. Frame geometry, ring size, spacing and wrap construction influence line flow, load transfer and finished weight. The objective is sufficient frame strength and bracing without unnecessary mass.'
+    },
+    {
+      eyebrow:'02 · Wrap',
+      title:'Secure where it matters. Controlled everywhere else.',
+      text:'Guide security depends on wrap length, thread build, resin control and preparation beneath the foot. Low-build construction manages avoidable weight and stiffness around the guide location.'
+    },
+    {
+      eyebrow:'03 · Progression',
+      title:'From line coil to controlled path.',
+      text:'A large offshore spinning reel releases broad coils of braid. Guide size and progression gradually control that movement while maintaining clearance and supporting the blank under load.'
+    },
+    {
+      eyebrow:'04 · Power',
+      title:'Power carried through the working section.',
+      text:'The main working section balances blank authority, guide support and controlled load transfer. It is where casting recovery becomes sustained pressure when the fight moves under load.'
+    }
+  ];
+
+  const anchor=document.createElement('span');
+  anchor.id='details';
+  anchor.setAttribute('aria-hidden','true');
+  anchor.style.cssText='display:block;position:relative;top:calc(var(--header) * -1);visibility:hidden;height:0;';
+  technical.parentNode.insertBefore(anchor,technical);
+  technical.setAttribute('aria-label','ASSAULT Engineering · Guide Architecture, Wrap, Progression and Power');
+  details.remove();
 })();
 </script>`;
 
@@ -95,7 +129,7 @@ export default {
           rewriter
             .on("body", {
               element(element) {
-                element.append(mergedStoryMarkup + mergedEngineeringMarkup, { html: true });
+                element.append(mergedStoryMarkup + engineeringPreviewMarkup, { html: true });
               },
             })
             .on('#updates form', {
