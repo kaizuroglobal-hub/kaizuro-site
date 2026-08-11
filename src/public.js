@@ -64,6 +64,45 @@ const mergedEngineeringMarkup = `<script>
 })();
 </script>`;
 
+const mergedHaloUpdatesMarkup = `<style>
+  #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel{box-sizing:border-box;background:#f4f4f2;color:#050505}
+  #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel .capture-box{box-sizing:border-box}
+  #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel .capture-box>p:not(.eyebrow){color:rgba(5,5,5,.68)}
+  #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel .capture-box>small{color:rgba(5,5,5,.54)}
+  @media(min-width:901px){
+    #halo.kz-halo-follow-merged{grid-template-rows:auto auto!important;align-items:center!important}
+    html body main #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel{grid-column:1/-1!important;grid-row:2!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;margin:clamp(38px,4vw,62px) 0 0!important;padding:clamp(48px,5vw,72px)!important;align-self:stretch!important}
+    html body main #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel>.capture-box.content-grid{display:grid!important;justify-items:center!important;align-content:center!important;width:min(760px,100%)!important;max-width:760px!important;margin:0 auto!important;padding:0!important;text-align:center!important}
+    html body main #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel .capture-box form{width:min(680px,100%)!important;margin:26px auto 0!important}
+  }
+  @media(max-width:900px){
+    #halo.kz-halo-follow-merged{display:grid!important;grid-template-columns:1fr!important;min-height:0!important;height:auto!important;padding:48px 0!important;overflow:hidden!important}
+    #halo.kz-halo-follow-merged .halo-copy{position:relative!important;grid-column:1!important;grid-row:1!important;width:calc(100% - 48px)!important;max-width:none!important;margin:0 auto!important;padding:0!important}
+    #halo.kz-halo-follow-merged .full-bleed-image{position:relative!important;inset:auto!important;grid-column:1!important;grid-row:2!important;width:calc(100% - 48px)!important;height:auto!important;margin:34px auto 0!important}
+    #halo.kz-halo-follow-merged .focal-halo img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:16/10!important;object-fit:cover!important;object-position:center!important}
+    #halo.kz-halo-follow-merged .hero-scrim,#halo.kz-halo-follow-merged::after{display:none!important}
+    html body main #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel{grid-column:1!important;grid-row:3!important;width:calc(100% - 48px)!important;min-height:0!important;height:auto!important;margin:36px auto 0!important;padding:40px 24px!important}
+    html body main #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel>.capture-box.content-grid{width:100%!important;max-width:720px!important;margin:0 auto!important;padding:0!important;text-align:left!important}
+  }
+  @media(max-width:640px){
+    #halo.kz-halo-follow-merged{padding:40px 0!important}
+    #halo.kz-halo-follow-merged .halo-copy,#halo.kz-halo-follow-merged .full-bleed-image{width:calc(100% - 40px)!important}
+    html body main #halo.kz-halo-follow-merged>#updates.kz-halo-follow-panel{width:calc(100% - 40px)!important;margin-top:30px!important;padding:34px 20px!important}
+  }
+</style>
+<script>
+(function(){
+  const halo=document.querySelector('#halo');
+  const updates=document.querySelector('#updates');
+  if(!halo||!updates||updates.parentElement===halo)return;
+  const repeatedEyebrow=updates.querySelector('.capture-box>.eyebrow');
+  if(repeatedEyebrow)repeatedEyebrow.remove();
+  halo.classList.add('kz-halo-follow-merged');
+  updates.classList.add('kz-halo-follow-panel');
+  halo.appendChild(updates);
+})();
+</script>`;
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -95,7 +134,7 @@ export default {
           rewriter
             .on("body", {
               element(element) {
-                element.append(mergedStoryMarkup + mergedEngineeringMarkup, { html: true });
+                element.append(mergedStoryMarkup + mergedEngineeringMarkup + mergedHaloUpdatesMarkup, { html: true });
               },
             })
             .on('#updates form', {
