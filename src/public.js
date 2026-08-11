@@ -26,6 +26,11 @@ export default {
               element.removeAttribute("enctype");
             },
           })
+          .on('#specifications .specifications-list > div:nth-child(9) dd', {
+            element(element) {
+              element.setInnerContent("FUJI DPSSD GM Deluxe Seat");
+            },
+          })
           .on('footer nav[aria-label="KAIZURO"] a[href="#evolution"]', {
             element(element) {
               element.before('<a href="/how-kaizuro-is-built/">How KAIZURO Is Built</a><a href="/partners/portal">Partners</a>', { html: true });
