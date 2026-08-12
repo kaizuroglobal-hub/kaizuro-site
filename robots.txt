@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /section-review.html
-Disallow: /founder-pack-preview.html
-Disallow: /engineering-preview.html
 
 Sitemap: https://kaizuro.com/sitemap.xml
