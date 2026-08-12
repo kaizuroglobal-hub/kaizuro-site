@@ -16,6 +16,14 @@ const assaultPreviewHeroFixMarkup = `<style>
   .assault-hero h1 span+span{margin-left:.18em!important}
   .assault-hero .assault-lead{max-width:860px!important;margin-top:18px!important;font-size:17px!important;line-height:1.5!important}
   .assault-hero .assault-actions{margin-top:44px!important}
+
+  .assault-intro-grid{display:block!important}
+  .assault-intro-grid>div:first-child{margin-bottom:48px!important}
+  .assault-intro-grid .assault-copy{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;max-width:none!important;padding-top:0!important;border-top:1px solid var(--assault-line)!important}
+  .assault-intro-grid .assault-copy p,
+  .assault-intro-grid .assault-copy strong{box-sizing:border-box!important;display:block!important;max-width:none!important;margin:0!important;padding:28px 32px 30px!important;border:0!important;border-right:1px solid var(--assault-line)!important;color:var(--assault-muted)!important;font-size:15px!important;font-weight:400!important;line-height:1.65!important;letter-spacing:normal!important}
+  .assault-intro-grid .assault-copy strong{border-right:0!important;color:#fff!important;font-size:22px!important;font-weight:600!important;line-height:1.18!important;letter-spacing:-.02em!important}
+  .assault-principles{margin-top:0!important}
 }
 </style>`;
 
