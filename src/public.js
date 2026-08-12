@@ -64,6 +64,85 @@ const mergedEngineeringMarkup = `<script>
 })();
 </script>`;
 
+const mergedPerformanceMarkup = `<style>
+  #proof.kz-performance-merged{box-sizing:border-box;min-height:0!important;height:auto!important;padding:clamp(78px,7vw,112px) var(--pad)!important;background:#070707!important}
+  #proof.kz-performance-merged>.kz-performance-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;width:100%;max-width:var(--max);margin:0 auto;border-top:1px solid rgba(244,244,242,.18)}
+  #proof.kz-performance-merged .kz-performance-proof{min-width:0;padding:clamp(34px,3vw,48px) clamp(48px,5vw,78px) 0 0}
+  #proof.kz-performance-merged .kz-performance-specs{min-width:0;padding:clamp(34px,3vw,48px) 0 0 clamp(48px,5vw,78px);border-left:1px solid rgba(244,244,242,.22)}
+  #proof.kz-performance-merged .kz-performance-proof>div:first-child{margin-bottom:clamp(28px,3vw,42px)}
+  #proof.kz-performance-merged .kz-performance-proof>div:first-child>.eyebrow{margin-bottom:clamp(24px,2vw,32px)}
+  #proof.kz-performance-merged .kz-performance-proof h2,
+  #proof.kz-performance-merged .kz-performance-specs h2{max-width:none!important;margin:0 0 clamp(22px,2vw,30px)!important;font-size:clamp(42px,4vw,64px)!important;font-weight:300!important;line-height:1.02!important;letter-spacing:-.03em!important;color:#f4f4f2!important}
+  #proof.kz-performance-merged .kz-performance-specs h2{display:flex!important;flex-wrap:wrap!important;gap:0 .18em!important;white-space:normal!important}
+  #proof.kz-performance-merged .kz-performance-specs h2 span{display:inline!important;white-space:nowrap!important}
+  #proof.kz-performance-merged .kz-performance-proof>div:first-child>p:not(.eyebrow){max-width:620px;color:rgba(244,244,242,.68)}
+  #proof.kz-performance-merged .proof-panel{border-top:1px solid rgba(244,244,242,.18)!important}
+  #proof.kz-performance-merged .metric-row{padding:clamp(14px,1.3vw,19px) 0!important;border-bottom:1px solid rgba(244,244,242,.16)!important}
+  #proof.kz-performance-merged .metric-row strong{font-size:clamp(34px,3.2vw,50px)!important}
+  #proof.kz-performance-merged .load-curve{box-sizing:border-box;width:100%!important;max-width:none!important;height:auto!important;aspect-ratio:2.05/1!important;margin:clamp(24px,2.5vw,36px) 0 0!important;padding:0!important;overflow:hidden!important;border:1px solid rgba(244,244,242,.18)!important;border-radius:8px!important;background:#050505!important}
+  #proof.kz-performance-merged .load-curve svg{display:block!important;width:100%!important;height:100%!important}
+  #proof.kz-performance-merged .curve-heading{max-width:680px;margin:18px 0 10px!important;font-size:clamp(17px,1.4vw,21px)!important;color:rgba(244,244,242,.72)!important}
+  #proof.kz-performance-merged .proof-disclosure{max-width:680px;color:rgba(244,244,242,.48)!important}
+  #proof.kz-performance-merged #specifications{display:block!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
+  #proof.kz-performance-merged #specifications .specifications-intro{margin:0 0 clamp(22px,2vw,30px)!important}
+  #proof.kz-performance-merged #specifications .specifications-intro>.eyebrow{margin-bottom:clamp(24px,2vw,32px)!important}
+  #proof.kz-performance-merged #specifications .specifications-summary{max-width:620px;margin:0 0 28px!important;color:rgba(244,244,242,.64)!important}
+  #proof.kz-performance-merged #specifications .specifications-list{margin:0!important;border-top:1px solid rgba(244,244,242,.24)!important}
+  #proof.kz-performance-merged #specifications .specifications-list div{grid-template-columns:minmax(150px,.72fr) minmax(220px,1.28fr)!important;gap:24px!important;padding:17px 0!important;border-bottom:1px solid rgba(244,244,242,.14)!important}
+  #proof.kz-performance-merged #specifications dt{color:rgba(244,244,242,.56)!important}
+  #proof.kz-performance-merged #specifications dd{color:#f4f4f2!important}
+  #proof.kz-performance-merged #specifications .specifications-note{grid-column:auto!important;max-width:680px;margin:18px 0 0!important;color:rgba(244,244,242,.46)!important}
+  #proof.kz-performance-merged .kz-performance-proof>div:first-child .kaizuro-section-cta{display:none!important}
+  #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]{box-sizing:border-box;min-height:54px;margin-top:30px!important;padding:0 26px!important;border:1px solid rgba(205,205,202,.72)!important;background:transparent!important;color:#cdcdca!important}
+  #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]:hover,
+  #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]:focus-visible{border-color:#e0e0dd!important;color:#e0e0dd!important;background:transparent!important}
+  @media(max-width:1100px){
+    #proof.kz-performance-merged{padding:64px 24px!important}
+    #proof.kz-performance-merged>.kz-performance-grid{grid-template-columns:1fr}
+    #proof.kz-performance-merged .kz-performance-proof{padding:34px 0 54px}
+    #proof.kz-performance-merged .kz-performance-specs{padding:52px 0 0;border-top:1px solid rgba(244,244,242,.22);border-left:0}
+    #proof.kz-performance-merged .kz-performance-proof h2,#proof.kz-performance-merged .kz-performance-specs h2{font-size:clamp(40px,7vw,58px)!important}
+  }
+  @media(max-width:640px){
+    #proof.kz-performance-merged{padding:52px 20px!important}
+    #proof.kz-performance-merged .kz-performance-proof{padding-top:28px;padding-bottom:44px}
+    #proof.kz-performance-merged .kz-performance-specs{padding-top:44px}
+    #proof.kz-performance-merged .kz-performance-proof h2,#proof.kz-performance-merged .kz-performance-specs h2{font-size:clamp(38px,10vw,48px)!important}
+    #proof.kz-performance-merged #specifications .specifications-list div{grid-template-columns:1fr!important;gap:7px!important;padding:15px 0!important}
+    #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]{width:100%!important}
+  }
+</style>
+<script>
+(function(){
+  const proof=document.querySelector('#proof');
+  const specifications=document.querySelector('#specifications');
+  const proofGrid=proof?.querySelector('.proof-grid');
+  const specificationsGrid=specifications?.querySelector('.specifications-grid');
+  if(!proof||!specifications||!proofGrid||!specificationsGrid||proof.classList.contains('kz-performance-merged'))return;
+
+  const performanceGrid=document.createElement('div');
+  performanceGrid.className='kz-performance-grid';
+
+  const proofColumn=document.createElement('div');
+  proofColumn.className='kz-performance-proof';
+  while(proofGrid.firstChild)proofColumn.appendChild(proofGrid.firstChild);
+
+  const specsColumn=document.createElement('div');
+  specsColumn.className='kz-performance-specs';
+  specsColumn.id='specifications';
+  while(specificationsGrid.firstChild)specsColumn.appendChild(specificationsGrid.firstChild);
+
+  const performanceEyebrow=proofColumn.querySelector(':scope>div:first-child>.eyebrow');
+  if(performanceEyebrow)performanceEyebrow.textContent='Performance & Specifications';
+
+  performanceGrid.appendChild(proofColumn);
+  performanceGrid.appendChild(specsColumn);
+  proofGrid.replaceWith(performanceGrid);
+  specifications.remove();
+  proof.classList.add('kz-performance-merged');
+})();
+</script>`;
+
 const commercialTermsLightMarkup = `<style>
   #terms.terms-section{background:#f4f4f2!important;color:#050505!important}
   #terms .eyebrow{color:rgba(5,5,5,.52)!important}
@@ -104,7 +183,7 @@ export default {
           rewriter
             .on("body", {
               element(element) {
-                element.append(mergedStoryMarkup + mergedEngineeringMarkup + commercialTermsLightMarkup, { html: true });
+                element.append(mergedStoryMarkup + mergedEngineeringMarkup + mergedPerformanceMarkup + commercialTermsLightMarkup, { html: true });
               },
             })
             .on('#updates form', {
