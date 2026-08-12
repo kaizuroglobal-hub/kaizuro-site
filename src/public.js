@@ -187,6 +187,11 @@ export default {
 
         if (isHomepage) {
           rewriter
+            .on("head > script:first-of-type", {
+              element(element) {
+                element.remove();
+              },
+            })
             .on("body", {
               element(element) {
                 element.append(mergedStoryMarkup + mergedEngineeringMarkup + mergedPerformanceMarkup + commercialTermsLightMarkup, { html: true });
