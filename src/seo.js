@@ -14,7 +14,7 @@ const assaultPreviewHeroFixMarkup = `<style>
   .assault-hero h1{font-size:clamp(54px,4.5vw,70px)!important;line-height:.92!important;white-space:nowrap!important}
   .assault-hero h1 span{display:inline!important}
   .assault-hero h1 span+span{margin-left:.18em!important}
-  .assault-hero .assault-lead{max-width:700px!important;margin-top:18px!important;font-size:17px!important;line-height:1.5!important}
+  .assault-hero .assault-lead{max-width:860px!important;margin-top:18px!important;font-size:17px!important;line-height:1.5!important}
   .assault-hero .assault-actions{margin-top:22px!important}
 }
 </style>`;
