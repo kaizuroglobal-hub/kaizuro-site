@@ -205,11 +205,18 @@ export function applySeoHead(rewriter, pathname) {
   }
 
   if (isAssaultPreview) {
-    return rewriter.on("head", {
-      element(element) {
-        element.append(siteIconMarkup + temporaryNoIndexMarkup + assaultPreviewHeroFixMarkup, { html: true });
-      },
-    });
+    return rewriter
+      .on("head", {
+        element(element) {
+          element.append(siteIconMarkup + temporaryNoIndexMarkup + assaultPreviewHeroFixMarkup, { html: true });
+        },
+      })
+      .on('.site-footer .footer-links nav[aria-label="KAIZURO"] a:nth-of-type(3)', {
+        element(element) {
+          element.setAttribute("href", "/#evolution");
+          element.setInnerContent("Development");
+        },
+      });
   }
 
   return rewriter.on("head", {
