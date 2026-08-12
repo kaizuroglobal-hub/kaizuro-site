@@ -7,10 +7,10 @@ const siteIconMarkup = '<link rel="icon" href="/favicon.svg" type="image/svg+xml
 const homepageLayoutFixMarkup = '<style>#proof.kz-performance-merged>.kz-performance-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}</style>';
 const assaultPreviewHeroFixMarkup = `<style>
 @media (min-width:1001px){
-  .assault-hero{height:840px!important;min-height:0!important;display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important;overflow:hidden!important;background:#111315!important}
-  .assault-hero>img{position:absolute!important;inset:0 0 auto 0!important;width:100%!important;height:330px!important;object-fit:cover!important;object-position:center 56%!important;transform:none!important;filter:brightness(.72) contrast(1.05)!important;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)!important;mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)!important}
+  .assault-hero{height:840px!important;min-height:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:36px!important;position:relative!important;overflow:hidden!important;background:#111315!important}
+  .assault-hero>img{position:relative!important;inset:auto!important;display:block!important;width:100%!important;height:300px!important;flex:0 0 300px!important;object-fit:cover!important;object-position:center 56%!important;transform:none!important;margin:0!important;filter:brightness(.72) contrast(1.05)!important;-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)!important;mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)!important}
   .assault-hero::after{content:""!important;position:absolute!important;inset:0!important;background:linear-gradient(180deg,rgba(8,9,10,.04) 0%,rgba(8,9,10,.06) 34%,rgba(8,9,10,.16) 58%,rgba(8,9,10,.34) 100%)!important;pointer-events:none!important}
-  .assault-hero .assault-hero-copy{position:relative!important;z-index:2!important;box-sizing:border-box!important;width:min(900px,calc(100% - 96px))!important;margin:0 auto!important;padding:0!important;transform:none!important}
+  .assault-hero .assault-hero-copy{position:relative!important;z-index:2!important;box-sizing:border-box!important;width:min(900px,calc(100% - 96px))!important;margin:0 auto!important;padding:0!important;transform:none!important;flex:0 0 auto!important}
   .assault-hero h1{font-size:clamp(54px,4.5vw,70px)!important;line-height:.92!important;white-space:nowrap!important}
   .assault-hero h1 span{display:inline!important}
   .assault-hero h1 span+span{margin-left:.18em!important}
