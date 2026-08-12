@@ -2,6 +2,7 @@ const SITE_URL = "https://kaizuro.com";
 
 const homepageDescription = "KAIZURO builds premium offshore casting rods for GT, tuna, dogtooth tuna and large pelagics. Explore ASSAULT PE6-8, HALO PE10-12, engineering validation and Founder 100 allocation.";
 const builtDescription = "How KAIZURO offshore fishing rods are designed in Australia, developed through physical prototypes, tested under load and manufactured with a specialist high-performance rod partner.";
+const temporaryNoIndexMarkup = '<meta name="robots" content="noindex,follow,noarchive">';
 
 function jsonLd(value) {
   return `<script type="application/ld+json">${JSON.stringify(value)}</script>`;
@@ -9,7 +10,7 @@ function jsonLd(value) {
 
 export const homepageSeoMarkup = `
 <link rel="canonical" href="${SITE_URL}/">
-<meta name="robots" content="noindex,follow,noarchive">
+${temporaryNoIndexMarkup}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KAIZURO">
 <meta property="og:locale" content="en_AU">
@@ -61,7 +62,7 @@ ${jsonLd({
 
 export const builtSeoMarkup = `
 <link rel="canonical" href="${SITE_URL}/how-kaizuro-is-built/">
-<meta name="robots" content="noindex,follow,noarchive">
+${temporaryNoIndexMarkup}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KAIZURO">
 <meta property="og:locale" content="en_AU">
@@ -130,7 +131,11 @@ export function applySeoHead(rewriter, pathname) {
       .on("head", { element(element) { element.append(builtSeoMarkup, { html: true }); } });
   }
 
-  return rewriter;
+  return rewriter.on("head", {
+    element(element) {
+      element.append(temporaryNoIndexMarkup, { html: true });
+    },
+  });
 }
 
 export function withNoIndexHeaders(response) {
