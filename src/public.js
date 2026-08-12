@@ -66,10 +66,10 @@ const mergedEngineeringMarkup = `<script>
 
 const mergedPerformanceMarkup = `<style>
   #proof.kz-performance-merged{box-sizing:border-box;min-height:0!important;height:auto!important;padding:clamp(78px,7vw,112px) var(--pad)!important;background:#070707!important}
-  #proof.kz-performance-merged>.kz-performance-grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);column-gap:clamp(72px,7vw,110px);width:100%;max-width:var(--max);margin:0 auto;border-top:1px solid rgba(244,244,242,.18)}
+  #proof.kz-performance-merged>.kz-performance-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);column-gap:clamp(120px,9vw,160px);width:100%;max-width:var(--max);margin:0 auto;border-top:1px solid rgba(244,244,242,.18)}
   #proof.kz-performance-merged .kz-performance-proof{min-width:0;padding:clamp(34px,3vw,48px) 0 0}
   #proof.kz-performance-merged #specifications.kz-performance-specs{display:block!important;box-sizing:border-box!important;min-width:0!important;min-height:0!important;height:auto!important;margin:0!important;padding:clamp(34px,3vw,48px) 0 0!important;border:0!important;background:transparent!important;align-content:start!important;position:relative!important}
-  #proof.kz-performance-merged #specifications.kz-performance-specs:before{content:"";position:absolute;top:0;bottom:0;left:calc(clamp(72px,7vw,110px)/-2);width:1px;background:rgba(244,244,242,.22)}
+  #proof.kz-performance-merged #specifications.kz-performance-specs:before{content:"";position:absolute;top:0;bottom:0;left:calc(clamp(120px,9vw,160px)/-2);width:1px;background:rgba(244,244,242,.22)}
   #proof.kz-performance-merged .kz-performance-proof>div:first-child{margin-bottom:clamp(28px,3vw,42px)}
   #proof.kz-performance-merged .kz-performance-proof>div:first-child>.eyebrow{margin-bottom:clamp(24px,2vw,32px)}
   #proof.kz-performance-merged .kz-performance-proof h2,
