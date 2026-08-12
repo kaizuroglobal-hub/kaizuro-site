@@ -19,6 +19,7 @@ function applyImagePerformance(rewriter, pathname) {
       {
         element(element) {
           element.setAttribute("loading", "lazy");
+          element.setAttribute("fetchpriority", "low");
           if (!element.getAttribute("decoding")) {
             element.setAttribute("decoding", "async");
           }
@@ -31,6 +32,7 @@ function applyImagePerformance(rewriter, pathname) {
     return rewriter.on('.built-section img, .built-statement img, .built-quote img, .built-close img', {
       element(element) {
         element.setAttribute("loading", "lazy");
+        element.setAttribute("fetchpriority", "low");
         if (!element.getAttribute("decoding")) {
           element.setAttribute("decoding", "async");
         }
