@@ -30,7 +30,7 @@ const mergedStoryMarkup = `<style>
   const principles=document.querySelector('#principles');
   if(!story||!principles||principles.parentElement===story)return;
   const duplicate=[...story.querySelectorAll('.story-copy>p:not(.eyebrow)')].find((p)=>{
-    const text=p.textContent.replace(/\\s+/g,' ').trim().toLowerCase();
+    const text=p.textContent.replace(/\s+/g,' ').trim().toLowerCase();
     return text.includes('remove compromise')&&text.includes('prove the structure')&&text.includes('refine relentlessly');
   });
   if(duplicate)duplicate.remove();
@@ -64,6 +64,15 @@ const mergedEngineeringMarkup = `<script>
 })();
 </script>`;
 
+const commercialTermsLightMarkup = `<style>
+  #terms.terms-section{background:#f4f4f2!important;color:#050505!important}
+  #terms .eyebrow{color:rgba(5,5,5,.52)!important}
+  #terms h2,#terms .terms-list summary{color:#050505!important}
+  #terms .terms-list{border-top-color:rgba(5,5,5,.22)!important}
+  #terms .terms-list details{border-bottom-color:rgba(5,5,5,.22)!important}
+  #terms .terms-list p{color:rgba(5,5,5,.66)!important}
+</style>`;
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -95,7 +104,7 @@ export default {
           rewriter
             .on("body", {
               element(element) {
-                element.append(mergedStoryMarkup + mergedEngineeringMarkup, { html: true });
+                element.append(mergedStoryMarkup + mergedEngineeringMarkup + commercialTermsLightMarkup, { html: true });
               },
             })
             .on('#updates form', {
