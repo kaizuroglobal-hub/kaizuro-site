@@ -8,6 +8,38 @@ function jsonLd(value) {
   return `<script type="application/ld+json">${JSON.stringify(value)}</script>`;
 }
 
+function applyImagePerformance(rewriter, pathname) {
+  const isHomepage = pathname === "/" || pathname === "/index.html";
+  const isBuiltPage = pathname === "/how-kaizuro-is-built" || pathname === "/how-kaizuro-is-built/" || pathname === "/how-kaizuro-is-built/index.html";
+
+  if (isHomepage) {
+    return rewriter.on(
+      '#story img, #assault img, #details img, #technical img, #grip img, #reel img, #founder img, #halo img',
+      {
+        element(element) {
+          element.setAttribute("loading", "lazy");
+          if (!element.getAttribute("decoding")) {
+            element.setAttribute("decoding", "async");
+          }
+        },
+      },
+    );
+  }
+
+  if (isBuiltPage) {
+    return rewriter.on('.built-section img, .built-statement img, .built-quote img, .built-close img', {
+      element(element) {
+        element.setAttribute("loading", "lazy");
+        if (!element.getAttribute("decoding")) {
+          element.setAttribute("decoding", "async");
+        }
+      },
+    });
+  }
+
+  return rewriter;
+}
+
 export const homepageSeoMarkup = `
 <link rel="canonical" href="${SITE_URL}/">
 ${temporaryNoIndexMarkup}
@@ -116,6 +148,8 @@ ${jsonLd({
 export function applySeoHead(rewriter, pathname) {
   const isHomepage = pathname === "/" || pathname === "/index.html";
   const isBuiltPage = pathname === "/how-kaizuro-is-built" || pathname === "/how-kaizuro-is-built/" || pathname === "/how-kaizuro-is-built/index.html";
+
+  rewriter = applyImagePerformance(rewriter, pathname);
 
   if (isHomepage) {
     return rewriter
