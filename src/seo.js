@@ -20,9 +20,9 @@ const assaultPreviewHeroFixMarkup = `<style>
 
   .assault-intro-grid{display:block!important}
   .assault-intro-grid>div:first-child{margin-bottom:48px!important}
-  .assault-intro-grid .assault-copy{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;max-width:none!important;padding-top:0!important;border-top:0!important;align-items:start!important}
+  .assault-intro-grid .assault-copy{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1px!important;max-width:none!important;padding:0 1px!important;box-sizing:border-box!important;border-top:0!important;align-items:start!important}
   .assault-intro-grid .assault-copy p,
-  .assault-intro-grid .assault-copy strong{box-sizing:border-box!important;display:block!important;max-width:none!important;margin:0!important;padding:28px 32px 30px!important;border:0!important;color:var(--assault-muted)!important;font-size:15px!important;font-weight:400!important;line-height:1.65!important;letter-spacing:normal!important}
+  .assault-intro-grid .assault-copy strong{box-sizing:border-box!important;display:block!important;max-width:none!important;margin:0!important;padding:28px 30px 30px!important;border:0!important;color:var(--assault-muted)!important;font-size:15px!important;font-weight:400!important;line-height:1.65!important;letter-spacing:normal!important;text-align:left!important}
   .assault-intro-grid .assault-copy strong{color:#fff!important;font-size:22px!important;font-weight:600!important;line-height:1.18!important;letter-spacing:-.02em!important}
   .assault-principles{margin-top:0!important}
 }
