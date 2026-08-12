@@ -68,7 +68,7 @@ const mergedPerformanceMarkup = `<style>
   #proof.kz-performance-merged{box-sizing:border-box;min-height:0!important;height:auto!important;padding:clamp(78px,7vw,112px) var(--pad)!important;background:#070707!important}
   #proof.kz-performance-merged>.kz-performance-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;width:100%;max-width:var(--max);margin:0 auto;border-top:1px solid rgba(244,244,242,.18)}
   #proof.kz-performance-merged .kz-performance-proof{min-width:0;padding:clamp(34px,3vw,48px) clamp(48px,5vw,78px) 0 0}
-  #proof.kz-performance-merged .kz-performance-specs{min-width:0;padding:clamp(34px,3vw,48px) 0 0 clamp(48px,5vw,78px);border-left:1px solid rgba(244,244,242,.22)}
+  #proof.kz-performance-merged #specifications.kz-performance-specs{display:block!important;box-sizing:border-box!important;min-width:0!important;min-height:0!important;height:auto!important;margin:0!important;padding:clamp(34px,3vw,48px) 0 0 clamp(48px,5vw,78px)!important;border:0!important;border-left:1px solid rgba(244,244,242,.22)!important;background:transparent!important;align-content:start!important}
   #proof.kz-performance-merged .kz-performance-proof>div:first-child{margin-bottom:clamp(28px,3vw,42px)}
   #proof.kz-performance-merged .kz-performance-proof>div:first-child>.eyebrow{margin-bottom:clamp(24px,2vw,32px)}
   #proof.kz-performance-merged .kz-performance-proof h2,
@@ -83,30 +83,29 @@ const mergedPerformanceMarkup = `<style>
   #proof.kz-performance-merged .load-curve svg{display:block!important;width:100%!important;height:100%!important}
   #proof.kz-performance-merged .curve-heading{max-width:680px;margin:18px 0 10px!important;font-size:clamp(17px,1.4vw,21px)!important;color:rgba(244,244,242,.72)!important}
   #proof.kz-performance-merged .proof-disclosure{max-width:680px;color:rgba(244,244,242,.48)!important}
-  #proof.kz-performance-merged #specifications{display:block!important;min-height:0!important;height:auto!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important}
-  #proof.kz-performance-merged #specifications .specifications-intro{margin:0 0 clamp(22px,2vw,30px)!important}
+  #proof.kz-performance-merged #specifications .specifications-intro{margin:0 0 clamp(34px,3vw,44px)!important}
   #proof.kz-performance-merged #specifications .specifications-intro>.eyebrow{margin-bottom:clamp(24px,2vw,32px)!important}
-  #proof.kz-performance-merged #specifications .specifications-summary{max-width:620px;margin:0 0 28px!important;color:rgba(244,244,242,.64)!important}
+  #proof.kz-performance-merged #specifications .specifications-summary{max-width:620px;margin:0!important;color:rgba(244,244,242,.64)!important}
   #proof.kz-performance-merged #specifications .specifications-list{margin:0!important;border-top:1px solid rgba(244,244,242,.24)!important}
   #proof.kz-performance-merged #specifications .specifications-list div{grid-template-columns:minmax(150px,.72fr) minmax(220px,1.28fr)!important;gap:24px!important;padding:17px 0!important;border-bottom:1px solid rgba(244,244,242,.14)!important}
   #proof.kz-performance-merged #specifications dt{color:rgba(244,244,242,.56)!important}
   #proof.kz-performance-merged #specifications dd{color:#f4f4f2!important}
   #proof.kz-performance-merged #specifications .specifications-note{grid-column:auto!important;max-width:680px;margin:18px 0 0!important;color:rgba(244,244,242,.46)!important}
   #proof.kz-performance-merged .kz-performance-proof>div:first-child .kaizuro-section-cta{display:none!important}
-  #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]{box-sizing:border-box;min-height:54px;margin-top:30px!important;padding:0 26px!important;border:1px solid rgba(205,205,202,.72)!important;background:transparent!important;color:#cdcdca!important}
+  #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]{box-sizing:border-box;min-height:54px;margin-top:clamp(34px,3vw,42px)!important;padding:0 26px!important;border:1px solid rgba(205,205,202,.72)!important;background:transparent!important;color:#cdcdca!important}
   #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]:hover,
   #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]:focus-visible{border-color:#e0e0dd!important;color:#e0e0dd!important;background:transparent!important}
   @media(max-width:1100px){
     #proof.kz-performance-merged{padding:64px 24px!important}
     #proof.kz-performance-merged>.kz-performance-grid{grid-template-columns:1fr}
     #proof.kz-performance-merged .kz-performance-proof{padding:34px 0 54px}
-    #proof.kz-performance-merged .kz-performance-specs{padding:52px 0 0;border-top:1px solid rgba(244,244,242,.22);border-left:0}
+    #proof.kz-performance-merged #specifications.kz-performance-specs{padding:52px 0 0!important;border-left:0!important;border-top:1px solid rgba(244,244,242,.22)!important}
     #proof.kz-performance-merged .kz-performance-proof h2,#proof.kz-performance-merged .kz-performance-specs h2{font-size:clamp(40px,7vw,58px)!important}
   }
   @media(max-width:640px){
     #proof.kz-performance-merged{padding:52px 20px!important}
     #proof.kz-performance-merged .kz-performance-proof{padding-top:28px;padding-bottom:44px}
-    #proof.kz-performance-merged .kz-performance-specs{padding-top:44px}
+    #proof.kz-performance-merged #specifications.kz-performance-specs{padding-top:44px!important}
     #proof.kz-performance-merged .kz-performance-proof h2,#proof.kz-performance-merged .kz-performance-specs h2{font-size:clamp(38px,10vw,48px)!important}
     #proof.kz-performance-merged #specifications .specifications-list div{grid-template-columns:1fr!important;gap:7px!important;padding:15px 0!important}
     #proof.kz-performance-merged #specifications .kaizuro-section-cta[data-cta-tone="primary"]{width:100%!important}
