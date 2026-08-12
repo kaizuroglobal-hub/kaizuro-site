@@ -27,7 +27,7 @@ const assaultPreviewHeroFixMarkup = `<style>
   .assault-principles{margin-top:0!important}
 
   #specifications{padding-top:51px!important;padding-bottom:51px!important}
-  #specifications .assault-note{font-size:15px!important;line-height:1.5!important}
+  #specifications .assault-note{font-size:20px!important;line-height:1.5!important;color:#fff!important}
   #specifications .assault-specs-list dt,
   #specifications .assault-specs-list dd{font-size:15px!important;line-height:1.5!important}
 
