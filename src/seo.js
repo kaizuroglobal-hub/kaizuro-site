@@ -37,6 +37,17 @@ const assaultPreviewHeroFixMarkup = `<style>
 }
 </style>`;
 
+const assaultPreviewFooterFixMarkup = `<style>
+.footer-socials{display:grid;gap:13px;align-content:start}
+.footer-socials b{color:rgba(255,255,255,.54);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+.footer-socials a{width:fit-content;color:rgba(255,255,255,.78);font-size:14px;text-decoration:none;transition:color .18s ease,transform .18s ease}
+.footer-socials a:hover,.footer-socials a:focus-visible{color:#fff;transform:translateX(2px)}
+.mobile-socials{display:none}
+@media(min-width:1101px){.site-footer .footer-links{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:1100px){.footer-socials{margin-top:30px}.mobile-socials{display:grid;gap:12px;margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}.mobile-socials span{color:rgba(255,255,255,.48);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}.mobile-socials a{color:rgba(255,255,255,.8);font-size:15px;text-decoration:none}}
+@media(max-width:640px){.site-footer .footer-links{grid-template-columns:1fr 1fr!important;gap:34px 26px!important}.footer-socials{grid-column:1/-1}}
+</style>`;
+
 function jsonLd(value) {
   return `<script type="application/ld+json">${JSON.stringify(value)}</script>`;
 }
@@ -208,13 +219,32 @@ export function applySeoHead(rewriter, pathname) {
     return rewriter
       .on("head", {
         element(element) {
-          element.append(siteIconMarkup + temporaryNoIndexMarkup + assaultPreviewHeroFixMarkup, { html: true });
+          element.append(siteIconMarkup + temporaryNoIndexMarkup + assaultPreviewHeroFixMarkup + assaultPreviewFooterFixMarkup, { html: true });
         },
       })
-      .on('.site-footer .footer-links nav[aria-label="KAIZURO"] a:nth-of-type(3)', {
+      .on('.site-footer .footer-links nav[aria-label="Products"]', {
         element(element) {
-          element.setAttribute("href", "/#evolution");
-          element.setInnerContent("Development");
+          element.setInnerContent('<b>Products</b><a href="/#assault">ASSAULT PE6-8</a><a href="/#founder">Founder 100</a><a href="/#halo">HALO PE10-12</a>', { html: true });
+        },
+      })
+      .on('.site-footer .footer-links nav[aria-label="KAIZURO"]', {
+        element(element) {
+          element.setInnerContent('<b>KAIZURO</b><a href="/#story">Our Story</a><a href="/#details">Engineering</a><a href="/#proof">Physical Proof</a><a href="/how-kaizuro-is-built/">How KAIZURO Is Built</a><a href="/partners/portal">Partners</a><a href="/#evolution">Development</a>', { html: true });
+        },
+      })
+      .on('.site-footer .footer-links nav[aria-label="Support"]', {
+        element(element) {
+          element.setInnerContent('<b>Support</b><a href="/#terms">Founder Terms</a><a href="mailto:info@kaizuro.com">Contact</a><a href="mailto:info@kaizuro.com?subject=Warranty">Warranty</a><a href="mailto:info@kaizuro.com?subject=Shipping">Shipping</a><a href="mailto:info@kaizuro.com?subject=Privacy">Privacy</a>', { html: true });
+        },
+      })
+      .on('.site-footer .footer-links', {
+        element(element) {
+          element.append('<nav class="footer-socials" aria-label="Follow KAIZURO"><b>Follow KAIZURO</b><a href="https://www.instagram.com/kaizuro_official/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.linkedin.com/in/gregorygriffiths/" target="_blank" rel="noopener noreferrer">Founder Profile</a></nav>', { html: true });
+        },
+      })
+      .on('.site-footer .footer-bottom', {
+        element(element) {
+          element.setInnerContent('KAIZURO · Over-engineered on purpose. © 2026 KAIZURO. All rights reserved.');
         },
       });
   }
