@@ -30,6 +30,9 @@ const assaultPreviewHeroFixMarkup = `<style>
   #specifications .assault-note{font-size:15px!important;line-height:1.5!important}
   #specifications .assault-specs-list dt,
   #specifications .assault-specs-list dd{font-size:15px!important;line-height:1.5!important}
+
+  .assault-proof-grid>div:first-child .assault-copy{margin-left:0!important;padding-left:0!important;text-align:left!important}
+  .assault-proof-grid>div:first-child .assault-copy p{margin-left:0!important;padding-left:0!important;text-align:left!important}
 }
 </style>`;
 
