@@ -18,6 +18,8 @@ const assaultPreviewHeroFixMarkup = `<style>
   .assault-hero .assault-actions{margin-top:44px!important}
   .assault-status div{text-align:center!important}
 
+  .assault-section{padding-top:110px!important;padding-bottom:110px!important}
+
   .assault-intro-grid{display:block!important}
   .assault-intro-grid>div:first-child{margin-bottom:48px!important}
   .assault-intro-grid .assault-copy{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1px!important;max-width:none!important;padding:0 1px!important;box-sizing:border-box!important;border-top:0!important;align-items:start!important}
@@ -26,7 +28,6 @@ const assaultPreviewHeroFixMarkup = `<style>
   .assault-intro-grid .assault-copy strong{color:#fff!important;font-size:22px!important;font-weight:600!important;line-height:1.18!important;letter-spacing:-.02em!important}
   .assault-principles{margin-top:0!important}
 
-  #specifications{padding-top:51px!important;padding-bottom:51px!important}
   #specifications .assault-note{font-size:20px!important;line-height:1.5!important;color:#fff!important}
   #specifications .assault-specs-list dt,
   #specifications .assault-specs-list dd{font-size:15px!important;line-height:1.5!important}
