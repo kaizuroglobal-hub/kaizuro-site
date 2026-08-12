@@ -1,6 +1,59 @@
 import app from "./index.js";
 import { applySeoHead, withNoIndexHeaders } from "./seo.js";
 
+const ASSAULT_PREVIEW_PATH = "/assault-pe6-8-preview";
+const ASSAULT_PREVIEW_PASSWORD_HASH = "96e4f8728be28f1e1dd81783226c92d1735cb7ebc443f274b431ee8a7326234e";
+const ASSAULT_PREVIEW_COOKIE = "kz_assault_preview";
+const ASSAULT_PREVIEW_COOKIE_VALUE = "i61i93pF_QJGnJPrR668VxwdKZEQFzQm";
+
+const assaultPreviewLockMarkup = (invalid = false) => `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <title>KAIZURO Preview Access</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#050606;color:#f4f4f2;font-family:Inter,Arial,sans-serif}body{min-height:100svh;display:grid;place-items:center;padding:24px}.lock{width:min(420px,100%);padding:38px;border:1px solid rgba(255,255,255,.18);background:#0a0b0c}.brand{margin:0 0 42px;font-size:17px;font-weight:700;letter-spacing:.18em}.eyebrow{margin:0 0 12px;color:rgba(255,255,255,.5);font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}h1{margin:0 0 14px;font-size:36px;font-weight:300;line-height:1.02;letter-spacing:-.04em}p{margin:0 0 28px;color:rgba(255,255,255,.62);font-size:14px;line-height:1.6}form{display:grid;gap:12px}input{width:100%;height:52px;padding:0 15px;border:1px solid rgba(255,255,255,.28);background:#050606;color:#fff;font:inherit;outline:none}input:focus{border-color:rgba(255,255,255,.7)}button{height:52px;border:1px solid #f4f4f2;background:#f4f4f2;color:#050606;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}.error{margin:0 0 14px;color:#f1b7b7;font-size:12px}@media(max-width:520px){.lock{padding:28px 22px}h1{font-size:32px}}
+  </style>
+</head>
+<body>
+  <main class="lock">
+    <div class="brand">KAIZURO</div>
+    <p class="eyebrow">Private preview</p>
+    <h1>ASSAULT PE6-8</h1>
+    <p>This page is currently under development and is not publicly available.</p>
+    ${invalid ? '<div class="error">Incorrect password.</div>' : ''}
+    <form method="post" action="/assault-pe6-8-preview/">
+      <input type="password" name="password" autocomplete="current-password" placeholder="Password" required autofocus>
+      <button type="submit">View Preview</button>
+    </form>
+  </main>
+</body>
+</html>`;
+
+async function sha256Hex(value) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function hasAssaultPreviewAccess(request) {
+  const cookie = request.headers.get("Cookie") || "";
+  return cookie.split(";").some((part) => part.trim() === `${ASSAULT_PREVIEW_COOKIE}=${ASSAULT_PREVIEW_COOKIE_VALUE}`);
+}
+
+function assaultPreviewLockResponse(invalid = false, status = 200) {
+  return new Response(assaultPreviewLockMarkup(invalid), {
+    status,
+    headers: {
+      "Content-Type": "text/html; charset=UTF-8",
+      "Cache-Control": "no-store, no-cache, must-revalidate",
+      "X-Robots-Tag": "noindex, nofollow, noarchive",
+    },
+  });
+}
+
 const backToTopMarkup = `<style>
   .kz-back-to-top{position:fixed;right:24px;bottom:24px;z-index:70;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.3);background:rgba(5,5,5,.82);color:#f4f4f2;font:400 24px/1 Arial,sans-serif;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease,border-color .2s ease}
   .kz-back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
@@ -159,6 +212,30 @@ const commercialTermsLightMarkup = `<style>
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    const isAssaultPreview = url.pathname === ASSAULT_PREVIEW_PATH || url.pathname.startsWith(`${ASSAULT_PREVIEW_PATH}/`);
+    if (isAssaultPreview) {
+      if (request.method === "POST") {
+        const form = await request.formData();
+        const password = String(form.get("password") || "");
+        if (await sha256Hex(password) === ASSAULT_PREVIEW_PASSWORD_HASH) {
+          return new Response(null, {
+            status: 303,
+            headers: {
+              Location: "/assault-pe6-8-preview/",
+              "Set-Cookie": `${ASSAULT_PREVIEW_COOKIE}=${ASSAULT_PREVIEW_COOKIE_VALUE}; Path=/assault-pe6-8-preview/; Max-Age=86400; HttpOnly; Secure; SameSite=Strict`,
+              "Cache-Control": "no-store",
+              "X-Robots-Tag": "noindex, nofollow, noarchive",
+            },
+          });
+        }
+        return assaultPreviewLockResponse(true, 401);
+      }
+
+      if (!hasAssaultPreviewAccess(request)) {
+        return assaultPreviewLockResponse(false, 200);
+      }
+    }
 
     // Secure same-domain handoff for the Follow the Build email field.
     if (url.pathname === "/join" && request.method === "POST") {
