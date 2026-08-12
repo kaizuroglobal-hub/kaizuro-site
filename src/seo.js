@@ -25,6 +25,11 @@ const assaultPreviewHeroFixMarkup = `<style>
   .assault-intro-grid .assault-copy strong{box-sizing:border-box!important;display:block!important;max-width:none!important;margin:0!important;padding:28px 30px 30px!important;border:0!important;color:var(--assault-muted)!important;font-size:15px!important;font-weight:400!important;line-height:1.65!important;letter-spacing:normal!important;text-align:left!important}
   .assault-intro-grid .assault-copy strong{color:#fff!important;font-size:22px!important;font-weight:600!important;line-height:1.18!important;letter-spacing:-.02em!important}
   .assault-principles{margin-top:0!important}
+
+  #specifications{padding-top:64px!important;padding-bottom:64px!important}
+  #specifications .assault-note{font-size:15px!important;line-height:1.5!important}
+  #specifications .assault-specs-list dt,
+  #specifications .assault-specs-list dd{font-size:15px!important;line-height:1.5!important}
 }
 </style>`;
 
