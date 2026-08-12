@@ -9,7 +9,7 @@ function jsonLd(value) {
 
 export const homepageSeoMarkup = `
 <link rel="canonical" href="${SITE_URL}/">
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="robots" content="noindex,follow,noarchive">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KAIZURO">
 <meta property="og:locale" content="en_AU">
@@ -61,7 +61,7 @@ ${jsonLd({
 
 export const builtSeoMarkup = `
 <link rel="canonical" href="${SITE_URL}/how-kaizuro-is-built/">
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="robots" content="noindex,follow,noarchive">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KAIZURO">
 <meta property="og:locale" content="en_AU">
@@ -135,7 +135,7 @@ export function applySeoHead(rewriter, pathname) {
 
 export function withNoIndexHeaders(response) {
   const headers = new Headers(response.headers);
-  headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  headers.set("X-Robots-Tag", "noindex, follow, noarchive");
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
