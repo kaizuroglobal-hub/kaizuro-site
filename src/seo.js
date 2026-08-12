@@ -5,6 +5,17 @@ const builtDescription = "How KAIZURO offshore fishing rods are designed in Aust
 const temporaryNoIndexMarkup = '<meta name="robots" content="noindex,follow,noarchive">';
 const siteIconMarkup = '<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#050505"><meta name="apple-mobile-web-app-title" content="KAIZURO"><meta name="application-name" content="KAIZURO"><meta name="theme-color" content="#050505">';
 const homepageLayoutFixMarkup = '<style>#proof.kz-performance-merged>.kz-performance-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}</style>';
+const assaultPreviewHeroFixMarkup = `<style>
+@media (min-width:1001px){
+  .assault-hero{height:640px!important;min-height:0!important;display:block!important;align-items:initial!important;background:#111315!important}
+  .assault-hero>img{inset:0 0 auto 0!important;width:100%!important;height:230px!important;object-fit:cover!important;object-position:center 56%!important;transform:none!important;filter:brightness(.72) contrast(1.05)!important}
+  .assault-hero::after{background:linear-gradient(180deg,rgba(8,9,10,.04) 0,rgba(8,9,10,.10) 38%,rgba(8,9,10,.22) 100%)!important}
+  .assault-hero .assault-hero-copy{box-sizing:border-box!important;width:min(760px,calc(100% - 96px))!important;margin:0 auto!important;padding:258px 0 30px!important;transform:none!important}
+  .assault-hero h1{font-size:clamp(56px,4.7vw,74px)!important;line-height:.92!important}
+  .assault-hero .assault-lead{max-width:720px!important;margin-top:20px!important;font-size:18px!important;line-height:1.5!important}
+  .assault-hero .assault-actions{margin-top:24px!important}
+}
+</style>`;
 
 function jsonLd(value) {
   return `<script type="application/ld+json">${JSON.stringify(value)}</script>`;
@@ -155,6 +166,7 @@ ${jsonLd({
 export function applySeoHead(rewriter, pathname) {
   const isHomepage = pathname === "/" || pathname === "/index.html";
   const isBuiltPage = pathname === "/how-kaizuro-is-built" || pathname === "/how-kaizuro-is-built/" || pathname === "/how-kaizuro-is-built/index.html";
+  const isAssaultPreview = pathname === "/assault-pe6-8-preview" || pathname === "/assault-pe6-8-preview/" || pathname === "/assault-pe6-8-preview/index.html";
 
   rewriter = applyImagePerformance(rewriter, pathname);
 
@@ -170,6 +182,14 @@ export function applySeoHead(rewriter, pathname) {
       .on("title", { element(element) { element.setInnerContent("How KAIZURO Fishing Rods Are Built | Offshore Rod Engineering"); } })
       .on('meta[name="description"]', { element(element) { element.setAttribute("content", builtDescription); } })
       .on("head", { element(element) { element.append(builtSeoMarkup, { html: true }); } });
+  }
+
+  if (isAssaultPreview) {
+    return rewriter.on("head", {
+      element(element) {
+        element.append(siteIconMarkup + temporaryNoIndexMarkup + assaultPreviewHeroFixMarkup, { html: true });
+      },
+    });
   }
 
   return rewriter.on("head", {
