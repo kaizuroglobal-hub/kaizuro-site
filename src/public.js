@@ -1,4 +1,5 @@
 import app from "./index.js";
+import { applySeoHead, withNoIndexHeaders } from "./seo.js";
 
 const backToTopMarkup = `<style>
   .kz-back-to-top{position:fixed;right:24px;bottom:24px;z-index:70;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.3);background:rgba(5,5,5,.82);color:#f4f4f2;font:400 24px/1 Arial,sans-serif;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease,border-color .2s ease}
@@ -175,12 +176,14 @@ export default {
       const isHomepage = url.pathname === "/" || url.pathname === "/index.html";
 
       if (isHtml) {
-        const rewriter = new HTMLRewriter()
+        let rewriter = new HTMLRewriter()
           .on("body", {
             element(element) {
               element.append(backToTopMarkup, { html: true });
             },
           });
+
+        rewriter = applySeoHead(rewriter, url.pathname);
 
         if (isHomepage) {
           rewriter
@@ -233,6 +236,6 @@ export default {
       return response;
     }
 
-    return app.fetch(request, env);
+    return withNoIndexHeaders(await app.fetch(request, env));
   },
 };
