@@ -1,7 +1,9 @@
 import app from "./main.js";
+export { PartnerReferrals } from "./main.js";
 
 const NOTIFY_TO = "info@kaizuro.com";
 const NOTIFY_FROM = "info@kaizuro.com";
+const TRANSIENT_PARAMS = ["referral", "referral_error", "support", "support_error", "notify"];
 
 function field(form, name) {
   return String(form.get(name) || "").trim();
@@ -112,21 +114,35 @@ async function sendNotification(env, message) {
   });
 }
 
-function injectNotificationStatus(response, url, selector) {
-  const status = url.searchParams.get("notify");
-  if (!status || !response.headers.get("Content-Type")?.includes("text/html")) return response;
+function transientCleanupMarkup() {
+  return `<script>(function(){try{const u=new URL(window.location.href);let changed=false;${JSON.stringify(TRANSIENT_PARAMS)}.forEach(function(k){if(u.searchParams.has(k)){u.searchParams.delete(k);changed=true}});if(changed){const q=u.searchParams.toString();history.replaceState(null,"",u.pathname+(q?"?"+q:"")+u.hash)}}catch(e){}})();</script>`;
+}
 
+function decorateResultPage(response, url, selector) {
+  const contentType = response.headers.get("Content-Type") || "";
+  if (!contentType.includes("text/html")) return response;
+
+  const status = url.searchParams.get("notify");
   const markup = status === "sent"
     ? '<div class="callout"><b>Email notification sent.</b><br>KAIZURO has been notified at info@kaizuro.com.</div>'
-    : '<div class="callout"><b>Email notification not sent.</b><br>Your submission was saved successfully in the Partner Portal, but the email notification could not be delivered.</div>';
+    : status === "failed"
+      ? '<div class="callout"><b>Email notification not sent.</b><br>Your submission was saved successfully in the Partner Portal, but the email notification could not be delivered.</div>'
+      : "";
 
-  return new HTMLRewriter()
-    .on(selector, {
+  const rewriter = new HTMLRewriter();
+  if (markup) {
+    rewriter.on(selector, {
       element(element) {
         element.prepend(markup, { html: true });
       },
-    })
-    .transform(response);
+    });
+  }
+  rewriter.on("body", {
+    element(element) {
+      element.append(transientCleanupMarkup(), { html: true });
+    },
+  });
+  return rewriter.transform(response);
 }
 
 export default {
@@ -138,7 +154,6 @@ export default {
     if (isReferral || isSupport) {
       const form = await request.clone().formData();
       const response = await app.fetch(request, env, ctx);
-
       if (response.status !== 303) return response;
 
       const key = isReferral ? "referral" : "support";
@@ -157,10 +172,10 @@ export default {
 
     const response = await app.fetch(request, env, ctx);
     if ((url.pathname === "/partners/portal/account" || url.pathname === "/partners/portal/account/") && request.method === "GET") {
-      return injectNotificationStatus(response, url, "#customer-referral");
+      return decorateResultPage(response, url, "#customer-referral");
     }
     if ((url.pathname === "/partners/portal/support" || url.pathname === "/partners/portal/support/") && request.method === "GET") {
-      return injectNotificationStatus(response, url, "#support-form");
+      return decorateResultPage(response, url, "#support-form");
     }
     return response;
   },
