@@ -76,9 +76,33 @@ function decorateSuccess(response, reference, buttonSelector, cleanHref) {
     .transform(response);
 }
 
+function canonicalPortalRedirect(request, url) {
+  const host = url.hostname.toLowerCase();
+  const isPortalHost = host === "portal.kaizuro.com";
+  const isMainHost = host === "kaizuro.com" || host === "www.kaizuro.com";
+
+  if (isPortalHost && (url.pathname === "/" || url.pathname === "")) {
+    const target = new URL("/partners", url);
+    return Response.redirect(target.toString(), 302);
+  }
+
+  if (isMainHost && url.pathname.startsWith("/partners/portal")) {
+    const target = new URL(request.url);
+    target.protocol = "https:";
+    target.hostname = "portal.kaizuro.com";
+    target.port = "";
+    return Response.redirect(target.toString(), 301);
+  }
+
+  return null;
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    const redirect = canonicalPortalRedirect(request, url);
+    if (redirect) return redirect;
+
     const response = await app.fetch(request, env, ctx);
 
     if ((url.pathname === "/partners/portal/account" || url.pathname === "/partners/portal/account/") && request.method === "GET") {
