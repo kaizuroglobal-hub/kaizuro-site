@@ -30,6 +30,16 @@ export default {
     const url = new URL(request.url);
     let rewriter = new HTMLRewriter();
 
+    // Keep the copyright and legal/IP lines fully legible on the dark footer.
+    rewriter = rewriter.on("head", {
+      element(element) {
+        element.append(
+          '<style>footer .footer-bottom,footer .kz-global-legal{color:#fff!important;opacity:1!important}</style>',
+          { html: true },
+        );
+      },
+    });
+
     // Every standalone/product/partner page gets one deliberate first-use ™
     // in visible body copy, rather than marking every brand mention.
     rewriter = replaceFirstKaizuroInMain(rewriter);
