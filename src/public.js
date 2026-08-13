@@ -80,7 +80,7 @@ function assaultPreviewLockResponse(invalid = false, status = 200) {
     headers: {
       "Content-Type": "text/html; charset=UTF-8",
       "Cache-Control": "no-store, no-cache, must-revalidate",
-      "X-Robots-Tag": "noindex, nofollow, noarchive",
+      "X-Robots-Tag": "noindex, nofollow,noarchive",
     },
   });
 }
@@ -96,7 +96,7 @@ function haloPreviewLockResponse(invalid = false, status = 200) {
     headers: {
       "Content-Type": "text/html; charset=UTF-8",
       "Cache-Control": "no-store, no-cache, must-revalidate",
-      "X-Robots-Tag": "noindex, nofollow, noarchive",
+      "X-Robots-Tag": "noindex, nofollow,noarchive",
     },
   });
 }
@@ -105,17 +105,32 @@ const backToTopMarkup = `<style>
   .kz-back-to-top{position:fixed;right:24px;bottom:24px;z-index:70;width:48px;height:48px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.3);background:rgba(5,5,5,.82);color:#f4f4f2;font:400 24px/1 Arial,sans-serif;cursor:pointer;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;visibility:hidden;transform:translateY(8px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease,border-color .2s ease}
   .kz-back-to-top.is-visible{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
   .kz-back-to-top:hover,.kz-back-to-top:focus-visible{border-color:rgba(255,255,255,.85);outline:none}
+  .kz-global-legal{margin:10px 0 0;color:rgba(244,244,242,.45);font-size:12px;line-height:1.5}
   @media(max-width:640px){.kz-back-to-top{right:16px;bottom:16px;width:44px;height:44px;font-size:22px}}
 </style>
 <button class="kz-back-to-top" type="button" aria-label="Back to top" title="Back to top">↑</button>
 <script>
 (function(){
   const button=document.querySelector('.kz-back-to-top');
-  if(!button)return;
-  const update=()=>button.classList.toggle('is-visible',window.scrollY>500);
-  button.addEventListener('click',()=>window.scrollTo({top:0,left:0,behavior:'smooth'}));
-  window.addEventListener('scroll',update,{passive:true});
-  update();
+  if(button){
+    const update=()=>button.classList.toggle('is-visible',window.scrollY>500);
+    button.addEventListener('click',()=>window.scrollTo({top:0,left:0,behavior:'smooth'}));
+    window.addEventListener('scroll',update,{passive:true});
+    update();
+  }
+  const legalText='KAIZURO™ is a trade mark of KAIZURO. Selected KAIZURO product technologies and designs are patent pending.';
+  let footer=document.querySelector('footer');
+  if(!footer){
+    footer=document.createElement('footer');
+    footer.style.cssText='padding:24px var(--pad,24px);background:#050505;border-top:1px solid rgba(255,255,255,.16);color:#f4f4f2';
+    document.body.appendChild(footer);
+  }
+  if(!footer.querySelector('.kz-global-legal')){
+    const legal=document.createElement('p');
+    legal.className='kz-global-legal';
+    legal.textContent=legalText;
+    footer.appendChild(legal);
+  }
 })();
 </script>`;
 
