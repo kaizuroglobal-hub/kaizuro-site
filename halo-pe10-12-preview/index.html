@@ -69,10 +69,10 @@
       .halo-proof-panel b{display:block;margin-bottom:7px;color:#fff;font-size:14px;font-weight:500}
       .halo-proof-panel strong{align-self:center;font-size:clamp(32px,2.8vw,42px);font-weight:400;white-space:nowrap}
 
-      .halo-founder{padding:110px 0;text-align:center;background:#050606}
-      .halo-founder h2{max-width:940px;margin:0 auto;font-size:clamp(54px,5vw,76px);font-weight:300;line-height:.96;letter-spacing:-.055em}
-      .halo-founder p{max-width:720px;margin:28px auto 0;color:var(--halo-muted);font-size:17px;line-height:1.7}
-      .halo-founder .halo-actions{justify-content:center}
+      html body main.halo-main section#founder.halo-founder{box-sizing:border-box!important;min-height:0!important;height:auto!important;margin:0!important;padding:110px 0!important;text-align:center!important;background:#050606!important}
+      html body main.halo-main section#founder.halo-founder h2{max-width:940px;margin:0 auto;font-size:clamp(54px,5vw,76px);font-weight:300;line-height:.96;letter-spacing:-.055em}
+      html body main.halo-main section#founder.halo-founder> .halo-wrap>p:not(.halo-kicker){max-width:680px;margin:28px auto 0;color:var(--halo-muted);font-size:17px;line-height:1.7}
+      html body main.halo-main section#founder.halo-founder .halo-actions{justify-content:center!important;margin-top:32px!important}
 
       .footer-socials{display:grid;gap:13px;align-content:start}
       .footer-socials b{color:rgba(255,255,255,.54);font-size:11px;letter-spacing:.16em;text-transform:uppercase}
@@ -115,8 +115,8 @@
         .halo-specs-list div{grid-template-columns:1fr;gap:8px}
         .halo-proof-panel div{padding:22px 18px}
         .halo-proof-panel strong{font-size:28px}
-        .halo-founder{padding:78px 0}
-        .halo-founder h2{font-size:clamp(46px,13vw,66px)}
+        html body main.halo-main section#founder.halo-founder{padding:78px 0!important}
+        html body main.halo-main section#founder.halo-founder h2{font-size:clamp(46px,13vw,66px)}
         .site-footer .footer-links{grid-template-columns:1fr 1fr!important;gap:34px 26px!important}
         .footer-socials{grid-column:1/-1}
       }
