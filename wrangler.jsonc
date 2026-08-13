@@ -28,7 +28,7 @@
       "name": "PARTNER_NOTIFICATIONS",
       "destination_address": "info@kaizuro.com",
       "allowed_sender_addresses": [
-        "info@kaizuro.com"
+        "notifications@portal.kaizuro.com"
       ]
     }
   ]
