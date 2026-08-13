@@ -8,5 +8,19 @@
     "directory": ".",
     "binding": "ASSETS",
     "run_worker_first": ["/*"]
+  },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "PARTNER_REFERRALS",
+        "class_name": "PartnerReferrals"
+      }
+    ]
+  },
+  "exports": {
+    "PartnerReferrals": {
+      "type": "durable-object",
+      "storage": "sqlite"
+    }
   }
 }
