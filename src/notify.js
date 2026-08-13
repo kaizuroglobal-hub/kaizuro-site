@@ -3,7 +3,7 @@ export { PartnerReferrals } from "./main.js";
 
 const NOTIFY_TO = "info@kaizuro.com";
 const NOTIFY_FROM = "info@kaizuro.com";
-const TRANSIENT_PARAMS = ["referral", "referral_error", "support", "support_error", "notify"];
+const TRANSIENT_PARAMS = ["referral", "referral_error", "support", "support_error", "notify", "notify_code", "notify_message"];
 
 function field(form, name) {
   return String(form.get(name) || "").trim();
@@ -85,12 +85,14 @@ function referenceFromRedirect(response, requestUrl, key) {
   }
 }
 
-function withNotifyStatus(response, requestUrl, status) {
+function withNotifyStatus(response, requestUrl, status, details = {}) {
   const location = response.headers.get("Location");
   if (!location) return response;
   try {
     const redirect = new URL(location, requestUrl);
     redirect.searchParams.set("notify", status);
+    if (details.code) redirect.searchParams.set("notify_code", String(details.code).slice(0, 120));
+    if (details.message) redirect.searchParams.set("notify_message", String(details.message).slice(0, 500));
     const headers = new Headers(response.headers);
     headers.set("Location", redirect.toString());
     return new Response(response.body, {
@@ -123,10 +125,21 @@ function decorateResultPage(response, url, selector) {
   if (!contentType.includes("text/html")) return response;
 
   const status = url.searchParams.get("notify");
+  const code = url.searchParams.get("notify_code") || "";
+  const message = url.searchParams.get("notify_message") || "";
+  const detail = [code, message].filter(Boolean).join(" · ");
+  const safeDetail = detail.replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;",
+  })[char]);
+
   const markup = status === "sent"
     ? '<div class="callout"><b>Email notification sent.</b><br>KAIZURO has been notified at info@kaizuro.com.</div>'
     : status === "failed"
-      ? '<div class="callout"><b>Email notification not sent.</b><br>Your submission was saved successfully in the Partner Portal, but the email notification could not be delivered.</div>'
+      ? `<div class="callout"><b>Email notification not sent.</b><br>Your submission was saved successfully in the Partner Portal, but the email notification could not be delivered.${safeDetail ? `<br><br><b>Cloudflare email error:</b> ${safeDetail}` : ""}</div>`
       : "";
 
   const rewriter = new HTMLRewriter();
@@ -165,8 +178,11 @@ export default {
         await sendNotification(env, message);
         return withNotifyStatus(response, request.url, "sent");
       } catch (error) {
-        console.error("KAIZURO partner notification email failed", error);
-        return withNotifyStatus(response, request.url, "failed");
+        console.error("KAIZURO partner notification email failed", error?.code, error?.message, error);
+        return withNotifyStatus(response, request.url, "failed", {
+          code: error?.code || "EMAIL_SEND_FAILED",
+          message: error?.message || "Cloudflare did not return an email error message.",
+        });
       }
     }
 
