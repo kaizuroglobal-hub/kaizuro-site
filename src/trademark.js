@@ -1,5 +1,4 @@
-import app from "./main.js";
-export { PartnerReferrals } from "./main.js";
+import app from "./public.js";
 
 const HOMEPAGE_PATHS = new Set(["/", "/index.html"]);
 
