@@ -461,3 +461,13 @@ html body main #founder#founder .delivery-roadmap::before {
     text-align: center !important;
   }
 }
+
+/* HALO preview only: neutralise the production .halo-copy full-viewport layout. */
+.halo-main .halo-intro-grid .halo-copy {
+  position: static !important;
+  z-index: auto !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding-top: 0 !important;
+  align-content: start !important;
+}
