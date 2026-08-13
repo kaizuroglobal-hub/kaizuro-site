@@ -68,6 +68,11 @@ export default {
       );
       rewriter = setText(
         rewriter,
+        "#terms .terms-list details:nth-of-type(6) p",
+        "Final warranty coverage, delivery arrangements, shipping costs, applicable duties or taxes, and any ownership transfer conditions will be confirmed in writing before the final balance is requested. Founders will have the opportunity to review these terms before completing their purchase.",
+      );
+      rewriter = setText(
+        rewriter,
         "#halo .halo-copy > p:not(.eyebrow)",
         "HALO is the future KAIZURO™ chapter: a heavier PE10-12 platform for giant GT, very large tuna and expedition pressure. The same philosophy, carried further.",
       );
