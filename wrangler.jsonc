@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kaizuro-site-live",
-  "main": "src/main.js",
+  "main": "src/notify.js",
   "compatibility_date": "2026-08-02",
   "keep_vars": true,
   "assets": {
@@ -22,5 +22,14 @@
       "type": "durable-object",
       "storage": "sqlite"
     }
-  }
+  },
+  "send_email": [
+    {
+      "name": "PARTNER_NOTIFICATIONS",
+      "destination_address": "info@kaizuro.com",
+      "allowed_sender_addresses": [
+        "info@kaizuro.com"
+      ]
+    }
+  ]
 }
