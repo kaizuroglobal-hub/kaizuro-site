@@ -63,6 +63,11 @@ export default {
       );
       rewriter = setText(
         rewriter,
+        "#terms .terms-list details:nth-of-type(5) p",
+        "A numbered Founder rod, Founder Cap, Founder Offshore Pack, Premium Rod Wraps, Offshore Gloves, Large KAIZURO Tackle Box, Founder Certificate and registered Digital Rod Passport.",
+      );
+      rewriter = setText(
+        rewriter,
         "#halo .halo-copy > p:not(.eyebrow)",
         "HALO is the future KAIZURO™ chapter: a heavier PE10-12 platform for giant GT, very large tuna and expedition pressure. The same philosophy, carried further.",
       );
