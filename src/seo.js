@@ -55,7 +55,8 @@ const depositTermsFixMarkup = `<script>
     ["$599.25","$559"],
     ["$249.75","$300"],
     ["$749.25","$699"],
-    ["25%","30%"]
+    ["25%","30%"],
+    ["75%","70%"]
   ];
   const fixTextNode=(node)=>{
     const parent=node.parentElement;
