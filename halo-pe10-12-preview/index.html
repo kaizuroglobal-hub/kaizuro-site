@@ -21,8 +21,8 @@
       .halo-kicker{margin:0 0 18px;color:rgba(255,255,255,.62);font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
 
       .halo-preview-hero{height:840px;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;position:relative;overflow:hidden;border-bottom:1px solid var(--halo-line);background:var(--halo-bg)}
-      .halo-preview-hero>img{position:relative;display:block;width:100%;height:300px;flex:0 0 300px;object-fit:contain;object-position:center center;margin:0;filter:brightness(.64) contrast(1.08);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 82%,transparent 100%)}
-      .halo-preview-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,10,.02) 0%,rgba(8,9,10,.05) 34%,rgba(8,9,10,.16) 62%,rgba(8,9,10,.34) 100%);pointer-events:none}
+      .halo-preview-hero>img{position:absolute;inset:0;z-index:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center center;margin:0;filter:brightness(.52) contrast(1.08);-webkit-mask-image:none;mask-image:none}
+      .halo-preview-hero::after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(8,9,10,.16) 0%,rgba(8,9,10,.22) 38%,rgba(8,9,10,.44) 72%,rgba(8,9,10,.64) 100%);pointer-events:none}
       .halo-hero-copy{position:relative;z-index:2;box-sizing:border-box;width:min(900px,calc(100% - 96px));margin:0 auto;padding:0}
       .halo-preview-hero h1{margin:0;font-size:clamp(54px,4.5vw,70px);font-weight:300;line-height:.92;letter-spacing:-.052em;white-space:nowrap}
       .halo-lead{max-width:860px;margin:18px 0 0;color:rgba(255,255,255,.82);font-size:17px;line-height:1.5}
@@ -82,7 +82,7 @@
       @media(max-width:1000px){
         .halo-wrap{width:min(100% - 56px,1200px)}
         .halo-preview-hero{height:auto;min-height:calc(100svh - 72px);padding:70px 0}
-        .halo-preview-hero>img{height:280px;flex-basis:280px}
+        .halo-preview-hero>img{height:100%;object-fit:cover;object-position:center center}
         .halo-hero-copy{width:min(100% - 56px,900px)}
         .halo-status{grid-template-columns:repeat(2,minmax(0,1fr))}
         .halo-status div:nth-child(2){border-right:0}
@@ -98,7 +98,7 @@
         .halo-main{padding-top:64px}
         .halo-wrap{width:min(100% - 32px,1200px)}
         .halo-preview-hero{min-height:calc(100svh - 64px);padding:52px 0;gap:28px}
-        .halo-preview-hero>img{height:220px;flex-basis:220px;object-position:center center}
+        .halo-preview-hero>img{height:100%;object-fit:cover;object-position:center center}
         .halo-hero-copy{width:min(100% - 32px,900px)}
         .halo-preview-hero h1{font-size:clamp(46px,13vw,62px);white-space:normal}
         .halo-lead{font-size:17px}
