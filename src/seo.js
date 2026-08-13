@@ -50,6 +50,8 @@ const assaultPreviewFooterFixMarkup = `<style>
 
 const depositTermsFixMarkup = `<script>
 (function(){
+  const assaultFounderSource="ASSAULT PE6-8 is available within KAIZURO Founder 100 at a Founder price of $799 AUD, with a 25% deposit of $199.75 credited in full against the final purchase price.";
+  const assaultFounderTarget="ASSAULT PE6-8 is available within KAIZURO Founder 100 at a Founder price of $799 AUD, with a 30% deposit of $240 credited in full against the final purchase price. The remaining balance is $559 AUD.";
   const replacements=[
     ["$199.75","$240"],
     ["$599.25","$559"],
@@ -62,6 +64,7 @@ const depositTermsFixMarkup = `<script>
     const parent=node.parentElement;
     if(!parent||/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA)$/i.test(parent.tagName))return;
     let next=node.nodeValue||"";
+    if(next.includes(assaultFounderSource))next=next.split(assaultFounderSource).join(assaultFounderTarget);
     for(const [from,to] of replacements)next=next.split(from).join(to);
     if(next!==node.nodeValue)node.nodeValue=next;
   };
