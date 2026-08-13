@@ -1,5 +1,5 @@
-import app from "./approval.js";
-export { PartnerReferrals } from "./approval.js";
+import app from "./approval-guard.js";
+export { PartnerReferrals } from "./approval-guard.js";
 
 const PORTAL_HOST = "portal.kaizuro.com";
 
