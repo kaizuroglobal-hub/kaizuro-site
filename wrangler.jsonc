@@ -32,7 +32,6 @@
   "send_email": [
     {
       "name": "PARTNER_NOTIFICATIONS",
-      "destination_address": "info@kaizuro.com",
       "allowed_sender_addresses": [
         "notifications@portal.kaizuro.com"
       ]
