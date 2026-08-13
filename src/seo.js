@@ -48,6 +48,48 @@ const assaultPreviewFooterFixMarkup = `<style>
 @media(max-width:640px){.site-footer .footer-links{grid-template-columns:1fr 1fr!important;gap:34px 26px!important}.footer-socials{grid-column:1/-1}}
 </style>`;
 
+const depositTermsFixMarkup = `<script>
+(function(){
+  const replacements=[
+    ["$199.75","$240"],
+    ["$599.25","$559"],
+    ["$249.75","$300"],
+    ["$749.25","$699"],
+    ["25%","30%"]
+  ];
+  const fixTextNode=(node)=>{
+    const parent=node.parentElement;
+    if(!parent||/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA)$/i.test(parent.tagName))return;
+    let next=node.nodeValue||"";
+    for(const [from,to] of replacements)next=next.split(from).join(to);
+    if(next!==node.nodeValue)node.nodeValue=next;
+  };
+  const apply=(root=document.body)=>{
+    if(!root)return;
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    const nodes=[];
+    while(walker.nextNode())nodes.push(walker.currentNode);
+    nodes.forEach(fixTextNode);
+  };
+  const start=()=>{
+    apply();
+    if(!document.body)return;
+    const observer=new MutationObserver((mutations)=>{
+      for(const mutation of mutations){
+        if(mutation.type==="characterData")fixTextNode(mutation.target);
+        for(const node of mutation.addedNodes||[]){
+          if(node.nodeType===Node.TEXT_NODE)fixTextNode(node);
+          else if(node.nodeType===Node.ELEMENT_NODE)apply(node);
+        }
+      }
+    });
+    observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+  };
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+  window.addEventListener("kaizuro:content-loaded",()=>apply());
+})();
+</script>`;
+
 function jsonLd(value) {
   return `<script type="application/ld+json">${JSON.stringify(value)}</script>`;
 }
@@ -198,6 +240,7 @@ export function applySeoHead(rewriter, pathname) {
   const isHomepage = pathname === "/" || pathname === "/index.html";
   const isBuiltPage = pathname === "/how-kaizuro-is-built" || pathname === "/how-kaizuro-is-built/" || pathname === "/how-kaizuro-is-built/index.html";
   const isAssaultPreview = pathname === "/assault-pe6-8-preview" || pathname === "/assault-pe6-8-preview/" || pathname === "/assault-pe6-8-preview/index.html";
+  const isHaloPreview = pathname === "/halo-pe10-12-preview" || pathname === "/halo-pe10-12-preview/" || pathname === "/halo-pe10-12-preview/index.html";
 
   rewriter = applyImagePerformance(rewriter, pathname);
 
@@ -205,7 +248,7 @@ export function applySeoHead(rewriter, pathname) {
     return rewriter
       .on("title", { element(element) { element.setInnerContent("KAIZURO | Premium GT & Tuna Offshore Casting Rods"); } })
       .on('meta[name="description"]', { element(element) { element.setAttribute("content", homepageDescription); } })
-      .on("head", { element(element) { element.append(homepageSeoMarkup, { html: true }); } });
+      .on("head", { element(element) { element.append(homepageSeoMarkup + depositTermsFixMarkup, { html: true }); } });
   }
 
   if (isBuiltPage) {
@@ -219,7 +262,7 @@ export function applySeoHead(rewriter, pathname) {
     return rewriter
       .on("head", {
         element(element) {
-          element.append(siteIconMarkup + temporaryNoIndexMarkup + assaultPreviewHeroFixMarkup + assaultPreviewFooterFixMarkup, { html: true });
+          element.append(siteIconMarkup + temporaryNoIndexMarkup + assaultPreviewHeroFixMarkup + assaultPreviewFooterFixMarkup + depositTermsFixMarkup, { html: true });
         },
       })
       .on('.site-footer .footer-links nav[aria-label="Products"]', {
@@ -247,6 +290,14 @@ export function applySeoHead(rewriter, pathname) {
           element.setInnerContent('KAIZURO · Over-engineered on purpose. © 2026 KAIZURO. All rights reserved.');
         },
       });
+  }
+
+  if (isHaloPreview) {
+    return rewriter.on("head", {
+      element(element) {
+        element.append(siteIconMarkup + temporaryNoIndexMarkup + depositTermsFixMarkup, { html: true });
+      },
+    });
   }
 
   return rewriter.on("head", {
