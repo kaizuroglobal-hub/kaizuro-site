@@ -2,7 +2,7 @@ import app from "./main.js";
 export { PartnerReferrals } from "./main.js";
 
 const NOTIFY_TO = "info@kaizuro.com";
-const NOTIFY_FROM = "info@kaizuro.com";
+const NOTIFY_FROM = "notifications@portal.kaizuro.com";
 const TRANSIENT_PARAMS = ["referral", "referral_error", "support", "support_error", "notify", "notify_code", "notify_message"];
 
 function field(form, name) {
