@@ -1,12 +1,12 @@
-import app from "./portal-copy.js";
-export { PartnerReferrals } from "./portal-copy.js";
+import app from "./dealer-leads.js";
+export { PartnerReferrals } from "./dealer-leads.js";
 
 const HOST = "portal.kaizuro.com";
 const STORE = "kaizuro-partner-submissions";
 const TEST_EMAIL = "w3protocol@proton.me";
-const TEST_TOKEN_HASH = "eabdea971484829c2104b99db9506c48fe468f752ae2647b2b69a3063ef902f0";
-const TEST_SALT = "a048de99bf14904acc7becff6138c399";
-const TEST_PASSWORD_HASH = "29ce5faebacdd13bd5b2766307322000064d346a15ff4d8ac39baecb2763f0e9";
+const TEST_TOKEN_HASH = "862d4f74c80345198ca426383ffa981f657dce17510232b300a3019b98cd01b9";
+const TEST_SALT = "1704a9b0c1d7d396747bb92d0f0d4165";
+const TEST_PASSWORD_HASH = "8e0d7cf8c3576aac71a7288f9b66f5acaf5313647c472ab8114a39d390a1e584";
 
 async function sha(value) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(value || "")));
@@ -56,6 +56,13 @@ async function bootstrap(request, env) {
   }
 
   const existing = await latestAccount(env);
+  if (existing?.bootstrapComplete) {
+    return new Response("Bootstrap link has already been used.", {
+      status: 410,
+      headers: { "Cache-Control": "no-store", "X-Robots-Tag": "noindex,nofollow,noarchive" },
+    });
+  }
+
   const createdAt = new Date().toISOString();
   const account = {
     ...(existing || {}),
@@ -82,6 +89,7 @@ async function bootstrap(request, env) {
     tempPasswordExpiresAt: "",
     resetNonce: "",
     passwordSetAt: createdAt,
+    bootstrapComplete: true,
     createdAt,
   };
 
