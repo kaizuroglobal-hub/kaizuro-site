@@ -1,5 +1,5 @@
-import app from "./portal-copy.js";
-export { PartnerReferrals } from "./portal-copy.js";
+import app from "./dealer-dashboard.js";
+export { PartnerReferrals } from "./dealer-dashboard.js";
 
 const PUBLIC_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com"]);
 
