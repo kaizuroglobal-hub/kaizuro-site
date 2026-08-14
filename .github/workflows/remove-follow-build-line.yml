@@ -1,0 +1,36 @@
+name: Remove Follow the Build disclaimer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-follow-build-line.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Remove disclaimer from Follow the build
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          text = p.read_text()
+          old = '''          <small>\n            You can leave at any time. Your details will not be sold or\n            shared.\n          </small>\n'''
+          if old not in text:
+              raise SystemExit('Target disclaimer not found')
+          p.write_text(text.replace(old, '', 1))
+          PY
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Remove Follow the build privacy disclaimer"
+          git push origin main
