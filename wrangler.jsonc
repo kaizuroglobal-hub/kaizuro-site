@@ -6,12 +6,12 @@
   "keep_vars": true,
   "routes": [
     {
-      "pattern": "kaizuro.com",
-      "custom_domain": true
+      "pattern": "kaizuro.com/*",
+      "zone_name": "kaizuro.com"
     },
     {
-      "pattern": "www.kaizuro.com",
-      "custom_domain": true
+      "pattern": "www.kaizuro.com/*",
+      "zone_name": "kaizuro.com"
     },
     {
       "pattern": "portal.kaizuro.com",
