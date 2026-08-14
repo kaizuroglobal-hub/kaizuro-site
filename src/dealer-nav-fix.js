@@ -22,6 +22,18 @@ function normalizeNavigation(response) {
   for (const [selector, href] of REWRITES) {
     rewriter.on(selector, { element(element) { element.setAttribute("href", href); } });
   }
+  rewriter.on(".portal-label", {
+    element(element) {
+      element.setInnerContent("Dealer Dashboard");
+    },
+  });
+  rewriter.on("title", {
+    text(text) {
+      if (text.text.includes("Dealer Command Centre")) {
+        text.replace(text.text.replaceAll("Dealer Command Centre", "Dealer Dashboard"));
+      }
+    },
+  });
   return rewriter.transform(response);
 }
 
