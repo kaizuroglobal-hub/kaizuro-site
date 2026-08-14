@@ -22,8 +22,22 @@ jobs:
         with:
           node-version: 24
 
-      - name: Deploy KAIZURO Worker
+      - name: Upload new Worker version
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4.120.0 deploy --config wrangler.jsonc
+          WRANGLER_OUTPUT_FILE_PATH: wrangler-output.ndjson
+        run: npx --yes wrangler@4.120.0 versions upload --config wrangler.jsonc --message "${{ github.event.head_commit.message || github.sha }}"
+
+      - name: Read uploaded version ID
+        id: version
+        shell: bash
+        run: |
+          VERSION_ID=$(node -e 'const fs=require("fs");const lines=fs.readFileSync("wrangler-output.ndjson","utf8").trim().split(/\n+/).map(JSON.parse);const item=[...lines].reverse().find(x=>x.type==="version-upload");if(!item?.version_id)process.exit(1);process.stdout.write(item.version_id)')
+          echo "id=$VERSION_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy uploaded version at 100 percent
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.120.0 versions deploy "${{ steps.version.outputs.id }}@100%" --config wrangler.jsonc -y --message "KAIZURO production ${{ github.sha }}"
