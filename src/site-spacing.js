@@ -1,5 +1,5 @@
-import app from "./dealer-modules.js";
-export { PartnerReferrals } from "./dealer-modules.js";
+import app from "./dealer-nav-fix.js";
+export { PartnerReferrals } from "./dealer-nav-fix.js";
 
 const PUBLIC_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com"]);
 
