@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kaizuro-site-live",
-  "main": "src/admin-crm-v4.js",
+  "main": "src/admin-crm-inbox-v4.js",
   "compatibility_date": "2026-08-02",
   "keep_vars": true,
   "routes": [
