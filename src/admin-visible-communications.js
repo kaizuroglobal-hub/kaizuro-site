@@ -3,10 +3,20 @@ export { PartnerReferrals };
 
 const ROOT = "/kaizuro-admin";
 const STORE_NAME = "kaizuro-partner-submissions";
-const PUBLIC_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com"]);
-const ADMIN_RENDER_VERSION = "2026-08-15-contact-name-v3";
+const ADMIN_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com", "portal.kaizuro.com"]);
+const ADMIN_RENDER_VERSION = "2026-08-15-dealer-identity-v4";
 const LEGACY_TEST_CODE = "kz-au-001";
 const LEGACY_TEST_EMAIL = "w3protocol@proton.me";
+const LEGACY_TEST_ACCOUNT = {
+  partnerId: LEGACY_TEST_EMAIL,
+  username: LEGACY_TEST_EMAIL,
+  email: LEGACY_TEST_EMAIL,
+  assignedPartnerId: "KZP-TEST-0001",
+  dealerName: "KAIZURO Test Dealer",
+  businessName: "KAIZURO Test Dealer",
+  contactName: "Greg",
+  status: "Active"
+};
 
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const lower = (v) => String(v || "").trim().toLowerCase();
@@ -34,8 +44,8 @@ function matches(account,value){
 }
 function canonical(account,fallback){ return String(account?.partnerId||account?.username||account?.email||fallback||""); }
 function dealerEmail(account){ return String(account?.email||account?.username||"").trim(); }
-function dealerContactName(account,row){
-  const candidates=[account?.contactName,account?.businessName,account?.dealerName,row?.partnerName];
+function dealerDisplayName(account,row){
+  const candidates=[account?.businessName,account?.dealerName,account?.contactName,row?.partnerName];
   for(const value of candidates){
     const text=String(value||"").trim();
     if(text&&!looksLikeDealerCode(text))return text;
@@ -44,13 +54,9 @@ function dealerContactName(account,row){
   if(email)return email;
   return "Dealer account";
 }
-function dealerBusinessName(account){
-  const candidates=[account?.businessName,account?.dealerName];
-  for(const value of candidates){
-    const text=String(value||"").trim();
-    if(text&&!looksLikeDealerCode(text))return text;
-  }
-  return "";
+function dealerContactName(account){
+  const value=String(account?.contactName||"").trim();
+  return value&&!looksLikeDealerCode(value)?value:"";
 }
 function dealerHref(partner){ return `${ROOT}/dealer?partner=${encodeURIComponent(partner)}`; }
 function emailHref(partner,context,ref){ return `${ROOT}/email?partner=${encodeURIComponent(partner)}&context=${encodeURIComponent(context)}${ref?`&ref=${encodeURIComponent(ref)}`:""}`; }
@@ -73,20 +79,18 @@ function rowHasLegacyTestCode(row){
   return [row?.partnerId,row?.partnerCode,row?.partnerName].some(value=>lower(value)===LEGACY_TEST_CODE);
 }
 function resolveAccount(dir,row){
-  const direct=dir.find(row.partnerId)||dir.find(row.partnerCode)||dir.find(row.partnerName);
-  if(direct && !rowHasLegacyTestCode(row)) return direct;
-  if(rowHasLegacyTestCode(row)) return dir.find(LEGACY_TEST_EMAIL)||direct||dir.single||null;
-  return direct||dir.single||null;
+  if(rowHasLegacyTestCode(row)) return dir.find(LEGACY_TEST_EMAIL)||LEGACY_TEST_ACCOUNT;
+  return dir.find(row.partnerId)||dir.find(row.partnerCode)||dir.find(row.partnerName)||dir.single||null;
 }
 function dealerCell(row,account,context,ref){
   const partner=canonical(account,row.partnerId||row.partnerCode||row.partnerName);
-  const contact=dealerContactName(account,row);
-  const business=dealerBusinessName(account);
+  const name=dealerDisplayName(account,row);
+  const contact=dealerContactName(account);
   const email=dealerEmail(account);
   const code=String(row.partnerCode||account?.referralCode||account?.partnerCode||account?.assignedPartnerId||row.partnerId||"");
-  const secondary=[business&&business!==contact?business:"",email,code].filter(Boolean);
+  const secondary=[contact&&contact!==name?contact:"",email,code].filter(Boolean);
   return {
-    html:`<a class="kz-dealer-link" href="${esc(dealerHref(partner))}">${esc(contact)}</a>${secondary.length?`<br><small>${secondary.map(esc).join(" · ")}</small>`:""}`,
+    html:`<a class="kz-dealer-link" href="${esc(dealerHref(partner))}">${esc(name)}</a>${secondary.length?`<br><small>${secondary.map(esc).join(" · ")}</small>`:""}`,
     action:email?`<a class="btn light kz-email-dealer" href="${esc(emailHref(partner,context,ref))}">Email dealer</a>`:`<span class="kz-email-missing">Email unavailable</span>`
   };
 }
@@ -127,10 +131,24 @@ async function decorate(response,env,type){
   return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
 }
 
-export default { async fetch(request,env,ctx){
-  const url=new URL(request.url); let response=await app.fetch(request,env,ctx);
-  if(request.method!=="GET"||!PUBLIC_HOSTS.has(url.hostname.toLowerCase()))return response;
+function rewriteLegacyDealerRequest(request){
+  const url=new URL(request.url);
   const path=url.pathname.replace(/\/$/,"");
+  if((path===`${ROOT}/dealer`||path===`${ROOT}/email`) && lower(url.searchParams.get("partner"))===LEGACY_TEST_CODE){
+    url.searchParams.set("partner",LEGACY_TEST_EMAIL);
+    return new Request(url.toString(),request);
+  }
+  return request;
+}
+
+export default { async fetch(request,env,ctx){
+  const originalUrl=new URL(request.url);
+  const host=originalUrl.hostname.toLowerCase();
+  const effectiveRequest=ADMIN_HOSTS.has(host)?rewriteLegacyDealerRequest(request):request;
+  const effectiveUrl=new URL(effectiveRequest.url);
+  let response=await app.fetch(effectiveRequest,env,ctx);
+  if(request.method!=="GET"||!ADMIN_HOSTS.has(host))return response;
+  const path=effectiveUrl.pathname.replace(/\/$/,"");
   if(path===`${ROOT}/leads`)return decorate(response,env,"leads");
   if(path===`${ROOT}/support`)return decorate(response,env,"support");
   return response;
