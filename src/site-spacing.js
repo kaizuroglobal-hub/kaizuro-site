@@ -57,7 +57,7 @@ function forcePortalReadability(response, pathname) {
   const isDealer = pathname === "/partners/portal" || pathname.startsWith("/partners/portal/");
   if (!isAdmin && !isDealer) return response;
 
-  const transformed = new HTMLRewriter()
+  let rewriter = new HTMLRewriter()
     .on("head", {
       element(element) {
         element.append(`<style id="kz-portal-readability-v5">
@@ -182,10 +182,19 @@ function forcePortalReadability(response, pathname) {
           }
         </style>`, { html: true });
       },
-    })
-    .transform(response);
+    });
 
-  return noStore(transformed);
+  if (isDealer) {
+    rewriter = rewriter
+      .on('a[href="/partners/portal/marketing"] span', {
+        element(element) { element.setInnerContent("Marketing"); },
+      })
+      .on('a[href="/partners/portal/academy"] span', {
+        element(element) { element.setInnerContent("Academy"); },
+      });
+  }
+
+  return noStore(rewriter.transform(response));
 }
 
 export default {
