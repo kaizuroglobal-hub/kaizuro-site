@@ -12,27 +12,27 @@ function isPortalPath(pathname) {
 
 export default {
   async fetch(request, env, ctx) {
+    // V4 is intentionally a transparent platform boundary. Route handling,
+    // redirects, HTML rewriting, forms and authentication remain owned by
+    // the proven Admin + Dealer Portal stack below this layer.
     const response = await app.fetch(request, env, ctx);
     const url = new URL(request.url);
     if (!HOSTS.has(url.hostname.toLowerCase()) || !isPortalPath(url.pathname)) return response;
 
     const headers = new Headers(response.headers);
     headers.set("X-KAIZURO-Platform-Version", VERSION);
-    headers.set("X-KAIZURO-Admin-Version", VERSION);
-    headers.set("X-KAIZURO-Dealer-Portal-Version", VERSION);
-    headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
-
-    const contentType = headers.get("Content-Type") || "";
-    if (request.method === "GET" && response.status === 200 && contentType.includes("text/html")) {
-      return new HTMLRewriter()
-        .on("head", {
-          element(el) {
-            el.append(`<meta name="kaizuro-platform-version" content="${VERSION}">`, { html: true });
-          }
-        })
-        .transform(new Response(response.body, { status: response.status, statusText: response.statusText, headers }));
+    if (url.pathname === ADMIN_ROOT || url.pathname.startsWith(`${ADMIN_ROOT}/`)) {
+      headers.set("X-KAIZURO-Admin-Version", VERSION);
+    }
+    if (url.pathname === DEALER_ROOT || url.pathname.startsWith(`${DEALER_ROOT}/`)) {
+      headers.set("X-KAIZURO-Dealer-Portal-Version", VERSION);
     }
 
-    return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+    // Preserve the original body, status, redirects, cookies and content exactly.
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers
+    });
   }
 };
