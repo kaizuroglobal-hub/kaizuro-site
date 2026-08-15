@@ -106,11 +106,11 @@ aside nav .nav.kz-current:focus{
   box-shadow:none!important;
 }
 aside nav .nav.kz-current span{
+  display:inline-block!important;
   color:#fff!important;
-  text-decoration:underline!important;
-  text-decoration-color:#fff!important;
-  text-decoration-thickness:1px!important;
-  text-underline-offset:4px!important;
+  text-decoration:none!important;
+  border-bottom:1px solid #fff!important;
+  padding-bottom:2px!important;
 }
 aside .side{flex:0 0 auto!important;margin-top:8px!important;padding-top:8px!important;}
 .kz-live-activity{display:grid}.kz-live-row{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid #ddd}.kz-live-row small{color:#888;font-size:9px}.kz-live-row b{font-size:10px}.kz-live-row p{margin:4px 0 0!important;font-size:9px!important;color:#777!important}.kz-live-activity-empty{padding:28px;text-align:center;border:1px dashed #ccc;color:#888;font-size:10px}
