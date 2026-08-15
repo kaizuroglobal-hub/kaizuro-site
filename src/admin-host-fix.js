@@ -1,5 +1,5 @@
-import app from "./kaizuro-admin.js";
-export { PartnerReferrals } from "./kaizuro-admin.js";
+import app from "./admin-communications.js";
+export { PartnerReferrals } from "./admin-communications.js";
 
 const ADMIN_PREFIX = "/kaizuro-admin";
 const PUBLIC_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com"]);
@@ -31,7 +31,6 @@ function improveAdminReadability(response) {
     .on("head", {
       element(element) {
         element.append(`<style id="kz-admin-readability-v2">
-          /* KAIZURO Admin: high-contrast, larger navigation for desktop/tablet */
           .shell > aside .brand {
             color:#fff!important;
             font-size:23px!important;
@@ -47,10 +46,7 @@ function improveAdminReadability(response) {
             letter-spacing:.17em!important;
             line-height:1.25!important;
           }
-          .shell > aside nav {
-            gap:7px!important;
-            margin-top:40px!important;
-          }
+          .shell > aside nav { gap:7px!important; margin-top:40px!important; }
           .shell > aside .nav {
             min-height:52px!important;
             padding:0 14px!important;
@@ -60,10 +56,7 @@ function improveAdminReadability(response) {
             line-height:1.2!important;
             border-color:transparent!important;
           }
-          .shell > aside .nav span {
-            color:#fff!important;
-            opacity:1!important;
-          }
+          .shell > aside .nav span { color:#fff!important; opacity:1!important; }
           .shell > aside .nav small {
             color:#fff!important;
             opacity:.92!important;
@@ -77,10 +70,7 @@ function improveAdminReadability(response) {
             color:#fff!important;
           }
           .shell > aside .nav.active span,
-          .shell > aside .nav.active small {
-            color:#fff!important;
-            opacity:1!important;
-          }
+          .shell > aside .nav.active small { color:#fff!important; opacity:1!important; }
           .shell > aside .side {
             color:#fff!important;
             font-size:11px!important;
@@ -94,34 +84,23 @@ function improveAdminReadability(response) {
             line-height:1.45!important;
             opacity:1!important;
           }
-
-          /* Tablet: retain readable labels rather than collapsing too early */
           @media (max-width:1000px) and (min-width:701px) {
             .shell { grid-template-columns:220px 1fr!important; }
             .shell > aside { padding:24px 16px!important; }
-            .shell > aside .brand {
-              font-size:20px!important;
-            }
+            .shell > aside .brand { font-size:20px!important; }
             .shell > aside .brand:after { content:none!important; }
             .shell > aside .label,
             .shell > aside .nav span,
             .shell > aside .nav small,
-            .shell > aside .side {
-              display:block!important;
-            }
+            .shell > aside .side { display:block!important; }
             .shell > aside .nav {
               justify-content:space-between!important;
               font-size:13px!important;
               min-height:50px!important;
             }
           }
-
-          /* Mobile menu/header remains compact, but any visible sidebar text stays white */
           @media (max-width:700px) {
-            .shell > aside .brand {
-              color:#fff!important;
-              font-size:18px!important;
-            }
+            .shell > aside .brand { color:#fff!important; font-size:18px!important; }
           }
         </style>`, { html: true });
       },
