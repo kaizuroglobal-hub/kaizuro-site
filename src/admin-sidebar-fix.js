@@ -30,9 +30,24 @@ aside nav .nav{
   margin:0!important;
   line-height:25px!important;
   align-items:center!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
 }
 aside nav .nav span,
 aside nav .nav small{line-height:1!important;margin:0!important;}
+aside nav .nav.active{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+aside nav .nav.active span{
+  color:#fff!important;
+  text-decoration-line:underline!important;
+  text-decoration-color:#fff!important;
+  text-decoration-thickness:1px!important;
+  text-underline-offset:4px!important;
+}
 aside .side{flex:0 0 auto!important;margin-top:8px!important;padding-top:8px!important;}
 @media(max-height:900px) and (min-width:701px){
   aside{padding-top:18px!important;padding-bottom:14px!important;}
