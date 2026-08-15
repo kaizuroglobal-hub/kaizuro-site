@@ -10,9 +10,19 @@ const lower = (v) => String(v || "").trim().toLowerCase();
 const date = (v) => { try { return new Date(v).toLocaleDateString("en-AU", { day:"numeric", month:"short", year:"numeric" }); } catch { return "—"; } };
 function store(env){ return env.PARTNER_REFERRALS.get(env.PARTNER_REFERRALS.idFromName(STORE_NAME)); }
 async function listAll(env,type){ try { return await store(env).listAll(type); } catch { return []; } }
+function configuredAccounts(env){
+  try {
+    const raw=env.PARTNER_ACCOUNTS;
+    if(!raw)return [];
+    if(Array.isArray(raw))return raw;
+    if(typeof raw==="object")return [raw];
+    const parsed=JSON.parse(raw);
+    return Array.isArray(parsed)?parsed:[parsed];
+  } catch { return []; }
+}
 function matches(account, value){
   const p=lower(value);
-  return [account.partnerId,account.username,account.email,account.assignedPartnerId,account.referralCode,account.partnerCode,account.dealerName,account.businessName,account.contactName].some(v=>lower(v)===p);
+  return [account.partnerId,account.username,account.email,account.assignedPartnerId,account.referralCode,account.partnerCode,account.dealerCode,account.dealerName,account.businessName,account.contactName].some(v=>lower(v)===p);
 }
 function canonical(account,fallback){ return String(account?.partnerId||account?.username||account?.email||fallback||""); }
 function dealerName(account,fallback){ return account?.dealerName||account?.businessName||account?.contactName||account?.email||fallback||"—"; }
@@ -20,9 +30,14 @@ function dealerEmail(account){ return String(account?.email||account?.username||
 function dealerHref(partner){ return `${ROOT}/dealer?partner=${encodeURIComponent(partner)}`; }
 function emailHref(partner,context,ref){ return `${ROOT}/email?partner=${encodeURIComponent(partner)}&context=${encodeURIComponent(context)}${ref?`&ref=${encodeURIComponent(ref)}`:""}`; }
 
-async function lookup(env){ const accounts=await listAll(env,"account"); return (value)=>accounts.find(a=>matches(a,value))||null; }
+async function lookup(env){
+  const stored=await listAll(env,"account");
+  const configured=configuredAccounts(env);
+  const accounts=[...stored,...configured];
+  return (value)=>accounts.find(a=>matches(a,value))||null;
+}
 function resolveAccount(find,row){ return find(row.partnerId)||find(row.partnerCode)||find(row.partnerName)||null; }
-function displayedDealerName(row,account){ return String(row.partnerName||dealerName(account,row.partnerId)||"—"); }
+function displayedDealerName(row,account){ return String(dealerName(account,row.partnerName||row.partnerId||"—")); }
 
 async function leadsRows(env){
   const [leads,statuses]=await Promise.all([listAll(env,"referral"),listAll(env,"lead-status")]);
@@ -33,7 +48,7 @@ async function leadsRows(env){
     const partner=canonical(account,x.partnerId||x.partnerCode||x.partnerName);
     const name=displayedDealerName(x,account);
     const email=dealerEmail(account);
-    const code=String(x.partnerCode||account?.referralCode||account?.partnerCode||x.partnerId||"");
+    const code=String(x.partnerCode||account?.referralCode||account?.partnerCode||account?.assignedPartnerId||x.partnerId||"");
     const stage=latest.get(String(x.id))||x.status||"New";
     return `<tr><td>${esc(date(x.createdAt))}</td><td class="mono">${esc(x.id)}</td><td><b>${esc(x.customerName||"—")}</b><br><small>${esc(x.customerEmail||x.customerMobile||"")}</small></td><td><a class="kz-dealer-link" href="${esc(dealerHref(partner))}">${esc(name)}</a>${email?`<br><small>${esc(email)}</small>`:""}${code?`<br><small>${esc(code)}</small>`:""}</td><td>${esc(x.productInterest||"—")}</td><td>${esc(x.targetSpecies||"—")}</td><td><span class="badge">${esc(stage)}</span></td><td>${email?`<a class="btn light kz-email-dealer" href="${esc(emailHref(partner,"lead",x.id))}">Email dealer</a>`:`<span class="kz-email-missing">Email unavailable</span>`}</td></tr>`;
   }).join("");
@@ -46,7 +61,7 @@ async function supportRows(env){
     const partner=canonical(account,x.partnerId||x.partnerCode||x.partnerName);
     const name=displayedDealerName(x,account);
     const email=dealerEmail(account);
-    const code=String(x.partnerCode||account?.referralCode||account?.partnerCode||x.partnerId||"");
+    const code=String(x.partnerCode||account?.referralCode||account?.partnerCode||account?.assignedPartnerId||x.partnerId||"");
     const status=x.status||"Open";
     return `<tr><td>${esc(date(x.createdAt))}</td><td class="mono">${esc(x.id)}</td><td><a class="kz-dealer-link" href="${esc(dealerHref(partner))}">${esc(name)}</a>${email?`<br><small>${esc(email)}</small>`:""}${code?`<br><small>${esc(code)}</small>`:""}</td><td>${esc(x.requestType||"—")}</td><td>${esc(x.customerReference||"—")}</td><td style="max-width:300px">${esc(x.details||"—")}</td><td><span class="badge">${esc(status)}</span></td><td><form method="post" action="${ROOT}/support/status" style="display:flex;gap:6px"><input type="hidden" name="partnerId" value="${esc(x.partnerId)}"><input type="hidden" name="id" value="${esc(x.id)}"><select name="status"><option ${status==="Open"?"selected":""}>Open</option><option ${status==="Waiting dealer"?"selected":""}>Waiting dealer</option><option ${status==="Resolved"?"selected":""}>Resolved</option></select><button class="btn" type="submit">Save</button></form></td><td>${email?`<a class="btn light kz-email-dealer" href="${esc(emailHref(partner,"support",x.id))}">Email dealer</a>`:`<span class="kz-email-missing">Email unavailable</span>`}</td></tr>`;
   }).join("");
