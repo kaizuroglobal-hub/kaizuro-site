@@ -8,6 +8,7 @@ const HOSTS = new Set(["kaizuro.com", "www.kaizuro.com", "portal.kaizuro.com"]);
 function db(env){return env.PARTNER_REFERRALS.get(env.PARTNER_REFERRALS.idFromName(STORE));}
 async function all(env,type){try{return await db(env).listAll(type)}catch{return[]}}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function when(v){try{return new Date(v).toLocaleString("en-AU",{day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})}catch{return "—"}}
 function activeId(path){
   const p=path.replace(/\/$/,"");
   if(p===ADMIN_ROOT)return "overview";
@@ -51,8 +52,14 @@ async function canonicalNav(env,path){
   ];
   return items.map(([id,label,badge])=>{
     const href=id==="overview"?ADMIN_ROOT:`${ADMIN_ROOT}/${id}`;
-    return `<a class="nav ${active===id?"active":""}" href="${href}"><span>${esc(label)}</span>${badge?`<small>${esc(badge)}</small>`:"<small></small>"}</a>`;
+    return `<a class="nav${active===id?" kz-current":""}" href="${href}"><span>${esc(label)}</span>${badge?`<small>${esc(badge)}</small>`:"<small></small>"}</a>`;
   }).join("");
+}
+
+async function overviewActivity(env){
+  const rows=(await all(env,"admin-activity")).slice(0,8);
+  if(!rows.length)return `<div class="kz-live-activity-empty">No Admin activity recorded yet.</div>`;
+  return `<div class="kz-live-activity">${rows.map(x=>`<div class="kz-live-row"><small>${esc(when(x.createdAt))}</small><div><b>${esc(x.action||"Admin activity")}</b><p>${esc(x.details||x.contextRef||x.partnerId||"")}</p></div></div>`).join("")}</div>`;
 }
 
 const SIDEBAR_CSS = `<style id="kz-admin-sidebar-canonical-fix">
@@ -90,15 +97,15 @@ aside nav .nav{
 }
 aside nav .nav span,
 aside nav .nav small{line-height:1!important;margin:0!important;}
-aside nav .nav.active,
-aside nav .nav.active:hover,
-aside nav .nav.active:focus{
+aside nav .nav.kz-current,
+aside nav .nav.kz-current:hover,
+aside nav .nav.kz-current:focus{
   background:transparent!important;
   border:0!important;
   outline:0!important;
   box-shadow:none!important;
 }
-aside nav .nav.active span{
+aside nav .nav.kz-current span{
   color:#fff!important;
   text-decoration:underline!important;
   text-decoration-color:#fff!important;
@@ -106,6 +113,7 @@ aside nav .nav.active span{
   text-underline-offset:4px!important;
 }
 aside .side{flex:0 0 auto!important;margin-top:8px!important;padding-top:8px!important;}
+.kz-live-activity{display:grid}.kz-live-row{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 0;border-bottom:1px solid #ddd}.kz-live-row small{color:#888;font-size:9px}.kz-live-row b{font-size:10px}.kz-live-row p{margin:4px 0 0!important;font-size:9px!important;color:#777!important}.kz-live-activity-empty{padding:28px;text-align:center;border:1px dashed #ccc;color:#888;font-size:10px}
 @media(max-height:900px) and (min-width:701px){
   aside{padding-top:18px!important;padding-bottom:14px!important;}
   aside nav{margin-top:14px!important;grid-auto-rows:24px!important;}
@@ -121,9 +129,14 @@ export default {
     const type = response.headers.get("Content-Type") || "";
     if (request.method !== "GET" || response.status !== 200 || !type.includes("text/html")) return response;
     const nav = await canonicalNav(env,url.pathname);
-    return new HTMLRewriter()
+    const isOverview=url.pathname.replace(/\/$/,"")===ADMIN_ROOT;
+    const activity=isOverview?await overviewActivity(env):"";
+    const rewriter=new HTMLRewriter()
       .on("head", { element(el) { el.append(SIDEBAR_CSS, { html: true }); } })
-      .on("aside nav", { element(el) { el.setInnerContent(nav, { html: true }); } })
-      .transform(response);
+      .on("aside nav", { element(el) { el.setInnerContent(nav, { html: true }); } });
+    if(isOverview){
+      rewriter.on(".grid2 .panel .empty",{element(el){el.setInnerContent(activity,{html:true});}});
+    }
+    return rewriter.transform(response);
   }
 };
