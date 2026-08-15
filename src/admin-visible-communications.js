@@ -1,4 +1,4 @@
-import app, { PartnerReferrals } from "./admin-host-fix.js";
+import app, { PartnerReferrals } from "./site-spacing.js";
 export { PartnerReferrals };
 
 const ROOT = "/kaizuro-admin";
