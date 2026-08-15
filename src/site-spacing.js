@@ -60,8 +60,8 @@ function forcePortalReadability(response, pathname) {
   const transformed = new HTMLRewriter()
     .on("head", {
       element(element) {
-        element.append(`<style id="kz-portal-readability-v4">
-          /* Hard final override. Nothing in the sidebar is allowed to render grey. */
+        element.append(`<style id="kz-portal-readability-v5">
+          /* Final portal sidebar treatment shared by Admin + Dealer. */
           html body .shell > aside,
           html body .shell > aside *,
           html body .shell > aside a,
@@ -85,7 +85,7 @@ function forcePortalReadability(response, pathname) {
           html body .shell > aside .portal-label {
             display:block!important;
             font-size:11px!important;
-            font-weight:800!important;
+            font-weight:700!important;
             line-height:1.3!important;
             letter-spacing:.16em!important;
             opacity:1!important;
@@ -103,7 +103,7 @@ function forcePortalReadability(response, pathname) {
             min-height:54px!important;
             padding:0 14px!important;
             font-size:15px!important;
-            font-weight:600!important;
+            font-weight:400!important;
             line-height:1.25!important;
             opacity:1!important;
             text-decoration:none!important;
@@ -112,18 +112,21 @@ function forcePortalReadability(response, pathname) {
           html body .shell > aside .nav span {
             display:block!important;
             font-size:15px!important;
-            font-weight:600!important;
+            font-weight:400!important;
+            line-height:1.25!important;
+            letter-spacing:0!important;
             opacity:1!important;
             text-decoration:none!important;
           }
           html body .shell > aside nav a small,
           html body .shell > aside .nav small {
             display:block!important;
-            font-size:10px!important;
-            font-weight:800!important;
-            line-height:1!important;
-            letter-spacing:.04em!important;
-            opacity:.9!important;
+            font-size:15px!important;
+            font-weight:400!important;
+            line-height:1.25!important;
+            letter-spacing:0!important;
+            text-transform:none!important;
+            opacity:1!important;
             text-decoration:none!important;
           }
           html body .shell > aside .nav.active,
@@ -134,7 +137,7 @@ function forcePortalReadability(response, pathname) {
           html body .shell > aside .side {
             display:block!important;
             font-size:12px!important;
-            font-weight:500!important;
+            font-weight:400!important;
             line-height:1.6!important;
             border-top-color:#5b5d60!important;
             opacity:1!important;
@@ -143,7 +146,7 @@ function forcePortalReadability(response, pathname) {
             display:block!important;
             margin:12px 0 0!important;
             font-size:12px!important;
-            font-weight:600!important;
+            font-weight:400!important;
             line-height:1.45!important;
             text-decoration:none!important;
             opacity:1!important;
