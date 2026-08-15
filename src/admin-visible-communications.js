@@ -4,6 +4,7 @@ export { PartnerReferrals };
 const ROOT = "/kaizuro-admin";
 const STORE_NAME = "kaizuro-partner-submissions";
 const PUBLIC_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com"]);
+const ADMIN_RENDER_VERSION = "2026-08-15-contact-name-v2";
 
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const lower = (v) => String(v || "").trim().toLowerCase();
@@ -103,11 +104,17 @@ async function decorate(response,env,type){
   const ct=response.headers.get("Content-Type")||"";
   if(response.status!==200||!ct.includes("text/html"))return response;
   const rows=type==="leads"?await leadsRows(env):await supportRows(env);
-  return new HTMLRewriter()
-    .on("head",{element(el){el.append(`<style id="kz-admin-communications-visible">.kz-dealer-link{font-weight:600;text-decoration:underline;text-underline-offset:3px}.kz-email-dealer{white-space:nowrap}.kz-email-missing{font-size:12px;color:#777}</style>`,{html:true});}})
+  const transformed=new HTMLRewriter()
+    .on("head",{element(el){el.append(`<meta name="kz-admin-render" content="${ADMIN_RENDER_VERSION}"><style id="kz-admin-communications-visible">.kz-dealer-link{font-weight:600;text-decoration:underline;text-underline-offset:3px}.kz-email-dealer{white-space:nowrap}.kz-email-missing{font-size:12px;color:#777}</style>`,{html:true});}})
     .on(".panel .table thead tr",{element(el){el.append("<th>Contact</th>",{html:true});}})
     .on(".panel .table tbody",{element(el){el.setInnerContent(rows,{html:true});}})
     .transform(response);
+  const headers=new Headers(transformed.headers);
+  headers.set("Cache-Control","no-store, no-cache, must-revalidate, max-age=0");
+  headers.set("Pragma","no-cache");
+  headers.set("Expires","0");
+  headers.set("X-KAIZURO-Admin-Render",ADMIN_RENDER_VERSION);
+  return new Response(transformed.body,{status:transformed.status,statusText:transformed.statusText,headers});
 }
 
 export default { async fetch(request,env,ctx){
