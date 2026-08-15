@@ -1,5 +1,5 @@
-import app from "./kaizuro-admin.js";
-export { PartnerReferrals } from "./kaizuro-admin.js";
+import app from "./admin-host-fix.js";
+export { PartnerReferrals } from "./admin-host-fix.js";
 
 const PUBLIC_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com"]);
 
