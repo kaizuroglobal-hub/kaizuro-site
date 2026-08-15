@@ -22,6 +22,7 @@ function configuredAccounts(env){
 }
 function matches(account, value){
   const p=lower(value);
+  if(!p)return false;
   return [account.partnerId,account.username,account.email,account.assignedPartnerId,account.referralCode,account.partnerCode,account.dealerCode,account.dealerName,account.businessName,account.contactName].some(v=>lower(v)===p);
 }
 function canonical(account,fallback){ return String(account?.partnerId||account?.username||account?.email||fallback||""); }
@@ -29,22 +30,45 @@ function dealerName(account,fallback){ return account?.dealerName||account?.busi
 function dealerEmail(account){ return String(account?.email||account?.username||"").trim(); }
 function dealerHref(partner){ return `${ROOT}/dealer?partner=${encodeURIComponent(partner)}`; }
 function emailHref(partner,context,ref){ return `${ROOT}/email?partner=${encodeURIComponent(partner)}&context=${encodeURIComponent(context)}${ref?`&ref=${encodeURIComponent(ref)}`:""}`; }
+function looksLikeDealerCode(value){
+  const v=String(value||"").trim();
+  return /^KZ(?:P|TEST|[-_A-Z0-9])*$/i.test(v) || /^KZ-[A-Z]{2,}-\d+$/i.test(v);
+}
 
 async function lookup(env){
   const stored=await listAll(env,"account");
   const configured=configuredAccounts(env);
-  const accounts=[...stored,...configured];
-  return (value)=>accounts.find(a=>matches(a,value))||null;
+  const all=[...stored,...configured];
+  const unique=[];
+  const seen=new Set();
+  for(const account of all){
+    const key=lower(account.email||account.username||account.partnerId||account.assignedPartnerId||account.dealerName||account.businessName);
+    if(!key||seen.has(key))continue;
+    seen.add(key); unique.push(account);
+  }
+  const active=unique.filter(a=>lower(a.status||"active")==="active");
+  const single=active.length===1?active[0]:(unique.length===1?unique[0]:null);
+  return {
+    find(value){ return unique.find(a=>matches(a,value))||null; },
+    single,
+  };
 }
-function resolveAccount(find,row){ return find(row.partnerId)||find(row.partnerCode)||find(row.partnerName)||null; }
-function displayedDealerName(row,account){ return String(dealerName(account,row.partnerName||row.partnerId||"—")); }
+function resolveAccount(directory,row){
+  return directory.find(row.partnerId)||directory.find(row.partnerCode)||directory.find(row.partnerName)||directory.single||null;
+}
+function displayedDealerName(row,account){
+  const actual=dealerName(account,"");
+  if(actual)return String(actual);
+  if(row.partnerName&&!looksLikeDealerCode(row.partnerName))return String(row.partnerName);
+  return "Dealer account";
+}
 
 async function leadsRows(env){
   const [leads,statuses]=await Promise.all([listAll(env,"referral"),listAll(env,"lead-status")]);
-  const find=await lookup(env); const latest=new Map();
+  const directory=await lookup(env); const latest=new Map();
   for(const s of statuses){ const id=String(s.leadRef||s.leadId||""); if(id&&!latest.has(id)) latest.set(id,s.status); }
   return leads.slice(0,500).map(x=>{
-    const account=resolveAccount(find,x);
+    const account=resolveAccount(directory,x);
     const partner=canonical(account,x.partnerId||x.partnerCode||x.partnerName);
     const name=displayedDealerName(x,account);
     const email=dealerEmail(account);
@@ -55,9 +79,9 @@ async function leadsRows(env){
 }
 
 async function supportRows(env){
-  const support=await listAll(env,"support"); const find=await lookup(env);
+  const support=await listAll(env,"support"); const directory=await lookup(env);
   return support.map(x=>{
-    const account=resolveAccount(find,x);
+    const account=resolveAccount(directory,x);
     const partner=canonical(account,x.partnerId||x.partnerCode||x.partnerName);
     const name=displayedDealerName(x,account);
     const email=dealerEmail(account);
@@ -81,7 +105,8 @@ async function decorate(response,env,type){
 export default { async fetch(request,env,ctx){
   const url=new URL(request.url); let response=await app.fetch(request,env,ctx);
   if(request.method!=="GET"||!PUBLIC_HOSTS.has(url.hostname.toLowerCase())) return response;
-  if(url.pathname.replace(/\/$/,"")===`${ROOT}/leads`) return decorate(response,env,"leads");
-  if(url.pathname.replace(/\/$/,"")===`${ROOT}/support`) return decorate(response,env,"support");
+  const path=url.pathname.replace(/\/$/,"");
+  if(path===`${ROOT}/leads`) return decorate(response,env,"leads");
+  if(path===`${ROOT}/support`) return decorate(response,env,"support");
   return response;
 }};
