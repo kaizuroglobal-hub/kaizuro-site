@@ -4,7 +4,9 @@ export { PartnerReferrals };
 const ROOT = "/kaizuro-admin";
 const STORE_NAME = "kaizuro-partner-submissions";
 const PUBLIC_HOSTS = new Set(["kaizuro.com", "www.kaizuro.com"]);
-const ADMIN_RENDER_VERSION = "2026-08-15-contact-name-v2";
+const ADMIN_RENDER_VERSION = "2026-08-15-contact-name-v3";
+const LEGACY_TEST_CODE = "kz-au-001";
+const LEGACY_TEST_EMAIL = "w3protocol@proton.me";
 
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const lower = (v) => String(v || "").trim().toLowerCase();
@@ -67,7 +69,15 @@ async function directory(env){
   const single=active.length===1?active[0]:(unique.length===1?unique[0]:null);
   return { find(value){ return unique.find(a=>matches(a,value))||null; }, single };
 }
-function resolveAccount(dir,row){ return dir.find(row.partnerId)||dir.find(row.partnerCode)||dir.find(row.partnerName)||dir.single||null; }
+function rowHasLegacyTestCode(row){
+  return [row?.partnerId,row?.partnerCode,row?.partnerName].some(value=>lower(value)===LEGACY_TEST_CODE);
+}
+function resolveAccount(dir,row){
+  const direct=dir.find(row.partnerId)||dir.find(row.partnerCode)||dir.find(row.partnerName);
+  if(direct && !rowHasLegacyTestCode(row)) return direct;
+  if(rowHasLegacyTestCode(row)) return dir.find(LEGACY_TEST_EMAIL)||direct||dir.single||null;
+  return direct||dir.single||null;
+}
 function dealerCell(row,account,context,ref){
   const partner=canonical(account,row.partnerId||row.partnerCode||row.partnerName);
   const contact=dealerContactName(account,row);
