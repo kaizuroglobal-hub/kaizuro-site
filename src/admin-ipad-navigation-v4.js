@@ -31,13 +31,11 @@ function idForHref(href=""){
 
 const CSS=`<style id="kz-admin-ipad-nav-v4">
 aside nav{gap:0!important;margin-top:22px!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin;padding-bottom:8px}
-aside nav .nav{position:relative;min-height:35px!important;padding:0 10px!important;font-size:13.8px!important;line-height:1.15!important;border:0!important;border-bottom:2px solid transparent!important;color:rgba(255,255,255,.68)!important;text-decoration:none!important;background:transparent!important;box-shadow:none!important}
-aside nav .nav span{display:block!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-aside nav .nav small{display:block!important;font-size:8px!important;line-height:1!important;color:rgba(255,255,255,.34)!important;margin-left:8px}
-aside nav .nav:hover,aside nav .nav:focus,aside nav .nav:focus-visible,aside nav .nav:active{color:#fff!important;background:transparent!important;box-shadow:none!important;outline:none!important}
-aside nav .nav.active,aside nav .nav.kz-current,aside nav .nav[aria-current="page"]{color:#fff!important;background:transparent!important;box-shadow:none!important;border-bottom:2px solid #fff!important;font-weight:600!important}
-aside nav .nav.active:hover,aside nav .nav.kz-current:hover,aside nav .nav[aria-current="page"]:hover,aside nav .nav.active:focus,aside nav .nav.kz-current:focus,aside nav .nav[aria-current="page"]:focus{background:transparent!important;box-shadow:none!important}
-aside nav .nav.active small,aside nav .nav.kz-current small,aside nav .nav[aria-current="page"] small{color:rgba(255,255,255,.62)!important}
+aside nav .nav,aside nav .nav:link,aside nav .nav:visited,aside nav .nav:hover,aside nav .nav:focus,aside nav .nav:focus-visible,aside nav .nav:active{position:relative;min-height:35px!important;padding:0 10px!important;font-size:13.8px!important;line-height:1.15!important;border:0!important;border-bottom:2px solid transparent!important;color:rgba(255,255,255,.68)!important;text-decoration:none!important;background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;outline:none!important;-webkit-tap-highlight-color:transparent!important;-webkit-appearance:none!important;appearance:none!important}
+aside nav .nav span{display:block!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:transparent!important}
+aside nav .nav small{display:block!important;font-size:8px!important;line-height:1!important;color:rgba(255,255,255,.34)!important;margin-left:8px;background:transparent!important}
+aside nav .nav[aria-current="page"],aside nav .nav[aria-current="page"]:link,aside nav .nav[aria-current="page"]:visited,aside nav .nav[aria-current="page"]:hover,aside nav .nav[aria-current="page"]:focus,aside nav .nav[aria-current="page"]:focus-visible,aside nav .nav[aria-current="page"]:active{color:#fff!important;background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;border-bottom:2px solid #fff!important;font-weight:600!important}
+aside nav .nav[aria-current="page"] small{color:rgba(255,255,255,.62)!important}
 @media (min-width:701px) and (max-width:1180px){
   .shell{grid-template-columns:218px minmax(0,1fr)!important}
   aside{position:sticky!important;top:0!important;height:100svh!important;padding:18px 14px!important;display:flex!important;flex-direction:column!important}
@@ -57,6 +55,9 @@ aside nav .nav.active small,aside nav .nav.kz-current small,aside nav .nav[aria-
   aside nav .nav{min-height:31px!important;font-size:13px!important}
   aside .side{padding-top:7px!important}
 }
+@media (max-width:700px){
+  aside nav .nav,aside nav .nav *{-webkit-tap-highlight-color:transparent!important;background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important}
+}
 </style>`;
 
 export default{
@@ -73,8 +74,8 @@ export default{
         const id=idForHref(e.getAttribute("href")||"");
         const isActive=id===active;
         const cls=(e.getAttribute("class")||"").split(/\s+/).filter(Boolean).filter(x=>x!=="active"&&x!=="kz-current");
-        if(isActive)cls.push("active","kz-current");
         e.setAttribute("class",[...new Set(cls)].join(" "));
+        e.setAttribute("style","background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent!important;");
         if(isActive)e.setAttribute("aria-current","page");else e.removeAttribute("aria-current");
       }})
       .transform(response);
