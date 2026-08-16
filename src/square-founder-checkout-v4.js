@@ -70,16 +70,21 @@ async function webhook(request,env){
  if(eventId)await save(env,{id:rid("KZSQEV"),type:"square-webhook-event",partnerId:"network",eventId,eventType:text(event?.type,100),squareMerchantId:text(event?.merchant_id,160),squarePaymentId:text(payment?.id,160),squareOrderId:text(payment?.order_id,160),paymentStatus:text(payment?.status,60),createdAt:new Date().toISOString()});
  return new Response("OK",{status:200,headers:{"Cache-Control":"no-store"}});
 }
-function decorateSquareReturn(response,url){
- const returned=url.searchParams.get("founder_payment_return"),squareError=url.searchParams.get("square_error");if(!returned&&!squareError)return response;
- const markup=returned?'<div class="kz-founder-square-note" role="status"><b>Square checkout returned.</b><br>If your Sandbox payment completed successfully, KAIZURO will confirm the deposit automatically from Square.</div>':`<div class="kz-founder-square-error" role="alert"><b>Founder details were saved, but Square checkout was not created.</b><br>${String(squareError||"").replace(/[<>]/g,"")}</div>`;
+function decorateFounderFlow(response,url){
+ const returned=url.searchParams.get("founder_payment_return"),squareError=url.searchParams.get("square_error");
+ const markup=returned?'<div class="kz-founder-square-note" role="status"><b>Square checkout returned.</b><br>If your Sandbox payment completed successfully, KAIZURO will confirm the deposit automatically from Square.</div>':squareError?`<div class="kz-founder-square-error" role="alert"><b>Founder details were saved, but Square checkout was not created.</b><br>${String(squareError||"").replace(/[<>]/g,"")}</div>`:"";
  const css='<style id="kz-square-founder-v4">.kz-founder-square-note,.kz-founder-square-error{grid-column:1/-1;margin:0 0 22px;padding:15px 17px;font-size:12px;line-height:1.55}.kz-founder-square-note{border:1px solid #789d82;background:#e9f2eb;color:#214f30}.kz-founder-square-error{border:1px solid #b98d8d;background:#f4e8e8;color:#713838}</style>';
- return new HTMLRewriter().on("head",{element:e=>e.append(css,{html:true})}).on("form.founder-form",{element:e=>e.prepend(markup,{html:true})}).transform(response);
+ const js=`<script id="kz-founder-flow-v4">document.addEventListener('click',function(e){const a=e.target.closest('.founder-payment-button[data-founder-value]');if(!a)return;e.preventDefault();const v=a.getAttribute('data-founder-value')||'';const f=document.querySelector('form.founder-form');const s=f&&f.querySelector('select[name="Preferred rod"]');if(s){s.value=v;s.dispatchEvent(new Event('change',{bubbles:true}));}if(f){f.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>{const n=f.querySelector('input[name="Full name"]');if(n)n.focus({preventScroll:true});},450);}});</script>`;
+ return new HTMLRewriter()
+  .on("head",{element:e=>{e.append(css,{html:true});e.append(js,{html:true});}})
+  .on("form.founder-form",{element:e=>{e.setAttribute("id","founder-details");if(markup)e.prepend(markup,{html:true});}})
+  .on("a.founder-payment-button[data-founder-value]",{element:e=>{e.setAttribute("href","#founder-details");e.removeAttribute("target");e.removeAttribute("rel");e.setAttribute("aria-controls","founder-details");}})
+  .transform(response);
 }
 export default{async fetch(request,env,ctx){
  const url=new URL(request.url),host=url.hostname.toLowerCase(),path=url.pathname.replace(/\/$/,"")||"/";
  if(request.method==="GET"&&PUBLIC_HOSTS.has(host)&&path==="/api/square/status")return new Response(JSON.stringify({ok:true,environment:String(env.SQUARE_ENVIRONMENT||"sandbox").toLowerCase(),configured:squareReady(env),accessToken:Boolean(env.SQUARE_ACCESS_TOKEN),location:Boolean(env.SQUARE_LOCATION_ID),webhookSignature:Boolean(env.SQUARE_WEBHOOK_SIGNATURE_KEY)}),{headers:{"Content-Type":"application/json","Cache-Control":"no-store","X-Robots-Tag":"noindex,nofollow,noarchive"}});
  if(request.method==="POST"&&PUBLIC_HOSTS.has(host)&&path==="/api/square/webhook")return webhook(request,env);
  if(request.method==="POST"&&PUBLIC_HOSTS.has(host)&&path==="/api/crm/founder")return founderWithSquare(request,env,ctx);
- const response=await app.fetch(request,env,ctx);if(request.method==="GET"&&PUBLIC_HOSTS.has(host)&&path==="/"&&response.status===200&&(response.headers.get("Content-Type")||"").includes("text/html"))return decorateSquareReturn(response,url);return response;
+ const response=await app.fetch(request,env,ctx);if(request.method==="GET"&&PUBLIC_HOSTS.has(host)&&path==="/"&&response.status===200&&(response.headers.get("Content-Type")||"").includes("text/html"))return decorateFounderFlow(response,url);return response;
 },async email(message,env,ctx){if(typeof app.email==="function")return app.email(message,env,ctx)}};
