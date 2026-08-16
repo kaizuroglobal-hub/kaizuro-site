@@ -6,7 +6,7 @@ const HOSTS=new Set(["kaizuro.com","www.kaizuro.com","portal.kaizuro.com"]);
 const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function db(env){return env.PARTNER_REFERRALS.get(env.PARTNER_REFERRALS.idFromName(STORE));}
 async function all(env,t){try{return await db(env).listAll(t)}catch{return[]}}
-function activeFor(path){const p=path.replace(/\/$/,"");if(p===ROOT)return"overview";if(p===`${ROOT}/dealer`||p===`${ROOT}/dealers`)return"dealers";if(p===`${ROOT}/application`||p===`${ROOT}/applications`)return"applications";if(p===`${ROOT}/lead`||p===`${ROOT}/leads`)return"leads";if(p===`${ROOT}/order`||p===`${ROOT}/orders`)return"orders";if(p===`${ROOT}/email`||p===`${ROOT}/communications`||p.startsWith(`${ROOT}/communications/`))return"communications";if(p===`${ROOT}/health`)return"health";return p.slice(ROOT.length+1).split("/")[0]||"overview";}
+function activeFor(path){const p=path.replace(/\/$/,"");if(p===ROOT)return"overview";if(p===`${ROOT}/dealer`||p===`${ROOT}/dealers`)return"dealers";if(p===`${ROOT}/application`||p===`${ROOT}/applications`)return"applications";if(p===`${ROOT}/lead`||p===`${ROOT}/leads`)return"leads";if(p===`${ROOT}/order`||p===`${ROOT}/orders`)return"orders";if(p===`${ROOT}/supplier-production`||p.startsWith(`${ROOT}/supplier-production/`))return"supplier-production";if(p===`${ROOT}/email`||p===`${ROOT}/communications`||p.startsWith(`${ROOT}/communications/`))return"communications";if(p===`${ROOT}/health`)return"health";return p.slice(ROOT.length+1).split("/")[0]||"overview";}
 async function nav(env,path){
  const [accounts,applications,leads,orders,allocation,support,products,tasks]=await Promise.all(["account","application","referral","sale","allocation-request","support","product-config","dealer-task"].map(t=>all(env,t)));
  const active=activeFor(path),openTasks=tasks.filter(t=>!t.completed).length,productCount=Math.max(2,new Set(products.map(p=>p.product||p.id).filter(Boolean)).size||0);
@@ -28,6 +28,7 @@ async function nav(env,path){
   ["academy","Academy",""],
   ["performance","Performance",""],
   ["production","Production",""],
+  ["supplier-production","Supplier Production",""],
   ["customers","Customers",""],
   ["team","Team",""],
   ["paperwork","Paperwork",""],
