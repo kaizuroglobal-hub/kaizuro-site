@@ -41,3 +41,13 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4.120.0 versions deploy "${{ steps.version.outputs.id }}@100%" --config wrangler.jsonc -y --message "KAIZURO production ${{ github.sha }}"
+
+      - name: Release 3 Sandbox smoke test
+        shell: bash
+        run: |
+          for i in 1 2 3 4 5; do
+            BODY=$(curl --fail --silent --show-error --max-time 20 "https://kaizuro.com/api/release3/smoke?order=KZO-B54E0ECF92") && break
+            sleep 4
+          done
+          echo "$BODY"
+          node -e 'const x=JSON.parse(process.argv[1]); if(!x.ok||!x.mathsValid||!x.emailBinding||!x.customerEmailPresent||!x.balanceRequestSupported) process.exit(1)' "$BODY"
