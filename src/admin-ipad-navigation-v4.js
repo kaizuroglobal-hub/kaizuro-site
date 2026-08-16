@@ -29,8 +29,8 @@ function idForHref(href=""){
   return p.slice(ROOT.length+1).split("/")[0]||"overview";
 }
 
-const CSS=`<style id="kz-admin-ipad-nav-v5">
-/* Keep Admin navigation visually identical to desktop on iPad. */
+const CSS=`<style id="kz-admin-ipad-nav-v6">
+/* Desktop visual treatment, touch-safe iPad hit targets. */
 aside nav .nav,aside nav .nav:link,aside nav .nav:visited,aside nav .nav:hover,aside nav .nav:focus,aside nav .nav:focus-visible,aside nav .nav:active{
   position:relative!important;
   min-height:42px!important;
@@ -49,53 +49,39 @@ aside nav .nav,aside nav .nav:link,aside nav .nav:visited,aside nav .nav:hover,a
   -webkit-tap-highlight-color:transparent!important;
   -webkit-appearance:none!important;
   appearance:none!important;
+  touch-action:manipulation!important;
 }
 aside nav .nav:hover,aside nav .nav:focus-visible{color:#fff!important}
 aside nav .nav span{display:inline-block!important;position:relative!important;white-space:nowrap!important;overflow:visible!important;text-overflow:clip!important;background:transparent!important}
 aside nav .nav small{display:block!important;margin-left:10px!important;color:#555!important;font-size:8px!important;line-height:1!important;background:transparent!important}
 aside nav .nav[aria-current="page"]{color:#fff!important;font-weight:500!important}
-aside nav .nav[aria-current="page"] span:after{
-  content:""!important;
-  position:absolute!important;
-  left:0!important;
-  right:0!important;
-  bottom:-7px!important;
-  height:2px!important;
-  background:#fff!important;
-  pointer-events:none!important;
-}
+aside nav .nav[aria-current="page"] span:after{content:""!important;position:absolute!important;left:0!important;right:0!important;bottom:-7px!important;height:2px!important;background:#fff!important;pointer-events:none!important}
 aside nav .nav[aria-current="page"] small{color:#777!important}
 
 @media (min-width:701px) and (max-width:1180px){
   .shell{grid-template-columns:245px minmax(0,1fr)!important}
-  aside{position:sticky!important;top:0!important;height:100svh!important;padding:28px 20px!important;display:flex!important;flex-direction:column!important}
+  aside{position:sticky!important;top:0!important;height:100svh!important;padding:24px 20px 18px!important;display:flex!important;flex-direction:column!important}
   aside .brand{display:block!important;font-size:19px!important}
   aside .brand:after{display:none!important;content:none!important}
   aside .label{display:block!important;margin-top:7px!important;color:#777!important;font-size:9px!important;font-weight:800!important;letter-spacing:.16em!important;text-transform:uppercase!important}
-  aside nav{display:grid!important;gap:4px!important;margin-top:40px!important;overflow-y:auto!important;min-height:0!important;overscroll-behavior:contain!important;scrollbar-width:thin!important}
-  aside nav .nav{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:42px!important;padding:0 12px!important;font-size:12px!important}
+  aside nav{display:grid!important;gap:5px!important;margin-top:30px!important;overflow-y:auto!important;min-height:0!important;overscroll-behavior:contain!important;scrollbar-width:thin!important;padding:2px 0 8px!important}
+  aside nav .nav{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:48px!important;padding:0 12px!important;font-size:12px!important}
   aside nav .nav:before{display:none!important;content:none!important}
   aside nav .nav span,aside nav .nav small{display:block!important}
-  aside .side{display:block!important;margin-top:auto!important;padding-top:18px!important;border-top:1px solid #292b2d!important;color:#999!important;font-size:9px!important}
-  aside .side a{display:block!important;margin-top:12px!important;color:#777!important;text-decoration:none!important}
+  aside .side{display:block!important;margin-top:auto!important;padding-top:14px!important;border-top:1px solid #292b2d!important;color:#999!important;font-size:9px!important;flex:0 0 auto!important}
+  aside .side a{display:block!important;margin-top:10px!important;color:#777!important;text-decoration:none!important}
 }
 
 @media (min-width:701px) and (max-height:900px){
-  aside{padding-top:22px!important;padding-bottom:16px!important}
-  aside nav{margin-top:26px!important;gap:2px!important}
-  aside nav .nav{min-height:38px!important}
-  aside .side{padding-top:12px!important}
-  aside .side a{margin-top:8px!important}
+  aside{padding-top:18px!important;padding-bottom:12px!important}
+  aside nav{margin-top:20px!important;gap:4px!important}
+  aside nav .nav{min-height:46px!important}
+  aside .side{padding-top:9px!important}
+  aside .side a{margin-top:7px!important}
 }
 
 @media (max-width:700px){
-  aside nav .nav,aside nav .nav *{
-    -webkit-tap-highlight-color:transparent!important;
-    background:transparent!important;
-    background-color:transparent!important;
-    background-image:none!important;
-    box-shadow:none!important;
-  }
+  aside nav .nav,aside nav .nav *{-webkit-tap-highlight-color:transparent!important;background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;touch-action:manipulation!important}
 }
 </style>`;
 
