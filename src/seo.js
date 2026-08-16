@@ -3,6 +3,7 @@ const SITE_URL = "https://kaizuro.com";
 const homepageDescription = "KAIZURO builds premium offshore casting rods for GT, tuna, dogtooth tuna and large pelagics. Explore ASSAULT PE6-8, HALO PE10-12, engineering validation and Founder 100 allocation.";
 const builtDescription = "How KAIZURO offshore fishing rods are designed in Australia, developed through physical prototypes, tested under load and manufactured with a specialist high-performance rod partner.";
 const temporaryNoIndexMarkup = '<meta name="robots" content="noindex,follow,noarchive">';
+const publicIndexMarkup = '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">';
 const siteIconMarkup = '<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#050505"><meta name="apple-mobile-web-app-title" content="KAIZURO"><meta name="application-name" content="KAIZURO"><meta name="theme-color" content="#050505">';
 const homepageLayoutFixMarkup = '<style>#proof.kz-performance-merged>.kz-performance-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}</style>';
 const assaultPreviewHeroFixMarkup = `<style>
@@ -135,7 +136,7 @@ function applyImagePerformance(rewriter, pathname) {
 export const homepageSeoMarkup = `
 <link rel="canonical" href="${SITE_URL}/">
 ${siteIconMarkup}
-${temporaryNoIndexMarkup}
+${publicIndexMarkup}
 ${homepageLayoutFixMarkup}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KAIZURO">
@@ -158,6 +159,10 @@ ${jsonLd({
       "name": "KAIZURO",
       "url": `${SITE_URL}/`,
       "email": "info@kaizuro.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/favicon.svg`
+      },
       "description": "Premium offshore casting rods engineered for GT, tuna, dogtooth tuna and large pelagic fishing."
     },
     {
@@ -189,7 +194,7 @@ ${jsonLd({
 export const builtSeoMarkup = `
 <link rel="canonical" href="${SITE_URL}/how-kaizuro-is-built/">
 ${siteIconMarkup}
-${temporaryNoIndexMarkup}
+${publicIndexMarkup}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KAIZURO">
 <meta property="og:locale" content="en_AU">
