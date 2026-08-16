@@ -1,4 +1,4 @@
-import app,{PartnerReferrals}from"./dealer-portal-v1-clean.js";
+import app,{PartnerReferrals}from"./dealer-portal-v1-fixed.js";
 export{PartnerReferrals};
 
 const ROOT="/kaizuro-admin";
@@ -30,7 +30,6 @@ function idForHref(href=""){
 }
 
 const CSS=`<style id="kz-admin-ipad-nav-v4">
-/* KAIZURO Admin navigation: full labels on iPad, compact enough to fit the complete menu. */
 aside nav{gap:0!important;margin-top:22px!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-width:thin;padding-bottom:8px}
 aside nav .nav{position:relative;min-height:35px!important;padding:0 10px!important;font-size:13.8px!important;line-height:1.15!important;border:0!important;border-bottom:1px solid rgba(255,255,255,.12)!important;color:rgba(255,255,255,.68)!important;text-decoration:none!important}
 aside nav .nav span{display:block!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -72,7 +71,7 @@ export default{
       .on("aside nav a.nav",{element(e){
         const id=idForHref(e.getAttribute("href")||"");
         const isActive=id===active;
-        let cls=(e.getAttribute("class")||"").split(/\s+/).filter(Boolean).filter(x=>x!=="active"&&x!=="kz-current");
+        const cls=(e.getAttribute("class")||"").split(/\s+/).filter(Boolean).filter(x=>x!=="active"&&x!=="kz-current");
         if(isActive)cls.push("active","kz-current");
         e.setAttribute("class",[...new Set(cls)].join(" "));
         if(isActive)e.setAttribute("aria-current","page");else e.removeAttribute("aria-current");
