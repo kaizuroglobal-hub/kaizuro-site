@@ -16,8 +16,8 @@ function squareBase(env){return String(env.SQUARE_ENVIRONMENT||"sandbox").toLowe
 function squareReady(env){return Boolean(String(env.SQUARE_ACCESS_TOKEN||"").trim()&&String(env.SQUARE_LOCATION_ID||"").trim()&&String(env.SQUARE_WEBHOOK_SIGNATURE_KEY||"").trim());}
 function founderProduct(rod){
  const r=text(rod,120).toUpperCase();
- if(r.includes("ASSAULT"))return{product:"ASSAULT PE6-8",fullCents:79900,depositCents:19975};
- if(r.includes("HALO"))return{product:"HALO PE10-12",fullCents:99900,depositCents:24975};
+ if(r.includes("ASSAULT"))return{product:"ASSAULT PE6-8",fullCents:79900,depositCents:24000};
+ if(r.includes("HALO"))return{product:"HALO PE10-12",fullCents:99900,depositCents:30000};
  return null;
 }
 function bytesEqual(a,b){if(a.length!==b.length)return false;let n=0;for(let i=0;i<a.length;i++)n|=a.charCodeAt(i)^b.charCodeAt(i);return n===0;}
