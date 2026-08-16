@@ -45,9 +45,11 @@ jobs:
       - name: Release 3 Sandbox smoke test
         shell: bash
         run: |
+          BODY=""
           for i in 1 2 3 4 5; do
-            BODY=$(curl --fail --silent --show-error --max-time 20 "https://kaizuro.com/api/release3/smoke?order=KZO-B54E0ECF92") && break
+            BODY=$(curl --fail --silent --show-error --max-time 20 -A "KAIZURO-Release3-Smoke/1.0" "https://portal.kaizuro.com/api/release3/smoke?order=KZO-B54E0ECF92") && break
             sleep 4
           done
           echo "$BODY"
+          test -n "$BODY"
           node -e 'const x=JSON.parse(process.argv[1]); if(!x.ok||!x.mathsValid||!x.emailBinding||!x.customerEmailPresent||!x.balanceRequestSupported) process.exit(1)' "$BODY"
