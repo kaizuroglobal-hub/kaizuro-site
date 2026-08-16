@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kaizuro-site-live",
-  "main": "src/admin-retail-customers-v4.js",
+  "main": "src/admin-retail-customers-v4-fixed.js",
   "compatibility_date": "2026-08-02",
   "keep_vars": true,
   "routes": [
