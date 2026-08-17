@@ -168,11 +168,14 @@
     founderDeposit.innerHTML = `
       <div class="deposit-intro">
         <p class="eyebrow">Founder access.</p>
-        <h3 id="deposit-title"><span>Register your interest.</span></h3>
+        <h3 id="deposit-title"><span>Register for KAIZURO Founder Priority.</span></h3>
         <p>
-          Choose your preferred rod and submit your details below. No payment is required.
-          This is a priority access expression of interest only. Founder 100 members will be
-          contacted first when final validation and production timing are confirmed.
+          ASSAULT PE6-8 is currently the lead development platform. Register your interest to receive
+          prototype updates, production news and first access when manufacturing is confirmed.
+        </p>
+        <p>
+          You can also register interest in HALO PE10-12 or PE4-6. No payment is required and no
+          production date is being promised at this stage.
         </p>
 
         <ol class="founder-payment-steps" aria-label="Founder interest process">
@@ -182,9 +185,9 @@
         </ol>
 
         <div class="founder-payment-grid founder-interest-grid" aria-label="Founder interest options">
-          ${interestCard("PE4-6", "PE4-6", "Register PE4-6 interest")}
-          ${interestCard("ASSAULT", "PE6-8", "Register ASSAULT interest")}
+          ${interestCard("ASSAULT", "PE6-8", "Register ASSAULT interest", true)}
           ${interestCard("HALO", "PE10-12", "Register HALO interest")}
+          ${interestCard("PE4-6", "PE4-6", "Register PE4-6 interest")}
         </div>
       </div>
 
@@ -213,9 +216,9 @@
           Preferred model
           <select name="Preferred model" required>
             <option value="">Select your preferred model</option>
-            <option>PE4-6</option>
             <option>ASSAULT PE6-8</option>
             <option>HALO PE10-12</option>
+            <option>PE4-6</option>
           </select>
         </label>
 
@@ -247,11 +250,11 @@
           <textarea name="Message" rows="4" placeholder="Tell us anything else that helps us understand your interest..."></textarea>
         </label>
 
-        <button class="founder-submit form-wide" type="submit">Submit interest</button>
+        <button class="founder-submit form-wide" type="submit">Register interest</button>
 
         <p class="founder-interest-note form-wide">
           Expressions of interest are non-binding and do not guarantee final allocation.
-          Founder 100 priority members will receive first access when production opens.
+          Registered customers will receive updates and first-access information when manufacturing is confirmed.
         </p>
       </form>
     `;
@@ -279,6 +282,10 @@
           display: flex !important;
           flex-direction: column !important;
           min-height: 360px;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-payment-card[data-lead-model="true"] {
+          border-color: rgba(255,255,255,.5);
         }
 
         #founder-deposit[data-interest-mode="true"] .founder-payment-card dl {
@@ -331,22 +338,24 @@
     }
   }
 
-  function interestCard(name, pe, buttonText) {
+  function interestCard(name, pe, buttonText, isLead = false) {
     const model = name === "PE4-6" ? "PE4-6" : `${name} ${pe}`;
     const title = name === "PE4-6"
       ? `<span>PE4-6</span>`
       : `<span>${name}</span><small>${pe}</small>`;
+    const firstLine = isLead ? "Lead development platform" : "Register your preference";
+    const secondLine = isLead ? "Prototype updates + first access" : "Prototype and production updates";
 
     return `
-      <article class="founder-payment-card">
+      <article class="founder-payment-card"${isLead ? ' data-lead-model="true"' : ""}>
         <div class="founder-payment-card__visual" aria-hidden="true"></div>
         <div class="founder-payment-card__content">
           <h4 class="founder-payment-title">${title}</h4>
-          <p class="founder-payment-kicker">Founder Interest</p>
+          <p class="founder-payment-kicker">${isLead ? "Lead Platform" : "Founder Interest"}</p>
           <dl>
-            <div><dt>Priority access open</dt></div>
+            <div><dt>${firstLine}</dt></div>
+            <div><dt>${secondLine}</dt></div>
             <div><dt>No payment required</dt></div>
-            <div><dt>Register your preference</dt></div>
           </dl>
           <button
             type="button"
