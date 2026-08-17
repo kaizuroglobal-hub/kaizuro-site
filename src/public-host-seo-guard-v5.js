@@ -83,37 +83,37 @@ async function replacePublicGripNaming(response, isHomepage = false) {
   if (isHomepage) {
     const whyKaizuroBulletFix = `
 <style id="kz-why-kaizuro-bullet-fix">
-  .kz-why-kaizuro-bullet{font-size:22px!important;font-weight:400!important;line-height:1!important;letter-spacing:0!important;color:rgba(244,244,242,.86)!important;transform:none!important}
-  @media(max-width:640px){.kz-why-kaizuro-bullet{font-size:20px!important}}
+  .kz-why-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px;max-width:620px}
+  .kz-why-list li{position:relative;margin:0;padding:0 0 0 22px;color:inherit;font:inherit;line-height:inherit}
+  .kz-why-list li::before{content:"•";position:absolute;left:0;top:0;color:rgba(244,244,242,.88);font-size:1em;line-height:inherit}
+  .kz-why-list strong{font-weight:700}
+  @media(max-width:640px){.kz-why-list{gap:12px;margin-top:20px}.kz-why-list li{padding-left:20px}}
 </style>
 <script>
 (function(){
-  const targets=[
-    ['Confidence before volume.','1'],
-    ['Pressure before stock.','2'],
-    ['Founder 100 before scale.','3']
-  ];
   function applyWhyKaizuroBullets(){
-    const elements=[...document.querySelectorAll('body *')];
-    targets.forEach(([labelText,numberText])=>{
-      const label=elements.find((el)=>el.children.length===0&&el.textContent.trim()===labelText);
-      if(!label)return;
-      let scope=label.parentElement;
-      let marker=null;
-      for(let level=0;level<3&&scope&&!marker;level+=1){
-        marker=[...scope.querySelectorAll('*')].find((el)=>el.children.length===0&&el.textContent.trim()===numberText);
-        if(!marker)scope=scope.parentElement;
-      }
-      if(!marker)return;
-      marker.textContent='•';
-      marker.classList.add('kz-why-kaizuro-bullet');
-      marker.setAttribute('aria-hidden','true');
+    const paragraphs=[...document.querySelectorAll('p')];
+    const target=paragraphs.find((p)=>{
+      const text=p.textContent.replace(/\\s+/g,' ').trim();
+      return text.includes('1. Remove Compromise')&&text.includes('2. Prove the structure')&&text.includes('3. Refine relentlessly');
     });
+    if(!target||target.dataset.kzWhyBullets==='true')return;
+
+    const list=document.createElement('ul');
+    list.className='kz-why-list';
+    list.setAttribute('aria-label','Why KAIZURO principles');
+    list.innerHTML=`
+      <li><strong>Remove Compromise.</strong> Every component must justify its weight, geometry and function.</li>
+      <li><strong>Prove the structure.</strong> Physical prototype testing informs every meaningful decision.</li>
+      <li><strong>Refine relentlessly.</strong> Test, learn, correct and repeat until the complete system performs as intended.</li>`;
+    target.dataset.kzWhyBullets='true';
+    target.replaceWith(list);
   }
   applyWhyKaizuroBullets();
+  window.addEventListener('DOMContentLoaded',applyWhyKaizuroBullets,{once:true});
   window.addEventListener('kaizuro:content-loaded',applyWhyKaizuroBullets);
-  window.setTimeout(applyWhyKaizuroBullets,150);
-  window.setTimeout(applyWhyKaizuroBullets,700);
+  window.setTimeout(applyWhyKaizuroBullets,100);
+  window.setTimeout(applyWhyKaizuroBullets,500);
 })();
 </script>`;
     updated = updated.replace("</body>", `${whyKaizuroBulletFix}\n</body>`);
