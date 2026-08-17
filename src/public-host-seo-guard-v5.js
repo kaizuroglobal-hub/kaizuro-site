@@ -71,14 +71,53 @@ function removeGripSection(response) {
     .transform(response);
 }
 
-async function replacePublicGripNaming(response) {
+async function replacePublicGripNaming(response, isHomepage = false) {
   const type = response.headers.get("Content-Type") || "";
   if (!type.includes("text/html") || !response.body) return response;
 
   const headers = new Headers(response.headers);
   headers.delete("Content-Length");
   const html = await response.text();
-  const updated = html.replaceAll(OLD_GRIP_NAME, NEW_GRIP_NAME);
+  let updated = html.replaceAll(OLD_GRIP_NAME, NEW_GRIP_NAME);
+
+  if (isHomepage) {
+    const whyKaizuroBulletFix = `
+<style id="kz-why-kaizuro-bullet-fix">
+  .kz-why-kaizuro-bullet{font-size:22px!important;font-weight:400!important;line-height:1!important;letter-spacing:0!important;color:rgba(244,244,242,.86)!important;transform:none!important}
+  @media(max-width:640px){.kz-why-kaizuro-bullet{font-size:20px!important}}
+</style>
+<script>
+(function(){
+  const targets=[
+    ['Confidence before volume.','1'],
+    ['Pressure before stock.','2'],
+    ['Founder 100 before scale.','3']
+  ];
+  function applyWhyKaizuroBullets(){
+    const elements=[...document.querySelectorAll('body *')];
+    targets.forEach(([labelText,numberText])=>{
+      const label=elements.find((el)=>el.children.length===0&&el.textContent.trim()===labelText);
+      if(!label)return;
+      let scope=label.parentElement;
+      let marker=null;
+      for(let level=0;level<3&&scope&&!marker;level+=1){
+        marker=[...scope.querySelectorAll('*')].find((el)=>el.children.length===0&&el.textContent.trim()===numberText);
+        if(!marker)scope=scope.parentElement;
+      }
+      if(!marker)return;
+      marker.textContent='•';
+      marker.classList.add('kz-why-kaizuro-bullet');
+      marker.setAttribute('aria-hidden','true');
+    });
+  }
+  applyWhyKaizuroBullets();
+  window.addEventListener('kaizuro:content-loaded',applyWhyKaizuroBullets);
+  window.setTimeout(applyWhyKaizuroBullets,150);
+  window.setTimeout(applyWhyKaizuroBullets,700);
+})();
+</script>`;
+    updated = updated.replace("</body>", `${whyKaizuroBulletFix}\n</body>`);
+  }
 
   return new Response(updated, {
     status: response.status,
@@ -147,7 +186,7 @@ export default {
           Link: `<${PUBLIC_PAGES.get(normalizedPath)}>; rel="canonical"`,
         });
         const withoutGripSection = normalizedPath === "/" ? removeGripSection(publicResponse) : publicResponse;
-        return replacePublicGripNaming(withoutGripSection);
+        return replacePublicGripNaming(withoutGripSection, normalizedPath === "/");
       }
     }
 
