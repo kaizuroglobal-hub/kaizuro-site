@@ -80,6 +80,24 @@ async function rewritePublicHtml(response, isHomepage = false) {
   const html = await response.text();
   let updated = html.replaceAll(OLD_GRIP_NAME, NEW_GRIP_NAME);
 
+  const publicCopyReplacements = [
+    [
+      "Choose your Founder rod, pay the correct 25% deposit through\n                Square, then submit your ownership details below. Your deposit\n                is credited in full against the final Founder purchase price.",
+      "Choose your Founder rod, complete the initial 25% payment through\n                Square, then submit your ownership details below. The payment\n                is credited in full against the final Founder purchase price."
+    ],
+    ["Pay 25% deposit", "Pay 25% initial payment"],
+    ["Founder deposit options", "Founder payment options"],
+    ["Deposit today (25%)", "Initial payment (25%)"],
+    [
+      "I understand that my Founder allocation is only secured\n                  after the correct 25% deposit has been successfully paid\n                  through Square.",
+      "I understand that my Founder allocation is only secured\n                  after the correct initial 25% payment has been successfully completed\n                  through Square."
+    ],
+  ];
+
+  for (const [from, to] of publicCopyReplacements) {
+    updated = updated.replaceAll(from, to);
+  }
+
   if (isHomepage) {
     const oldWhyBlock = "          <p>\n            1. Remove Compromise\n            Every component must justify its weight, geometry and function.\n            2. Prove the structure\n            Physical prototype testing informs every meaningful decision.\n            3. Refine relentlessly\n            Test, learn, correct and repeat until the complete system performs as intended.\n\n          </p>";
 
