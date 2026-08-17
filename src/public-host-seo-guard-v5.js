@@ -71,7 +71,7 @@ function removeGripSection(response) {
     .transform(response);
 }
 
-async function replacePublicGripNaming(response, isHomepage = false) {
+async function rewritePublicHtml(response, isHomepage = false) {
   const type = response.headers.get("Content-Type") || "";
   if (!type.includes("text/html") || !response.body) return response;
 
@@ -81,42 +81,14 @@ async function replacePublicGripNaming(response, isHomepage = false) {
   let updated = html.replaceAll(OLD_GRIP_NAME, NEW_GRIP_NAME);
 
   if (isHomepage) {
-    const whyKaizuroBulletFix = `
-<style id="kz-why-kaizuro-bullet-fix">
-  .kz-why-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px;max-width:620px}
-  .kz-why-list li{position:relative;margin:0;padding:0 0 0 22px;color:inherit;font:inherit;line-height:inherit}
-  .kz-why-list li::before{content:"•";position:absolute;left:0;top:0;color:rgba(244,244,242,.88);font-size:1em;line-height:inherit}
-  .kz-why-list strong{font-weight:700}
-  @media(max-width:640px){.kz-why-list{gap:12px;margin-top:20px}.kz-why-list li{padding-left:20px}}
-</style>
-<script>
-(function(){
-  function applyWhyKaizuroBullets(){
-    const paragraphs=[...document.querySelectorAll('p')];
-    const target=paragraphs.find((p)=>{
-      const text=p.textContent.replace(/\\s+/g,' ').trim();
-      return text.includes('1. Remove Compromise')&&text.includes('2. Prove the structure')&&text.includes('3. Refine relentlessly');
-    });
-    if(!target||target.dataset.kzWhyBullets==='true')return;
+    const oldWhyBlock = "          <p>\n            1. Remove Compromise\n            Every component must justify its weight, geometry and function.\n            2. Prove the structure\n            Physical prototype testing informs every meaningful decision.\n            3. Refine relentlessly\n            Test, learn, correct and repeat until the complete system performs as intended.\n\n          </p>";
 
-    const list=document.createElement('ul');
-    list.className='kz-why-list';
-    list.setAttribute('aria-label','Why KAIZURO principles');
-    list.innerHTML=`
-      <li><strong>Remove Compromise.</strong> Every component must justify its weight, geometry and function.</li>
-      <li><strong>Prove the structure.</strong> Physical prototype testing informs every meaningful decision.</li>
-      <li><strong>Refine relentlessly.</strong> Test, learn, correct and repeat until the complete system performs as intended.</li>`;
-    target.dataset.kzWhyBullets='true';
-    target.replaceWith(list);
-  }
-  applyWhyKaizuroBullets();
-  window.addEventListener('DOMContentLoaded',applyWhyKaizuroBullets,{once:true});
-  window.addEventListener('kaizuro:content-loaded',applyWhyKaizuroBullets);
-  window.setTimeout(applyWhyKaizuroBullets,100);
-  window.setTimeout(applyWhyKaizuroBullets,500);
-})();
-</script>`;
-    updated = updated.replace("</body>", `${whyKaizuroBulletFix}\n</body>`);
+    const newWhyBlock = "          <div class=\"kz-why-bullets\" aria-label=\"Why KAIZURO principles\">\n            <p><span class=\"kz-why-dot\" aria-hidden=\"true\">•</span><span><span class=\"kz-why-title\">Remove Compromise.</span> Every component must justify its weight, geometry and function.</span></p>\n            <p><span class=\"kz-why-dot\" aria-hidden=\"true\">•</span><span><span class=\"kz-why-title\">Prove the structure.</span> Physical prototype testing informs every meaningful decision.</span></p>\n            <p><span class=\"kz-why-dot\" aria-hidden=\"true\">•</span><span><span class=\"kz-why-title\">Refine relentlessly.</span> Test, learn, correct and repeat until the complete system performs as intended.</span></p>\n          </div>";
+
+    updated = updated.replace(oldWhyBlock, newWhyBlock);
+
+    const whyStyle = "\n<style id=\"kz-why-kaizuro-clean-bullets\">\n#story .kz-why-bullets{display:grid;gap:10px;margin:22px 0 0;max-width:620px}\n#story .kz-why-bullets p{display:grid;grid-template-columns:12px minmax(0,1fr);gap:8px;margin:0!important;padding:0!important;max-width:none!important;color:inherit!important;font-size:inherit!important;font-weight:400!important;line-height:1.55!important;letter-spacing:normal!important}\n#story .kz-why-dot{font-size:14px;line-height:1.55;color:rgba(244,244,242,.82)}\n#story .kz-why-title{font-weight:600;color:#f4f4f2}\n@media(max-width:640px){#story .kz-why-bullets{gap:9px;margin-top:18px}#story .kz-why-bullets p{grid-template-columns:11px minmax(0,1fr);gap:7px}}\n</style>";
+    updated = updated.replace("</head>", whyStyle + "\n</head>");
   }
 
   return new Response(updated, {
@@ -186,7 +158,7 @@ export default {
           Link: `<${PUBLIC_PAGES.get(normalizedPath)}>; rel="canonical"`,
         });
         const withoutGripSection = normalizedPath === "/" ? removeGripSection(publicResponse) : publicResponse;
-        return replacePublicGripNaming(withoutGripSection, normalizedPath === "/");
+        return rewritePublicHtml(withoutGripSection, normalizedPath === "/");
       }
     }
 
