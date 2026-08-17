@@ -11,6 +11,8 @@ const PUBLIC_PAGES = new Map([
   ["/", "https://kaizuro.com/"],
   ["/how-kaizuro-is-built/", "https://kaizuro.com/how-kaizuro-is-built/"],
 ]);
+const OLD_GRIP_NAME = "KAIZURO Rounded Pentagonal EVA Grip";
+const NEW_GRIP_NAME = "KAIZURO Ergonomic EVA Grip";
 
 function normalizePublicPath(pathname) {
   if (pathname === "/index.html") return "/";
@@ -67,6 +69,22 @@ function removeGripSection(response) {
       },
     })
     .transform(response);
+}
+
+async function replacePublicGripNaming(response) {
+  const type = response.headers.get("Content-Type") || "";
+  if (!type.includes("text/html") || !response.body) return response;
+
+  const headers = new Headers(response.headers);
+  headers.delete("Content-Length");
+  const html = await response.text();
+  const updated = html.replaceAll(OLD_GRIP_NAME, NEW_GRIP_NAME);
+
+  return new Response(updated, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
 }
 
 function forceNoIndex(response) {
@@ -128,7 +146,8 @@ export default {
           "X-Robots-Tag": "all",
           Link: `<${PUBLIC_PAGES.get(normalizedPath)}>; rel="canonical"`,
         });
-        return normalizedPath === "/" ? removeGripSection(publicResponse) : publicResponse;
+        const withoutGripSection = normalizedPath === "/" ? removeGripSection(publicResponse) : publicResponse;
+        return replacePublicGripNaming(withoutGripSection);
       }
     }
 
