@@ -160,6 +160,93 @@
     }
   }
 
+  function cleanFounderPositioning() {
+    const founder = document.getElementById("founder");
+    if (!founder || founder.dataset.priorityMode === "true") return;
+    founder.dataset.priorityMode = "true";
+
+    const intro = founder.querySelector(".founder-intro");
+    if (intro) {
+      const eyebrow = intro.querySelector(".eyebrow");
+      const counter = intro.querySelector(".allocation-counter");
+      const title = intro.querySelector("h2");
+      const subhead = intro.querySelector(".founder-subhead");
+      const paragraphs = intro.querySelectorAll(":scope > p:not(.eyebrow)");
+      const cta = intro.querySelector(".text-link");
+
+      if (eyebrow) eyebrow.textContent = "Founder 100 Priority Access";
+      if (counter) counter.innerHTML = "<span>Founder 100</span><b>100 priority positions planned worldwide</b>";
+      if (title) title.innerHTML = "<span>The first 100.</span>";
+      if (subhead) subhead.innerHTML = "<span>Register early.</span><span>Access first.</span>";
+      if (paragraphs[0]) paragraphs[0].textContent = "Founder 100 is KAIZURO’s planned first production release. Registering your interest places you on the priority list for development updates and first-access information when final validation and manufacturing timing are confirmed.";
+      if (paragraphs[1]) paragraphs[1].textContent = "Registration is free and non-binding. No payment is required, no rod is currently allocated, and no production date is being promised at this stage.";
+      if (cta) cta.textContent = "Register for Founder 100 priority";
+    }
+
+    const collection = founder.querySelector(".founder-collection");
+    if (collection) {
+      const eyebrow = collection.querySelector(".eyebrow");
+      const heading = collection.querySelector("h3");
+      const introCopy = collection.querySelector("div > p:not(.eyebrow)");
+      const close = collection.querySelector(":scope > strong");
+      if (eyebrow) eyebrow.textContent = "Planned Founder 100 benefits";
+      if (heading) heading.textContent = "Founder Collection";
+      if (introCopy) introCopy.textContent = "The Founder 100 ownership package is planned for the first production release and remains subject to final production confirmation.";
+      if (close) close.textContent = "Founder 100 is planned to be limited to the first 100 production positions when ordering officially opens.";
+    }
+
+    const roadmap = founder.querySelector(".founder-roadmap");
+    if (roadmap) {
+      const eyebrow = roadmap.querySelector(".eyebrow");
+      const heading = roadmap.querySelector("h3");
+      const introCopy = roadmap.querySelector("div > p:not(.eyebrow)");
+      const steps = roadmap.querySelectorAll(".production-roadmap li");
+      if (eyebrow) eyebrow.textContent = "Path to Founder 100";
+      if (heading) heading.textContent = "From interest to first delivery.";
+      if (introCopy) introCopy.textContent = "The next steps move from registered interest through validation, production opening and final delivery.";
+      if (steps[0]) steps[0].innerHTML = "<span>01</span><strong>Interest registered</strong><p>Your preferred KAIZURO model and contact details are recorded.</p>";
+      if (steps[1]) steps[1].innerHTML = "<span>02</span><strong>Design validated</strong><p>Final component, load, recovery and real-world testing is completed.</p>";
+      if (steps[2]) steps[2].innerHTML = "<span>03</span><strong>Founder ordering opens</strong><p>Registered customers receive first-access information when production is ready.</p>";
+      if (steps[3]) steps[3].innerHTML = "<span>04</span><strong>Manufacturing begins</strong><p>The confirmed first production run enters controlled manufacture.</p>";
+      if (steps[4]) steps[4].innerHTML = "<span>05</span><strong>Founder delivery</strong><p>Numbered Founder rods and ownership packages are prepared and dispatched.</p>";
+    }
+
+    const terms = document.getElementById("terms");
+    if (terms) {
+      const eyebrow = terms.querySelector(".eyebrow");
+      const heading = terms.querySelector("h2");
+      const list = terms.querySelector(".terms-list");
+      if (eyebrow) eyebrow.textContent = "Founder 100 Registration";
+      if (heading) heading.textContent = "Clear before you register.";
+      if (list) {
+        list.innerHTML = `
+          <details open>
+            <summary>Does registering secure a rod?</summary>
+            <p>No. Registration records your interest and gives you priority access to updates when Founder 100 ordering opens. It is not a purchase, deposit or guaranteed allocation.</p>
+          </details>
+          <details>
+            <summary>Do I need to pay anything now?</summary>
+            <p>No. Registering interest is free and non-binding. KAIZURO will contact registered customers before any payment is requested.</p>
+          </details>
+          <details>
+            <summary>When will production open?</summary>
+            <p>Production timing will be confirmed only after final prototype, component, load, recovery and real-world validation is complete.</p>
+          </details>
+          <details>
+            <summary>What happens after I register?</summary>
+            <p>You will receive KAIZURO development updates and first-access information for Founder 100 when manufacturing and ordering are ready.</p>
+          </details>
+        `;
+      }
+    }
+
+    document.querySelectorAll('a[href="#founder-deposit"]').forEach((link) => {
+      if (/secure|allocation|deposit|reserve/i.test(link.textContent)) {
+        link.textContent = "Register your interest";
+      }
+    });
+  }
+
   function updateFounderInterest() {
     const founderDeposit = document.getElementById("founder-deposit");
     if (!founderDeposit || founderDeposit.dataset.interestMode === "true") return;
@@ -168,14 +255,11 @@
     founderDeposit.innerHTML = `
       <div class="deposit-intro">
         <p class="eyebrow">Founder access.</p>
-        <h3 id="deposit-title"><span>Register for KAIZURO Founder Priority.</span></h3>
+        <h3 id="deposit-title"><span>Register your interest.</span></h3>
         <p>
-          ASSAULT PE6-8 is currently the lead development platform. Register your interest to receive
-          prototype updates, production news and first access when manufacturing is confirmed.
-        </p>
-        <p>
-          You can also register interest in HALO PE10-12 or PE4-6. No payment is required and no
-          production date is being promised at this stage.
+          Choose your preferred KAIZURO rod and submit your details below. No payment is required.
+          This is a priority access expression of interest only. Founder 100 members will be contacted
+          first when final validation and production timing are confirmed.
         </p>
 
         <ol class="founder-payment-steps" aria-label="Founder interest process">
@@ -185,9 +269,9 @@
         </ol>
 
         <div class="founder-payment-grid founder-interest-grid" aria-label="Founder interest options">
+          ${interestCard("PE4-6", "PE4-6", "Register PE4-6 interest")}
           ${interestCard("ASSAULT", "PE6-8", "Register ASSAULT interest", true)}
           ${interestCard("HALO", "PE10-12", "Register HALO interest")}
-          ${interestCard("PE4-6", "PE4-6", "Register PE4-6 interest")}
         </div>
       </div>
 
@@ -216,9 +300,9 @@
           Preferred model
           <select name="Preferred model" required>
             <option value="">Select your preferred model</option>
+            <option>PE4-6</option>
             <option>ASSAULT PE6-8</option>
             <option>HALO PE10-12</option>
-            <option>PE4-6</option>
           </select>
         </label>
 
@@ -250,11 +334,11 @@
           <textarea name="Message" rows="4" placeholder="Tell us anything else that helps us understand your interest..."></textarea>
         </label>
 
-        <button class="founder-submit form-wide" type="submit">Register interest</button>
+        <button class="founder-submit form-wide" type="submit">Submit interest</button>
 
         <p class="founder-interest-note form-wide">
           Expressions of interest are non-binding and do not guarantee final allocation.
-          Registered customers will receive updates and first-access information when manufacturing is confirmed.
+          Founder 100 priority members will receive first access when production opens.
         </p>
       </form>
     `;
@@ -278,10 +362,14 @@
           grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
         }
 
+        #founder-deposit[data-interest-mode="true"] .founder-payment-card__visual {
+          display: none !important;
+        }
+
         #founder-deposit[data-interest-mode="true"] .founder-payment-card__content {
           display: flex !important;
           flex-direction: column !important;
-          min-height: 360px;
+          min-height: 330px;
         }
 
         #founder-deposit[data-interest-mode="true"] .founder-payment-card[data-lead-model="true"] {
@@ -343,19 +431,16 @@
     const title = name === "PE4-6"
       ? `<span>PE4-6</span>`
       : `<span>${name}</span><small>${pe}</small>`;
-    const firstLine = isLead ? "Lead development platform" : "Register your preference";
-    const secondLine = isLead ? "Prototype updates + first access" : "Prototype and production updates";
 
     return `
       <article class="founder-payment-card"${isLead ? ' data-lead-model="true"' : ""}>
-        <div class="founder-payment-card__visual" aria-hidden="true"></div>
         <div class="founder-payment-card__content">
           <h4 class="founder-payment-title">${title}</h4>
-          <p class="founder-payment-kicker">${isLead ? "Lead Platform" : "Founder Interest"}</p>
+          <p class="founder-payment-kicker">Founder Interest</p>
           <dl>
-            <div><dt>${firstLine}</dt></div>
-            <div><dt>${secondLine}</dt></div>
+            <div><dt>Priority access open</dt></div>
             <div><dt>No payment required</dt></div>
+            <div><dt>Register your preference</dt></div>
           </dl>
           <button
             type="button"
@@ -370,10 +455,12 @@
   }
 
   protectGripDesign();
+  cleanFounderPositioning();
   updateFounderInterest();
 
   window.setTimeout(function () {
     protectGripDesign();
+    cleanFounderPositioning();
     updateFounderInterest();
     window.dispatchEvent(new CustomEvent("kaizuro:content-loaded", { detail: { cms: false } }));
   }, 0);
