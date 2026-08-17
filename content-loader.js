@@ -160,10 +160,212 @@
     }
   }
 
+  function updateFounderInterest() {
+    const founderDeposit = document.getElementById("founder-deposit");
+    if (!founderDeposit || founderDeposit.dataset.interestMode === "true") return;
+
+    founderDeposit.dataset.interestMode = "true";
+    founderDeposit.innerHTML = `
+      <div class="deposit-intro">
+        <p class="eyebrow">Founder access.</p>
+        <h3 id="deposit-title"><span>Register your interest.</span></h3>
+        <p>
+          Choose your preferred rod and submit your details below. No payment is required.
+          This is a priority access expression of interest only. Founder 100 members will be
+          contacted first when final validation and production timing are confirmed.
+        </p>
+
+        <ol class="founder-payment-steps" aria-label="Founder interest process">
+          <li><span>1</span>Choose your rod</li>
+          <li><span>2</span>Register interest</li>
+          <li><span>3</span>Submit details</li>
+        </ol>
+
+        <div class="founder-payment-grid founder-interest-grid" aria-label="Founder interest options">
+          ${interestCard("PE4-6", "PE4-6", "Register PE4-6 interest")}
+          ${interestCard("ASSAULT", "PE6-8", "Register ASSAULT interest")}
+          ${interestCard("HALO", "PE10-12", "Register HALO interest")}
+        </div>
+      </div>
+
+      <form
+        class="founder-form founder-interest-form"
+        action="mailto:info@kaizuro.com?subject=KAIZURO%20Founder%20Interest"
+        method="post"
+        enctype="text/plain"
+      >
+        <label>
+          Full name
+          <input type="text" name="Full name" autocomplete="name" required>
+        </label>
+
+        <label>
+          Email address
+          <input type="email" name="Email" autocomplete="email" required>
+        </label>
+
+        <label>
+          Country
+          <input type="text" name="Country" autocomplete="country-name" required>
+        </label>
+
+        <label>
+          Preferred model
+          <select name="Preferred model" required>
+            <option value="">Select your preferred model</option>
+            <option>PE4-6</option>
+            <option>ASSAULT PE6-8</option>
+            <option>HALO PE10-12</option>
+          </select>
+        </label>
+
+        <label>
+          Quantity
+          <select name="Quantity" required>
+            <option value="">Select quantity</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4+</option>
+          </select>
+        </label>
+
+        <label>
+          Target species
+          <select name="Target species">
+            <option value="">Select target species</option>
+            <option>GT</option>
+            <option>Tuna</option>
+            <option>Kingfish</option>
+            <option>Dogtooth Tuna</option>
+            <option>Other large pelagics</option>
+          </select>
+        </label>
+
+        <label class="form-wide">
+          Message
+          <textarea name="Message" rows="4" placeholder="Tell us anything else that helps us understand your interest..."></textarea>
+        </label>
+
+        <button class="founder-submit form-wide" type="submit">Submit interest</button>
+
+        <p class="founder-interest-note form-wide">
+          Expressions of interest are non-binding and do not guarantee final allocation.
+          Founder 100 priority members will receive first access when production opens.
+        </p>
+      </form>
+    `;
+
+    founderDeposit.querySelectorAll("[data-interest-model]").forEach((button) => {
+      button.addEventListener("click", function () {
+        const select = founderDeposit.querySelector('select[name="Preferred model"]');
+        if (!select) return;
+        select.value = button.dataset.interestModel;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        select.scrollIntoView({ behavior: "smooth", block: "center" });
+        window.setTimeout(() => select.focus({ preventScroll: true }), 450);
+      });
+    });
+
+    if (!document.getElementById("kaizuro-founder-interest-style")) {
+      const style = document.createElement("style");
+      style.id = "kaizuro-founder-interest-style";
+      style.textContent = `
+        #founder-deposit[data-interest-mode="true"] .founder-interest-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-payment-card__content {
+          display: flex !important;
+          flex-direction: column !important;
+          min-height: 360px;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-payment-card dl {
+          display: grid;
+          grid-template-rows: none !important;
+          gap: 0;
+          margin: 0 0 24px;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-payment-card dl > div {
+          min-height: 54px;
+          padding: 14px 0;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-payment-card dt {
+          margin: 0;
+          color: rgba(255,255,255,.76);
+          font-size: 12px;
+          letter-spacing: .02em;
+          text-transform: none;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-payment-button--graphene {
+          margin-top: auto;
+          cursor: pointer;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-form::before {
+          content: "Interest details" !important;
+        }
+
+        #founder-deposit[data-interest-mode="true"] .founder-interest-note {
+          margin: -4px 0 0;
+          color: rgba(255,255,255,.52);
+          font-size: 11px;
+          line-height: 1.55;
+        }
+
+        @media (max-width: 1000px) {
+          #founder-deposit[data-interest-mode="true"] .founder-interest-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          #founder-deposit[data-interest-mode="true"] .founder-payment-card__content {
+            min-height: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }
+
+  function interestCard(name, pe, buttonText) {
+    const model = name === "PE4-6" ? "PE4-6" : `${name} ${pe}`;
+    const title = name === "PE4-6"
+      ? `<span>PE4-6</span>`
+      : `<span>${name}</span><small>${pe}</small>`;
+
+    return `
+      <article class="founder-payment-card">
+        <div class="founder-payment-card__visual" aria-hidden="true"></div>
+        <div class="founder-payment-card__content">
+          <h4 class="founder-payment-title">${title}</h4>
+          <p class="founder-payment-kicker">Founder Interest</p>
+          <dl>
+            <div><dt>Priority access open</dt></div>
+            <div><dt>No payment required</dt></div>
+            <div><dt>Register your preference</dt></div>
+          </dl>
+          <button
+            type="button"
+            class="founder-payment-button founder-payment-button--graphene"
+            data-interest-model="${model}"
+          >
+            <span>${buttonText}</span><span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </article>
+    `;
+  }
+
   protectGripDesign();
+  updateFounderInterest();
 
   window.setTimeout(function () {
     protectGripDesign();
+    updateFounderInterest();
     window.dispatchEvent(new CustomEvent("kaizuro:content-loaded", { detail: { cms: false } }));
   }, 0);
 })();
