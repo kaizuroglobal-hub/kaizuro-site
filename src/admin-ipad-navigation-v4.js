@@ -1,4 +1,4 @@
-import app,{PartnerReferrals}from"./dealer-portal-v1-fixed.js";
+import app,{PartnerReferrals}from"./dealer-ipad-navigation-v1.js";
 export{PartnerReferrals};
 
 const ROOT="/kaizuro-admin";
