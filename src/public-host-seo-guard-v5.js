@@ -56,6 +56,19 @@ function withHeaders(response, values) {
   });
 }
 
+function removeGripSection(response) {
+  const type = response.headers.get("Content-Type") || "";
+  if (!type.includes("text/html") || !response.body) return response;
+
+  return new HTMLRewriter()
+    .on("#grip", {
+      element(element) {
+        element.remove();
+      },
+    })
+    .transform(response);
+}
+
 function forceNoIndex(response) {
   const headers = new Headers(response.headers);
   headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
@@ -110,11 +123,12 @@ export default {
 
       if (host === APEX && PUBLIC_PAGES.has(normalizedPath)) {
         const response = await publicSite.fetch(canonicalPublicRequest(request, url), env, ctx);
-        return withHeaders(response, {
+        const publicResponse = withHeaders(response, {
           "X-KAIZURO-Public": normalizedPath === "/" ? "homepage" : "how-kaizuro-is-built",
           "X-Robots-Tag": "all",
           Link: `<${PUBLIC_PAGES.get(normalizedPath)}>; rel="canonical"`,
         });
+        return normalizedPath === "/" ? removeGripSection(publicResponse) : publicResponse;
       }
     }
 
