@@ -71,7 +71,7 @@ function removeGripSection(response) {
     .transform(response);
 }
 
-async function rewritePublicHtml(response, isHomepage = false) {
+async function rewritePublicHtml(response, isHomepage = false, canonicalUrl = null) {
   const type = response.headers.get("Content-Type") || "";
   if (!type.includes("text/html") || !response.body) return response;
 
@@ -79,6 +79,11 @@ async function rewritePublicHtml(response, isHomepage = false) {
   headers.delete("Content-Length");
   const html = await response.text();
   let updated = html.replaceAll(OLD_GRIP_NAME, NEW_GRIP_NAME);
+
+  if (canonicalUrl && !/<link\s+[^>]*rel=["']canonical["']/i.test(updated)) {
+    const canonicalTag = `\n    <link rel="canonical" href="${canonicalUrl}">`;
+    updated = updated.replace("</head>", canonicalTag + "\n  </head>");
+  }
 
   const publicCopyReplacements = [
     [
@@ -169,14 +174,15 @@ export default {
       }
 
       if (host === APEX && PUBLIC_PAGES.has(normalizedPath)) {
+        const canonicalUrl = PUBLIC_PAGES.get(normalizedPath);
         const response = await publicSite.fetch(canonicalPublicRequest(request, url), env, ctx);
         const publicResponse = withHeaders(response, {
           "X-KAIZURO-Public": normalizedPath === "/" ? "homepage" : "how-kaizuro-is-built",
           "X-Robots-Tag": "all",
-          Link: `<${PUBLIC_PAGES.get(normalizedPath)}>; rel="canonical"`,
+          Link: `<${canonicalUrl}>; rel="canonical"`,
         });
         const withoutGripSection = normalizedPath === "/" ? removeGripSection(publicResponse) : publicResponse;
-        return rewritePublicHtml(withoutGripSection, normalizedPath === "/");
+        return rewritePublicHtml(withoutGripSection, normalizedPath === "/", canonicalUrl);
       }
     }
 
