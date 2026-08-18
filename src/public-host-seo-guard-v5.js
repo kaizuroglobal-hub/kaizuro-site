@@ -110,13 +110,13 @@ async function rewritePublicHtml(response, isHomepage = false, canonicalUrl = nu
 
     updated = updated.replace(oldWhyBlock, newWhyBlock);
 
-    const whyStyle = "\n<style id=\"kz-why-kaizuro-clean-bullets\">\n#story .kz-why-bullets{display:grid;gap:10px;margin:22px 0 0;max-width:620px}\n#story .kz-why-bullets p{display:grid;grid-template-columns:12px minmax(0,1fr);gap:8px;margin:0!important;padding:0!important;max-width:none!important;color:inherit!important;font-size:inherit!important;font-weight:400!important;line-height:1.55!important;letter-spacing:normal!important}\n#story .kz-why-dot{font-size:14px;line-height:1.55;color:rgba(244,244,242,.82)}\n#story .kz-why-title{font-weight:600;color:#f4f4f2}\n#platforms .kz-platform-principles{display:none!important}\n@media(max-width:640px){#story .kz-why-bullets{gap:9px;margin-top:18px}#story .kz-why-bullets p{grid-template-columns:11px minmax(0,1fr);gap:7px}}\n</style>";
-    updated = updated.replace("</head>", whyStyle + "\n</head>");
+    const homepageStyle = "\n<style id=\"kz-homepage-production-overrides\">\n#story .kz-why-bullets{display:grid;gap:10px;margin:22px 0 0;max-width:620px}\n#story .kz-why-bullets p{display:grid;grid-template-columns:12px minmax(0,1fr);gap:8px;margin:0!important;padding:0!important;max-width:none!important;color:inherit!important;font-size:inherit!important;font-weight:400!important;line-height:1.55!important;letter-spacing:normal!important}\n#story .kz-why-dot{font-size:14px;line-height:1.55;color:rgba(244,244,242,.82)}\n#story .kz-why-title{font-weight:600;color:#f4f4f2}\n#platforms,#halo{display:none!important}\n.desktop-nav a[href=\"#platforms\"],.desktop-nav a[href=\"#halo\"],.mobile-menu a[href=\"#platforms\"],.mobile-menu a[href=\"#halo\"]{display:none!important}\n@media(max-width:640px){#story .kz-why-bullets{gap:9px;margin-top:18px}#story .kz-why-bullets p{grid-template-columns:11px minmax(0,1fr);gap:7px}}\n</style>";
+    updated = updated.replace("</head>", homepageStyle + "\n</head>");
 
     if (!updated.includes('/platform-section.js')) {
-      updated = updated.replace("</body>", '<script src="/platform-section.js?v=20260818-platforms-2"></script>\n</body>');
+      updated = updated.replace("</body>", '<script src="/platform-section.js?v=20260818-remove-platforms"></script>\n</body>');
     } else {
-      updated = updated.replace(/\/platform-section\.js\?v=[^"']+/g, '/platform-section.js?v=20260818-platforms-2');
+      updated = updated.replace(/\/platform-section\.js\?v=[^"']+/g, '/platform-section.js?v=20260818-remove-platforms');
     }
   }
 
