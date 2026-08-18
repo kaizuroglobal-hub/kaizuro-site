@@ -1,8 +1,8 @@
 (function(){
   "use strict";
 
-  function removePlatforms(){
-    document.querySelectorAll('#platforms, #halo').forEach(function(section){
+  function removeDeprecatedSections(){
+    document.querySelectorAll('#platforms, #halo, .founder-roadmap').forEach(function(section){
       section.remove();
     });
 
@@ -14,13 +14,13 @@
   }
 
   if(document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", removePlatforms, { once: true });
+    document.addEventListener("DOMContentLoaded", removeDeprecatedSections, { once: true });
   } else {
-    removePlatforms();
+    removeDeprecatedSections();
   }
 
-  window.addEventListener("kaizuro:content-loaded", removePlatforms);
-  window.setTimeout(removePlatforms, 0);
-  window.setTimeout(removePlatforms, 100);
-  window.setTimeout(removePlatforms, 500);
+  window.addEventListener("kaizuro:content-loaded", removeDeprecatedSections);
+  window.setTimeout(removeDeprecatedSections, 0);
+  window.setTimeout(removeDeprecatedSections, 100);
+  window.setTimeout(removeDeprecatedSections, 500);
 })();
