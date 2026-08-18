@@ -114,9 +114,9 @@ async function rewritePublicHtml(response, isHomepage = false, canonicalUrl = nu
     updated = updated.replace("</head>", homepageStyle + "\n</head>");
 
     if (!updated.includes('/platform-section.js')) {
-      updated = updated.replace("</body>", '<script src="/platform-section.js?v=20260818-remove-platforms"></script>\n</body>');
+      updated = updated.replace("</body>", '<script src="/platform-section.js?v=20260818-remove-roadmap-v2"></script>\n</body>');
     } else {
-      updated = updated.replace(/\/platform-section\.js\?v=[^"']+/g, '/platform-section.js?v=20260818-remove-platforms');
+      updated = updated.replace(/\/platform-section\.js\?v=[^"']+/g, '/platform-section.js?v=20260818-remove-roadmap-v2');
     }
   }
 
@@ -185,6 +185,7 @@ export default {
         const publicResponse = withHeaders(response, {
           "X-KAIZURO-Public": normalizedPath === "/" ? "homepage" : "how-kaizuro-is-built",
           "X-Robots-Tag": "all",
+          "Cache-Control": normalizedPath === "/" ? "no-store" : "public, max-age=300",
           Link: `<${canonicalUrl}>; rel="canonical"`,
         });
         const withoutGripSection = normalizedPath === "/" ? removeGripSection(publicResponse) : publicResponse;
