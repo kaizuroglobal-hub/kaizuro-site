@@ -112,6 +112,10 @@ async function rewritePublicHtml(response, isHomepage = false, canonicalUrl = nu
 
     const whyStyle = "\n<style id=\"kz-why-kaizuro-clean-bullets\">\n#story .kz-why-bullets{display:grid;gap:10px;margin:22px 0 0;max-width:620px}\n#story .kz-why-bullets p{display:grid;grid-template-columns:12px minmax(0,1fr);gap:8px;margin:0!important;padding:0!important;max-width:none!important;color:inherit!important;font-size:inherit!important;font-weight:400!important;line-height:1.55!important;letter-spacing:normal!important}\n#story .kz-why-dot{font-size:14px;line-height:1.55;color:rgba(244,244,242,.82)}\n#story .kz-why-title{font-weight:600;color:#f4f4f2}\n@media(max-width:640px){#story .kz-why-bullets{gap:9px;margin-top:18px}#story .kz-why-bullets p{grid-template-columns:11px minmax(0,1fr);gap:7px}}\n</style>";
     updated = updated.replace("</head>", whyStyle + "\n</head>");
+
+    if (!updated.includes('/platform-section.js')) {
+      updated = updated.replace("</body>", '<script src="/platform-section.js?v=20260818-platforms"></script>\n</body>');
+    }
   }
 
   return new Response(updated, {
