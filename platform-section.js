@@ -1,7 +1,23 @@
 (function(){
   "use strict";
 
+  function harmonizeFounder(){
+    document.querySelectorAll('#founder-deposit [data-lead-model="true"]').forEach(function(card){
+      card.removeAttribute("data-lead-model");
+    });
+
+    var terms=document.getElementById("terms");
+    if(terms){
+      terms.querySelectorAll("p").forEach(function(p){
+        if(p.textContent.includes("It is not a purchase, deposit or guaranteed allocation.")){
+          p.textContent=p.textContent.replace("It is not a purchase, deposit or guaranteed allocation.","It is not a purchase or guaranteed allocation.");
+        }
+      });
+    }
+  }
+
   function installPlatforms(){
+    harmonizeFounder();
     if(document.getElementById("platforms")) return;
     var halo=document.getElementById("halo");
     if(!halo) return;
@@ -98,5 +114,5 @@
 
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",installPlatforms,{once:true});
   else installPlatforms();
-  window.addEventListener("kaizuro:content-loaded",installPlatforms);
+  window.addEventListener("kaizuro:content-loaded",function(){harmonizeFounder();installPlatforms();});
 })();
