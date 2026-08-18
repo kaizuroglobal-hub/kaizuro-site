@@ -2,11 +2,11 @@
   "use strict";
 
   function removeDeprecatedSections(){
-    document.querySelectorAll('#platforms, #halo, .founder-roadmap').forEach(function(section){
+    document.querySelectorAll('#platforms, #halo, #proof, .founder-roadmap').forEach(function(section){
       section.remove();
     });
 
-    document.querySelectorAll('.desktop-nav a[href="#platforms"], .desktop-nav a[href="#halo"], .mobile-menu a[href="#platforms"], .mobile-menu a[href="#halo"]').forEach(function(link){
+    document.querySelectorAll('.desktop-nav a[href="#platforms"], .desktop-nav a[href="#halo"], .desktop-nav a[href="#proof"], .mobile-menu a[href="#platforms"], .mobile-menu a[href="#halo"], .mobile-menu a[href="#proof"]').forEach(function(link){
       var item = link.closest('li');
       if (item) item.remove();
       else link.remove();
