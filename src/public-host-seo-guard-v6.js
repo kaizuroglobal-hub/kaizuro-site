@@ -20,13 +20,13 @@ export default {
         return new HTMLRewriter()
           .on("aside nav a", {
             element(el) {
-              const href = el.getAttribute("href") || "";
-              if (href === `${ROOT}/partnership` || href === `${ROOT}/partnerships`) el.remove();
+              const href = (el.getAttribute("href") || "").toLowerCase();
+              if (href.includes("/partnership")) el.remove();
             },
           })
           .on("aside nav", {
             element(el) {
-              el.append(`<a class="nav kz-partnership-canonical" href="${ROOT}/partnerships"><span>Partnerships</span><small>JE</small></a>`, { html: true });
+              el.append(`<a class="nav kz-partnership-canonical" href="${ROOT}/partnership"><span>Partnerships</span><small>JE</small></a>`, { html: true });
             },
           })
           .transform(response);
