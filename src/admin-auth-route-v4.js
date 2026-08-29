@@ -1,4 +1,4 @@
-import app from "./admin-partnership-je-v1.js";
+import app from "./admin-partnership-shell-v1.js";
 import baseAdmin from "./kaizuro-admin.js";
 
 const ROOT="/kaizuro-admin";
@@ -8,12 +8,8 @@ export default {
   async fetch(request,env,ctx){
     const url=new URL(request.url);
     const path=url.pathname.replace(/\/$/,"");
-    if(HOSTS.has(url.hostname.toLowerCase()) && (path===`${ROOT}/login` || path===`${ROOT}/logout`)){
-      return baseAdmin.fetch(request,env,ctx);
-    }
+    if(HOSTS.has(url.hostname.toLowerCase()) && (path===`${ROOT}/login` || path===`${ROOT}/logout`)) return baseAdmin.fetch(request,env,ctx);
     return app.fetch(request,env,ctx);
   },
-  async email(message,env,ctx){
-    if(typeof app.email==="function") return app.email(message,env,ctx);
-  }
+  async email(message,env,ctx){ if(typeof app.email==="function") return app.email(message,env,ctx); }
 };
