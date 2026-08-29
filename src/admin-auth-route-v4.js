@@ -1,6 +1,5 @@
-import app, { PartnerReferrals } from "./admin-partnership-je-v1.js";
+import app from "./admin-partnership-je-v1.js";
 import baseAdmin from "./kaizuro-admin.js";
-export { PartnerReferrals };
 
 const ROOT="/kaizuro-admin";
 const HOSTS=new Set(["kaizuro.com","www.kaizuro.com","portal.kaizuro.com"]);
