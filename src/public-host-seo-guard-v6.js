@@ -1,5 +1,8 @@
 import legacy from "./public-host-seo-guard-v5.js";
 import portal from "./admin-partnership-je-v1.js";
+import { PartnerReferrals } from "./kaizuro-admin.js";
+
+export { PartnerReferrals };
 
 const PORTAL_HOST = "portal.kaizuro.com";
 const ROOT = "/kaizuro-admin";
