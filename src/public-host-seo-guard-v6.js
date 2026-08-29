@@ -11,20 +11,19 @@ const JE_PATH = "/je-wilds";
 const JE_LIGHT_OVERRIDE = `<style id="kz-je-light-override">
 html:has(body.je),body.je{background:#ecece8!important;color:#101113!important}
 .je .kz-wrap{width:min(1180px,calc(100% - 44px))!important}
-.je .kz-top{border-color:#d1d2ce!important}
-.je .kz-eyebrow{color:#777!important}
-.je .kz-top h1{color:#101113!important}
-.je .kz-top p,.je .kz-card p{color:#6f7477!important}
+.je .kz-top{border-color:#d1d2ce!important}.je .kz-eyebrow{color:#777!important}
+.je .kz-top h1{color:#101113!important}.je .kz-top p,.je .kz-card p{color:#6f7477!important}
 .je .kz-card{background:#f8f8f5!important;border-color:#d1d2ce!important;color:#101113!important}
 .je .kz-row,.je .kz-mini,.je .kz-equity div{background:#fff!important;border-color:#d1d2ce!important;color:#101113!important}
-.je .kz-list,.je .kz-equity{background:#d1d2ce!important}
-.je .kz-row span{color:#555!important}
-.je .kz-mini .num{color:#777!important}
-.je .kz-quote{background:#f5f0df!important;color:#101113!important}
+.je .kz-list,.je .kz-equity{background:#d1d2ce!important}.je .kz-row span{color:#555!important}
+.je .kz-mini .num{color:#777!important}.je .kz-quote{background:#f5f0df!important;color:#101113!important}
 .je .kz-btn{border-color:#111!important;background:#111!important;color:#fff!important}
-.je .kz-btn.light{background:#fff!important;color:#111!important;border-color:#111!important}
-.je .kz-footer{color:#888!important}
+.je .kz-btn.light{background:#fff!important;color:#111!important;border-color:#111!important}.je .kz-footer{color:#888!important}
 </style>`;
+
+function stripPartnershipLinks(html) {
+  return html.replace(/<a\b[^>]*href=["'][^"']*\/partnership[^"']*["'][^>]*>[\s\S]*?<\/a>/gi, "");
+}
 
 export default {
   async fetch(request, env, ctx) {
@@ -34,19 +33,18 @@ export default {
 
     if (host === PORTAL_HOST && (path === JE_PATH || path.startsWith(`${ROOT}/`))) {
       const response = await portal.fetch(request, env, ctx);
-      if (path === JE_PATH && (response.headers.get("Content-Type") || "").includes("text/html")) {
+      if (!(response.headers.get("Content-Type") || "").includes("text/html")) return response;
+
+      if (path === JE_PATH) {
         return new HTMLRewriter().on("head", { element(el) { el.append(JE_LIGHT_OVERRIDE, { html: true }); } }).transform(response);
       }
-      if (path.startsWith(ROOT) && (response.headers.get("Content-Type") || "").includes("text/html")) {
-        return new HTMLRewriter()
-          .on("aside a", { element(el) {
-            const href = (el.getAttribute("href") || "").toLowerCase();
-            if (href.includes("/partnership")) el.remove();
-          }})
-          .transform(response);
-      }
-      return response;
+
+      const headers = new Headers(response.headers);
+      headers.set("Cache-Control", "no-store, no-cache, must-revalidate");
+      const html = stripPartnershipLinks(await response.text());
+      return new Response(html, { status: response.status, statusText: response.statusText, headers });
     }
+
     return legacy.fetch(request, env, ctx);
   },
   async email(message, env, ctx) {
