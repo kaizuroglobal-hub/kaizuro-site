@@ -44,8 +44,9 @@ export default {
           .transform(response);
       }
       if (path.startsWith(ROOT) && (response.headers.get("Content-Type") || "").includes("text/html")) {
+        let inserted = false;
         return new HTMLRewriter()
-          .on("aside nav a", {
+          .on("aside a", {
             element(el) {
               const href = (el.getAttribute("href") || "").toLowerCase();
               if (href.includes("/partnership")) el.remove();
@@ -53,7 +54,10 @@ export default {
           })
           .on("aside nav", {
             element(el) {
-              el.append(`<a class="nav kz-partnership-canonical" href="${ROOT}/partnership"><span>Partnerships</span><small>JE</small></a>`, { html: true });
+              if (!inserted) {
+                inserted = true;
+                el.append(`<a class="nav kz-partnership-canonical" href="${ROOT}/partnership"><span>Partnerships</span><small>JE</small></a>`, { html: true });
+              }
             },
           })
           .transform(response);
