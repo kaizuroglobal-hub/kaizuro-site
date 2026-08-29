@@ -15,7 +15,23 @@ export default {
     const path = url.pathname.replace(/\/$/, "");
 
     if (host === PORTAL_HOST && (path === JE_PATH || path.startsWith(`${ROOT}/`))) {
-      return portal.fetch(request, env, ctx);
+      const response = await portal.fetch(request, env, ctx);
+      if (path.startsWith(ROOT) && (response.headers.get("Content-Type") || "").includes("text/html")) {
+        return new HTMLRewriter()
+          .on("aside nav a", {
+            element(el) {
+              const href = el.getAttribute("href") || "";
+              if (href === `${ROOT}/partnership` || href === `${ROOT}/partnerships`) el.remove();
+            },
+          })
+          .on("aside nav", {
+            element(el) {
+              el.append(`<a class="nav kz-partnership-canonical" href="${ROOT}/partnerships"><span>Partnerships</span><small>JE</small></a>`, { html: true });
+            },
+          })
+          .transform(response);
+      }
+      return response;
     }
 
     return legacy.fetch(request, env, ctx);
