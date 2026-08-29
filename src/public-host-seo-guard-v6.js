@@ -26,6 +26,20 @@ html:has(body.je),body.je{background:#ecece8!important;color:#101113!important}
 .je .kz-footer{color:#888!important}
 </style>`;
 
+const SIDEBAR_DEDUPE = `<script id="kz-partnership-sidebar-dedupe">(() => {
+  const fix = () => {
+    const navs = document.querySelectorAll('aside nav');
+    if (!navs.length) return;
+    document.querySelectorAll('aside a[href*="/partnership"]').forEach(a => a.remove());
+    const a = document.createElement('a');
+    a.className = 'nav kz-partnership-canonical';
+    a.href = '/kaizuro-admin/partnership';
+    a.innerHTML = '<span>Partnerships</span><small>JE</small>';
+    navs[0].appendChild(a);
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fix, {once:true}); else fix();
+})();</script>`;
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -35,32 +49,10 @@ export default {
     if (host === PORTAL_HOST && (path === JE_PATH || path.startsWith(`${ROOT}/`))) {
       const response = await portal.fetch(request, env, ctx);
       if (path === JE_PATH && (response.headers.get("Content-Type") || "").includes("text/html")) {
-        return new HTMLRewriter()
-          .on("head", {
-            element(el) {
-              el.append(JE_LIGHT_OVERRIDE, { html: true });
-            },
-          })
-          .transform(response);
+        return new HTMLRewriter().on("head", { element(el) { el.append(JE_LIGHT_OVERRIDE, { html: true }); } }).transform(response);
       }
       if (path.startsWith(ROOT) && (response.headers.get("Content-Type") || "").includes("text/html")) {
-        let inserted = false;
-        return new HTMLRewriter()
-          .on("aside a", {
-            element(el) {
-              const href = (el.getAttribute("href") || "").toLowerCase();
-              if (href.includes("/partnership")) el.remove();
-            },
-          })
-          .on("aside nav", {
-            element(el) {
-              if (!inserted) {
-                inserted = true;
-                el.append(`<a class="nav kz-partnership-canonical" href="${ROOT}/partnership"><span>Partnerships</span><small>JE</small></a>`, { html: true });
-              }
-            },
-          })
-          .transform(response);
+        return new HTMLRewriter().on("head", { element(el) { el.append(SIDEBAR_DEDUPE, { html: true }); } }).transform(response);
       }
       return response;
     }
