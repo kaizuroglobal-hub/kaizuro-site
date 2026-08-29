@@ -7,6 +7,7 @@ export { PartnerReferrals };
 const PORTAL_HOST = "portal.kaizuro.com";
 const ROOT = "/kaizuro-admin";
 const JE_PATH = "/je-wilds";
+const ADMIN_HIDE_PARTNERSHIPS = `<style id="kz-admin-hide-partnerships">aside nav a[href*="/partnership"]{display:none!important}</style>`;
 
 const JE_LIGHT_OVERRIDE = `<style id="kz-je-light-override">
 html:has(body.je),body.je{background:#ecece8!important;color:#101113!important}
@@ -34,10 +35,14 @@ export default {
 
     if (host === PORTAL_HOST && (path === JE_PATH || path.startsWith(`${ROOT}/`))) {
       const response = await portal.fetch(request, env, ctx);
-      if (path === JE_PATH && (response.headers.get("Content-Type") || "").includes("text/html")) {
-        return new HTMLRewriter().on("head", {
-          element(el) { el.append(JE_LIGHT_OVERRIDE, { html: true }); },
-        }).transform(response);
+      if ((response.headers.get("Content-Type") || "").includes("text/html")) {
+        const rw = new HTMLRewriter().on("head", {
+          element(el) {
+            if (path === JE_PATH) el.append(JE_LIGHT_OVERRIDE, { html: true });
+            if (path.startsWith(ROOT)) el.append(ADMIN_HIDE_PARTNERSHIPS, { html: true });
+          },
+        });
+        return rw.transform(response);
       }
       return response;
     }
