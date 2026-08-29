@@ -1,4 +1,4 @@
-import app, { PartnerReferrals } from "./admin-inbox-nav-v4.js";
+import app, { PartnerReferrals } from "./admin-partnership-je-v1.js";
 import baseAdmin from "./kaizuro-admin.js";
 export { PartnerReferrals };
 
