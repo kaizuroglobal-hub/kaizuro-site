@@ -9,7 +9,7 @@ const ROOT = "/kaizuro-admin";
 const JE_PATH = "/je-wilds";
 const JE_ACCESS = "KZJE-2026-7F3K9P";
 
-const PARTNERSHIP_NAV = `<a class="nav" href="${ROOT}/partnerships"><span>Partnerships</span><small>Strategic</small></a>`;
+const PARTNERSHIP_NAV = `<a class="nav" href="${JE_PATH}?access=${JE_ACCESS}"><span>Partnerships</span><small>Strategic</small></a>`;
 
 const JE_LIGHT_OVERRIDE = `<style id="kz-je-light-override">
 html:has(body.je),body.je{background:#ecece8!important;color:#101113!important}
@@ -47,12 +47,6 @@ export default {
     const url = new URL(request.url);
     const host = url.hostname.toLowerCase();
     const path = url.pathname.replace(/\/$/, "");
-
-    // Keep the single Admin Partnerships nav item functional without invoking
-    // the unstable nested Admin partnership shell that was causing Error 1101.
-    if (host === PORTAL_HOST && (path === `${ROOT}/partnerships` || path === `${ROOT}/partnerships/je-wilds`)) {
-      return Response.redirect(`${JE_PATH}?access=${JE_ACCESS}`, 302);
-    }
 
     if (host === PORTAL_HOST && path === JE_PATH) {
       const response = await portal.fetch(request, env, ctx);
