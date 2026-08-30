@@ -7,7 +7,8 @@ export { PartnerReferrals };
 const PORTAL_HOST = "portal.kaizuro.com";
 const ROOT = "/kaizuro-admin";
 const JE_PATH = "/je-wilds";
-const ADMIN_HIDE_PARTNERSHIPS = `<style id="kz-admin-hide-partnerships">aside nav a[href*="/partnership"]~a[href*="/partnership"]{display:none!important}</style>`;
+
+const PARTNERSHIP_NAV = `<a class="nav" href="${ROOT}/partnerships"><span>Partnerships</span><small>Strategic</small></a>`;
 
 const JE_LIGHT_OVERRIDE = `<style id="kz-je-light-override">
 html:has(body.je),body.je{background:#ecece8!important;color:#101113!important}
@@ -36,7 +37,7 @@ html:has(body.je),body.je{background:#ecece8!important;color:#101113!important}
 .je .kz-hero h2{color:#fff!important}
 .je .kz-hero p{color:#c5c8ca!important}
 .je .kz-footer{color:#888!important}
-@media(max-width:900px){.je .kz-wrap{width:min(100% - 36px,720px)!important}.je .kz-top{padding-top:42px!important}.je .kz-grid{grid-template-columns:1fr!important}.je .kz-cols,.je .kz-equity{grid-template-columns:1fr 1fr!important}}
+@media(max-width:900px){.je .kz-wrap{width:min(calc(100% - 36px),720px)!important}.je .kz-top{padding-top:42px!important}.je .kz-grid{grid-template-columns:1fr!important}.je .kz-cols,.je .kz-equity{grid-template-columns:1fr 1fr!important}}
 @media(max-width:600px){.je .kz-wrap{width:calc(100% - 28px)!important}.je .kz-top h1{font-size:clamp(46px,15vw,68px)!important}.je .kz-top{padding-top:30px!important}.je .kz-cols,.je .kz-equity{grid-template-columns:1fr!important}.je .kz-card{padding:20px!important}.je .kz-row{grid-template-columns:1fr!important;gap:7px!important}}
 </style>`;
 
@@ -49,21 +50,14 @@ export default {
     if (host === PORTAL_HOST && (path === JE_PATH || path.startsWith(`${ROOT}/`))) {
       const response = await portal.fetch(request, env, ctx);
       if ((response.headers.get("Content-Type") || "").includes("text/html")) {
-        let partnershipSeen = false;
-        const rw = new HTMLRewriter()
-          .on("head", {
-            element(el) {
-              if (path === JE_PATH || path.endsWith("/je-wilds")) el.append(JE_LIGHT_OVERRIDE, { html: true });
-              if (path.startsWith(ROOT)) el.append(ADMIN_HIDE_PARTNERSHIPS, { html: true });
-            },
-          })
-          .on('aside nav a[href*="/partnership"]', {
-            element(el) {
-              if (partnershipSeen) el.remove();
-              else partnershipSeen = true;
-            },
-          });
-        return rw.transform(response);
+        if (path === JE_PATH) {
+          return new HTMLRewriter()
+            .on("head", { element(el) { el.append(JE_LIGHT_OVERRIDE, { html: true }); } })
+            .transform(response);
+        }
+        return new HTMLRewriter()
+          .on("aside nav", { element(el) { el.append(PARTNERSHIP_NAV, { html: true }); } })
+          .transform(response);
       }
       return response;
     }
