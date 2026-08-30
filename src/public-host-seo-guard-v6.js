@@ -36,12 +36,20 @@ export default {
     if (host === PORTAL_HOST && (path === JE_PATH || path.startsWith(`${ROOT}/`))) {
       const response = await portal.fetch(request, env, ctx);
       if ((response.headers.get("Content-Type") || "").includes("text/html")) {
-        const rw = new HTMLRewriter().on("head", {
-          element(el) {
-            if (path === JE_PATH) el.append(JE_LIGHT_OVERRIDE, { html: true });
-            if (path.startsWith(ROOT)) el.append(ADMIN_HIDE_PARTNERSHIPS, { html: true });
-          },
-        });
+        let partnershipSeen = false;
+        const rw = new HTMLRewriter()
+          .on("head", {
+            element(el) {
+              if (path === JE_PATH) el.append(JE_LIGHT_OVERRIDE, { html: true });
+              if (path.startsWith(ROOT)) el.append(ADMIN_HIDE_PARTNERSHIPS, { html: true });
+            },
+          })
+          .on('aside nav a[href*="/partnership"]', {
+            element(el) {
+              if (partnershipSeen) el.remove();
+              else partnershipSeen = true;
+            },
+          });
         return rw.transform(response);
       }
       return response;
