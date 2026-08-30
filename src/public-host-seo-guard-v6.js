@@ -17,7 +17,7 @@ html:has(body.je),body.je{background:#ecece8!important;color:#101113!important}
 .je .kz-top h1{color:#101113!important}
 .je .kz-top p,.je .kz-card p{color:#6f7477!important}
 .je .kz-card{background:#f8f8f5!important;border-color:#d1d2ce!important;color:#101113!important}
-.je .kz-row,.je .kz-mini,.je .kz-equity div{background:#fff!important;border-color:#d1d2ce!important}
+.je .kz-row,.je .kz-mini,.je .kz-equity div{background:#fff!important;border-color:#d1d2ce!important;color:#101113!important}
 .je .kz-list,.je .kz-equity{background:#d1d2ce!important}
 .je .kz-row span{color:#555!important}
 .je .kz-mini .num{color:#777!important}
@@ -40,7 +40,7 @@ export default {
         const rw = new HTMLRewriter()
           .on("head", {
             element(el) {
-              if (path === JE_PATH) el.append(JE_LIGHT_OVERRIDE, { html: true });
+              if (path === JE_PATH || path.endsWith("/je-wilds")) el.append(JE_LIGHT_OVERRIDE, { html: true });
               if (path.startsWith(ROOT)) el.append(ADMIN_HIDE_PARTNERSHIPS, { html: true });
             },
           })
