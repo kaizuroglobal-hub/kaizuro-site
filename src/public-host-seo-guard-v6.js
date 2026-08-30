@@ -7,6 +7,7 @@ export { PartnerReferrals };
 const PORTAL_HOST = "portal.kaizuro.com";
 const ROOT = "/kaizuro-admin";
 const JE_PATH = "/je-wilds";
+const JE_ACCESS = "KZJE-2026-7F3K9P";
 
 const PARTNERSHIP_NAV = `<a class="nav" href="${ROOT}/partnerships"><span>Partnerships</span><small>Strategic</small></a>`;
 
@@ -47,14 +48,25 @@ export default {
     const host = url.hostname.toLowerCase();
     const path = url.pathname.replace(/\/$/, "");
 
-    if (host === PORTAL_HOST && (path === JE_PATH || path.startsWith(`${ROOT}/`))) {
+    // Keep the single Admin Partnerships nav item functional without invoking
+    // the unstable nested Admin partnership shell that was causing Error 1101.
+    if (host === PORTAL_HOST && (path === `${ROOT}/partnerships` || path === `${ROOT}/partnerships/je-wilds`)) {
+      return Response.redirect(`${JE_PATH}?access=${JE_ACCESS}`, 302);
+    }
+
+    if (host === PORTAL_HOST && path === JE_PATH) {
       const response = await portal.fetch(request, env, ctx);
       if ((response.headers.get("Content-Type") || "").includes("text/html")) {
-        if (path === JE_PATH) {
-          return new HTMLRewriter()
-            .on("head", { element(el) { el.append(JE_LIGHT_OVERRIDE, { html: true }); } })
-            .transform(response);
-        }
+        return new HTMLRewriter()
+          .on("head", { element(el) { el.append(JE_LIGHT_OVERRIDE, { html: true }); } })
+          .transform(response);
+      }
+      return response;
+    }
+
+    if (host === PORTAL_HOST && path.startsWith(`${ROOT}/`)) {
+      const response = await portal.fetch(request, env, ctx);
+      if ((response.headers.get("Content-Type") || "").includes("text/html")) {
         return new HTMLRewriter()
           .on("aside nav", { element(el) { el.append(PARTNERSHIP_NAV, { html: true }); } })
           .transform(response);
