@@ -42,8 +42,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4.120.0 versions deploy "${{ steps.version.outputs.id }}@100%" --config wrangler.v6.jsonc -y --message "KAIZURO production ${{ github.sha }}"
 
-      - name: Reconcile Worker triggers and custom domains
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4.120.0 triggers deploy --config wrangler.v6.jsonc
+      # Existing production routes/custom domains already target this Worker.
+      # Do not run `wrangler triggers deploy` here: the deployment token does not
+      # have Workers Routes edit permission, and the trigger reconciliation failure
+      # was incorrectly marking otherwise successful production deployments failed.
