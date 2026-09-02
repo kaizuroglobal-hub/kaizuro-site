@@ -1,4 +1,3 @@
-import app, { PartnerReferrals as BasePartnerReferrals } from "./dealer-commercial-v2.js";
 import { PartnerReferrals as AdminPartnerReferrals } from "./admin-partner-referrals.js";
 
 const HOST = "portal.kaizuro.com";
@@ -86,7 +85,7 @@ async function decorateDealerProducts(responseValue,env){ const type=responseVal
 
 export default { async fetch(request,env,executionCtx){
   const url=new URL(request.url),host=url.hostname.toLowerCase(),path=url.pathname.replace(/\/$/,"");
-  if(host!==HOST){ return app.fetch(request,env,executionCtx); }
+  if(host!==HOST){ const {default:app}=await import("./dealer-commercial-v2.js"); return app.fetch(request,env,executionCtx); }
   if(path===`${ROOT}/login`&&request.method==="GET") return response(loginPage());
   if(path===`${ROOT}/login`&&request.method==="POST") return login(request,env);
   if(path===`${ROOT}/logout`&&request.method==="GET") return logout(request);
@@ -99,6 +98,7 @@ export default { async fetch(request,env,executionCtx){
     const html=moduleId==="overview"?overview(data):moduleId==="dealers"?dealers(data,url):moduleId==="leads"?leads(data,url):moduleId==="orders"?orders(data,url):moduleId==="allocation"?allocation(data):moduleId==="products"?products(data,url):support(data);
     return response(html);
   }
+  const {default:app}=await import("./dealer-commercial-v2.js");
   const inner=await app.fetch(request,env,executionCtx);
   if(request.method==="GET"&&path==="/partners/portal/products") return decorateDealerProducts(inner,env);
   return inner;
