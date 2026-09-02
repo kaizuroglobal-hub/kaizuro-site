@@ -18,7 +18,6 @@ function transformAdmin(response) {
   return new HTMLRewriter()
     .on("aside nav", {
       element(el) {
-        if (!el.querySelector) return;
         el.append(PARTNERSHIP_NAV, { html: true });
       },
     })
