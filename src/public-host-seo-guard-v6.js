@@ -56,7 +56,7 @@ async function portalLogin(request, env) {
   const password = String(form.get("password") || "");
   if (email !== ADMIN_EMAIL || await digest(password) !== ADMIN_PASSWORD_SHA) return htmlResponse(loginPage("Email or password is incorrect."),401);
   const cookie = encodeURIComponent(await adminSession(env));
-  return new Response(null,{status:303,headers:{"Location":ROOT,"Set-Cookie":`kz_admin=${cookie}; Path=${ROOT}; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`,`Cache-Control":"no-store"}});
+  return new Response(null,{status:303,headers:{"Location":ROOT,"Set-Cookie":`kz_admin=${cookie}; Path=${ROOT}; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`,"Cache-Control":"no-store"}});
 }
 
 function htmlResponse(html,status=200) {
@@ -69,7 +69,6 @@ export default {
     const host = url.hostname.toLowerCase();
     const path = url.pathname.replace(/\/$/, "") || "/";
 
-    // Keep the primary portal login completely local to this entrypoint.
     if (host === PORTAL_HOST && (path === "/" || path === "/admin" || path === "/admin/login" || path === LOGIN_PATH)) {
       if (request.method === "GET") return htmlResponse(loginPage());
       if (request.method === "POST" && path === LOGIN_PATH) return portalLogin(request, env);
@@ -77,11 +76,8 @@ export default {
     }
 
     if (host === PORTAL_HOST && (path === JE_ADMIN_ROOT || path.startsWith(`${JE_ADMIN_ROOT}/`))) return jeViewer.fetch(request,env,ctx);
-
     if (host === PORTAL_HOST && (path === `${ROOT}/partnerships` || path.startsWith(`${ROOT}/partnerships/`))) return partnerships.fetch(request,env,ctx);
-
     if (host === PORTAL_HOST && (path === ROOT || path.startsWith(`${ROOT}/`))) return baseAdmin.fetch(request,env,ctx);
-
     if (host === PORTAL_HOST && path === JE_PATH) return partnerships.fetch(request,env,ctx);
 
     return legacy.fetch(request,env,ctx);
