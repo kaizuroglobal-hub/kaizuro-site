@@ -3,7 +3,7 @@ import admin from "./kaizuro-admin.js";
 const HOST = "portal.kaizuro.com";
 const ROOT = "/kaizuro-admin-je";
 const ADMIN_ROOT = "/kaizuro-admin";
-const VIEWER_USERNAME = "jewilds";
+const VIEWER_USERNAME = "joe@jewilds.com";
 const VIEWER_PASSWORD_SHA = "4849ce0482febc102664480b5ef3c03295de1bf11860234eae42f91c2a39bcae";
 const SESSION_TTL = 8 * 60 * 60;
 
@@ -56,14 +56,14 @@ function redirectWithCookie(request, path, cookie) {
 }
 
 function loginPage(message = "") {
-  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>KAIZURO | JE WILDS</title><style>html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif;background:#ecece8;color:#101113}.login{width:min(480px,calc(100% - 30px));margin:10vh auto;padding:34px;background:#fff;border:1px solid #d4d5d1}.brand{font-size:19px;font-weight:600;letter-spacing:.17em}.eyebrow{margin:8px 0 10px;color:#777;font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.login h1{margin:40px 0 0;font-size:42px;font-weight:300;line-height:.98;letter-spacing:-.05em}.login p{color:#777;font-size:12px;line-height:1.6}.login label{display:grid;gap:7px;margin-top:15px;font-size:10px;font-weight:700}.login input{min-height:50px;padding:12px;border:1px solid #bbb;font:inherit}.login button{width:100%;min-height:50px;margin-top:18px;border:1px solid #111;background:#111;color:#fff;font:inherit;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.notice{margin-top:16px;padding:13px 15px;border:1px solid #c9b06e;background:#f8f1de;color:#69521b;font-size:10px;line-height:1.55}</style></head><body><main class="login"><div class="brand">KAIZURO</div><p class="eyebrow">JE WILDS · View Only</p><h1>Network control.</h1><p>Read-only access to the KAIZURO Admin Dashboard. Commercial controls and data-changing actions are disabled.</p>${message?`<div class="notice">${esc(message)}</div>`:""}<form method="post" action="${ROOT}/login"><label>Username<input type="text" name="username" autocomplete="username" required></label><label>Password<input type="password" name="password" autocomplete="current-password" required></label><button type="submit">Sign in</button></form></main></body></html>`;
+  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>KAIZURO | JE WILDS</title><style>html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif;background:#ecece8;color:#101113}.login{width:min(480px,calc(100% - 30px));margin:10vh auto;padding:34px;background:#fff;border:1px solid #d4d5d1}.brand{font-size:19px;font-weight:600;letter-spacing:.17em}.eyebrow{margin:8px 0 10px;color:#777;font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.login h1{margin:40px 0 0;font-size:42px;font-weight:300;line-height:.98;letter-spacing:-.05em}.login p{color:#777;font-size:12px;line-height:1.6}.login label{display:grid;gap:7px;margin-top:15px;font-size:10px;font-weight:700}.login input{min-height:50px;padding:12px;border:1px solid #bbb;font:inherit}.login button{width:100%;min-height:50px;margin-top:18px;border:1px solid #111;background:#111;color:#fff;font:inherit;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.notice{margin-top:16px;padding:13px 15px;border:1px solid #c9b06e;background:#f8f1de;color:#69521b;font-size:10px;line-height:1.55}</style></head><body><main class="login"><div class="brand">KAIZURO</div><p class="eyebrow">JE WILDS · View Only</p><h1>Network control.</h1><p>Read-only access to the KAIZURO Admin Dashboard. Commercial controls and data-changing actions are disabled.</p>${message?`<div class="notice">${esc(message)}</div>`:""}<form method="post" action="${ROOT}/login"><label>Email<input type="email" name="email" autocomplete="username" required></label><label>Password<input type="password" name="password" autocomplete="current-password" required></label><button type="submit">Sign in</button></form></main></body></html>`;
 }
 
 async function login(request, env) {
   const form = await request.formData();
-  const username = String(form.get("username") || "").trim().toLowerCase();
+  const username = String(form.get("email") || "").trim().toLowerCase();
   const password = String(form.get("password") || "");
-  if (username !== VIEWER_USERNAME || await digest(password) !== VIEWER_PASSWORD_SHA) return response(loginPage("Username or password is incorrect."), 401);
+  if (username !== VIEWER_USERNAME || await digest(password) !== VIEWER_PASSWORD_SHA) return response(loginPage("Email or password is incorrect."), 401);
   const cookie = encodeURIComponent(await makeSession(env));
   return redirectWithCookie(request, ROOT, `kz_je_viewer=${cookie}; Path=${ROOT}; HttpOnly; Secure; SameSite=Strict; Max-Age=${SESSION_TTL}`);
 }
