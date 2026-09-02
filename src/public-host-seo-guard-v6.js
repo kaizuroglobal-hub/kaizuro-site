@@ -1,11 +1,13 @@
 import legacy from "./public-host-seo-guard-v5.js";
 import portal from "./admin-partnership-je-v1.js";
+import jeViewer from "./je-admin-viewer.js";
 import { PartnerReferrals } from "./kaizuro-admin.js";
 
 export { PartnerReferrals };
 
 const PORTAL_HOST = "portal.kaizuro.com";
 const ROOT = "/kaizuro-admin";
+const JE_ADMIN_ROOT = "/kaizuro-admin-je";
 const JE_PATH = "/je-wilds";
 const JE_ACCESS = "KZJE-2026-7F3K9P";
 
@@ -48,6 +50,10 @@ export default {
     const url = new URL(request.url);
     const host = url.hostname.toLowerCase();
     const path = url.pathname.replace(/\/$/, "");
+
+    if (host === PORTAL_HOST && (path === JE_ADMIN_ROOT || path.startsWith(`${JE_ADMIN_ROOT}/`))) {
+      return jeViewer.fetch(request, env, ctx);
+    }
 
     if (host === PORTAL_HOST && (path === `${ROOT}/partnerships` || path === `${ROOT}/partnerships/je-wilds`)) {
       return Response.redirect(`${JE_PATH}?access=${JE_ACCESS}`, 302);
