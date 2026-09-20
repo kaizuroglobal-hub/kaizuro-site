@@ -1,6 +1,6 @@
 const SITE_URL = "https://kaizuro.com";
 
-const homepageDescription = "KAIZURO builds premium offshore casting rods for GT, tuna, dogtooth tuna and large pelagics. Explore ASSAULT PE6-8, HALO PE10-12, engineering validation and Founder 100 allocation.";
+const homepageDescription = "KAIZURO is developing a new generation of offshore casting rods. Join the list for prototype updates, testing and first release information.";
 const builtDescription = "How KAIZURO offshore fishing rods are designed in Australia, developed through physical prototypes, tested under load and manufactured with a specialist high-performance rod partner.";
 const temporaryNoIndexMarkup = '<meta name="robots" content="noindex,follow,noarchive">';
 const publicIndexMarkup = '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">';
@@ -141,13 +141,13 @@ ${homepageLayoutFixMarkup}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KAIZURO">
 <meta property="og:locale" content="en_AU">
-<meta property="og:title" content="KAIZURO | Premium GT & Tuna Offshore Casting Rods">
+<meta property="og:title" content="KAIZURO | Built for What’s Next.">
 <meta property="og:description" content="${homepageDescription}">
 <meta property="og:url" content="${SITE_URL}/">
 <meta property="og:image" content="${SITE_URL}/assets/kaizuro-site/hero/kaizuro-website-hero-final.png">
 <meta property="og:image:alt" content="KAIZURO premium offshore casting rod">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="KAIZURO | Premium GT & Tuna Offshore Casting Rods">
+<meta name="twitter:title" content="KAIZURO | Built for What’s Next.">
 <meta name="twitter:description" content="${homepageDescription}">
 <meta name="twitter:image" content="${SITE_URL}/assets/kaizuro-site/hero/kaizuro-website-hero-final.png">
 ${jsonLd({
@@ -163,7 +163,7 @@ ${jsonLd({
         "@type": "ImageObject",
         "url": `${SITE_URL}/favicon.svg`
       },
-      "description": "Premium offshore casting rods engineered for GT, tuna, dogtooth tuna and large pelagic fishing."
+      "description": "A new generation of offshore casting rods under development by KAIZURO."
     },
     {
       "@type": "WebSite",
