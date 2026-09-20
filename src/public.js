@@ -327,7 +327,7 @@ export default {
     if (url.pathname === "/join" && request.method === "POST") {
       const form = await request.formData();
       const email = String(form.get("email") || "").trim().slice(0, 254);
-      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         return Response.redirect(new URL("/?error=1#join", url).toString(), 303);
       }
 
