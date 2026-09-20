@@ -323,14 +323,49 @@ export default {
       }
     }
 
-    // Secure same-domain handoff for the Follow the Build email field.
+    // Public KAIZURO waitlist capture.
     if (url.pathname === "/join" && request.method === "POST") {
       const form = await request.formData();
-      const email = String(form.get("email") || "").trim();
-      const mailto = new URL("mailto:info@kaizuro.com");
-      mailto.searchParams.set("subject", "KAIZURO Follow the Build");
-      mailto.searchParams.set("body", `Please add this email to the KAIZURO update list:\n\n${email}`);
-      return Response.redirect(mailto.toString(), 303);
+      const email = String(form.get("email") || "").trim().slice(0, 254);
+      if (!email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+        return Response.redirect(new URL("/?error=1#join", url).toString(), 303);
+      }
+
+      const createdAt = new Date().toISOString();
+      const id = `waitlist:public:${createdAt}:${crypto.randomUUID()}`;
+      const submission = {
+        id,
+        type: "waitlist",
+        partnerId: "public-waitlist",
+        partnerName: "KAIZURO Website",
+        customerEmail: email,
+        status: "New",
+        createdAt,
+        source: "kaizuro.com",
+      };
+
+      try {
+        const storageId = env.PARTNER_REFERRALS.idFromName("kaizuro-public-waitlist");
+        await env.PARTNER_REFERRALS.get(storageId).createSubmission(submission);
+      } catch (error) {
+        console.error("KAIZURO public waitlist save failed", error);
+      }
+
+      try {
+        if (env.PARTNER_NOTIFICATIONS) {
+          await env.PARTNER_NOTIFICATIONS.send({
+            to: "info@kaizuro.com",
+            from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO Website" },
+            replyTo: email,
+            subject: "KAIZURO Website · New waitlist signup",
+            text: `New KAIZURO waitlist signup\\n\\nEmail: ${email}\\nSource: kaizuro.com\\nReference: ${id}`,
+          });
+        }
+      } catch (error) {
+        console.error("KAIZURO public waitlist notification failed", error);
+      }
+
+      return Response.redirect(new URL("/?joined=1#join", url).toString(), 303);
     }
 
     if (!url.pathname.startsWith("/partners")) {
