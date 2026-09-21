@@ -45,11 +45,13 @@ h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-to
 .benefits{gap:9px;flex-wrap:wrap;line-height:1.6}.benefits i{display:none}
 .bottom{left:22px;right:22px;bottom:22px;display:block}.tagline{font-size:10px;letter-spacing:.19em}.footer{margin-top:25px;font-size:9px}
 }
+.join-confirmation{display:none;width:min(700px,89vw);min-height:74px;margin-top:38px;border:1px solid rgba(245,245,242,.82);background:rgba(2,5,7,.34);backdrop-filter:blur(7px);align-items:center;padding:0 28px;font-size:14px;font-weight:600;letter-spacing:.2em;text-transform:uppercase}.join-confirmation.is-visible{display:flex}
+@media(max-width:700px){.join-confirmation{width:100%;min-height:64px;margin-top:30px;padding:0 18px;font-size:12px}}
 </style>
 </head>
 <body>
 <main class="hero">
-<img class="hero-bg" src="/assets/kaizuro-site/editorial/00-ocean-hero.png" alt="Open ocean at sunset">
+<img class="hero-bg" src="/assets/kaizuro-site/hero/kaizuro-website-hero-final.png" alt="Open ocean at sunset">
 <div class="header">
 <a class="brand" href="/">KAIZURO</a>
 <div class="category">OFFSHORE PERFORMANCE EQUIPMENT</div>
@@ -66,6 +68,7 @@ h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-to
 <input type="email" name="email" autocomplete="email" placeholder="YOUR EMAIL ADDRESS" aria-label="Your email address" required>
 <button type="submit" aria-label="Join the KAIZURO list">→</button>
 </form>
+<div class="join-confirmation" id="join-confirmation" role="status" aria-live="polite">YOU'RE IN.</div>
 <div class="benefits"><span>BE FIRST TO KNOW</span><i></i><span>PRODUCT UPDATES</span><i></i><span>TESTING</span><i></i><span>FIRST RELEASE</span></div>
 </section>
 <div class="bottom">
@@ -73,5 +76,17 @@ h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-to
 <div class="footer">© 2026 KAIZURO</div>
 </div>
 </main>
+<script>
+(function(){
+  const params=new URLSearchParams(window.location.search);
+  const confirmation=document.getElementById('join-confirmation');
+  const form=document.querySelector('.capture');
+  if(params.get('joined')==='1' && confirmation && form){
+    form.style.display='none';
+    confirmation.classList.add('is-visible');
+    window.history.replaceState({},'',window.location.pathname+'#join');
+  }
+})();
+</script>
 </body>
 </html>
