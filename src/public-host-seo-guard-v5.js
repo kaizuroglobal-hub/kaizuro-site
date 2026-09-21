@@ -173,6 +173,11 @@ export default {
       });
     }
 
+    // Serve public static assets through the public site handler.
+    if (PUBLIC_HOSTS.has(host) && (request.method === "GET" || request.method === "HEAD") && url.pathname.startsWith("/assets/")) {
+      return publicSite.fetch(request, env, ctx);
+    }
+
     // Route the public waitlist endpoint explicitly so /join never falls through to the admin app.
     if (PUBLIC_HOSTS.has(host) && url.pathname === "/join") {
       if (request.method === "POST") {
