@@ -369,6 +369,35 @@ Reference: ${id}`,
         console.error("KAIZURO public waitlist notification failed", error);
       }
 
+      // Send a polished confirmation to the person who joined the list.
+      try {
+        if (env.PARTNER_NOTIFICATIONS) {
+          await env.PARTNER_NOTIFICATIONS.send({
+            to: email,
+            from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO" },
+            replyTo: "info@kaizuro.com",
+            subject: "You're on the KAIZURO list.",
+            text: `KAIZURO
+
+YOU'RE IN.
+
+Thanks for joining the KAIZURO list.
+
+A new generation of offshore performance equipment is coming. We'll share product updates, testing and first-release news with you before it goes public.
+
+OCEANS DEMAND MORE.
+SO DO WE.
+
+KAIZURO
+Offshore Performance Equipment
+kaizuro.com`,
+            html: `<!doctype html><html><body style="margin:0;background:#f2f2f0;font-family:Arial,sans-serif;color:#111"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:32px 16px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#050505;color:#f4f4f2"><tr><td style="padding:34px 38px;border-bottom:1px solid #2a2a2a"><b style="font-size:18px;letter-spacing:4px">KAIZURO</b><div style="margin-top:9px;font-size:10px;letter-spacing:2px;color:#888">OFFSHORE PERFORMANCE EQUIPMENT</div></td></tr><tr><td style="padding:58px 38px 54px"><div style="font-size:11px;font-weight:bold;letter-spacing:2px;color:#888">WAITLIST CONFIRMATION</div><div style="margin-top:18px;font-size:48px;line-height:1;font-weight:bold">YOU'RE<br>IN.</div><p style="margin:26px 0 0;font-size:17px;line-height:1.6;color:#ccc">Thanks for joining the KAIZURO list.</p><p style="font-size:15px;line-height:1.75;color:#999">A new generation of offshore performance equipment is coming. We'll share product updates, testing and first-release news with you before it goes public.</p><p style="margin-top:32px"><a href="https://kaizuro.com/" style="display:inline-block;border:1px solid #ddd;padding:14px 20px;color:#fff;text-decoration:none;font-size:11px;font-weight:bold;letter-spacing:2px">VISIT KAIZURO →</a></p></td></tr><tr><td style="padding:30px 38px;border-top:1px solid #2a2a2a"><b style="font-size:22px">OCEANS DEMAND MORE.</b><div style="font-size:22px;color:#888">SO DO WE.</div><div style="margin-top:28px;font-size:10px;letter-spacing:1.5px;color:#666">KAIZURO™ · OFFSHORE PERFORMANCE EQUIPMENT</div></td></tr></table></td></tr></table></body></html>`,
+          });
+        }
+      } catch (error) {
+        console.error("KAIZURO waitlist confirmation failed", error);
+      }
+
       return Response.redirect(new URL("/?joined=1#join", url).toString(), 303);
     }
 
