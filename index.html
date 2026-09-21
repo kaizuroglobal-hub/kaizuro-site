@@ -3,7 +3,75 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KAIZURO</title>
+<meta name="description" content="KAIZURO — offshore performance equipment. A new generation is coming.">
+<meta name="theme-color" content="#05080b">
+<title>KAIZURO | Built for What's Next.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--white:#f5f5f2;--muted:rgba(245,245,242,.72);--line:rgba(245,245,242,.28);--bg:#030608}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--white);font-family:Inter,Arial,sans-serif}
+body{overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.hero{position:relative;min-height:100svh;overflow:hidden;background:#05090c}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.55) saturate(.82) contrast(1.08);transform:scale(1.02)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(2,5,7,.82) 0%,rgba(2,5,7,.46) 48%,rgba(2,5,7,.12) 100%),linear-gradient(180deg,rgba(2,5,7,.42) 0%,rgba(2,5,7,0) 38%,rgba(2,5,7,.72) 100%)}
+.header{position:absolute;z-index:3;top:0;left:0;right:0;padding:34px 5.5vw;display:flex;align-items:flex-start;justify-content:space-between}
+.brand{font-size:23px;font-weight:500;letter-spacing:.34em;line-height:1}
+.category{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.instagram{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.06em}
+.instagram svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8}
+.content{position:relative;z-index:2;width:min(1000px,89vw);padding-top:clamp(150px,24vh,255px);margin-left:5.5vw}
+.eyebrow{margin:0 0 22px;font-size:12px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,245,242,.78)}
+h1{margin:0;max-width:900px;font-size:clamp(62px,8.6vw,136px);font-weight:800;line-height:.88;letter-spacing:-.075em}
+.lead{max-width:560px;margin:32px 0 0;font-size:19px;line-height:1.48;color:var(--muted);font-weight:300}
+.capture{display:flex;width:min(700px,89vw);height:74px;margin-top:38px;border:1px solid rgba(245,245,242,.82);background:rgba(2,5,7,.34);backdrop-filter:blur(7px)}
+.capture input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--white);padding:0 28px;font:600 21px Inter,Arial,sans-serif;letter-spacing:.025em}
+.capture input::placeholder{color:rgba(245,245,242,.9);opacity:1}
+.capture button{width:86px;border:0;border-left:1px solid rgba(3,6,8,.25);background:var(--white);color:#05080a;cursor:pointer;font-size:31px;font-weight:300}
+.benefits{display:flex;gap:17px;align-items:center;margin-top:17px;font-size:10px;font-weight:500;letter-spacing:.17em;text-transform:uppercase;color:rgba(245,245,242,.72)}
+.benefits i{width:3px;height:3px;border-radius:50%;background:rgba(245,245,242,.62)}
+.bottom{position:absolute;z-index:3;left:5.5vw;right:5.5vw;bottom:30px;display:flex;align-items:flex-end;justify-content:space-between}
+.tagline{display:flex;gap:18px;align-items:flex-start;font-size:13px;line-height:1.65;letter-spacing:.25em;text-transform:uppercase}
+.tagline:before{content:"";width:38px;height:1px;background:var(--white);margin-top:9px;flex:none}
+.footer{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,245,242,.55)}
+@media(max-width:700px){
+.header{padding:24px 22px}.brand{font-size:18px}.category{display:none}.instagram span{display:none}
+.content{width:calc(100% - 44px);margin-left:22px;padding-top:155px}
+h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-top:24px}
+.capture{width:100%;height:64px;margin-top:30px}.capture input{font-size:16px;padding:0 18px}.capture button{width:68px;font-size:27px}
+.benefits{gap:9px;flex-wrap:wrap;line-height:1.6}.benefits i{display:none}
+.bottom{left:22px;right:22px;bottom:22px;display:block}.tagline{font-size:10px;letter-spacing:.19em}.footer{margin-top:25px;font-size:9px}
+}
+</style>
 </head>
-<body></body>
+<body>
+<main class="hero">
+<img class="hero-bg" src="/assets/kaizuro-site/editorial/00-ocean-hero.png" alt="Open ocean at sunset">
+<div class="header">
+<a class="brand" href="/">KAIZURO</a>
+<div class="category">OFFSHORE PERFORMANCE EQUIPMENT</div>
+<a class="instagram" href="https://www.instagram.com/kaizuro_official/" target="_blank" rel="noopener noreferrer" aria-label="KAIZURO on Instagram">
+<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"/><circle cx="12" cy="12" r="4.1"/><circle cx="17.5" cy="6.6" r="1"/></svg>
+<span>kaizuro_official</span>
+</a>
+</div>
+<section class="content">
+<p class="eyebrow">A new generation is coming</p>
+<h1>BUILT FOR<br>WHAT’S NEXT.</h1>
+<p class="lead">Offshore performance equipment engineered for the fish, conditions and casts that demand more.</p>
+<form class="capture" action="/join" method="post">
+<input type="email" name="email" autocomplete="email" placeholder="YOUR EMAIL ADDRESS" aria-label="Your email address" required>
+<button type="submit" aria-label="Join the KAIZURO list">→</button>
+</form>
+<div class="benefits"><span>BE FIRST TO KNOW</span><i></i><span>PRODUCT UPDATES</span><i></i><span>TESTING</span><i></i><span>FIRST RELEASE</span></div>
+</section>
+<div class="bottom">
+<div class="tagline">OCEANS DEMAND MORE.<br>SO DO WE.</div>
+<div class="footer">© 2026 KAIZURO</div>
+</div>
+</main>
+</body>
 </html>
