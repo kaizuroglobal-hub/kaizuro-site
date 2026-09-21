@@ -176,22 +176,16 @@ export default {
     if (PUBLIC_HOSTS.has(host) && isRead) {
       const normalizedPath = normalizePublicPath(url.pathname);
 
-      // Serve the new minimalist KAIZURO homepage and its static assets directly
-      // from the Cloudflare Assets binding. The legacy publicSite router otherwise
-      // intercepts these requests and returns the previous homepage.
+      // Serve the new minimalist KAIZURO homepage using the same proven
+      // Assets binding path used by the existing public router.
       if (host === APEX && normalizedPath === "/") {
-        const assetUrl = new URL("/index.html", request.url);
-        const assetResponse = await env.ASSETS.fetch(new Request(assetUrl.toString(), request));
+        const assetResponse = await env.ASSETS.fetch(request);
         return withHeaders(assetResponse, {
           "X-KAIZURO-Public": "homepage-v2",
           "X-Robots-Tag": "all",
           "Cache-Control": "no-store",
-          Link: "<https://kaizuro.com/>; rel=\"canonical\"",
+          Link: "<https://kaizuro.com/>; rel="canonical"",
         });
-      }
-
-      if (host === APEX && normalizedPath.startsWith("/assets/")) {
-        return env.ASSETS.fetch(request);
       }
       if (url.protocol !== "https:" || host === WWW || normalizedPath !== url.pathname) {
         return canonicalRedirect(url);
