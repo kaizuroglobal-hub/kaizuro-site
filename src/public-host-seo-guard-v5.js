@@ -184,7 +184,7 @@ export default {
           "X-KAIZURO-Public": "homepage-v2",
           "X-Robots-Tag": "all",
           "Cache-Control": "no-store",
-          Link: "<https://kaizuro.com/>; rel="canonical"",
+          Link: '<https://kaizuro.com/>; rel="canonical"',
         });
       }
       if (url.protocol !== "https:" || host === WWW || normalizedPath !== url.pathname) {
