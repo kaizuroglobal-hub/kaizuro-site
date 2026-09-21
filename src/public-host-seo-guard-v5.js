@@ -173,7 +173,12 @@ export default {
       });
     }
 
-    // Route the public waitlist submission through the same public handler as the homepage.\n    if (PUBLIC_HOSTS.has(host) && url.pathname === "/join" && request.method === "POST") {\n      return publicSite.fetch(request, env, ctx);\n    }\n\n    if (PUBLIC_HOSTS.has(host) && isRead) {
+    // Route the public waitlist submission through the same public handler as the homepage.
+    if (PUBLIC_HOSTS.has(host) && url.pathname === "/join" && request.method === "POST") {
+      return publicSite.fetch(request, env, ctx);
+    }
+
+    if (PUBLIC_HOSTS.has(host) && isRead) {
       const normalizedPath = normalizePublicPath(url.pathname);
 
       // Serve the new minimalist KAIZURO homepage using the same proven
