@@ -358,7 +358,11 @@ export default {
             from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO Website" },
             replyTo: email,
             subject: "KAIZURO Website · New waitlist signup",
-            text: `New KAIZURO waitlist signup\\n\\nEmail: ${email}\\nSource: kaizuro.com\\nReference: ${id}`,
+            text: `New KAIZURO waitlist signup
+
+Email: ${email}
+Source: kaizuro.com
+Reference: ${id}`,
           });
         }
       } catch (error) {
