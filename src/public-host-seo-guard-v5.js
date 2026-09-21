@@ -173,9 +173,14 @@ export default {
       });
     }
 
-    // Route the public waitlist submission through the same public handler as the homepage.
-    if (PUBLIC_HOSTS.has(host) && url.pathname === "/join" && request.method === "POST") {
-      return publicSite.fetch(request, env, ctx);
+    // Route the public waitlist endpoint explicitly so /join never falls through to the admin app.
+    if (PUBLIC_HOSTS.has(host) && url.pathname === "/join") {
+      if (request.method === "POST") {
+        return publicSite.fetch(request, env, ctx);
+      }
+      if (request.method === "GET" || request.method === "HEAD") {
+        return Response.redirect(new URL("/", url).toString(), 303);
+      }
     }
 
     if (PUBLIC_HOSTS.has(host) && isRead) {
