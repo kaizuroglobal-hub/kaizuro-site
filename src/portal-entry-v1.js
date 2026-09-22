@@ -1,6 +1,15 @@
 import { DurableObject } from "cloudflare:workers";
 
 export class PartnerReferrals extends DurableObject {
+  async createSubmission(submission) {
+    const type = String(submission?.type || "record");
+    const partnerId = String(submission?.partnerId || "global");
+    const id = String(submission?.id || crypto.randomUUID());
+    const key = type + ":" + partnerId + ":" + id;
+    await this.ctx.storage.put(key, submission);
+    return submission;
+  }
+
   async listForPartner(partnerId, type) {
     const entries = await this.ctx.storage.list({ prefix: `${type}:${partnerId}:`, limit: 5000, reverse: true });
     return [...entries.values()].sort((a, b) => String(b?.createdAt || "").localeCompare(String(a?.createdAt || "")));
