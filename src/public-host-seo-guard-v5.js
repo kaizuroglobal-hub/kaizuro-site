@@ -197,16 +197,19 @@ export default {
     if (PUBLIC_HOSTS.has(host) && isRead) {
       const normalizedPath = normalizePublicPath(url.pathname);
 
-      // Serve the new minimalist KAIZURO homepage using the same proven
-      // Assets binding path used by the existing public router.
+      // Route the homepage through publicSite so its form/status rewriter
+      // can run. The previous direct ASSETS path bypassed that logic entirely.
       if (host === APEX && normalizedPath === "/") {
-        const assetResponse = await env.ASSETS.fetch(request);
-        return withHeaders(assetResponse, {
+        const canonicalUrl = PUBLIC_PAGES.get("/");
+        const response = await publicSite.fetch(canonicalPublicRequest(request, url), env, ctx);
+        const publicResponse = withHeaders(response, {
           "X-KAIZURO-Public": "homepage-v2",
           "X-Robots-Tag": "all",
           "Cache-Control": "no-store",
           Link: '<https://kaizuro.com/>; rel="canonical"',
         });
+        const withoutGripSection = removeGripSection(publicResponse);
+        return rewritePublicHtml(withoutGripSection, true, canonicalUrl);
       }
       if (url.protocol !== "https:" || host === WWW || normalizedPath !== url.pathname) {
         return canonicalRedirect(url);
