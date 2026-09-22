@@ -434,6 +434,24 @@ kaizuro.com`,
                 element.append(mergedStoryMarkup + mergedEngineeringMarkup + mergedPerformanceMarkup + commercialTermsLightMarkup, { html: true });
               },
             })
+            .on('form.capture input', {
+              element(element) {
+                if (url.searchParams.get("joined") === "1") {
+                  element.setAttribute("placeholder", "YOU'RE IN — CHECK YOUR EMAIL");
+                  element.setAttribute("aria-label", "You're in — check your email");
+                } else if (url.searchParams.get("error") === "1") {
+                  element.setAttribute("placeholder", "PLEASE TRY AGAIN");
+                }
+              },
+            })
+            .on('form.capture button', {
+              element(element) {
+                if (url.searchParams.get("joined") === "1") {
+                  element.setAttribute("disabled", "");
+                  element.setAttribute("aria-label", "You're already on the KAIZURO list");
+                }
+              },
+            })
             .on('#updates form', {
               element(element) {
                 element.setAttribute("action", "/join");
