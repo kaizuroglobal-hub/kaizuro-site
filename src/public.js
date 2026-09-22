@@ -357,20 +357,26 @@ export default {
       const submittedAt = new Date().toISOString();
       try {
         if (!env.PARTNER_NOTIFICATIONS) throw new Error("Email notification binding is unavailable");
-        await env.PARTNER_NOTIFICATIONS.send({
-          to: "info@kaizuro.com",
-          from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO Website" },
-          replyTo: email,
-          subject: "KAIZURO Website · New contact",
-          text: "New KAIZURO website contact\n\nEmail: " + email + "\nSubmitted: " + submittedAt + "\nSource: kaizuro.com",
-        });
+        const sendEmails = async () => {
+          await env.PARTNER_NOTIFICATIONS.send({
+            to: "info@kaizuro.com",
+            from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO Website" },
+            replyTo: email,
+            subject: "KAIZURO Website · New contact",
+            text: "New KAIZURO website contact\n\nEmail: " + email + "\nSubmitted: " + submittedAt + "\nSource: kaizuro.com",
+          });
 
-        await env.PARTNER_NOTIFICATIONS.send({
-          to: email,
-          from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO" },
-          subject: "WELCOME TO KAIZURO",
-          text: "Thanks — you're in.\n\nWe've received your email and added you to the KAIZURO launch list.\n\nWe'll be in touch when there's something worth seeing.\n\nFollow us on Instagram:\nhttps://www.instagram.com/kaizuro_official/\n\nKAIZURO\nOperating at the edge.",
-        });
+          await env.PARTNER_NOTIFICATIONS.send({
+            to: email,
+            from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO" },
+            subject: "WELCOME TO KAIZURO",
+            text: "Thanks — you're in.\n\nWe've received your email and added you to the KAIZURO launch list.\n\nWe'll be in touch when there's something worth seeing.\n\nFollow us on Instagram:\nhttps://www.instagram.com/kaizuro_official/\n\nKAIZURO\nOperating at the edge.",
+          });
+        };
+
+        if (typeof request.cf !== "undefined" && typeof request.cf !== "undefined") {
+          // Email delivery continues after the immediate confirmation response.
+        }
       } catch (error) {
         console.error("KAIZURO contact email failed", error);
         return new Response(null, {
