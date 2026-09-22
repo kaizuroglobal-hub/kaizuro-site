@@ -68,23 +68,51 @@ h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-to
 </form>
 <script>
 (function(){
-  const params=new URLSearchParams(window.location.search);
   const form=document.querySelector('form.capture');
   const input=form?.querySelector('input');
   const button=form?.querySelector('button');
-  if(!input||!button)return;
+  if(!form||!input||!button)return;
+
+  const params=new URLSearchParams(window.location.search);
   if(params.get('joined')==='1'){
     input.value="YOU'RE IN — CHECK YOUR EMAIL";
     input.readOnly=true;
-    input.setAttribute('aria-label',"You're in — check your email");
     button.disabled=true;
     button.style.opacity='.45';
-    button.style.cursor='default';
-  }else if(params.get('error')==='1'){
-    input.value='';
-    input.placeholder='PLEASE TRY AGAIN';
-    input.focus();
+    return;
   }
+
+  form.addEventListener('submit',async function(event){
+    event.preventDefault();
+    if(!input.value.trim())return;
+
+    const original=input.value;
+    button.disabled=true;
+    input.readOnly=true;
+
+    try{
+      const response=await fetch('/join',{
+        method:'POST',
+        body:new FormData(form),
+        redirect:'follow'
+      });
+
+      if(response.ok && new URL(response.url).searchParams.get('joined')==='1'){
+        input.value="YOU'RE IN — CHECK YOUR EMAIL";
+        input.style.color='#fff';
+        input.style.webkitTextFillColor='#fff';
+      }else{
+        input.value='';
+        input.placeholder='PLEASE TRY AGAIN';
+        input.readOnly=false;
+        button.disabled=false;
+      }
+    }catch(error){
+      input.value=original;
+      input.readOnly=false;
+      button.disabled=false;
+    }
+  });
 })();
 </script>
 <div class="benefits"><span>BE FIRST TO KNOW</span><i></i><span>PRODUCT UPDATES</span><i></i><span>TESTING</span><i></i><span>FIRST RELEASE</span></div>
