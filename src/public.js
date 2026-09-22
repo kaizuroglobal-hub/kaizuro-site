@@ -427,6 +427,14 @@ export default {
                 }
               },
             })
+            .on('form.capture', {
+              element(element) {
+                const cookie = request.headers.get("Cookie") || "";
+                if (cookie.split(";").some((part) => part.trim() === "kz_contact_status=submitted")) {
+                  element.after('<div style="margin-top:14px;color:#fff;font:600 14px/1.4 Inter,Arial,sans-serif;letter-spacing:.04em;">THANKS — YOU\'RE IN</div>', { html: true });
+                }
+              },
+            })
             .on('#updates form', {
               element(element) {
                 element.setAttribute("action", "/contact");
