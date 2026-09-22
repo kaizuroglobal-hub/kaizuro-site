@@ -324,8 +324,18 @@ export default {
     }
 
     // Public KAIZURO contact capture.
-    // GET /contact is handled safely so a direct visit never reaches the asset router.
+    // Clear the one-shot confirmation state when the user closes the modal.
     if ((url.pathname === "/contact" || url.pathname === "/join") && request.method === "GET") {
+      if (url.searchParams.get("clear") === "1") {
+        return new Response(null, {
+          status: 303,
+          headers: {
+            Location: "/#join",
+            "Set-Cookie": "kz_contact_status=; Path=/; Max-Age=0; Secure; SameSite=Lax",
+            "Cache-Control": "no-store",
+          },
+        });
+      }
       return Response.redirect(new URL("/#join", request.url).toString(), 303);
     }
 
@@ -431,7 +441,7 @@ export default {
               element(element) {
                 const cookie = request.headers.get("Cookie") || "";
                 if (cookie.split(";").some((part) => part.trim() === "kz_contact_status=submitted")) {
-                  element.after('<div id="kz-success-modal" role="dialog" aria-modal="true" aria-label="KAIZURO confirmation"><div class="kz-success-backdrop"></div><div class="kz-success-card"><button type="button" class="kz-success-close" aria-label="Close confirmation" onclick="document.getElementById(\'kz-success-modal\').remove()">×</button><div class="kz-success-eyebrow">KAIZURO</div><div class="kz-success-title">THANKS — YOU\'RE IN</div><div class="kz-success-copy">We\'ve received your email. Check your inbox for confirmation.</div><button type="button" class="kz-success-action" onclick="document.getElementById(\'kz-success-modal\').remove()">CLOSE</button></div></div><style id="kz-success-modal-style">#kz-success-modal{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:24px;box-sizing:border-box}#kz-success-modal .kz-success-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(5px)}#kz-success-modal .kz-success-card{position:relative;width:min(460px,calc(100vw - 48px));padding:42px 40px 36px;box-sizing:border-box;background:#080b0e;border:1px solid rgba(245,245,242,.9);box-shadow:0 24px 80px rgba(0,0,0,.5);text-align:center;color:#fff;font-family:Inter,Arial,sans-serif}.kz-success-close{position:absolute;top:10px;right:12px;border:0;background:transparent;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:4px 8px}.kz-success-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;margin-bottom:18px;opacity:.72}.kz-success-title{font-size:28px;font-weight:600;letter-spacing:.05em;line-height:1.15}.kz-success-copy{margin:14px auto 26px;max-width:330px;font-size:13px;line-height:1.55;opacity:.78}.kz-success-action{min-width:120px;padding:12px 20px;border:1px solid rgba(245,245,242,.85);background:#f5f5f2;color:#111;font:700 10px/1 Inter,Arial,sans-serif;letter-spacing:.12em;cursor:pointer}@media(max-width:640px){#kz-success-modal .kz-success-card{padding:38px 24px 30px}.kz-success-title{font-size:23px}}</style>', { html: true });
+                  element.after('<div id="kz-success-modal" role="dialog" aria-modal="true" aria-label="KAIZURO confirmation"><div class="kz-success-backdrop"></div><div class="kz-success-card"><a class="kz-success-close" aria-label="Close confirmation" href="/contact?clear=1#join">×</a><div class="kz-success-eyebrow">KAIZURO</div><div class="kz-success-title">THANKS — YOU\'RE IN</div><div class="kz-success-copy">We\'ve received your email. Check your inbox for confirmation.</div><a class="kz-success-action" href="/contact?clear=1#join">CLOSE</a></div></div><style id="kz-success-modal-style">#kz-success-modal{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:24px;box-sizing:border-box}#kz-success-modal .kz-success-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(5px)}#kz-success-modal .kz-success-card{position:relative;width:min(460px,calc(100vw - 48px));padding:42px 40px 36px;box-sizing:border-box;background:#080b0e;border:1px solid rgba(245,245,242,.9);box-shadow:0 24px 80px rgba(0,0,0,.5);text-align:center;color:#fff;font-family:Inter,Arial,sans-serif}.kz-success-close{position:absolute;top:10px;right:12px;border:0;background:transparent;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:4px 8px;text-decoration:none}.kz-success-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;margin-bottom:18px;opacity:.72}.kz-success-title{font-size:28px;font-weight:600;letter-spacing:.05em;line-height:1.15}.kz-success-copy{margin:14px auto 26px;max-width:330px;font-size:13px;line-height:1.55;opacity:.78}.kz-success-action{display:inline-block;min-width:120px;padding:12px 20px;border:1px solid rgba(245,245,242,.85);background:#f5f5f2;color:#111;font:700 10px/1 Inter,Arial,sans-serif;letter-spacing:.12em;cursor:pointer;text-decoration:none}@media(max-width:640px){#kz-success-modal .kz-success-card{padding:38px 24px 30px}.kz-success-title{font-size:23px}}</style>', { html: true });
                 }
               },
             })
