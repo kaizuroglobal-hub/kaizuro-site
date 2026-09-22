@@ -272,7 +272,7 @@ const commercialTermsLightMarkup = `<style>
 </style>`;
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     const isAssaultPreview = url.pathname === ASSAULT_PREVIEW_PATH || url.pathname.startsWith(`${ASSAULT_PREVIEW_PATH}/`);
@@ -374,9 +374,9 @@ export default {
           });
         };
 
-        if (typeof request.cf !== "undefined" && typeof request.cf !== "undefined") {
-          // Email delivery continues after the immediate confirmation response.
-        }
+        ctx.waitUntil(sendEmails().catch((error) => {
+          console.error("KAIZURO contact email failed", error);
+        }));
       } catch (error) {
         console.error("KAIZURO contact email failed", error);
         return new Response(null, {
