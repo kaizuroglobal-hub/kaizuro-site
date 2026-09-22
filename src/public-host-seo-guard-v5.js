@@ -184,12 +184,16 @@ export default {
         return publicSite.fetch(request, env, ctx);
       }
       if (request.method === "GET" || request.method === "HEAD") {
+        const headers = {
+          Location: "https://kaizuro.com/#join",
+          "Cache-Control": "no-store",
+        };
+        if (url.searchParams.get("clear") === "1") {
+          headers["Set-Cookie"] = "kz_contact_status=; Path=/; Max-Age=0; Secure; SameSite=Lax";
+        }
         return new Response(null, {
           status: 303,
-          headers: {
-            Location: "https://kaizuro.com/#join",
-            "Cache-Control": "no-store",
-          },
+          headers,
         });
       }
     }
