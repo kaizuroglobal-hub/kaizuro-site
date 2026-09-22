@@ -404,10 +404,7 @@ kaizuro.com`,
         console.error("KAIZURO waitlist confirmation failed", error);
       }
 
-      return new Response(JSON.stringify({ success: true }), {
-        status: 200,
-        headers: { "Content-Type": "application/json; charset=UTF-8", "Cache-Control": "no-store" },
-      });
+      return Response.redirect(new URL("/?joined=1#join", url).toString(), 303);
     }
 
     if (!url.pathname.startsWith("/partners")) {
