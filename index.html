@@ -79,42 +79,7 @@ h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-to
     input.readOnly=true;
     button.disabled=true;
     button.style.opacity='.45';
-    return;
   }
-
-  form.addEventListener('submit',async function(event){
-    event.preventDefault();
-    if(!input.value.trim())return;
-
-    const original=input.value;
-    button.disabled=true;
-    input.readOnly=true;
-
-    try{
-      const response=await fetch('/join',{
-        method:'POST',
-        body:new FormData(form),
-        redirect:'follow'
-      });
-
-      let result=null;
-      try{ result=await response.json(); }catch(e){}
-      if(response.ok && result && result.success){
-        input.value="YOU'RE IN — CHECK YOUR EMAIL";
-        input.style.color='#fff';
-        input.style.webkitTextFillColor='#fff';
-      }else{
-        input.value='';
-        input.placeholder='PLEASE TRY AGAIN';
-        input.readOnly=false;
-        button.disabled=false;
-      }
-    }catch(error){
-      input.value=original;
-      input.readOnly=false;
-      button.disabled=false;
-    }
-  });
 })();
 </script>
 <div class="benefits"><span>BE FIRST TO KNOW</span><i></i><span>PRODUCT UPDATES</span><i></i><span>TESTING</span><i></i><span>FIRST RELEASE</span></div>
