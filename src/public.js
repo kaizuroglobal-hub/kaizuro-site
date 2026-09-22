@@ -328,7 +328,14 @@ export default {
       const form = await request.formData();
       const email = String(form.get("email") || "").trim().slice(0, 254);
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return Response.redirect(new URL("/?error=1#join", url).toString(), 303);
+        return new Response(null, {
+          status: 303,
+          headers: {
+            Location: "/#join",
+            "Set-Cookie": "kz_join_status=error; Path=/; Max-Age=120; Secure; SameSite=Lax",
+            "Cache-Control": "no-store",
+          },
+        });
       }
 
       const createdAt = new Date().toISOString();
@@ -354,7 +361,14 @@ export default {
       }
 
       if (!saved) {
-        return Response.redirect(new URL("/?error=1#join", url).toString(), 303);
+        return new Response(null, {
+          status: 303,
+          headers: {
+            Location: "/#join",
+            "Set-Cookie": "kz_join_status=error; Path=/; Max-Age=120; Secure; SameSite=Lax",
+            "Cache-Control": "no-store",
+          },
+        });
       }
 
       try {
@@ -404,7 +418,14 @@ kaizuro.com`,
         console.error("KAIZURO waitlist confirmation failed", error);
       }
 
-      return Response.redirect(new URL("/?joined=1#join", url).toString(), 303);
+      return new Response(null, {
+        status: 303,
+        headers: {
+          Location: "/#join",
+          "Set-Cookie": "kz_join_status=joined; Path=/; Max-Age=120; Secure; SameSite=Lax",
+          "Cache-Control": "no-store",
+        },
+      });
     }
 
     if (!url.pathname.startsWith("/partners")) {
@@ -436,17 +457,21 @@ kaizuro.com`,
             })
             .on('form.capture input', {
               element(element) {
-                if (url.searchParams.get("joined") === "1") {
+                const cookie = request.headers.get("Cookie") || "";
+                const joined = cookie.split(";").some((part) => part.trim() === "kz_join_status=joined");
+                const error = cookie.split(";").some((part) => part.trim() === "kz_join_status=error");
+                if (joined) {
                   element.setAttribute("placeholder", "YOU'RE IN — CHECK YOUR EMAIL");
                   element.setAttribute("aria-label", "You're in — check your email");
-                } else if (url.searchParams.get("error") === "1") {
+                } else if (error) {
                   element.setAttribute("placeholder", "PLEASE TRY AGAIN");
                 }
               },
             })
             .on('form.capture button', {
               element(element) {
-                if (url.searchParams.get("joined") === "1") {
+                const cookie = request.headers.get("Cookie") || "";
+                if (cookie.split(";").some((part) => part.trim() === "kz_join_status=joined")) {
                   element.setAttribute("disabled", "");
                   element.setAttribute("aria-label", "You're already on the KAIZURO list");
                 }
