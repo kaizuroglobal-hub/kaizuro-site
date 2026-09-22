@@ -178,8 +178,8 @@ export default {
       return publicSite.fetch(request, env, ctx);
     }
 
-    // Route the public waitlist endpoint explicitly so /join never falls through to the admin app.
-    if (PUBLIC_HOSTS.has(host) && url.pathname === "/join") {
+    // Route the public contact endpoint explicitly so /contact never falls through to the legacy app.
+    if (PUBLIC_HOSTS.has(host) && (url.pathname === "/contact" || url.pathname === "/join")) {
       if (request.method === "POST") {
         return publicSite.fetch(request, env, ctx);
       }
