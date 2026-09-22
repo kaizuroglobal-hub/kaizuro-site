@@ -62,35 +62,10 @@ h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-to
 </a>
 </div>
 <section class="content">
-<form class="capture" action="/join" method="post">
-<input type="email" name="email" autocomplete="off" placeholder="YOUR EMAIL ADDRESS" aria-label="Your email address" required>
-<button type="submit" aria-label="Join the KAIZURO list">→</button>
+<form class="capture" action="/contact" method="post">
+<input type="email" name="email" autocomplete="email" placeholder="YOUR EMAIL ADDRESS" aria-label="Your email address" required>
+<button type="submit" aria-label="Send your email address to KAIZURO">→</button>
 </form>
-<script>
-(function(){
-  const form=document.querySelector('form.capture');
-  const input=form?.querySelector('input');
-  const button=form?.querySelector('button');
-  if(!form||!input||!button)return;
-
-  const params=new URLSearchParams(window.location.search);
-  const joined=params.get('joined')==='1';
-  const error=params.get('error')==='1';
-
-  if(joined){
-    input.value="YOU'RE IN — CHECK YOUR EMAIL";
-    input.readOnly=true;
-    button.disabled=true;
-    button.style.opacity='.45';
-  }else if(error){
-    input.placeholder="PLEASE TRY AGAIN";
-  }
-
-  if(joined||error){
-    window.history.replaceState({},document.title,window.location.pathname+"#join");
-  }
-})();
-</script>
 <div class="benefits"><span>BE FIRST TO KNOW</span><i></i><span>PRODUCT UPDATES</span><i></i><span>TESTING</span><i></i><span>FIRST RELEASE</span></div>
 </section>
 <div class="bottom">
