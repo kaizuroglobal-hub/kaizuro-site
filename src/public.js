@@ -344,11 +344,17 @@ export default {
         source: "kaizuro.com",
       };
 
+      let saved = false;
       try {
         const storageId = env.PARTNER_REFERRALS.idFromName("kaizuro-public-waitlist");
         await env.PARTNER_REFERRALS.get(storageId).createSubmission(submission);
+        saved = true;
       } catch (error) {
         console.error("KAIZURO public waitlist save failed", error);
+      }
+
+      if (!saved) {
+        return Response.redirect(new URL("/?error=1#join", url).toString(), 303);
       }
 
       try {
@@ -398,7 +404,7 @@ kaizuro.com`,
         console.error("KAIZURO waitlist confirmation failed", error);
       }
 
-      return Response.redirect(new URL("/", url).toString(), 303);
+      return Response.redirect(new URL("/?joined=1#join", url).toString(), 303);
     }
 
     if (!url.pathname.startsWith("/partners")) {
