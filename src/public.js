@@ -323,7 +323,13 @@ export default {
       }
     }
 
-    // Public KAIZURO contact capture. The submitted address is sent directly to info@kaizuro.com.
+    // Public KAIZURO contact capture.
+    // GET /contact is handled safely so a direct visit never reaches the asset router.
+    if ((url.pathname === "/contact" || url.pathname === "/join") && request.method === "GET") {
+      return Response.redirect(new URL("/#join", request.url).toString(), 303);
+    }
+
+    // POST sends the submitted address directly to info@kaizuro.com.
     if ((url.pathname === "/contact" || url.pathname === "/join") && request.method === "POST") {
       const form = await request.formData();
       const email = String(form.get("email") || "").trim().slice(0, 254);
