@@ -364,6 +364,13 @@ export default {
           subject: "KAIZURO Website · New contact",
           text: "New KAIZURO website contact\n\nEmail: " + email + "\nSubmitted: " + submittedAt + "\nSource: kaizuro.com",
         });
+
+        await env.PARTNER_NOTIFICATIONS.send({
+          to: email,
+          from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO" },
+          subject: "WELCOME TO KAIZURO",
+          text: "Thanks — you're in.\n\nWe've received your email and added you to the KAIZURO launch list.\n\nWe'll be in touch when there's something worth seeing.\n\nKAIZURO\nOperating at the edge.",
+        });
       } catch (error) {
         console.error("KAIZURO contact email failed", error);
         return new Response(null, {
