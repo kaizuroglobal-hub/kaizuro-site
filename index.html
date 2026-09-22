@@ -97,7 +97,9 @@ h1{font-size:clamp(55px,15vw,82px);line-height:.9}.lead{font-size:16px;margin-to
         redirect:'follow'
       });
 
-      if(response.ok && new URL(response.url).searchParams.get('joined')==='1'){
+      let result=null;
+      try{ result=await response.json(); }catch(e){}
+      if(response.ok && result && result.success){
         input.value="YOU'RE IN — CHECK YOUR EMAIL";
         input.style.color='#fff';
         input.style.webkitTextFillColor='#fff';
