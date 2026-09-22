@@ -184,7 +184,13 @@ export default {
         return publicSite.fetch(request, env, ctx);
       }
       if (request.method === "GET" || request.method === "HEAD") {
-        return Response.redirect(new URL("/", url).toString(), 303);
+        return new Response(null, {
+          status: 303,
+          headers: {
+            Location: "https://kaizuro.com/#join",
+            "Cache-Control": "no-store",
+          },
+        });
       }
     }
 
