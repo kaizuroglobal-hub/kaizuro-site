@@ -323,8 +323,8 @@ export default {
       }
     }
 
-    // Public KAIZURO waitlist capture.
-    if (url.pathname === "/join" && request.method === "POST") {
+    // Public KAIZURO contact capture. The submitted address is sent directly to info@kaizuro.com.
+    if ((url.pathname === "/contact" || url.pathname === "/join") && request.method === "POST") {
       const form = await request.formData();
       const email = String(form.get("email") || "").trim().slice(0, 254);
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -332,97 +332,39 @@ export default {
           status: 303,
           headers: {
             Location: "/#join",
-            "Set-Cookie": "kz_join_status=error; Path=/; Max-Age=120; Secure; SameSite=Lax",
+            "Set-Cookie": "kz_contact_status=error; Path=/; Max-Age=120; Secure; SameSite=Lax",
             "Cache-Control": "no-store",
           },
         });
       }
 
-      const createdAt = new Date().toISOString();
-      const id = `waitlist:public:${createdAt}:${crypto.randomUUID()}`;
-      const submission = {
-        id,
-        type: "waitlist",
-        partnerId: "public-waitlist",
-        partnerName: "KAIZURO Website",
-        customerEmail: email,
-        status: "New",
-        createdAt,
-        source: "kaizuro.com",
-      };
-
-      let saved = false;
+      const submittedAt = new Date().toISOString();
       try {
-        const storageId = env.PARTNER_REFERRALS.idFromName("kaizuro-public-waitlist");
-        await env.PARTNER_REFERRALS.get(storageId).createSubmission(submission);
-        saved = true;
+        if (!env.PARTNER_NOTIFICATIONS) throw new Error("Email notification binding is unavailable");
+        await env.PARTNER_NOTIFICATIONS.send({
+          to: "info@kaizuro.com",
+          from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO Website" },
+          replyTo: email,
+          subject: "KAIZURO Website · New contact",
+          text: "New KAIZURO website contact\n\nEmail: " + email + "\nSubmitted: " + submittedAt + "\nSource: kaizuro.com",
+        });
       } catch (error) {
-        console.error("KAIZURO public waitlist save failed", error);
-      }
-
-      if (!saved) {
+        console.error("KAIZURO contact email failed", error);
         return new Response(null, {
           status: 303,
           headers: {
             Location: "/#join",
-            "Set-Cookie": "kz_join_status=error; Path=/; Max-Age=120; Secure; SameSite=Lax",
+            "Set-Cookie": "kz_contact_status=error; Path=/; Max-Age=120; Secure; SameSite=Lax",
             "Cache-Control": "no-store",
           },
         });
-      }
-
-      try {
-        if (env.PARTNER_NOTIFICATIONS) {
-          await env.PARTNER_NOTIFICATIONS.send({
-            to: "info@kaizuro.com",
-            from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO Website" },
-            replyTo: email,
-            subject: "KAIZURO Website · New waitlist signup",
-            text: `New KAIZURO waitlist signup
-
-Email: ${email}
-Source: kaizuro.com
-Reference: ${id}`,
-          });
-        }
-      } catch (error) {
-        console.error("KAIZURO public waitlist notification failed", error);
-      }
-
-      // Send a polished confirmation to the person who joined the list.
-      try {
-        if (env.PARTNER_NOTIFICATIONS) {
-          await env.PARTNER_NOTIFICATIONS.send({
-            to: email,
-            from: { email: "notifications@portal.kaizuro.com", name: "KAIZURO" },
-            replyTo: "info@kaizuro.com",
-            subject: "You're on the KAIZURO list.",
-            text: `KAIZURO
-
-YOU'RE IN.
-
-Thanks for joining the KAIZURO list.
-
-A new generation of offshore performance equipment is coming. We'll share product updates, testing and first-release news with you before it goes public.
-
-OCEANS DEMAND MORE.
-SO DO WE.
-
-KAIZURO
-Over-engineered on purpose.
-kaizuro.com`,
-            html: `<!doctype html><html><body style="margin:0;background:#f2f2f0;font-family:Arial,sans-serif;color:#111"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:32px 16px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;background:#050505;color:#f4f4f2"><tr><td style="padding:0"><img src="https://kaizuro.com/assets/kaizuro-site/hero/kaizuro-website-hero-final.png" width="640" alt="KAIZURO — offshore performance" style="display:block;width:100%;height:auto;max-width:640px"></td></tr><tr><td style="padding:30px 38px;border-bottom:1px solid #2a2a2a"><b style="font-size:18px;letter-spacing:4px">KAIZURO</b><div style="margin-top:9px;font-size:10px;letter-spacing:2px;color:#888">OVER-ENGINEERED ON PURPOSE.</div></td></tr><tr><td style="padding:58px 38px 54px"><div style="font-size:11px;font-weight:bold;letter-spacing:2px;color:#888">WAITLIST CONFIRMATION</div><div style="margin-top:18px;font-size:48px;line-height:1;font-weight:bold">YOU'RE<br>IN.</div><p style="margin:26px 0 0;font-size:17px;line-height:1.6;color:#ccc">Thanks for joining the KAIZURO list.</p><p style="font-size:15px;line-height:1.75;color:#999">A new generation of offshore performance equipment is coming. We'll share product updates, testing and first-release news with you before it goes public.</p><p style="margin-top:32px"><a href="https://kaizuro.com/" style="display:inline-block;border:1px solid #ddd;padding:14px 20px;color:#fff;text-decoration:none;font-size:11px;font-weight:bold;letter-spacing:2px">VISIT KAIZURO →</a></p></td></tr><tr><td style="padding:30px 38px;border-top:1px solid #2a2a2a"><b style="font-size:22px">OCEANS DEMAND MORE.</b><div style="font-size:22px;color:#888">SO DO WE.</div><div style="margin-top:28px;font-size:10px;letter-spacing:1.5px;color:#666">KAIZURO™ · OVER-ENGINEERED ON PURPOSE.</div></td></tr></table></td></tr></table></body></html>`,
-          });
-        }
-      } catch (error) {
-        console.error("KAIZURO waitlist confirmation failed", error);
       }
 
       return new Response(null, {
         status: 303,
         headers: {
           Location: "/#join",
-          "Set-Cookie": "kz_join_status=joined; Path=/; Max-Age=120; Secure; SameSite=Lax",
+          "Set-Cookie": "kz_contact_status=submitted; Path=/; Max-Age=120; Secure; SameSite=Lax",
           "Cache-Control": "no-store",
         },
       });
@@ -458,11 +400,13 @@ kaizuro.com`,
             .on('form.capture input', {
               element(element) {
                 const cookie = request.headers.get("Cookie") || "";
-                const joined = cookie.split(";").some((part) => part.trim() === "kz_join_status=joined");
-                const error = cookie.split(";").some((part) => part.trim() === "kz_join_status=error");
-                if (joined) {
+                const submitted = cookie.split(";").some((part) => part.trim() === "kz_contact_status=submitted");
+                const error = cookie.split(";").some((part) => part.trim() === "kz_contact_status=error");
+                if (submitted) {
+                  element.setAttribute("value", "YOU'RE IN — CHECK YOUR EMAIL");
                   element.setAttribute("placeholder", "YOU'RE IN — CHECK YOUR EMAIL");
                   element.setAttribute("aria-label", "You're in — check your email");
+                  element.setAttribute("readonly", "");
                 } else if (error) {
                   element.setAttribute("placeholder", "PLEASE TRY AGAIN");
                 }
@@ -471,15 +415,15 @@ kaizuro.com`,
             .on('form.capture button', {
               element(element) {
                 const cookie = request.headers.get("Cookie") || "";
-                if (cookie.split(";").some((part) => part.trim() === "kz_join_status=joined")) {
+                if (cookie.split(";").some((part) => part.trim() === "kz_contact_status=submitted")) {
                   element.setAttribute("disabled", "");
-                  element.setAttribute("aria-label", "You're already on the KAIZURO list");
+                  element.setAttribute("aria-label", "Email sent to KAIZURO");
                 }
               },
             })
             .on('#updates form', {
               element(element) {
-                element.setAttribute("action", "/join");
+                element.setAttribute("action", "/contact");
                 element.setAttribute("method", "post");
                 element.removeAttribute("enctype");
               },
