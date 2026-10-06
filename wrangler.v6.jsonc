@@ -5,6 +5,8 @@
   "compatibility_date": "2026-08-02",
   "keep_vars": true,
   "routes": [
+    {"pattern": "kaizuro.com/*", "zone_name": "kaizuro.com"},
+    {"pattern": "www.kaizuro.com/*", "zone_name": "kaizuro.com"},
     {"pattern": "portal.kaizuro.com", "custom_domain": true}
   ],
   "assets": {"directory": ".", "binding": "ASSETS", "run_worker_first": ["/*"]},
